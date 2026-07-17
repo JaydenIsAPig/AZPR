@@ -1,0 +1,41 @@
+# Environment files and local secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+secrets.*
+
+# Dependencies
+node_modules/
+vendor/
+.venv/
+venv/
+
+# Build and coverage output
+dist/
+build/
+out/
+coverage/
+.next/
+.nuxt/
+
+# Language and tool caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+*.log
+
+# Editor and operating-system files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
