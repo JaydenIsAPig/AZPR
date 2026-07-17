@@ -1,0 +1,7 @@
+Permit Number,Issued Date,Valuation,Address,Description
+T26-0001,2026-07-16,"$12,345.67",100 W Congress St,Electrical service upgrade
+T26-0002,07/17/2026,,200 E Broadway Blvd,Interior remodel
+T26-BAD,2026-07-18,$100
+T26-0003,2026-13-40,$500.00,300 N Stone Ave,Invalid date fixture
+T26-0004,2026-07-18,not-money,400 S Church Ave,Invalid currency fixture
+T26-0001,2026-07-16,"$12,345.67",100 W Congress St,Electrical service upgrade

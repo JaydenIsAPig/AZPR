@@ -54,6 +54,6 @@ Future tests must prove deterministic handling of enumerated categories, schema 
 
 ## Related documents
 
-- [Business logic](../current/business-logic-v1.1.md)
-- [Backend structure](../current/backend-structure-v1.1.md)
+- [Business logic](../current/business-logic-v1.5.md)
+- [Backend structure](../current/backend-structure-v1.5.md)
 - [Domain glossary](../governance/domain-glossary.md)

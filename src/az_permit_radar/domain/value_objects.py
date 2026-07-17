@@ -44,6 +44,10 @@ class SourceRecordId(Identifier):
     pass
 
 
+class AcquisitionJobId(Identifier):
+    pass
+
+
 class PermitId(Identifier):
     pass
 
@@ -77,6 +81,10 @@ class NotificationAttemptId(Identifier):
 
 
 class ReviewTaskId(Identifier):
+    pass
+
+
+class DuplicateCandidateId(Identifier):
     pass
 
 
@@ -126,6 +134,8 @@ class Money:
     currency: str = "USD"
 
     def __post_init__(self) -> None:
+        if isinstance(self.amount, (float, bool)):
+            raise InvalidValue("money amount must not use floating-point or boolean input")
         try:
             amount = Decimal(self.amount)
         except (InvalidOperation, TypeError) as exc:

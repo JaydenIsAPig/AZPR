@@ -53,8 +53,8 @@ The frontend must consume explicit application/query contracts and must not reac
 
 ## Related current documents
 
-- [Project structure v1.1](project-structure-v1.1.md)
-- [Backend structure v1.1](backend-structure-v1.1.md)
-- [Business logic v1.1](business-logic-v1.1.md)
+- [Project structure v1.5](project-structure-v1.5.md)
+- [Backend structure v1.5](backend-structure-v1.5.md)
+- [Business logic v1.5](business-logic-v1.5.md)
 - [Business data v1.0](business-data-v1.0.json)
 - [Frontend design log](../logs/frontend-design-log-v1.0.md)

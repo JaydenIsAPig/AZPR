@@ -12,7 +12,9 @@ from .value_objects import ReviewTaskId, UtcTimestamp
 
 class ReviewSubjectType(str, Enum):
     SOURCE_RECORD = "source_record"
+    ADDRESS = "address"
     PERMIT = "permit"
+    PERMIT_DUPLICATE = "permit_duplicate"
     CLASSIFICATION_RESULT = "classification_result"
     OPPORTUNITY = "opportunity"
     OPPORTUNITY_MATCH = "opportunity_match"

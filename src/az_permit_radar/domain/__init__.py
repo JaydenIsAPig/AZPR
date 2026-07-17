@@ -1,5 +1,12 @@
 """Framework-independent domain model for the AZ Permit Radar pilot."""
 
+from .acquisition import (
+    AcquisitionJob,
+    AcquisitionJobStatus,
+    AcquisitionOutcome,
+    AcquisitionRecord,
+    AcquisitionTrigger,
+)
 from .customer import (
     CustomerAccount,
     CustomerAccountStatus,
@@ -7,6 +14,14 @@ from .customer import (
     CustomerTradePreference,
     NotificationPreference,
     ServiceTerritory,
+)
+from .deduplication import (
+    DuplicateCandidateStatus,
+    DuplicateDecisionRecord,
+    DuplicateEvidence,
+    DuplicateEvidenceLayer,
+    ManualDuplicateDecision,
+    PermitDuplicateCandidate,
 )
 from .errors import (
     ConsentRequired,
@@ -17,6 +32,7 @@ from .errors import (
     InvalidValue,
 )
 from .ingestion import (
+    ArtifactResponseMetadata,
     ImportBatch,
     ImportBatchStatus,
     SourceArtifact,
@@ -30,15 +46,53 @@ from .matching import (
     OpportunityMatch,
     OpportunityMatchStatus,
 )
+from .parsing import (
+    ImportReport,
+    IssueSeverity,
+    ParseIssue,
+    ParsedValue,
+    RecordDisposition,
+    RowParseResult,
+    ValueValidationResult,
+)
 from .notification import (
     NotificationAttempt,
     NotificationAttemptStatus,
     NotificationChannel,
 )
 from .opportunity import Opportunity, OpportunityStatus
-from .permit import Address, ParcelReference, Permit, PermitStatus
+from .permit import (
+    Address,
+    AddressResolutionStatus,
+    CoordinateSource,
+    GeocodeQuality,
+    GeocodeResult,
+    NormalizedPermitType,
+    ParcelReference,
+    Permit,
+    PermitAuthorityStatus,
+    PermitHistoryAction,
+    PermitHistoryEntry,
+    PermitParty,
+    PermitPartyRole,
+    PermitSnapshot,
+    PermitSourceEvidence,
+    PermitStatus,
+)
 from .review import ReviewSubjectType, ReviewTask, ReviewTaskStatus
-from .source_registry import Jurisdiction, JurisdictionStatus, Source, SourceStatus
+from .source_registry import (
+    AccessReviewStatus,
+    AcquisitionMethod,
+    AuthenticationRequirement,
+    EndpointConfiguration,
+    Jurisdiction,
+    JurisdictionStatus,
+    Source,
+    SourceFileType,
+    SourceHealthStatus,
+    SourceProfile,
+    SourceStatus,
+)
 from .classification import (
     ClassificationMethod,
     ClassificationResult,

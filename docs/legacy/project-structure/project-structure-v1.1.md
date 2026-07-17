@@ -1,7 +1,7 @@
 ---
 document_id: project-structure
 version: 1.1
-document_status: current
+document_status: superseded
 implementation_status: partially implemented
 approved_on: 2026-07-17
 ---
@@ -68,7 +68,7 @@ The domain package uses Python standard-library modules only. Application ports 
 
 ## Planned bounded contexts
 
-The contexts approved by [ADR-0001](../adr/0001-modular-monolith.md) remain the intended modular-monolith boundaries. The current domain files group the minimum pilot model by cohesive domain concern; they are not microservices and do not claim complete bounded-context implementation.
+The contexts approved by [ADR-0001](../../adr/0001-modular-monolith.md) remain the intended modular-monolith boundaries. The current domain files group the minimum pilot model by cohesive domain concern; they are not microservices and do not claim complete bounded-context implementation.
 
 Exact database, web framework, package-management workflow, job runner, artifact store, deployment target, and frontend structure remain **not selected**.
 
@@ -99,9 +99,9 @@ git diff --check
 
 ## Related current documents
 
-- [Backend structure v1.1](backend-structure-v1.1.md)
-- [Business logic v1.1](business-logic-v1.1.md)
-- [Business data v1.0](business-data-v1.0.json)
-- [Frontend design v1.0](frontend-design-v1.0.md)
-- [Project structure log](../logs/project-structure-log-v1.1.md)
-- [Python domain-kernel decision](../adr/0004-python-domain-kernel.md)
+- [Backend structure v1.1](../backend-structure/backend-structure-v1.1.md)
+- [Business logic v1.1](../business-logic/business-logic-v1.1.md)
+- [Business data v1.0](../../current/business-data-v1.0.json)
+- [Frontend design v1.0](../../current/frontend-design-v1.0.md)
+- [Project structure log](../../logs/project-structure-log-v1.1.md)
+- [Python domain-kernel decision](../../adr/0004-python-domain-kernel.md)

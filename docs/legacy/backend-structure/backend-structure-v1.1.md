@@ -1,7 +1,7 @@
 ---
 document_id: backend-structure
 version: 1.1
-document_status: current
+document_status: superseded
 implementation_status: partially implemented
 approved_on: 2026-07-17
 ---
@@ -16,7 +16,7 @@ approved_on: 2026-07-17
 
 ## Technology decision
 
-[ADR-0004](../adr/0004-python-domain-kernel.md) selects Python 3.12 and standard-library-only domain/application contracts. No web framework, database/ORM, migration tool, job runner, package-manager workflow, artifact store, provider, or hosting target is selected.
+[ADR-0004](../../adr/0004-python-domain-kernel.md) selects Python 3.12 and standard-library-only domain/application contracts. No web framework, database/ORM, migration tool, job runner, package-manager workflow, artifact store, provider, or hosting target is selected.
 
 ## Aggregate boundaries and consistency rules
 
@@ -72,7 +72,7 @@ Write messages cover registration/acquisition, permit creation, classification, 
 
 ## Planned bounded contexts and infrastructure
 
-The bounded contexts in [ADR-0001](../adr/0001-modular-monolith.md) remain approved. Current modules are a minimum kernel, not complete contexts. Persistence must eventually add stable keys, uniqueness constraints, append-only artifacts/results, optimistic concurrency, and an outbox. Authentication/authorization, consent enforcement at use-case boundaries, source-access compliance, encryption/secrets, and customer isolation require separate approved implementation work.
+The bounded contexts in [ADR-0001](../../adr/0001-modular-monolith.md) remain approved. Current modules are a minimum kernel, not complete contexts. Persistence must eventually add stable keys, uniqueness constraints, append-only artifacts/results, optimistic concurrency, and an outbox. Authentication/authorization, consent enforcement at use-case boundaries, source-access compliance, encryption/secrets, and customer isolation require separate approved implementation work.
 
 ## Validation
 
@@ -81,8 +81,8 @@ The bounded contexts in [ADR-0001](../adr/0001-modular-monolith.md) remain appro
 
 ## Related current documents
 
-- [Project structure v1.1](project-structure-v1.1.md)
-- [Business logic v1.1](business-logic-v1.1.md)
-- [Business data v1.0](business-data-v1.0.json)
-- [Frontend design v1.0](frontend-design-v1.0.md)
-- [Backend structure log](../logs/backend-structure-log-v1.1.md)
+- [Project structure v1.1](../project-structure/project-structure-v1.1.md)
+- [Business logic v1.1](../business-logic/business-logic-v1.1.md)
+- [Business data v1.0](../../current/business-data-v1.0.json)
+- [Frontend design v1.0](../../current/frontend-design-v1.0.md)
+- [Backend structure log](../../logs/backend-structure-log-v1.1.md)

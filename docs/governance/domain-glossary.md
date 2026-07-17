@@ -12,6 +12,8 @@ These terms are normative. Implemented lifecycle states and aggregate rules are 
 | Permit | An observed government record traceable to source evidence | Not an Opportunity, Match, lead, or alert |
 | Address | A source-observed or normalized location value with provenance/quality | Not a Parcel or stable Project identity by itself |
 | Parcel Reference | A jurisdiction-qualified land identifier asserted for a Permit | Not an address string or independent Project |
+| Geocode Result | Provider-attributed coordinates with timestamp, quality, and confidence | Never an unattributed replacement for source evidence |
+| Permit Duplicate Candidate | A reviewable relationship between two Permits supported by layered evidence | Not an automatic merge or deletion instruction |
 | Project | A possible grouping of related records or Permits | Never inferred merely because one Permit exists |
 | Party | A person or organization asserted by source data | Not a platform Customer unless explicitly linked |
 | Project Classification | A controlled classification value describing interpreted project type | Not a versioned result or observed fact |

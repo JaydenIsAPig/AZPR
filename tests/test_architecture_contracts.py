@@ -7,6 +7,7 @@ from pathlib import Path
 from az_permit_radar.application import commands, queries, repositories
 from az_permit_radar.domain import (
     Address,
+    AcquisitionJob,
     ClassificationResult,
     CustomerAccount,
     CustomerFilter,
@@ -19,12 +20,14 @@ from az_permit_radar.domain import (
     Opportunity,
     OpportunityMatch,
     ParcelReference,
+    PermitDuplicateCandidate,
     Permit,
     ProjectClassification,
     ReviewTask,
     ServiceTerritory,
     Source,
     SourceArtifact,
+    SourceProfile,
     SourceRecord,
     TradeTag,
 )
@@ -33,14 +36,17 @@ from az_permit_radar.domain import (
 class ArchitectureContractTests(unittest.TestCase):
     def test_required_domain_concepts_are_concrete_dataclasses(self) -> None:
         concepts = (
+            AcquisitionJob,
             Jurisdiction,
             Source,
+            SourceProfile,
             SourceArtifact,
             ImportBatch,
             SourceRecord,
             Permit,
             Address,
             ParcelReference,
+            PermitDuplicateCandidate,
             ProjectClassification,
             TradeTag,
             ClassificationResult,

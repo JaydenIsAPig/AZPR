@@ -1,7 +1,7 @@
 ---
 document_id: business-logic
 version: 1.1
-document_status: current
+document_status: superseded
 implementation_status: partially implemented
 approved_on: 2026-07-17
 ---
@@ -18,7 +18,7 @@ approved_on: 2026-07-17
 
 AZ Permit Radar remains an Arizona-specific permit intelligence and opportunity-alert platform. It is not approved as a permit-application platform, full CRM, bidding marketplace, national permit database, or microservice ecosystem.
 
-No pilot jurisdiction, source, trade, threshold, provider, or notification policy is selected in [business data v1.0](business-data-v1.0.json). Domain examples in tests are fixtures, not approved business data or production behavior.
+No pilot jurisdiction, source, trade, threshold, provider, or notification policy is selected in [business data v1.0](../../current/business-data-v1.0.json). Domain examples in tests are fixtures, not approved business data or production behavior.
 
 ## Implemented domain distinctions
 
@@ -60,7 +60,7 @@ These validate shape, not whether a source assertion is factually correct.
 
 ## State transitions
 
-The state-transition sets documented in [backend structure v1.1](backend-structure-v1.1.md) are implemented and tested. Invalid transitions raise `InvalidStateTransition`; invalid construction or operations raise `InvalidValue`, `InvariantViolation`, or `ConsentRequired`. `ConcurrencyConflict` is defined for future repository adapters.
+The state-transition sets documented in [backend structure v1.1](../backend-structure/backend-structure-v1.1.md) are implemented and tested. Invalid transitions raise `InvalidStateTransition`; invalid construction or operations raise `InvalidValue`, `InvariantViolation`, or `ConsentRequired`. `ConcurrencyConflict` is defined for future repository adapters.
 
 ## Domain events
 
@@ -68,7 +68,7 @@ Aggregates record immutable `StateChanged`, `ArtifactRegistered`, `Classificatio
 
 ## Deterministic-first and explainability
 
-[ADR-0002](../adr/0002-deterministic-first-ai.md) remains controlling. The model enforces derivation provenance but implements no classifier or AI call. `MatchExplanation` provides the required shape; no actual matching/scoring algorithm or threshold is implemented. Numeric score component values are explanatory inputs, not an approved universal scoring formula.
+[ADR-0002](../../adr/0002-deterministic-first-ai.md) remains controlling. The model enforces derivation provenance but implements no classifier or AI call. `MatchExplanation` provides the required shape; no actual matching/scoring algorithm or threshold is implemented. Numeric score component values are explanatory inputs, not an approved universal scoring formula.
 
 ## Consistency and idempotency
 
@@ -80,9 +80,9 @@ No authentication, authorization, billing, source access, personal-data retentio
 
 ## Related current documents
 
-- [Project structure v1.1](project-structure-v1.1.md)
-- [Backend structure v1.1](backend-structure-v1.1.md)
-- [Business data v1.0](business-data-v1.0.json)
-- [Frontend design v1.0](frontend-design-v1.0.md)
-- [Business logic log](../logs/business-logic-log-v1.1.md)
-- [Domain glossary](../governance/domain-glossary.md)
+- [Project structure v1.1](../project-structure/project-structure-v1.1.md)
+- [Backend structure v1.1](../backend-structure/backend-structure-v1.1.md)
+- [Business data v1.0](../../current/business-data-v1.0.json)
+- [Frontend design v1.0](../../current/frontend-design-v1.0.md)
+- [Business logic log](../../logs/business-logic-log-v1.1.md)
+- [Domain glossary](../../governance/domain-glossary.md)

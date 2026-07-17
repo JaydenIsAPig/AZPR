@@ -29,6 +29,8 @@ class ValueObjectTests(unittest.TestCase):
         self.assertEqual(Money(Decimal("12.345")).amount, Decimal("12.34"))
         with self.assertRaises(InvalidValue):
             Money(Decimal("-0.01"))
+        with self.assertRaises(InvalidValue):
+            Money(12.34)  # type: ignore[arg-type]
 
     def test_confidence_is_bounded(self) -> None:
         self.assertEqual(Confidence(Decimal("1")).value, Decimal("1"))

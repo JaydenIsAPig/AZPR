@@ -7,9 +7,9 @@
   "approved_on": "2026-07-16",
   "description": "Governed business-data registries. Empty arrays mean no jurisdiction, source, trade, geography rule, threshold, or notification policy has been approved.",
   "related_documents": [
-    "project-structure-v1.1.md",
-    "backend-structure-v1.1.md",
-    "business-logic-v1.1.md",
+    "project-structure-v1.5.md",
+    "backend-structure-v1.5.md",
+    "business-logic-v1.5.md",
     "frontend-design-v1.0.md"
   ],
   "sources": [],

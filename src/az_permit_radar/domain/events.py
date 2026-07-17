@@ -30,6 +30,13 @@ class ArtifactRegistered(DomainEvent):
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
+class ArtifactAcquired(DomainEvent):
+    source_id: str
+    artifact_id: str
+    content_digest: str
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
 class ClassificationReviewed(DomainEvent):
     permit_id: str
     review_status: str
