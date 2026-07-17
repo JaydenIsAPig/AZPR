@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://azpermittedradar.example/schemas/business-data.schema.json",
+  "title": "AZ Permit Radar governed business data",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "document_id",
+    "version",
+    "document_status",
+    "implementation_status",
+    "approved_on",
+    "description",
+    "related_documents",
+    "sources",
+    "trades",
+    "geography_rules",
+    "matching_rules",
+    "notification_policies"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "../schema/business-data.schema.json"
+    },
+    "document_id": {
+      "const": "business-data"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]*\\.[0-9]+$"
+    },
+    "document_status": {
+      "enum": ["current", "superseded"]
+    },
+    "implementation_status": {
+      "enum": ["implemented", "partially implemented", "planned", "proposed"]
+    },
+    "approved_on": {
+      "type": "string",
+      "format": "date"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "related_documents": {
+      "type": "array",
+      "minItems": 4,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(project-structure|backend-structure|business-logic|frontend-design)-v[1-9][0-9]*\\.[0-9]+\\.md$"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "jurisdiction", "approval_status", "implementation_status"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+          "name": {"type": "string", "minLength": 1},
+          "jurisdiction": {"type": "string", "minLength": 1},
+          "approval_status": {"enum": ["proposed", "approved", "retired"]},
+          "implementation_status": {"enum": ["planned", "partially implemented", "implemented"]}
+        }
+      }
+    },
+    "trades": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "label", "approval_status", "implementation_status"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+          "label": {"type": "string", "minLength": 1},
+          "approval_status": {"enum": ["proposed", "approved", "retired"]},
+          "implementation_status": {"enum": ["planned", "partially implemented", "implemented"]}
+        }
+      }
+    },
+    "geography_rules": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "label", "rule_type", "approval_status", "implementation_status"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+          "label": {"type": "string", "minLength": 1},
+          "rule_type": {"enum": ["jurisdiction", "postal-code", "radius", "polygon", "not selected"]},
+          "approval_status": {"enum": ["proposed", "approved", "retired"]},
+          "implementation_status": {"enum": ["planned", "partially implemented", "implemented"]}
+        }
+      }
+    },
+    "matching_rules": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "label", "approval_status", "implementation_status"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+          "label": {"type": "string", "minLength": 1},
+          "approval_status": {"enum": ["proposed", "approved", "retired"]},
+          "implementation_status": {"enum": ["planned", "partially implemented", "implemented"]}
+        }
+      }
+    },
+    "notification_policies": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "channel", "approval_status", "implementation_status"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+          "channel": {"enum": ["email", "sms"]},
+          "approval_status": {"enum": ["proposed", "approved", "retired"]},
+          "implementation_status": {"enum": ["planned", "partially implemented", "implemented"]}
+        }
+      }
+    }
+  }
+}
