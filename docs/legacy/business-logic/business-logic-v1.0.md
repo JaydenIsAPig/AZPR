@@ -22,7 +22,7 @@ It is not currently approved as a permit-application platform, full CRM, bidding
 
 ## Pilot priority
 
-The planned first vertical slice is limited to one approved Arizona jurisdiction or source family, a limited approved trade set, reliable ingestion, explainable classification, trade/geographic matching, a dashboard feed, email alerts, controlled SMS, and internal review/source monitoring. The jurisdiction, source, trades, timing, thresholds, and provider choices are **not selected** and remain empty in [business data v1.0](../../current/business-data-v1.0.json).
+The planned first vertical slice is limited to one approved Arizona jurisdiction or source family, a limited approved trade set, reliable ingestion, explainable classification, trade/geographic matching, a dashboard feed, email alerts, controlled SMS, and internal review/source monitoring. The jurisdiction, source, trades, timing, thresholds, and provider choices are **not selected** and remain empty in [business data v1.0](../business-data/business-data-v1.0.json).
 
 ## Domain invariants
 
@@ -77,6 +77,6 @@ Implementation must not guess about authentication, authorization, billing, pers
 
 - [Project structure v1.0](../project-structure/project-structure-v1.0.md)
 - [Backend structure v1.0](../backend-structure/backend-structure-v1.0.md)
-- [Business data v1.0](../../current/business-data-v1.0.json)
-- [Frontend design v1.0](../../current/frontend-design-v1.0.md)
+- [Business data v1.0](../business-data/business-data-v1.0.json)
+- [Frontend design v1.0](../frontend-design/frontend-design-v1.0.md)
 - [Business logic log](../../logs/business-logic-log-v1.0.md)

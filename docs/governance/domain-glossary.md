@@ -19,14 +19,16 @@ These terms are normative. Implemented lifecycle states and aggregate rules are 
 | Project Classification | A controlled classification value describing interpreted project type | Not a versioned result or observed fact |
 | Trade Tag | A stable trade classification used by classifications, customer preferences, Opportunities, and Match explanations | Not a free-form source label |
 | Classification Result | A versioned interpretation with method, evidence, provenance, confidence, and review status | Not an observed fact or Opportunity by itself |
-| Opportunity | A product interpretation derived from one or more source-backed records | Not customer-specific and not a Permit |
+| Opportunity | A customer-independent, source-attributed projection derived from one or more source-backed Permits and Classifications | Not a Customer Match and never contains customer configuration |
 | Customer Account | A platform business account receiving configured product behavior | Distinct from a Party named in source data |
 | Customer Trade Preference | A Customer Account's enabled/disabled preference for one Trade Tag | Does not modify the Trade Tag catalog |
-| Service Territory | Customer-owned geographic scope expressed by jurisdiction, postal code, or radius values | Not a Jurisdiction entity and does not modify Permit geography |
+| Service Territory | Customer-owned geographic scope expressed by validated-origin radius, city/jurisdiction, ZIP set, or reserved polygon reference | Not a Jurisdiction entity and does not modify Permit geography |
+| Territory Evaluation | Customer-isolated deterministic result containing inclusion, distance/unit, matched rule, exclusion reason, and verification status | Not a shared Opportunity fact or legal-boundary determination |
 | Customer Filter | Customer-owned valuation, confidence, date, or exclusion constraints | Not a global Opportunity rule |
 | Notification Preference | Customer-owned channel destination and explicit consent evidence | Not a delivery attempt or proof of current authorization by itself |
 | Customer Match | The explainable relation between one Opportunity and one Customer/configuration | Not a Notification or shared Opportunity |
 | Match Explanation | Recorded/reproducible trade, geography, filters, score components, exclusions, freshness, and confidence supporting a Match | Never only an unexplained score |
+| Match Score Version | Governed deterministic weights and freshness boundaries used to calculate a Match's exact 100-point component sum | Not an AI model version; prior scored explanations remain reproducible |
 | Notification Intent | The idempotent decision to communicate about a Customer Match through an eligible channel | Distinct from each provider attempt |
 | Notification Attempt | One channel-specific delivery attempt concerning a Customer Match | Provider submission is not proof of delivery; a retry is a new attempt |
 | Lead State | Customer-owned workflow state inside an Opportunity Match | Cannot mutate another Customer or shared Permit/Opportunity |

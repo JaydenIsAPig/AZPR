@@ -17,7 +17,12 @@
     "trades",
     "geography_rules",
     "matching_rules",
-    "notification_policies"
+    "notification_policies",
+    "classification_policy",
+    "geography_policy",
+    "opportunity_projection_policy",
+    "processing_workflow_policy",
+    "opportunity_matching_policy"
   ],
   "properties": {
     "$schema": {
@@ -128,6 +133,91 @@
           "approval_status": {"enum": ["proposed", "approved", "retired"]},
           "implementation_status": {"enum": ["planned", "partially implemented", "implemented"]}
         }
+      }
+    },
+    "classification_policy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["rule_set_version", "ai_acceptance_confidence", "review_confidence", "publication_confidence", "evaluation_fixture_version"],
+      "properties": {
+        "rule_set_version": {"type":"string", "pattern":"^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "ai_acceptance_confidence": {"type":"string", "pattern":"^(0(?:\\.[0-9]+)?|1(?:\\.0+)?)$"},
+        "review_confidence": {"type":"string", "pattern":"^(0(?:\\.[0-9]+)?|1(?:\\.0+)?)$"},
+        "publication_confidence": {"type":"string", "pattern":"^(0(?:\\.[0-9]+)?|1(?:\\.0+)?)$"},
+        "evaluation_fixture_version": {"type":"string", "pattern":"^[0-9]+\\.[0-9]+\\.[0-9]+$"}
+      }
+    },
+    "geography_policy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["distance_formula", "distance_unit", "earth_mean_radius_km", "maximum_radius_km", "maximum_postal_codes", "maximum_jurisdictions", "maximum_cities"],
+      "properties": {
+        "distance_formula": {"const":"haversine"},
+        "distance_unit": {"const":"km"},
+        "earth_mean_radius_km": {"const":"6371.0088"},
+        "maximum_radius_km": {"type":"string", "pattern":"^[1-9][0-9]*(?:\\.[0-9]+)?$"},
+        "maximum_postal_codes": {"type":"integer"},
+        "maximum_jurisdictions": {"type":"integer"},
+        "maximum_cities": {"type":"integer"}
+      }
+    },
+    "opportunity_matching_policy": {
+      "type":"object", "additionalProperties":false,
+      "required":["policy_id", "score_version", "freshness_full_days", "freshness_partial_days", "unknown_source_date_factor", "exclusion_reason_codes", "weights"],
+      "properties": {
+        "policy_id":{"const":"opportunity-match-score"},
+        "score_version":{"type":"string", "pattern":"^opportunity-score-[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "freshness_full_days":{"type":"integer"},
+        "freshness_partial_days":{"type":"integer"},
+        "unknown_source_date_factor":{"const":"0"},
+        "exclusion_reason_codes":{"const":[
+          "permit_missing", "permit_voided", "permit_superseded", "probable_duplicate_unresolved",
+          "noncanonical_permit", "classification_missing", "classification_pending_review",
+          "classification_rejected", "classification_confidence_below_publication_threshold",
+          "geography_unverified", "opportunity_not_publishable", "opportunity_projection_not_current",
+          "account_not_active", "trade_mismatch", "outside_service_territory", "minimum_value",
+          "maximum_value", "value_band", "permit_filter", "project_filter", "confidence_filter", "date_filter"
+        ]},
+        "weights": {
+          "type":"object", "additionalProperties":false,
+          "required":["trade", "geography", "value", "completeness", "freshness", "notification_readiness"],
+          "properties": {
+            "trade":{"type":"string"}, "geography":{"type":"string"}, "value":{"type":"string"},
+            "completeness":{"type":"string"}, "freshness":{"type":"string"}, "notification_readiness":{"type":"string"}
+          }
+        }
+      }
+    },
+    "opportunity_projection_policy": {
+      "type":"object", "additionalProperties":false,
+      "required":["projection_version", "source_date_precedence", "unknown_source_date_behavior", "acquisition_timestamp_role", "processing_timestamp_role", "completeness_fields", "valuation_in_completeness"],
+      "properties": {
+        "projection_version":{"type":"string", "pattern":"^opportunity-projection-[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "source_date_precedence":{"const":["issued_on", "applied_on"]},
+        "unknown_source_date_behavior":{"const":"zero_source_freshness_credit"},
+        "acquisition_timestamp_role":{"const":"context_only"},
+        "processing_timestamp_role":{"const":"provenance_only"},
+        "completeness_fields":{"const":["permit_type", "description", "address", "permit_date"]},
+        "valuation_in_completeness":{"const":false}
+      }
+    },
+    "processing_workflow_policy": {
+      "type":"object", "additionalProperties":false,
+      "required":["version", "batch_owner", "normalization_atomicity", "retryable_batch_failure_action", "uniqueness_scopes", "failure_categories"],
+      "properties": {
+        "version":{"const":"processing-consistency-1.0.0"},
+        "batch_owner":{"const":"acquisition_state"},
+        "normalization_atomicity":{"const":"process_local_shared_lock_snapshot_rollback"},
+        "retryable_batch_failure_action":{"const":"explicit_reprocessing_new_batch"},
+        "uniqueness_scopes":{"const":[
+          "source_artifact_source_and_content_hash", "import_batch_processing_claim",
+          "source_record_external_key_and_parser_version", "canonical_permit_identity",
+          "classification_permit_revision", "active_opportunity_projection",
+          "active_customer_opportunity_match", "review_task_subject_reason",
+          "processing_correlation_command"
+        ]},
+        "failure_categories":{"const":[
+          "acquisition", "storage", "parsing", "normalization", "geocoding",
+          "classification", "review_requirement", "opportunity_projection", "matching"
+        ]}
       }
     }
   }

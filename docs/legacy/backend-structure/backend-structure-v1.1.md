@@ -83,6 +83,6 @@ The bounded contexts in [ADR-0001](../../adr/0001-modular-monolith.md) remain ap
 
 - [Project structure v1.1](../project-structure/project-structure-v1.1.md)
 - [Business logic v1.1](../business-logic/business-logic-v1.1.md)
-- [Business data v1.0](../../current/business-data-v1.0.json)
-- [Frontend design v1.0](../../current/frontend-design-v1.0.md)
+- [Business data v1.0](../business-data/business-data-v1.0.json)
+- [Frontend design v1.0](../frontend-design/frontend-design-v1.0.md)
 - [Backend structure log](../../logs/backend-structure-log-v1.1.md)

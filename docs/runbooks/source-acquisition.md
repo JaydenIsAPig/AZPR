@@ -1,5 +1,11 @@
 # Source Acquisition Failure and Recovery Runbook
 
+## Processing handoff
+
+An archived or explicitly reprocessed Batch is queued by `InMemoryAcquisitionState`, the authoritative owner. Parsing must claim it with a correlation identifier; operators must not pass a repository copy directly to a parser and then infer that the authoritative Batch changed. Completed, partially failed, and failed parser outcomes acknowledge and remove the queue entry.
+
+Retryable acquisition errors may retry within the governed request limit. A retryable parser failure is recorded on the failed Batch and requires an explicit reprocessing command with a new Batch identity. Production scheduling, leases, and poison-message handling remain unimplemented.
+
 - **Owner:** Source operational owner named in `SourceProfile`
 - **Backup/escalation:** Engineering owner, then source-access reviewer for terms/auth/access issues
 - **Applies to:** Acquisition Job creation/claim, raw source acquisition, immutable artifact archival, Import Batch finalization, duplicate suppression, and manual reprocessing

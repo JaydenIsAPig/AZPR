@@ -74,6 +74,6 @@ The current Tucson-named parser is fixture-only. It must not be treated as an ap
 
 - [Project structure v1.4](../project-structure/project-structure-v1.4.md)
 - [Backend structure v1.4](../backend-structure/backend-structure-v1.4.md)
-- [Business data v1.0](../../current/business-data-v1.0.json)
+- [Business data v1.0](../business-data/business-data-v1.0.json)
 - [Source parsing runbook](../../runbooks/source-parsing.md)
 - [Business logic log](../../logs/business-logic-log-v1.4.md)

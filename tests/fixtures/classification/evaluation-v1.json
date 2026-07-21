@@ -1,0 +1,6 @@
+[
+  {"id":"solar-1","description":"Install rooftop photovoltaic solar system","permit_type":"solar","valuation":"18000","expected_tags":["solar","value_band","data_completeness"]},
+  {"id":"ti-1","description":"Commercial tenant improvement with panel upgrade","permit_type":"remodel","valuation":"125000","expected_tags":["market_segment","tenant_improvement","electrical","remodel","value_band","data_completeness"]},
+  {"id":"roof-1","description":"Residential reroof","permit_type":"roofing","valuation":"24000","expected_tags":["market_segment","roofing","value_band","data_completeness"]},
+  {"id":"demo-1","description":"Demolition of warehouse","permit_type":"demolition","valuation":"600000","expected_tags":["market_segment","demolition","value_band","data_completeness"]}
+]

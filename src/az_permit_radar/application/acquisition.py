@@ -608,6 +608,25 @@ class AcquisitionState(Protocol):
         content_digest: ContentDigest | None = None,
     ) -> AcquisitionExecution: ...
 
+    def claim_processing(
+        self,
+        batch_id: ImportBatchId,
+        correlation_id: str,
+    ) -> tuple[ImportBatch, SourceArtifact]: ...
+
+    def finish_processing(self, batch: ImportBatch, correlation_id: str) -> None: ...
+
+    def fail_processing(
+        self,
+        batch_id: ImportBatchId,
+        correlation_id: str,
+        *,
+        category: str,
+        message: str,
+        retryable: bool,
+        occurred_at: UtcTimestamp,
+    ) -> ImportBatch: ...
+
 
 MetricLabels = tuple[tuple[str, str], ...]
 

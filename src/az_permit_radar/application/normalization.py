@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 from dataclasses import dataclass
 from enum import Enum
-from typing import Callable, Protocol
+from typing import Callable, Protocol, TypeVar
 
 from az_permit_radar.domain.deduplication import (
     DuplicateEvidence,
@@ -155,6 +155,15 @@ class NormalizationMetrics(Protocol):
     def increment(self, name: str, *, labels: tuple[tuple[str, str], ...] = ()) -> None: ...
 
 
+ResultT = TypeVar("ResultT")
+
+
+class NormalizationUnitOfWork(Protocol):
+    """Process-local atomic boundary for Permit/candidate/review persistence."""
+
+    def execute(self, operation: Callable[[], ResultT]) -> ResultT: ...
+
+
 class PermitNormalizationOutcome(str, Enum):
     CREATED = "created"
     CORRECTED = "corrected"
@@ -182,6 +191,7 @@ class PermitNormalizationWorkflow:
         permits: PermitNormalizationStore,
         duplicate_candidates: DuplicateCandidateStore,
         reviews: NormalizationReviewStore,
+        unit_of_work: NormalizationUnitOfWork,
         logger: NormalizationLogger,
         metrics: NormalizationMetrics,
         now: Callable[[], UtcTimestamp] = UtcTimestamp.now,
@@ -192,11 +202,15 @@ class PermitNormalizationWorkflow:
         self._permits = permits
         self._duplicate_candidates = duplicate_candidates
         self._reviews = reviews
+        self._unit_of_work = unit_of_work
         self._logger = logger
         self._metrics = metrics
         self._now = now
 
     def normalize(self, source_record: SourceRecord) -> PermitNormalizationResult:
+        return self._unit_of_work.execute(lambda: self._normalize(source_record))
+
+    def _normalize(self, source_record: SourceRecord) -> PermitNormalizationResult:
         if source_record.status is not SourceRecordStatus.PARSED or source_record.parser_version is None:
             raise InvariantViolation("permit normalization requires a successfully parsed Source Record")
         raw_jurisdiction = self._text_value(source_record, "jurisdiction")
@@ -220,6 +234,7 @@ class PermitNormalizationWorkflow:
             record_fingerprint=source_record.payload_digest.hexadecimal,
             parser_version=source_record.parser_version,
             observed_at=source_record.observed_at,
+            acquired_at=source_record.acquired_at,
         )
 
         exact, exact_layer = self._find_exact(source_record)
@@ -287,9 +302,9 @@ class PermitNormalizationWorkflow:
             source_evidence=[evidence],
         )
         probable_permit, probable_evidence = self._find_probable(permit)
-        self._permits.save(permit)
         review_tasks = list(self._address_reviews(permit, occurred_at))
         if probable_permit is None:
+            self._permits.save(permit)
             return self._finish(
                 source_record,
                 PermitNormalizationOutcome.CREATED,
@@ -300,6 +315,8 @@ class PermitNormalizationWorkflow:
             )
 
         duplicate_candidate = self._candidate(permit, probable_permit, probable_evidence, occurred_at)
+        permit.mark_probable_duplicate(duplicate_candidate.candidate_id, occurred_at)
+        self._permits.save(permit)
         self._duplicate_candidates.save(duplicate_candidate)
         duplicate_review = self._review_task(
             ReviewSubjectType.PERMIT_DUPLICATE,
@@ -327,6 +344,23 @@ class PermitNormalizationWorkflow:
         actor_id: str,
         rationale: str,
     ) -> PermitDuplicateCandidate:
+        return self._unit_of_work.execute(
+            lambda: self._decide_duplicate(
+                candidate_id,
+                decision=decision,
+                actor_id=actor_id,
+                rationale=rationale,
+            )
+        )
+
+    def _decide_duplicate(
+        self,
+        candidate_id: DuplicateCandidateId,
+        *,
+        decision: ManualDuplicateDecision,
+        actor_id: str,
+        rationale: str,
+    ) -> PermitDuplicateCandidate:
         candidate = self._duplicate_candidates.get(candidate_id)
         if candidate is None:
             raise InvariantViolation("permit duplicate candidate does not exist")
@@ -345,7 +379,9 @@ class PermitNormalizationWorkflow:
             canonical.absorb_manual_merge(incoming, rationale=rationale, occurred_at=occurred_at)
             incoming.supersede(canonical.permit_id, rationale=rationale, occurred_at=occurred_at)
             self._permits.save(canonical)
-            self._permits.save(incoming)
+        else:
+            incoming.confirm_distinct(candidate.candidate_id, occurred_at)
+        self._permits.save(incoming)
         self._duplicate_candidates.save(candidate)
         self._metrics.increment(
             "permit_duplicate_decisions_total",

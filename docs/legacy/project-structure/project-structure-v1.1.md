@@ -101,7 +101,7 @@ git diff --check
 
 - [Backend structure v1.1](../backend-structure/backend-structure-v1.1.md)
 - [Business logic v1.1](../business-logic/business-logic-v1.1.md)
-- [Business data v1.0](../../current/business-data-v1.0.json)
-- [Frontend design v1.0](../../current/frontend-design-v1.0.md)
+- [Business data v1.0](../business-data/business-data-v1.0.json)
+- [Frontend design v1.0](../frontend-design/frontend-design-v1.0.md)
 - [Project structure log](../../logs/project-structure-log-v1.1.md)
 - [Python domain-kernel decision](../../adr/0004-python-domain-kernel.md)

@@ -33,3 +33,15 @@ class ConsentRequired(InvariantViolation):
 
 class ConcurrencyConflict(DomainError):
     """A repository rejected a stale aggregate version."""
+
+
+class AuthenticationRequired(DomainError):
+    """The operation requires a verified actor context."""
+
+
+class ForbiddenAccess(DomainError):
+    """An authenticated actor lacks a required permission."""
+
+
+class ResourceNotFound(DomainError):
+    """A resource is missing or deliberately hidden by anti-enumeration policy."""

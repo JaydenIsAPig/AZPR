@@ -11,6 +11,7 @@ from .value_objects import (
     AddressId,
     CalendarDate,
     Confidence,
+    DuplicateCandidateId,
     GeographicCoordinates,
     JurisdictionId,
     Money,
@@ -103,6 +104,7 @@ class PermitSourceEvidence:
     record_fingerprint: str
     parser_version: str
     observed_at: UtcTimestamp
+    acquired_at: UtcTimestamp | None = None
 
     def __post_init__(self) -> None:
         if self.external_record_id is not None and not self.external_record_id.strip():
@@ -177,6 +179,12 @@ class PermitStatus(str, Enum):
     SUPERSEDED = "superseded"
 
 
+class PermitCanonicalStatus(str, Enum):
+    CANONICAL = "canonical"
+    PROBABLE_DUPLICATE = "probable_duplicate"
+    NONCANONICAL = "noncanonical"
+
+
 class PermitHistoryAction(str, Enum):
     EXACT_EVIDENCE_ATTACHED = "exact_evidence_attached"
     CORRECTED = "corrected"
@@ -238,6 +246,8 @@ class Permit(EventRecorder):
     merged_permit_ids: set[PermitId] = field(default_factory=set)
     status: PermitStatus = PermitStatus.ACTIVE
     version: int = 0
+    canonical_status: PermitCanonicalStatus = PermitCanonicalStatus.CANONICAL
+    duplicate_candidate_id: DuplicateCandidateId | None = None
 
     def __post_init__(self) -> None:
         self._initialize_events()
@@ -256,8 +266,52 @@ class Permit(EventRecorder):
             raise InvariantViolation("permit evidence must reference permit source records")
         if self.status is PermitStatus.SUPERSEDED and self.superseded_by is None:
             raise InvariantViolation("superseded permit requires a canonical permit")
+        if self.status is PermitStatus.SUPERSEDED:
+            self.canonical_status = PermitCanonicalStatus.NONCANONICAL
         if self.superseded_by == self.permit_id:
             raise InvariantViolation("permit cannot supersede itself")
+        if self.canonical_status is PermitCanonicalStatus.PROBABLE_DUPLICATE:
+            if self.duplicate_candidate_id is None:
+                raise InvariantViolation("probable duplicate Permit requires a duplicate candidate")
+        elif self.duplicate_candidate_id is not None:
+            raise InvariantViolation("duplicate candidate link requires probable duplicate status")
+
+    def mark_probable_duplicate(
+        self,
+        candidate_id: DuplicateCandidateId,
+        occurred_at: UtcTimestamp,
+    ) -> None:
+        if self.status in {PermitStatus.VOIDED, PermitStatus.SUPERSEDED}:
+            raise InvalidStateTransition("Permit", self.status, PermitCanonicalStatus.PROBABLE_DUPLICATE)
+        if self.canonical_status is PermitCanonicalStatus.PROBABLE_DUPLICATE:
+            if self.duplicate_candidate_id == candidate_id:
+                return
+            raise InvariantViolation("Permit is already linked to another duplicate candidate")
+        if self.canonical_status is not PermitCanonicalStatus.CANONICAL:
+            raise InvalidStateTransition("Permit", self.canonical_status, PermitCanonicalStatus.PROBABLE_DUPLICATE)
+        previous = self.canonical_status
+        self.canonical_status = PermitCanonicalStatus.PROBABLE_DUPLICATE
+        self.duplicate_candidate_id = candidate_id
+        self.version += 1
+        self._record(state_change_event(self, self.permit_id, previous, self.canonical_status, occurred_at))
+
+    def confirm_distinct(
+        self,
+        candidate_id: DuplicateCandidateId,
+        occurred_at: UtcTimestamp,
+    ) -> None:
+        if self.canonical_status is PermitCanonicalStatus.CANONICAL and self.duplicate_candidate_id is None:
+            return
+        if (
+            self.canonical_status is not PermitCanonicalStatus.PROBABLE_DUPLICATE
+            or self.duplicate_candidate_id != candidate_id
+        ):
+            raise InvariantViolation("distinct decision does not match Permit duplicate candidate")
+        previous = self.canonical_status
+        self.canonical_status = PermitCanonicalStatus.CANONICAL
+        self.duplicate_candidate_id = None
+        self.version += 1
+        self._record(state_change_event(self, self.permit_id, previous, self.canonical_status, occurred_at))
 
     def snapshot(self) -> PermitSnapshot:
         return PermitSnapshot(
@@ -444,6 +498,8 @@ class Permit(EventRecorder):
         snapshot = self.snapshot()
         self.status = PermitStatus.SUPERSEDED
         self.superseded_by = canonical_permit_id
+        self.canonical_status = PermitCanonicalStatus.NONCANONICAL
+        self.duplicate_candidate_id = None
         self.history.append(
             PermitHistoryEntry(
                 PermitHistoryAction.SUPERSEDED,

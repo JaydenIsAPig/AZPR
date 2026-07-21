@@ -68,7 +68,7 @@ Run the unit suite with Python 3.12 and `PYTHONPATH=src`. Architecture tests ver
 
 ## Related documents
 
-- [Project structure](../current/project-structure-v1.5.md)
-- [Backend structure](../current/backend-structure-v1.5.md)
-- [Business logic](../current/business-logic-v1.5.md)
+- [Project structure](../current/project-structure-v1.12.md)
+- [Backend structure](../current/backend-structure-v1.12.md)
+- [Business logic](../current/business-logic-v1.12.md)
 - [Modular-monolith decision](0001-modular-monolith.md)

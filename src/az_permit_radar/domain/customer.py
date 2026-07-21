@@ -32,18 +32,32 @@ class CustomerTradePreference:
 @dataclass(frozen=True, slots=True)
 class ServiceTerritory:
     jurisdiction_ids: frozenset[JurisdictionId] = frozenset()
+    city_names: frozenset[str] = frozenset()
     postal_codes: frozenset[str] = frozenset()
     radius_center: GeographicCoordinates | None = None
     radius_km: Decimal | None = None
+    origin_coordinates_validated: bool = False
+    polygon_reference: str | None = None
+    allow_uncertain_geography: bool = False
 
     def __post_init__(self) -> None:
-        if not self.jurisdiction_ids and not self.postal_codes and self.radius_center is None:
+        if not self.jurisdiction_ids and not self.city_names and not self.postal_codes and self.radius_center is None and self.polygon_reference is None:
             raise InvariantViolation("service territory requires at least one geographic scope")
+        normalized_cities = frozenset(" ".join(city.upper().split()) for city in self.city_names)
+        if any(not city for city in normalized_cities):
+            raise InvariantViolation("service territory city names cannot be blank")
+        object.__setattr__(self, "city_names", normalized_cities)
         for postal_code in self.postal_codes:
             if len(postal_code) not in {5, 10} or not postal_code[:5].isdigit():
                 raise InvariantViolation(f"invalid service territory postal code: {postal_code!r}")
         if (self.radius_center is None) != (self.radius_km is None):
             raise InvariantViolation("radius center and radius distance must be supplied together")
+        if self.radius_center is not None and not self.origin_coordinates_validated:
+            raise InvariantViolation("radius territory requires validated normalized origin coordinates")
+        if self.origin_coordinates_validated and self.radius_center is None:
+            raise InvariantViolation("validated origin marker requires radius coordinates")
+        if self.polygon_reference is not None and not self.polygon_reference.strip():
+            raise InvariantViolation("polygon reference cannot be blank")
         if self.radius_km is not None:
             try:
                 radius = Decimal(self.radius_km)
@@ -53,6 +67,10 @@ class ServiceTerritory:
                 raise InvariantViolation("service radius must be positive")
             object.__setattr__(self, "radius_km", radius)
 
+    @property
+    def origin_coordinates(self) -> GeographicCoordinates | None:
+        return self.radius_center
+
 
 @dataclass(frozen=True, slots=True)
 class CustomerFilter:
@@ -61,6 +79,8 @@ class CustomerFilter:
     minimum_confidence: Confidence | None = None
     issued_during: DateRange | None = None
     excluded_project_classification_codes: frozenset[str] = frozenset()
+    allowed_value_bands: frozenset[str] = frozenset()
+    excluded_permit_type_codes: frozenset[str] = frozenset()
 
     def __post_init__(self) -> None:
         if self.minimum_valuation and self.maximum_valuation:
@@ -68,8 +88,9 @@ class CustomerFilter:
                 raise InvariantViolation("customer valuation filter currencies must match")
             if self.minimum_valuation.amount > self.maximum_valuation.amount:
                 raise InvariantViolation("minimum valuation cannot exceed maximum valuation")
-        if any(not code.strip() for code in self.excluded_project_classification_codes):
-            raise InvariantViolation("excluded project classification codes cannot be blank")
+        for values in (self.excluded_project_classification_codes, self.allowed_value_bands, self.excluded_permit_type_codes):
+            if any(not code.strip() for code in values):
+                raise InvariantViolation("customer filter codes cannot be blank")
 
 
 @dataclass(frozen=True, slots=True)

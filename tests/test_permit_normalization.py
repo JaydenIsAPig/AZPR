@@ -18,6 +18,7 @@ from az_permit_radar.domain.permit import (
     CoordinateSource,
     GeocodeQuality,
     PermitAuthorityStatus,
+    PermitCanonicalStatus,
     PermitHistoryAction,
     PermitPartyRole,
     PermitStatus,
@@ -40,12 +41,10 @@ from az_permit_radar.domain.value_objects import (
 from az_permit_radar.infrastructure.permit_normalization import (
     ArizonaPermitRecordNormalizer,
     FakeGeocoder,
-    InMemoryDuplicateCandidateStore,
     InMemoryJurisdictionResolver,
     InMemoryNormalizationLogger,
     InMemoryNormalizationMetrics,
-    InMemoryNormalizationReviewStore,
-    InMemoryPermitNormalizationStore,
+    InMemoryNormalizationUnitOfWork,
     NullGeocoder,
 )
 
@@ -88,6 +87,7 @@ def source_record(
         external_record_id=external_id,
         payload_digest=digest,
         observed_at=NOW,
+        acquired_at=NOW,
         source_row_number=2,
         parsed_values=tuple(
             parsed_value(name, value) for name, value in (fields or {}).items()
@@ -121,9 +121,10 @@ def base_fields(
 class NormalizationHarness:
     def __init__(self, geocoder: FakeGeocoder | None = None) -> None:
         self.geocoder = geocoder or NullGeocoder()
-        self.permits = InMemoryPermitNormalizationStore()
-        self.candidates = InMemoryDuplicateCandidateStore()
-        self.reviews = InMemoryNormalizationReviewStore()
+        self.unit_of_work = InMemoryNormalizationUnitOfWork()
+        self.permits = self.unit_of_work.permits
+        self.candidates = self.unit_of_work.duplicate_candidates
+        self.reviews = self.unit_of_work.reviews
         self.logs = InMemoryNormalizationLogger()
         self.metrics = InMemoryNormalizationMetrics()
         self.workflow = PermitNormalizationWorkflow(
@@ -136,6 +137,7 @@ class NormalizationHarness:
             permits=self.permits,
             duplicate_candidates=self.candidates,
             reviews=self.reviews,
+            unit_of_work=self.unit_of_work,
             logger=self.logs,
             metrics=self.metrics,
             now=lambda: LATER,
@@ -156,6 +158,7 @@ class PermitNormalizationTests(unittest.TestCase):
         permit = result.permit
 
         self.assertEqual(result.outcome, PermitNormalizationOutcome.CREATED)
+        self.assertEqual(permit.source_evidence[0].acquired_at, NOW)
         self.assertEqual(permit.permit_number, "BP-2026-001")
         self.assertEqual(permit.authority_status, PermitAuthorityStatus.ISSUED)
         self.assertEqual(permit.permit_type.code, "remodel")  # type: ignore[union-attr]
@@ -315,6 +318,8 @@ class PermitNormalizationTests(unittest.TestCase):
         self.assertEqual(second_result.outcome, PermitNormalizationOutcome.PROBABLE_DUPLICATE)
         self.assertEqual(len(harness.permits.permits), 2)
         self.assertIsNotNone(second_result.duplicate_candidate)
+        self.assertEqual(second_result.permit.canonical_status, PermitCanonicalStatus.PROBABLE_DUPLICATE)
+        self.assertEqual(second_result.permit.duplicate_candidate_id, second_result.duplicate_candidate.candidate_id)
         self.assertEqual(
             second_result.duplicate_candidate.status,  # type: ignore[union-attr]
             DuplicateCandidateStatus.PENDING_REVIEW,
@@ -357,6 +362,7 @@ class PermitNormalizationTests(unittest.TestCase):
         incoming = harness.permits.get(decided.permit_id)
         canonical = harness.permits.get(decided.possible_duplicate_of_id)
         self.assertEqual(incoming.status, PermitStatus.SUPERSEDED)  # type: ignore[union-attr]
+        self.assertEqual(incoming.canonical_status, PermitCanonicalStatus.NONCANONICAL)  # type: ignore[union-attr]
         self.assertEqual(incoming.superseded_by, canonical.permit_id)  # type: ignore[union-attr]
         self.assertIn(incoming.permit_id, canonical.merged_permit_ids)  # type: ignore[union-attr]
         self.assertEqual(len(canonical.source_record_ids), 2)  # type: ignore[union-attr]
@@ -397,6 +403,11 @@ class PermitNormalizationTests(unittest.TestCase):
             harness.permits.get(decided.permit_id).status,  # type: ignore[union-attr]
             PermitStatus.ACTIVE,
         )
+        self.assertEqual(
+            harness.permits.get(decided.permit_id).canonical_status,  # type: ignore[union-attr]
+            PermitCanonicalStatus.CANONICAL,
+        )
+        self.assertIsNone(harness.permits.get(decided.permit_id).duplicate_candidate_id)  # type: ignore[union-attr]
 
 
 if __name__ == "__main__":

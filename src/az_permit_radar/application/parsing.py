@@ -436,6 +436,7 @@ class SourceParserPipeline:
             external_record_id=external_key,
             payload_digest=payload_digest,
             observed_at=self._now(),
+            acquired_at=artifact.acquired_at,
             source_row_number=entry.row_number,
             parsed_values=values,
             parse_issues=issues,
@@ -490,6 +491,7 @@ class SourceParserPipeline:
             external_record_id=external_key,
             payload_digest=payload_digest,
             observed_at=self._now(),
+            acquired_at=artifact.acquired_at,
             source_row_number=row_number,
             parsed_values=values,
             parse_issues=issues,
@@ -520,7 +522,12 @@ class SourceParserPipeline:
         batch: ImportBatch,
         error: ArtifactUnusable,
     ) -> None:
-        batch.fail(error.safe_message, self._now())
+        batch.fail(
+            error.safe_message,
+            self._now(),
+            category=error.category.value,
+            retryable=error.category is ArtifactUnusableCategory.ARTIFACT_READ,
+        )
         self._metrics.increment(
             "parser_failures_total",
             labels=(

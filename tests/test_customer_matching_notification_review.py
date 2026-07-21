@@ -19,6 +19,7 @@ from az_permit_radar.domain.notification import (
 from az_permit_radar.domain.review import ReviewSubjectType, ReviewTask, ReviewTaskStatus
 from az_permit_radar.domain.value_objects import (
     CalendarDate,
+    ClassificationResultId,
     Confidence,
     CustomerAccountId,
     EmailAddress,
@@ -29,6 +30,7 @@ from az_permit_radar.domain.value_objects import (
     OpportunityId,
     OpportunityMatchId,
     PhoneNumber,
+    PermitId,
     ReviewTaskId,
 )
 
@@ -180,6 +182,8 @@ class ReviewTaskTests(unittest.TestCase):
             "classification-001",
             "low confidence",
             NOW,
+            permit_id=PermitId("permit-001"),
+            classification_result_id=ClassificationResultId("classification-001"),
         )
         task.start("reviewer-001", NOW)
         task.resolve("accepted after source review", LATER)

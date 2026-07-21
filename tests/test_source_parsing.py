@@ -126,6 +126,7 @@ class SourceParsingTests(unittest.TestCase):
         by_name = {value.canonical_field: value.normalized_value for value in record.parsed_values}  # type: ignore[union-attr]
 
         self.assertEqual(report.accepted_count, 1)
+        self.assertEqual(record.acquired_at, artifact.acquired_at)  # type: ignore[union-attr]
         self.assertEqual(by_name["application_date"], CalendarDate.from_iso("2026-07-10"))
         self.assertEqual(by_name["permit_status"], "Permit Issued")
         self.assertEqual(by_name["permit_type"], "Residential Remodel")

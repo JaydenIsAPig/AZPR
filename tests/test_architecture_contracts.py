@@ -73,6 +73,28 @@ class ArchitectureContractTests(unittest.TestCase):
         self.assertTrue(hasattr(queries, "FindOpportunityMatchesForCustomer"))
         self.assertTrue(hasattr(repositories, "PermitRepository"))
 
+    def test_every_customer_facing_message_requires_explicit_access_context(self) -> None:
+        customer_messages = (
+            commands.ConfigureCustomerTradePreference,
+            commands.ConfigureServiceTerritory,
+            commands.ConfigureCustomerFilter,
+            commands.ConfigureNotificationPreference,
+            commands.ChangeLeadState,
+            commands.SaveCustomerMatch,
+            commands.DismissCustomerMatch,
+            commands.MarkCustomerMatchContacted,
+            commands.RecalculateCustomerMatches,
+            queries.GetPermit,
+            queries.GetOpportunity,
+            queries.GetCustomerOpportunityMatch,
+            queries.GetCustomerMatchExplanation,
+            queries.GetCustomerConfiguration,
+            queries.FindOpportunityMatchesForCustomer,
+        )
+        for message in customer_messages:
+            with self.subTest(message=message.__name__):
+                self.assertIn("access_context", {field.name for field in dataclasses.fields(message)})
+
     def test_domain_and_application_contracts_have_no_external_dependencies(self) -> None:
         package_root = Path(__file__).parents[1] / "src" / "az_permit_radar"
         violations: list[str] = []

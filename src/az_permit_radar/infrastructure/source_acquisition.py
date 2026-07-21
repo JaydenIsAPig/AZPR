@@ -33,6 +33,7 @@ from az_permit_radar.domain.events import DomainEvent
 from az_permit_radar.domain.ingestion import (
     ArtifactResponseMetadata,
     ImportBatch,
+    ImportBatchStatus,
     SourceArtifact,
 )
 from az_permit_radar.domain.source_registry import AcquisitionMethod, SourceProfile
@@ -77,6 +78,7 @@ class InMemoryAcquisitionState:
         self._results: dict[AcquisitionJobId, list[AcquisitionRecord]] = {}
         self._outbox: list[DomainEvent] = []
         self._processing_queue: list[ImportBatchId] = []
+        self._processing_claims: dict[ImportBatchId, str] = {}
 
     def get(self, source_id: SourceId) -> SourceProfile | None:
         with self._lock:
@@ -323,6 +325,79 @@ class InMemoryAcquisitionState:
     def processing_batch_ids(self) -> tuple[ImportBatchId, ...]:
         with self._lock:
             return tuple(self._processing_queue)
+
+    def claim_processing(
+        self,
+        batch_id: ImportBatchId,
+        correlation_id: str,
+    ) -> tuple[ImportBatch, SourceArtifact]:
+        """Lease one acquired Batch without detaching its authoritative ownership."""
+        if not correlation_id.strip():
+            raise InvariantViolation("processing correlation identifier is required")
+        with self._lock:
+            if batch_id not in self._processing_queue:
+                raise InvariantViolation("import batch is not queued for processing")
+            existing = self._processing_claims.get(batch_id)
+            if existing is not None and existing != correlation_id:
+                raise ConcurrencyConflict("import batch is already claimed for processing")
+            batch = self._batches[batch_id]
+            if batch.status is not ImportBatchStatus.ACQUIRED:
+                raise InvariantViolation("only an acquired import batch can be claimed")
+            artifact_id = next(iter(batch.artifact_ids), None)
+            artifact = self._artifacts.get(artifact_id) if artifact_id is not None else None
+            if artifact is None:
+                raise InvariantViolation("queued import batch has no authoritative artifact")
+            self._processing_claims[batch_id] = correlation_id
+            return deepcopy(batch), artifact
+
+    def finish_processing(
+        self,
+        batch: ImportBatch,
+        correlation_id: str,
+    ) -> None:
+        """Commit the parser-mutated Batch and atomically acknowledge its queue item."""
+        with self._lock:
+            self._require_processing_claim(batch.import_batch_id, correlation_id)
+            if batch.status not in {
+                ImportBatchStatus.COMPLETED,
+                ImportBatchStatus.PARTIALLY_FAILED,
+                ImportBatchStatus.FAILED,
+            }:
+                raise InvariantViolation("processing completion requires a terminal parsed batch")
+            current = self._batches[batch.import_batch_id]
+            if current.status is not ImportBatchStatus.ACQUIRED:
+                raise ConcurrencyConflict("authoritative import batch changed while processing")
+            events = batch.pull_domain_events()
+            self._batches[batch.import_batch_id] = deepcopy(batch)
+            self._processing_queue.remove(batch.import_batch_id)
+            del self._processing_claims[batch.import_batch_id]
+            self._outbox.extend(events)
+
+    def fail_processing(
+        self,
+        batch_id: ImportBatchId,
+        correlation_id: str,
+        *,
+        category: str,
+        message: str,
+        retryable: bool,
+        occurred_at: UtcTimestamp,
+    ) -> ImportBatch:
+        """Record an unexpected parser/UoW failure and acknowledge the queue item."""
+        with self._lock:
+            self._require_processing_claim(batch_id, correlation_id)
+            batch = deepcopy(self._batches[batch_id])
+            batch.fail(message, occurred_at, category=category, retryable=retryable)
+            events = batch.pull_domain_events()
+            self._batches[batch_id] = deepcopy(batch)
+            self._processing_queue.remove(batch_id)
+            del self._processing_claims[batch_id]
+            self._outbox.extend(events)
+            return deepcopy(batch)
+
+    def _require_processing_claim(self, batch_id: ImportBatchId, correlation_id: str) -> None:
+        if self._processing_claims.get(batch_id) != correlation_id:
+            raise ConcurrencyConflict("import batch processing claim is missing or belongs to another run")
 
     def _commit_attempt(
         self,

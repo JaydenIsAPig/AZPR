@@ -72,6 +72,10 @@ class CustomerAccountId(Identifier):
     pass
 
 
+class AccessActorId(Identifier):
+    """Stable external-authentication subject mapped by the application boundary."""
+
+
 class OpportunityMatchId(Identifier):
     pass
 

@@ -1,0 +1,49 @@
+{
+  "$schema": "../../schema/business-data.schema.json",
+  "document_id": "business-data",
+  "version": "1.4",
+  "document_status": "superseded",
+  "implementation_status": "implemented",
+  "approved_on": "2026-07-20",
+  "description": "Superseded governed business-data registries and fail-closed classification/publication thresholds.",
+  "related_documents": [
+    "project-structure-v1.9.md",
+    "backend-structure-v1.9.md",
+    "business-logic-v1.9.md",
+    "frontend-design-v1.0.md"
+  ],
+  "sources": [],
+  "trades": [],
+  "geography_rules": [],
+  "matching_rules": [],
+  "notification_policies": [],
+  "classification_policy": {
+    "rule_set_version": "1.0.0",
+    "ai_acceptance_confidence": "0.60",
+    "review_confidence": "0.80",
+    "publication_confidence": "0.80",
+    "evaluation_fixture_version": "1.0.0"
+  },
+  "geography_policy": {
+    "distance_formula": "haversine",
+    "distance_unit": "km",
+    "earth_mean_radius_km": "6371.0088",
+    "maximum_radius_km": "160.934",
+    "maximum_postal_codes": 100,
+    "maximum_jurisdictions": 25,
+    "maximum_cities": 50
+  },
+  "opportunity_matching_policy": {
+    "score_version": "opportunity-score-1.0.0",
+    "freshness_full_days": 30,
+    "freshness_partial_days": 90,
+    "weights": {
+      "trade": "35",
+      "geography": "30",
+      "value": "15",
+      "completeness": "10",
+      "freshness": "5",
+      "notification_readiness": "5"
+    }
+  }
+}

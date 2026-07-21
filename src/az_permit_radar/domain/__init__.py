@@ -7,6 +7,7 @@ from .acquisition import (
     AcquisitionRecord,
     AcquisitionTrigger,
 )
+from .access import AccessContext, AccessPermission, AccessRole
 from .customer import (
     CustomerAccount,
     CustomerAccountStatus,
@@ -24,12 +25,21 @@ from .deduplication import (
     PermitDuplicateCandidate,
 )
 from .errors import (
+    AuthenticationRequired,
     ConsentRequired,
     DomainError,
     DuplicateConfiguration,
+    ForbiddenAccess,
     InvariantViolation,
     InvalidStateTransition,
     InvalidValue,
+    ResourceNotFound,
+)
+from .eligibility import (
+    EligibilityDecision,
+    EligibilityReason,
+    PublicationEligibilityError,
+    PublicationEligibilityPolicy,
 )
 from .ingestion import (
     ArtifactResponseMetadata,
@@ -40,11 +50,15 @@ from .ingestion import (
     SourceRecordStatus,
 )
 from .matching import (
+    CustomerConfigurationSnapshot,
+    FreshnessEvaluationSnapshot,
     LeadState,
     MatchExplanation,
     MatchScoreComponent,
     OpportunityMatch,
     OpportunityMatchStatus,
+    ScorePolicySnapshot,
+    TerritoryEvaluationSnapshot,
 )
 from .parsing import (
     ImportReport,
@@ -60,7 +74,13 @@ from .notification import (
     NotificationAttemptStatus,
     NotificationChannel,
 )
-from .opportunity import Opportunity, OpportunityStatus
+from .opportunity import (
+    Opportunity,
+    OpportunityProjectionSnapshot,
+    OpportunityProjectionStatus,
+    OpportunityStatus,
+    SourceFreshnessBasis,
+)
 from .permit import (
     Address,
     AddressResolutionStatus,
@@ -71,6 +91,7 @@ from .permit import (
     ParcelReference,
     Permit,
     PermitAuthorityStatus,
+    PermitCanonicalStatus,
     PermitHistoryAction,
     PermitHistoryEntry,
     PermitParty,
@@ -94,9 +115,12 @@ from .source_registry import (
     SourceStatus,
 )
 from .classification import (
+    ClassificationAssertion,
     ClassificationMethod,
+    ClassificationOrigin,
     ClassificationResult,
     ClassificationReviewStatus,
+    HumanClassificationDecision,
     ProjectClassification,
     TradeTag,
 )

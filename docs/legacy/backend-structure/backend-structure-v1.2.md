@@ -74,7 +74,7 @@ The aggregate boundaries, lifecycles, CQRS messages, and repository ports from [
 
 - [Project structure v1.2](../project-structure/project-structure-v1.2.md)
 - [Business logic v1.2](../business-logic/business-logic-v1.2.md)
-- [Business data v1.0](../../current/business-data-v1.0.json)
+- [Business data v1.0](../business-data/business-data-v1.0.json)
 - [Source onboarding checklist](../../governance/source-onboarding-checklist.md)
 - [Source acquisition runbook](../../runbooks/source-acquisition.md)
 - [Backend structure log](../../logs/backend-structure-log-v1.2.md)

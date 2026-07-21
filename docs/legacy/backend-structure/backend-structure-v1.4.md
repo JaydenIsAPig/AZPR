@@ -67,6 +67,6 @@ Structured parser logs contain operational IDs, parser identity, safe failure ca
 
 - [Project structure v1.4](../project-structure/project-structure-v1.4.md)
 - [Business logic v1.4](../business-logic/business-logic-v1.4.md)
-- [Business data v1.0](../../current/business-data-v1.0.json)
+- [Business data v1.0](../business-data/business-data-v1.0.json)
 - [Source parsing runbook](../../runbooks/source-parsing.md)
 - [Backend structure log](../../logs/backend-structure-log-v1.4.md)

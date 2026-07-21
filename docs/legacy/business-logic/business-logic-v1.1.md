@@ -18,7 +18,7 @@ approved_on: 2026-07-17
 
 AZ Permit Radar remains an Arizona-specific permit intelligence and opportunity-alert platform. It is not approved as a permit-application platform, full CRM, bidding marketplace, national permit database, or microservice ecosystem.
 
-No pilot jurisdiction, source, trade, threshold, provider, or notification policy is selected in [business data v1.0](../../current/business-data-v1.0.json). Domain examples in tests are fixtures, not approved business data or production behavior.
+No pilot jurisdiction, source, trade, threshold, provider, or notification policy is selected in [business data v1.0](../business-data/business-data-v1.0.json). Domain examples in tests are fixtures, not approved business data or production behavior.
 
 ## Implemented domain distinctions
 
@@ -82,7 +82,7 @@ No authentication, authorization, billing, source access, personal-data retentio
 
 - [Project structure v1.1](../project-structure/project-structure-v1.1.md)
 - [Backend structure v1.1](../backend-structure/backend-structure-v1.1.md)
-- [Business data v1.0](../../current/business-data-v1.0.json)
-- [Frontend design v1.0](../../current/frontend-design-v1.0.md)
+- [Business data v1.0](../business-data/business-data-v1.0.json)
+- [Frontend design v1.0](../frontend-design/frontend-design-v1.0.md)
 - [Business logic log](../../logs/business-logic-log-v1.1.md)
 - [Domain glossary](../../governance/domain-glossary.md)

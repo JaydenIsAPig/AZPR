@@ -49,6 +49,6 @@ The coordinator returns immutable `SourceArtifact` metadata but does not persist
 
 - [Project structure v1.2](../project-structure/project-structure-v1.2.md)
 - [Backend structure v1.2](../backend-structure/backend-structure-v1.2.md)
-- [Business data v1.0](../../current/business-data-v1.0.json)
+- [Business data v1.0](../business-data/business-data-v1.0.json)
 - [Source acquisition runbook](../../runbooks/source-acquisition.md)
 - [Business logic log](../../logs/business-logic-log-v1.2.md)

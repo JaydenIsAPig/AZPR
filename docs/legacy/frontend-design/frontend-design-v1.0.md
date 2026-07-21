@@ -1,7 +1,7 @@
 ---
 document_id: frontend-design
 version: 1.0
-document_status: current
+document_status: superseded
 implementation_status: planned
 approved_on: 2026-07-16
 ---
@@ -53,8 +53,8 @@ The frontend must consume explicit application/query contracts and must not reac
 
 ## Related current documents
 
-- [Project structure v1.5](project-structure-v1.5.md)
-- [Backend structure v1.5](backend-structure-v1.5.md)
-- [Business logic v1.5](business-logic-v1.5.md)
-- [Business data v1.0](business-data-v1.0.json)
-- [Frontend design log](../logs/frontend-design-log-v1.0.md)
+- [Project structure v1.11](../project-structure/project-structure-v1.11.md)
+- [Backend structure v1.11](../backend-structure/backend-structure-v1.11.md)
+- [Business logic v1.11](../business-logic/business-logic-v1.11.md)
+- [Business data v1.6](../business-data/business-data-v1.6.json)
+- [Frontend design log](../../logs/frontend-design-log-v1.0.md)

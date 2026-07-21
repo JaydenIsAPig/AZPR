@@ -1,7 +1,7 @@
 ---
 document_id: project-structure
 version: 1.5
-document_status: current
+document_status: superseded
 implementation_status: partially implemented
 approved_on: 2026-07-17
 ---
@@ -45,7 +45,7 @@ AZPR/
     └── test_permit_normalization.py
 ```
 
-The other modular-monolith contexts retain the structure described in [project structure v1.4](../legacy/project-structure/project-structure-v1.4.md).
+The other modular-monolith contexts retain the structure described in [project structure v1.4](project-structure-v1.4.md).
 
 ## Dependency direction
 
@@ -80,9 +80,8 @@ git diff --check
 
 ## Related current documents
 
-- [Backend structure v1.5](backend-structure-v1.5.md)
-- [Business logic v1.5](business-logic-v1.5.md)
-- [Business data v1.0](business-data-v1.0.json)
-- [Frontend design v1.0](frontend-design-v1.0.md)
-- [Project structure log](../logs/project-structure-log-v1.5.md)
-
+- [Backend structure v1.5](../backend-structure/backend-structure-v1.5.md)
+- [Business logic v1.5](../business-logic/business-logic-v1.5.md)
+- [Business data v1.0](../business-data/business-data-v1.0.json)
+- [Frontend design v1.0](../frontend-design/frontend-design-v1.0.md)
+- [Project structure log](../../logs/project-structure-log-v1.5.md)

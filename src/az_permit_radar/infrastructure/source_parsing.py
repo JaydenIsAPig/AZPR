@@ -490,6 +490,16 @@ class InMemorySourceRecordRepository:
                     source_record.source_record_id
                 )
 
+    def snapshot(self) -> object:
+        with self._lock:
+            return deepcopy((self._records, self._latest))
+
+    def restore(self, snapshot: object) -> None:
+        with self._lock:
+            records, latest = deepcopy(snapshot)
+            self._records = records
+            self._latest = latest
+
     @property
     def records(self) -> tuple[SourceRecord, ...]:
         with self._lock:

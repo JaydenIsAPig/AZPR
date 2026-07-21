@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Protocol
+from typing import Callable, Protocol
 
 from az_permit_radar.domain.classification import ClassificationResult, TradeTag
 from az_permit_radar.domain.customer import CustomerAccount
@@ -66,6 +66,7 @@ class PermitRepository(Protocol):
 
 class ClassificationResultRepository(Protocol):
     def get(self, classification_result_id: ClassificationResultId) -> ClassificationResult | None: ...
+    def find_current_for_permit(self, permit_id: PermitId) -> ClassificationResult | None: ...
     def save(self, classification_result: ClassificationResult) -> None: ...
 
 
@@ -80,14 +81,48 @@ class OpportunityRepository(Protocol):
 
 
 class CustomerAccountRepository(Protocol):
-    def get(self, customer_account_id: CustomerAccountId) -> CustomerAccount | None: ...
-    def save(self, customer_account: CustomerAccount) -> None: ...
+    """Normal application port: an account can be reached only through its customer scope."""
+
+    def get_for_customer(self, customer_account_id: CustomerAccountId) -> CustomerAccount | None: ...
+    def update_for_customer(
+        self,
+        customer_account_id: CustomerAccountId,
+        operation: Callable[[CustomerAccount], None],
+    ) -> CustomerAccount | None: ...
+
+
+class InternalCustomerAccountRepository(Protocol):
+    """Explicit operations-only port; never inject into a normal customer handler."""
+
+    def get_for_internal(self, customer_account_id: CustomerAccountId) -> CustomerAccount | None: ...
+    def save_for_internal(self, customer_account: CustomerAccount) -> None: ...
+    def list_for_internal(self) -> tuple[CustomerAccount, ...]: ...
 
 
 class OpportunityMatchRepository(Protocol):
-    def get(self, opportunity_match_id: OpportunityMatchId) -> OpportunityMatch | None: ...
+    """Normal application port: every read/write includes the owning customer ID."""
+
+    def get_for_customer(
+        self,
+        customer_account_id: CustomerAccountId,
+        opportunity_match_id: OpportunityMatchId,
+    ) -> OpportunityMatch | None: ...
+    def list_for_customer(self, customer_account_id: CustomerAccountId) -> tuple[OpportunityMatch, ...]: ...
     def find_for(self, opportunity_id: OpportunityId, customer_account_id: CustomerAccountId) -> OpportunityMatch | None: ...
-    def save(self, opportunity_match: OpportunityMatch) -> None: ...
+    def update_for_customer(
+        self,
+        customer_account_id: CustomerAccountId,
+        opportunity_match_id: OpportunityMatchId,
+        operation: Callable[[OpportunityMatch], None],
+    ) -> OpportunityMatch | None: ...
+
+
+class InternalOpportunityMatchRepository(Protocol):
+    """Explicit internal generation/operations port with intentionally broad visibility."""
+
+    def get_for_internal(self, opportunity_match_id: OpportunityMatchId) -> OpportunityMatch | None: ...
+    def list_for_internal(self) -> tuple[OpportunityMatch, ...]: ...
+    def save_for_internal(self, opportunity_match: OpportunityMatch) -> None: ...
 
 
 class NotificationAttemptRepository(Protocol):
@@ -97,4 +132,5 @@ class NotificationAttemptRepository(Protocol):
 
 class ReviewTaskRepository(Protocol):
     def get(self, review_task_id: ReviewTaskId) -> ReviewTask | None: ...
+    def find_for_classification(self, classification_result_id: ClassificationResultId) -> tuple[ReviewTask, ...]: ...
     def save(self, review_task: ReviewTask) -> None: ...

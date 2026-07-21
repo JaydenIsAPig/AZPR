@@ -83,6 +83,7 @@ class SourceRecord(EventRecorder):
     external_record_id: str | None
     payload_digest: ContentDigest
     observed_at: UtcTimestamp
+    acquired_at: UtcTimestamp | None = None
     status: SourceRecordStatus = SourceRecordStatus.RECEIVED
     parser_version: str | None = None
     rejection_reason: str | None = None
@@ -147,6 +148,11 @@ class ImportBatchStatus(str, Enum):
     SKIPPED = "skipped"
 
 
+class RetryDisposition(str, Enum):
+    RETRYABLE = "retryable"
+    TERMINAL = "terminal"
+
+
 _TERMINAL_BATCH_STATES = frozenset(
     {
         ImportBatchStatus.COMPLETED,
@@ -169,6 +175,8 @@ class ImportBatch(EventRecorder):
     processed_count: int = 0
     rejected_count: int = 0
     failure_reason: str | None = None
+    failure_category: str | None = None
+    retry_disposition: RetryDisposition | None = None
     duplicate_of_artifact_id: SourceArtifactId | None = None
     reprocess_of_artifact_id: SourceArtifactId | None = None
     skip_reason: str | None = None
@@ -267,12 +275,23 @@ class ImportBatch(EventRecorder):
         requested = ImportBatchStatus.PARTIALLY_FAILED if rejected_count else ImportBatchStatus.COMPLETED
         self._transition(requested, occurred_at)
 
-    def fail(self, reason: str, occurred_at: UtcTimestamp) -> None:
+    def fail(
+        self,
+        reason: str,
+        occurred_at: UtcTimestamp,
+        *,
+        category: str = "unexpected",
+        retryable: bool = False,
+    ) -> None:
         if self.status in _TERMINAL_BATCH_STATES:
             raise InvalidStateTransition("ImportBatch", self.status, ImportBatchStatus.FAILED)
-        if not reason.strip():
-            raise InvariantViolation("batch failure reason is required")
+        if not reason.strip() or not category.strip():
+            raise InvariantViolation("batch failure reason and category are required")
         self.failure_reason = reason
+        self.failure_category = category
+        self.retry_disposition = (
+            RetryDisposition.RETRYABLE if retryable else RetryDisposition.TERMINAL
+        )
         self._transition(ImportBatchStatus.FAILED, occurred_at)
 
     def _transition(self, requested: ImportBatchStatus, occurred_at: UtcTimestamp) -> None:

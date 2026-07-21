@@ -1,0 +1,12 @@
+{
+  "$schema": "../../schema/business-data.schema.json",
+  "document_id": "business-data",
+  "version": "1.0",
+  "document_status": "superseded",
+  "implementation_status": "implemented",
+  "approved_on": "2026-07-16",
+  "description": "Superseded governed business-data registries before classification policy was approved.",
+  "related_documents": ["project-structure-v1.5.md", "backend-structure-v1.5.md", "business-logic-v1.5.md", "frontend-design-v1.0.md"],
+  "sources": [], "trades": [], "geography_rules": [], "matching_rules": [], "notification_policies": [],
+  "classification_policy": {"rule_set_version":"0.0.0", "ai_acceptance_confidence":"0", "review_confidence":"0", "evaluation_fixture_version":"0.0.0"}
+}

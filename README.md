@@ -4,11 +4,11 @@ AZ Permit Radar is an Arizona-specific permit intelligence and opportunity-alert
 
 ## Authoritative documentation
 
-- [Project structure](docs/current/project-structure-v1.5.md)
-- [Backend structure](docs/current/backend-structure-v1.5.md)
-- [Business logic](docs/current/business-logic-v1.5.md)
-- [Business data](docs/current/business-data-v1.0.json)
-- [Frontend design](docs/current/frontend-design-v1.0.md)
+- [Project structure](docs/current/project-structure-v1.12.md)
+- [Backend structure](docs/current/backend-structure-v1.12.md)
+- [Business logic](docs/current/business-logic-v1.12.md)
+- [Business data](docs/current/business-data-v1.7.json)
+- [Frontend design](docs/current/frontend-design-v1.1.md)
 - [Domain glossary](docs/governance/domain-glossary.md)
 - [Architecture decisions](docs/adr/README.md)
 - [Repository audit](docs/audits/repository-audit.md)
@@ -25,7 +25,7 @@ The domain kernel requires Python 3.12 or newer. Run from the repository root wi
 ```sh
 PYTHONPATH=src python3 -m unittest discover -s tests -v
 python3 scripts/check_docs.py
-python3 -m json.tool docs/current/business-data-v1.0.json >/dev/null
+python3 -m json.tool docs/current/business-data-v1.7.json >/dev/null
 python3 -m json.tool docs/schema/business-data.schema.json >/dev/null
 git diff --check
 ```

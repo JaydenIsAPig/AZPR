@@ -76,6 +76,6 @@ External systems must be reached through adapters owned by the appropriate modul
 
 - [Backend structure v1.0](../backend-structure/backend-structure-v1.0.md)
 - [Business logic v1.0](../business-logic/business-logic-v1.0.md)
-- [Business data v1.0](../../current/business-data-v1.0.json)
-- [Frontend design v1.0](../../current/frontend-design-v1.0.md)
+- [Business data v1.0](../business-data/business-data-v1.0.json)
+- [Frontend design v1.0](../frontend-design/frontend-design-v1.0.md)
 - [Project structure log](../../logs/project-structure-log-v1.0.md)

@@ -7,7 +7,7 @@ from enum import Enum
 
 from .errors import InvalidStateTransition, InvariantViolation
 from .events import EventRecorder, state_change_event
-from .value_objects import ReviewTaskId, UtcTimestamp
+from .value_objects import ClassificationResultId, PermitId, ReviewTaskId, UtcTimestamp
 
 
 class ReviewSubjectType(str, Enum):
@@ -50,21 +50,32 @@ class ReviewTask(EventRecorder):
     resolution: str | None = None
     completed_at: UtcTimestamp | None = None
     version: int = 0
+    permit_id: PermitId | None = None
+    classification_result_id: ClassificationResultId | None = None
 
     def __post_init__(self) -> None:
         self._initialize_events()
         if not self.subject_id.strip() or not self.reason.strip():
             raise InvariantViolation("review task subject and reason are required")
+        if self.subject_type is ReviewSubjectType.CLASSIFICATION_RESULT:
+            if self.classification_result_id is None or self.permit_id is None:
+                raise InvariantViolation("classification review task requires Permit and Classification Result links")
+            if self.subject_id != str(self.classification_result_id):
+                raise InvariantViolation("classification review subject must be the Classification Result identifier")
 
     def start(self, assignee_id: str, occurred_at: UtcTimestamp) -> None:
         if not assignee_id.strip():
             raise InvariantViolation("review task assignee is required")
+        if self.status is ReviewTaskStatus.IN_PROGRESS and self.assignee_id == assignee_id:
+            return
         self._transition(ReviewTaskStatus.IN_PROGRESS, occurred_at)
         self.assignee_id = assignee_id
 
     def resolve(self, resolution: str, occurred_at: UtcTimestamp) -> None:
         if not resolution.strip():
             raise InvariantViolation("review task resolution is required")
+        if self.status is ReviewTaskStatus.RESOLVED and self.resolution == resolution:
+            return
         self._transition(ReviewTaskStatus.RESOLVED, occurred_at)
         self.resolution = resolution
         self.completed_at = occurred_at
@@ -72,6 +83,8 @@ class ReviewTask(EventRecorder):
     def cancel(self, reason: str, occurred_at: UtcTimestamp) -> None:
         if not reason.strip():
             raise InvariantViolation("review task cancellation reason is required")
+        if self.status is ReviewTaskStatus.CANCELLED and self.resolution == reason:
+            return
         self._transition(ReviewTaskStatus.CANCELLED, occurred_at)
         self.resolution = reason
         self.completed_at = occurred_at

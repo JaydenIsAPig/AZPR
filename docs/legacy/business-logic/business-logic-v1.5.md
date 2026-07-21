@@ -1,7 +1,7 @@
 ---
 document_id: business-logic
 version: 1.5
-document_status: current
+document_status: superseded
 implementation_status: partially implemented
 approved_on: 2026-07-17
 ---
@@ -71,9 +71,8 @@ A score of at least 75 creates a probable duplicate candidate and review task. B
 
 ## Related current documents
 
-- [Project structure v1.5](project-structure-v1.5.md)
-- [Backend structure v1.5](backend-structure-v1.5.md)
-- [Business data v1.0](business-data-v1.0.json)
-- [Permit normalization runbook](../runbooks/permit-normalization.md)
-- [Business logic log](../logs/business-logic-log-v1.5.md)
-
+- [Project structure v1.5](../project-structure/project-structure-v1.5.md)
+- [Backend structure v1.5](../backend-structure/backend-structure-v1.5.md)
+- [Business data v1.0](../business-data/business-data-v1.0.json)
+- [Permit normalization runbook](../../runbooks/permit-normalization.md)
+- [Business logic log](../../logs/business-logic-log-v1.5.md)

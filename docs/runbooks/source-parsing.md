@@ -1,5 +1,11 @@
 # Source Parsing Runbook
 
+## Authoritative Batch procedure
+
+Use `AuthoritativeBatchParser`: claim the queued Batch, parse its working copy, commit Source Records and the terminal Batch, then acknowledge the queue item. Never treat a caller-mutated Batch copy as authoritative. On parser or commit failure, Source Record changes roll back, the authoritative Batch records a safe category and retry disposition, and its queue entry is removed.
+
+`completed` means no rejected rows; `partially_failed` means valid rows committed and malformed rows were explicitly rejected; `failed` means the artifact or processing transaction could not produce a valid batch result.
+
 ## Scope
 
 Use this runbook for processing an already archived immutable Source Artifact into Source Records. It does not authorize network access or live Tucson/Pima source use.
@@ -46,4 +52,3 @@ PYTHONPATH=src python3 -m unittest tests.test_source_parsing -v
 PYTHONPATH=src python3 -m unittest discover -s tests -v
 python3 scripts/check_docs.py
 ```
-

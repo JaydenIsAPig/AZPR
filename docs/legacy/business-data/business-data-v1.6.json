@@ -1,0 +1,112 @@
+{
+  "$schema": "../schema/business-data.schema.json",
+  "document_id": "business-data",
+  "version": "1.6",
+  "document_status": "superseded",
+  "implementation_status": "implemented",
+  "approved_on": "2026-07-20",
+  "description": "Governed registries plus processing consistency, projection, freshness, and explainable matching policies. Empty arrays mean no additional registry entries have been approved.",
+  "related_documents": [
+    "project-structure-v1.11.md",
+    "backend-structure-v1.11.md",
+    "business-logic-v1.11.md",
+    "frontend-design-v1.0.md"
+  ],
+  "sources": [],
+  "trades": [],
+  "geography_rules": [],
+  "matching_rules": [],
+  "notification_policies": [],
+  "classification_policy": {
+    "rule_set_version": "1.0.0",
+    "ai_acceptance_confidence": "0.60",
+    "review_confidence": "0.80",
+    "publication_confidence": "0.80",
+    "evaluation_fixture_version": "1.0.0"
+  },
+  "geography_policy": {
+    "distance_formula": "haversine",
+    "distance_unit": "km",
+    "earth_mean_radius_km": "6371.0088",
+    "maximum_radius_km": "160.934",
+    "maximum_postal_codes": 100,
+    "maximum_jurisdictions": 25,
+    "maximum_cities": 50
+  },
+  "opportunity_projection_policy": {
+    "projection_version": "opportunity-projection-1.0.0",
+    "source_date_precedence": ["issued_on", "applied_on"],
+    "unknown_source_date_behavior": "zero_source_freshness_credit",
+    "acquisition_timestamp_role": "context_only",
+    "processing_timestamp_role": "provenance_only",
+    "completeness_fields": ["permit_type", "description", "address", "permit_date"],
+    "valuation_in_completeness": false
+  },
+  "processing_workflow_policy": {
+    "version": "processing-consistency-1.0.0",
+    "batch_owner": "acquisition_state",
+    "normalization_atomicity": "process_local_shared_lock_snapshot_rollback",
+    "retryable_batch_failure_action": "explicit_reprocessing_new_batch",
+    "uniqueness_scopes": [
+      "source_artifact_source_and_content_hash",
+      "import_batch_processing_claim",
+      "source_record_external_key_and_parser_version",
+      "canonical_permit_identity",
+      "classification_permit_revision",
+      "active_opportunity_projection",
+      "active_customer_opportunity_match",
+      "review_task_subject_reason",
+      "processing_correlation_command"
+    ],
+    "failure_categories": [
+      "acquisition",
+      "storage",
+      "parsing",
+      "normalization",
+      "geocoding",
+      "classification",
+      "review_requirement",
+      "opportunity_projection",
+      "matching"
+    ]
+  },
+  "opportunity_matching_policy": {
+    "policy_id": "opportunity-match-score",
+    "score_version": "opportunity-score-1.1.0",
+    "freshness_full_days": 30,
+    "freshness_partial_days": 90,
+    "unknown_source_date_factor": "0",
+    "exclusion_reason_codes": [
+      "permit_missing",
+      "permit_voided",
+      "permit_superseded",
+      "probable_duplicate_unresolved",
+      "noncanonical_permit",
+      "classification_missing",
+      "classification_pending_review",
+      "classification_rejected",
+      "classification_confidence_below_publication_threshold",
+      "geography_unverified",
+      "opportunity_not_publishable",
+      "opportunity_projection_not_current",
+      "account_not_active",
+      "trade_mismatch",
+      "outside_service_territory",
+      "minimum_value",
+      "maximum_value",
+      "value_band",
+      "permit_filter",
+      "project_filter",
+      "confidence_filter",
+      "date_filter"
+    ],
+    "weights": {
+      "trade": "35",
+      "geography": "30",
+      "value": "15",
+      "completeness": "10",
+      "freshness": "5",
+      "notification_readiness": "5"
+    }
+  }
+}

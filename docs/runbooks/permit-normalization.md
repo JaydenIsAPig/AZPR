@@ -1,5 +1,11 @@
 # Permit Normalization and Duplicate Review Runbook
 
+## Atomic local persistence
+
+Run normalization and duplicate decisions through `InMemoryNormalizationUnitOfWork`. Permit, duplicate candidate, and normalization Review Task stores share one lock and snapshot. Any exception before commit restores all three. Injected failure must leave no visible partial state.
+
+This is process-local rollback, not database transactionality. A future adapter must use one database transaction and publish resulting events through a transactional outbox.
+
 ## Scope
 
 Use this runbook after a Source Record has parsed successfully. It covers deterministic Permit normalization, address resolution review, probable duplicate review, correction handling, and manual merge/distinct decisions. It does not authorize live source access or select a production geocoder.
@@ -53,4 +59,3 @@ PYTHONPATH=src python3 -m unittest tests.test_permit_normalization -v
 PYTHONPATH=src python3 -m unittest discover -s tests -v
 python3 scripts/check_docs.py
 ```
-

@@ -1,0 +1,13 @@
+{
+  "$schema": "../../schema/business-data.schema.json",
+  "document_id": "business-data",
+  "version": "1.2",
+  "document_status": "superseded",
+  "implementation_status": "implemented",
+  "approved_on": "2026-07-17",
+  "description": "Superseded governed business data before Opportunity matching weights were approved.",
+  "related_documents": ["project-structure-v1.7.md", "backend-structure-v1.7.md", "business-logic-v1.7.md", "frontend-design-v1.0.md"],
+  "sources": [], "trades": [], "geography_rules": [], "matching_rules": [], "notification_policies": [],
+  "classification_policy": {"rule_set_version":"1.0.0", "ai_acceptance_confidence":"0.60", "review_confidence":"0.80", "evaluation_fixture_version":"1.0.0"},
+  "geography_policy": {"distance_formula":"haversine", "distance_unit":"km", "earth_mean_radius_km":"6371.0088", "maximum_radius_km":"160.934", "maximum_postal_codes":100, "maximum_jurisdictions":25, "maximum_cities":50}
+}

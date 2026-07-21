@@ -8,6 +8,7 @@ import threading
 from copy import deepcopy
 from dataclasses import replace
 from decimal import Decimal, InvalidOperation
+from typing import Callable, TypeVar
 
 from az_permit_radar.application.normalization import (
     GeocodingAdapter,
@@ -493,8 +494,8 @@ class NullGeocoder(FakeGeocoder):
 
 
 class InMemoryPermitNormalizationStore:
-    def __init__(self) -> None:
-        self._lock = threading.RLock()
+    def __init__(self, lock: threading.RLock | None = None) -> None:
+        self._lock = lock or threading.RLock()
         self._permits: dict[PermitId, Permit] = {}
         self._source_external: dict[tuple[SourceId, str], PermitId] = {}
         self._source_fingerprint: dict[tuple[SourceId, str], PermitId] = {}
@@ -553,27 +554,65 @@ class InMemoryPermitNormalizationStore:
 
 
 class InMemoryDuplicateCandidateStore:
-    def __init__(self) -> None:
+    def __init__(self, lock: threading.RLock | None = None) -> None:
+        self._lock = lock or threading.RLock()
         self._candidates: dict[DuplicateCandidateId, PermitDuplicateCandidate] = {}
 
     def get(self, candidate_id: DuplicateCandidateId) -> PermitDuplicateCandidate | None:
-        candidate = self._candidates.get(candidate_id)
-        return deepcopy(candidate) if candidate is not None else None
+        with self._lock:
+            candidate = self._candidates.get(candidate_id)
+            return deepcopy(candidate) if candidate is not None else None
 
     def save(self, candidate: PermitDuplicateCandidate) -> None:
-        self._candidates[candidate.candidate_id] = deepcopy(candidate)
+        with self._lock:
+            self._candidates[candidate.candidate_id] = deepcopy(candidate)
 
     @property
     def candidates(self) -> tuple[PermitDuplicateCandidate, ...]:
-        return tuple(deepcopy(candidate) for candidate in self._candidates.values())
+        with self._lock:
+            return tuple(deepcopy(candidate) for candidate in self._candidates.values())
 
 
 class InMemoryNormalizationReviewStore:
-    def __init__(self) -> None:
+    def __init__(self, lock: threading.RLock | None = None) -> None:
+        self._lock = lock or threading.RLock()
         self.tasks: dict[ReviewTaskId, ReviewTask] = {}
 
     def save(self, review_task: ReviewTask) -> None:
-        self.tasks[review_task.review_task_id] = deepcopy(review_task)
+        with self._lock:
+            self.tasks[review_task.review_task_id] = deepcopy(review_task)
+
+
+TransactionResultT = TypeVar("TransactionResultT")
+
+
+class InMemoryNormalizationUnitOfWork:
+    """Shared-lock snapshot transaction for local Permit/candidate/review state."""
+
+    def __init__(self) -> None:
+        self._lock = threading.RLock()
+        self.permits = InMemoryPermitNormalizationStore(self._lock)
+        self.duplicate_candidates = InMemoryDuplicateCandidateStore(self._lock)
+        self.reviews = InMemoryNormalizationReviewStore(self._lock)
+        self.fail_next_commit = False
+
+    def execute(self, operation: Callable[[], TransactionResultT]) -> TransactionResultT:
+        with self._lock:
+            permit_snapshot = deepcopy(self.permits._permits)
+            candidate_snapshot = deepcopy(self.duplicate_candidates._candidates)
+            review_snapshot = deepcopy(self.reviews.tasks)
+            try:
+                result = operation()
+                if self.fail_next_commit:
+                    self.fail_next_commit = False
+                    raise OSError("injected normalization persistence failure")
+                return result
+            except Exception:
+                self.permits._permits = permit_snapshot
+                self.permits._rebuild_indexes()
+                self.duplicate_candidates._candidates = candidate_snapshot
+                self.reviews.tasks = review_snapshot
+                raise
 
 
 class InMemoryNormalizationLogger:

@@ -68,6 +68,6 @@ The exact signatures remain unapproved. The architecture requires adapter bounda
 
 - [Project structure v1.0](../project-structure/project-structure-v1.0.md)
 - [Business logic v1.0](../business-logic/business-logic-v1.0.md)
-- [Business data v1.0](../../current/business-data-v1.0.json)
-- [Frontend design v1.0](../../current/frontend-design-v1.0.md)
+- [Business data v1.0](../business-data/business-data-v1.0.json)
+- [Frontend design v1.0](../frontend-design/frontend-design-v1.0.md)
 - [Backend structure log](../../logs/backend-structure-log-v1.0.md)
