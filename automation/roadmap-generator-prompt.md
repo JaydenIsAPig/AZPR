@@ -29,7 +29,8 @@ Create one numbered stage entry for every file under `automation/numbered/`, exa
 
 For every stage:
 
-- Copy the title, stage group, prompt ID, prompt type, and human effort label from the prompt file metadata.
+- Treat the controller-supplied immutable numbered-prompt metadata catalog as the source of truth.
+- Copy the title, stage group, prompt ID, prompt type, and human effort label from the prompt file metadata. Never infer, upgrade, downgrade, or reinterpret an effort label from task complexity or older planning text.
 - Apply this reasoning mapping exactly:
   - Light -> `low`
   - Medium -> `medium`

@@ -39,3 +39,6 @@ __pycache__/
 *.swo
 .DS_Store
 Thumbs.db
+
+# Local Codex autonomous-loop runtime
+.codex-loop/

@@ -32,7 +32,7 @@ from pathlib import Path
 from typing import Any, Iterable, Sequence
 
 
-CONTROLLER_VERSION = "1.0.0"
+CONTROLLER_VERSION = "1.0.1"
 PROMOTE_CONFIRMATION = "PROMOTE ROADMAP"
 ABANDON_CONFIRMATION = "ABANDON ACTIVE STAGE"
 APPENDIX_B_CONFIRMATION = "ENABLE CONTROLLED SMS CANARY"
@@ -264,6 +264,87 @@ def prompt_body(path: Path) -> str:
             f"Prompt must contain BEGIN PROMPT and END PROMPT boundaries: {path}"
         )
     return body
+
+
+def numbered_prompt_metadata_catalog(root: Path) -> list[dict[str, Any]]:
+    """Return immutable roadmap metadata derived from numbered prompt files.
+
+    Codex may reason about dependencies and execution details, but it must not
+    reinterpret prompt identity or effort labels. This catalog is the source of
+    truth for those fields.
+    """
+
+    numbered_dir = root / "automation" / "numbered"
+    catalog: list[dict[str, Any]] = []
+    for prompt_path in sorted(numbered_dir.glob("*.md")):
+        meta = parse_front_matter(prompt_path)
+        required = ("prompt_id", "sequence", "title", "stage_group", "effort_label")
+        missing = [key for key in required if key not in meta]
+        if missing:
+            raise ControllerError(
+                f"Prompt metadata is incomplete in {prompt_path}: missing {missing}"
+            )
+        effort = meta["effort_label"]
+        if effort not in EFFORT_MAP:
+            raise ControllerError(
+                f"Unsupported effort_label {effort!r} in {prompt_path}."
+            )
+        catalog.append(
+            {
+                "id": str(meta["prompt_id"]),
+                "sequence": int(meta["sequence"]),
+                "title": str(meta["title"]),
+                "stage_group": str(meta["stage_group"]),
+                "effort_label": str(effort),
+                "reasoning_effort": EFFORT_MAP[str(effort)],
+                "prompt_file": str(prompt_path.relative_to(root)).replace("\\", "/"),
+            }
+        )
+    return catalog
+
+
+def reconcile_generated_prompt_metadata(
+    root: Path, roadmap: dict[str, Any]
+) -> list[str]:
+    """Deterministically align generated stages with prompt front matter.
+
+    Returns human-readable reconciliation notes for the generation report. The
+    controller changes only immutable identity/effort fields; Codex remains
+    responsible for dependencies, gates, paths, validation, and notes.
+    """
+
+    expected_by_file = {
+        item["prompt_file"]: item for item in numbered_prompt_metadata_catalog(root)
+    }
+    reconciliations: list[str] = []
+    stages = roadmap.get("stages", [])
+    if not isinstance(stages, list):
+        return reconciliations
+
+    immutable_fields = (
+        "id",
+        "sequence",
+        "title",
+        "stage_group",
+        "effort_label",
+        "reasoning_effort",
+    )
+    for index, stage in enumerate(stages):
+        if not isinstance(stage, dict):
+            continue
+        prompt_file = stage.get("prompt_file")
+        expected = expected_by_file.get(prompt_file)
+        if expected is None:
+            continue
+        for field in immutable_fields:
+            actual = stage.get(field)
+            target = expected[field]
+            if actual != target:
+                reconciliations.append(
+                    f"stages[{index}].{field}: {actual!r} -> {target!r}"
+                )
+                stage[field] = target
+    return reconciliations
 
 
 # ---------------------------------------------------------------------------
@@ -690,6 +771,7 @@ def cmd_generate_roadmap(root: Path) -> None:
     config = load_config(root)
     p = paths(root)
     generator = p["generator_prompt"].read_text(encoding="utf-8")
+    metadata_catalog = numbered_prompt_metadata_catalog(root)
     context = textwrap.dedent(
         f"""
         CONTROLLER-SUPPLIED FACTS
@@ -700,6 +782,13 @@ def cmd_generate_roadmap(root: Path) -> None:
         - Do not execute, edit, or simulate any numbered prompt.
         - Appendix B and Appendix C must not appear in the numbered stages array and must remain hard-locked.
         - Return only the roadmap JSON object.
+
+        IMMUTABLE NUMBERED-PROMPT METADATA
+        Copy id, sequence, title, stage_group, prompt_file, effort_label, and
+        reasoning_effort exactly from this controller-generated catalog. Do not
+        infer, upgrade, downgrade, or reinterpret these values:
+
+        {json.dumps(metadata_catalog, indent=2)}
         """
     ).strip()
     prompt = f"{generator.strip()}\n\n{context}\n"
@@ -718,6 +807,7 @@ def cmd_generate_roadmap(root: Path) -> None:
     )
     if clean_status(root):
         raise ControllerError("Roadmap generation was read-only but the working tree changed.")
+    metadata_reconciliations = reconcile_generated_prompt_metadata(root, roadmap)
     errors, warnings = validate_roadmap(root, roadmap)
     save_json(p["roadmap_proposed"], roadmap)
     report_lines = [
@@ -739,6 +829,13 @@ def cmd_generate_roadmap(root: Path) -> None:
         report_lines += ["## Errors", ""] + [f"- {value}" for value in errors] + [""]
     if warnings:
         report_lines += ["## Warnings", ""] + [f"- {value}" for value in warnings] + [""]
+    if metadata_reconciliations:
+        report_lines += [
+            "## Deterministic Metadata Reconciliation",
+            "",
+            "The controller aligned immutable stage identity and effort fields with prompt front matter:",
+            "",
+        ] + [f"- {value}" for value in metadata_reconciliations] + [""]
     report_lines += [
         "## Required Human Action",
         "",
