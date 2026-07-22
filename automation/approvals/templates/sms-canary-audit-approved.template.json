@@ -1,0 +1,14 @@
+{
+  "approved": false,
+  "decision_id": "SMS-CANARY-AUDIT",
+  "decision": "Authorize the read-only Appendix C audit of the exact deployed SMS canary evidence.",
+  "approved_by": "project owner",
+  "approved_on": "YYYY-MM-DD",
+  "appendix_b_commit": "REPLACE-ME",
+  "deployment_evidence": [],
+  "canary_cohort_id": "REPLACE-ME",
+  "constraints": [
+    "Appendix C is read-only.",
+    "Appendix C does not authorize broader SMS rollout."
+  ]
+}

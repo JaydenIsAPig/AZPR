@@ -1,0 +1,15 @@
+{
+  "approved": false,
+  "decision_id": "REPLACE-ME",
+  "decision": "Describe the exact approved decision.",
+  "selected_option": "REPLACE-ME",
+  "approved_by": "project owner",
+  "approved_on": "YYYY-MM-DD",
+  "evidence": [
+    "docs/adr/REPLACE-ME.md",
+    "docs/audits/REPLACE-ME.md"
+  ],
+  "constraints": [],
+  "review_triggers": [],
+  "notes": "Set approved to true only after reviewing all evidence."
+}

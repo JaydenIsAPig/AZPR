@@ -1,0 +1,21 @@
+{
+  "approved": false,
+  "decision_id": "SMS-CANARY-ENABLEMENT",
+  "decision": "Approve a tightly bounded controlled SMS canary after the numbered MVP roadmap and project review pass.",
+  "approved_by": "project owner",
+  "approved_on": "YYYY-MM-DD",
+  "provider_adr": "docs/adr/REPLACE-ME.md",
+  "environment": "production",
+  "canary_cohort_id": "REPLACE-ME",
+  "maximum_customers": 0,
+  "maximum_messages_per_day": 0,
+  "cost_cap_usd": "0.00",
+  "activation_start": "YYYY-MM-DDTHH:MM:SS-07:00",
+  "activation_end": "YYYY-MM-DDTHH:MM:SS-07:00",
+  "required_evidence": [],
+  "constraints": [
+    "Global SMS remains disabled.",
+    "Only the named canary cohort may be enabled.",
+    "Consent, verification, suppression, webhook, retry, and provider-failure tests must already pass."
+  ]
+}

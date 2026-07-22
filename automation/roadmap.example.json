@@ -1,0 +1,3169 @@
+{
+  "format_version": "1.0",
+  "roadmap_version": "example-not-for-activation",
+  "project_name": "AZ Permit Radar",
+  "repository_root_name": "AZPR",
+  "base_branch": "main",
+  "generated_from": {
+    "prompt_manifest": "automation/prompt-manifest.json",
+    "prompt_count": 38,
+    "generated_at": "EXAMPLE",
+    "generator_prompt": "automation/roadmap-generator-prompt.md"
+  },
+  "normal_execution": {
+    "maximum_stages_per_run": 1,
+    "include_appendix_a": true,
+    "include_appendix_b": false,
+    "include_appendix_c": false
+  },
+  "stages": [
+    {
+      "id": "001",
+      "sequence": 1,
+      "title": "Close the Post-Core Traceability Release Gate",
+      "stage_group": "S1 - Traceability Gate",
+      "prompt_file": "automation/numbered/001-close-the-post-core-traceability-release-gate.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "close-the-post-core-traceability-release-gate",
+      "prerequisites": [],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "002",
+      "sequence": 2,
+      "title": "Post-Core Traceability Corrective Audit",
+      "stage_group": "S1 - Traceability Gate",
+      "prompt_file": "automation/numbered/002-post-core-traceability-corrective-audit.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "branch_slug": "post-core-traceability-corrective-audit",
+      "prerequisites": [
+        "001"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "post-core-traceability-corrective-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "003",
+      "sequence": 3,
+      "title": "Define and Govern the Narrow Pilot Scope",
+      "stage_group": "S2 - MVP Scope and Architecture",
+      "prompt_file": "automation/numbered/003-define-and-govern-the-narrow-pilot-scope.md",
+      "effort_label": "High",
+      "reasoning_effort": "high",
+      "kind": "decision_gate",
+      "sandbox": "workspace-write",
+      "branch_slug": "define-and-govern-the-narrow-pilot-scope",
+      "prerequisites": [
+        "002"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED",
+          "APPROVAL_REQUIRED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "004",
+      "sequence": 4,
+      "title": "Select and Govern the Production Application Stack",
+      "stage_group": "S2 - MVP Scope and Architecture",
+      "prompt_file": "automation/numbered/004-select-and-govern-the-production-application-stack.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "decision_gate",
+      "sandbox": "workspace-write",
+      "branch_slug": "select-and-govern-the-production-application-stack",
+      "prerequisites": [
+        "003"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED",
+          "APPROVAL_REQUIRED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "005",
+      "sequence": 5,
+      "title": "Bootstrap the Production Application Shell and Engineering Baseline",
+      "stage_group": "S2 - MVP Scope and Architecture",
+      "prompt_file": "automation/numbered/005-bootstrap-the-production-application-shell-and-engineering-baseline.md",
+      "effort_label": "Medium",
+      "reasoning_effort": "medium",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "bootstrap-the-production-application-shell-and-engineering-b",
+      "prerequisites": [
+        "004"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": true,
+        "approval_files": [
+          "automation/approvals/004-production-stack-approved.json"
+        ]
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "006",
+      "sequence": 6,
+      "title": "MVP Scope and Architecture Decision Audit",
+      "stage_group": "S2 - MVP Scope and Architecture",
+      "prompt_file": "automation/numbered/006-mvp-scope-and-architecture-decision-audit.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "branch_slug": "mvp-scope-and-architecture-decision-audit",
+      "prerequisites": [
+        "005"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "mvp-scope-and-architecture-decision-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "007",
+      "sequence": 7,
+      "title": "Design and Implement the Durable Database Schema and Migrations",
+      "stage_group": "S3 - Durable Platform Foundation",
+      "prompt_file": "automation/numbered/007-design-and-implement-the-durable-database-schema-and-migrations.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "design-and-implement-the-durable-database-schema-and-migrati",
+      "prerequisites": [
+        "006"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "008",
+      "sequence": 8,
+      "title": "Implement Durable Repositories and Transaction Boundaries",
+      "stage_group": "S3 - Durable Platform Foundation",
+      "prompt_file": "automation/numbered/008-implement-durable-repositories-and-transaction-boundaries.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-durable-repositories-and-transaction-boundaries",
+      "prerequisites": [
+        "007"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "009",
+      "sequence": 9,
+      "title": "Implement Immutable Artifact Storage, Outbox, Workers, and Crash Recovery",
+      "stage_group": "S3 - Durable Platform Foundation",
+      "prompt_file": "automation/numbered/009-implement-immutable-artifact-storage-outbox-workers-and-crash-recovery.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-immutable-artifact-storage-outbox-workers-and-cras",
+      "prerequisites": [
+        "008"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "010",
+      "sequence": 10,
+      "title": "Durable Platform and Persistence Audit",
+      "stage_group": "S3 - Durable Platform Foundation",
+      "prompt_file": "automation/numbered/010-durable-platform-and-persistence-audit.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "branch_slug": "durable-platform-and-persistence-audit",
+      "prerequisites": [
+        "009"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "durable-platform-and-persistence-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "011",
+      "sequence": 11,
+      "title": "Implement Authentication, Session Security, and AccessContext Construction",
+      "stage_group": "S4 - Identity and Customer Configuration",
+      "prompt_file": "automation/numbered/011-implement-authentication-session-security-and-accesscontext-construction.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-authentication-session-security-and-accesscontext-",
+      "prerequisites": [
+        "010"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "012",
+      "sequence": 12,
+      "title": "Implement Customer Account Lifecycle, Versioned Configuration, and Onboarding API",
+      "stage_group": "S4 - Identity and Customer Configuration",
+      "prompt_file": "automation/numbered/012-implement-customer-account-lifecycle-versioned-configuration-and-onboarding-api.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-customer-account-lifecycle-versioned-configuration",
+      "prerequisites": [
+        "011"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "013",
+      "sequence": 13,
+      "title": "Identity, Authorization, and Customer-Isolation Audit",
+      "stage_group": "S4 - Identity and Customer Configuration",
+      "prompt_file": "automation/numbered/013-identity-authorization-and-customer-isolation-audit.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "branch_slug": "identity-authorization-and-customer-isolation-audit",
+      "prerequisites": [
+        "012"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "identity-authorization-and-customer-isolation-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "014",
+      "sequence": 14,
+      "title": "Select and Approve the First Tucson or Pima County Production Source",
+      "stage_group": "S5 - Live Source and Geography",
+      "prompt_file": "automation/numbered/014-select-and-approve-the-first-tucson-or-pima-county-production-source.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "decision_gate",
+      "sandbox": "workspace-write",
+      "branch_slug": "select-and-approve-the-first-tucson-or-pima-county-productio",
+      "prerequisites": [
+        "013"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED",
+          "APPROVAL_REQUIRED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "015",
+      "sequence": 15,
+      "title": "Implement Durable Scheduled Acquisition and the Approved Live Connector",
+      "stage_group": "S5 - Live Source and Geography",
+      "prompt_file": "automation/numbered/015-implement-durable-scheduled-acquisition-and-the-approved-live-connector.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-durable-scheduled-acquisition-and-the-approved-liv",
+      "prerequisites": [
+        "014"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": true,
+        "approval_files": [
+          "automation/approvals/014-pilot-source-approved.json"
+        ]
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "016",
+      "sequence": 16,
+      "title": "Implement the Production Source Parser, Replay, and Backfill Contract",
+      "stage_group": "S5 - Live Source and Geography",
+      "prompt_file": "automation/numbered/016-implement-the-production-source-parser-replay-and-backfill-contract.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-the-production-source-parser-replay-and-backfill-c",
+      "prerequisites": [
+        "015"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "017",
+      "sequence": 17,
+      "title": "Implement Required Production Geography and Address Resolution",
+      "stage_group": "S5 - Live Source and Geography",
+      "prompt_file": "automation/numbered/017-implement-required-production-geography-and-address-resolution.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-required-production-geography-and-address-resoluti",
+      "prerequisites": [
+        "016"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "018",
+      "sequence": 18,
+      "title": "Pilot Source, Ingestion, Normalization, and Geography Audit",
+      "stage_group": "S5 - Live Source and Geography",
+      "prompt_file": "automation/numbered/018-pilot-source-ingestion-normalization-and-geography-audit.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "branch_slug": "pilot-source-ingestion-normalization-and-geography-audit",
+      "prerequisites": [
+        "017"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "pilot-source-ingestion-normalization-and-geography-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "019",
+      "sequence": 19,
+      "title": "Implement the Authorized Customer API and Query Projections",
+      "stage_group": "S6 - Customer API and Dashboard",
+      "prompt_file": "automation/numbered/019-implement-the-authorized-customer-api-and-query-projections.md",
+      "effort_label": "High",
+      "reasoning_effort": "high",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-the-authorized-customer-api-and-query-projections",
+      "prerequisites": [
+        "018"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "020",
+      "sequence": 20,
+      "title": "Build the Authenticated Frontend Foundation and Onboarding Experience",
+      "stage_group": "S6 - Customer API and Dashboard",
+      "prompt_file": "automation/numbered/020-build-the-authenticated-frontend-foundation-and-onboarding-experience.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "build-the-authenticated-frontend-foundation-and-onboarding-e",
+      "prerequisites": [
+        "019"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "021",
+      "sequence": 21,
+      "title": "Build the Explainable Opportunity Dashboard and Lead Workflow",
+      "stage_group": "S6 - Customer API and Dashboard",
+      "prompt_file": "automation/numbered/021-build-the-explainable-opportunity-dashboard-and-lead-workflow.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "build-the-explainable-opportunity-dashboard-and-lead-workflo",
+      "prerequisites": [
+        "020"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "022",
+      "sequence": 22,
+      "title": "Customer API, Frontend, and Data-Exposure Audit",
+      "stage_group": "S6 - Customer API and Dashboard",
+      "prompt_file": "automation/numbered/022-customer-api-frontend-and-data-exposure-audit.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "branch_slug": "customer-api-frontend-and-data-exposure-audit",
+      "prerequisites": [
+        "021"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "customer-api-frontend-and-data-exposure-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "023",
+      "sequence": 23,
+      "title": "Implement Email Notification Orchestration and Delivery",
+      "stage_group": "S7 - Notifications and Operations",
+      "prompt_file": "automation/numbered/023-implement-email-notification-orchestration-and-delivery.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-email-notification-orchestration-and-delivery",
+      "prerequisites": [
+        "022"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "024",
+      "sequence": 24,
+      "title": "Email Delivery Audit",
+      "stage_group": "S7 - Notifications and Operations",
+      "prompt_file": "automation/numbered/024-email-delivery-audit.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "branch_slug": "email-delivery-audit",
+      "prerequisites": [
+        "023"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "email-delivery-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "025",
+      "sequence": 25,
+      "title": "Implement Controlled SMS Infrastructure Behind a Disabled Feature Flag",
+      "stage_group": "S7 - Notifications and Operations",
+      "prompt_file": "automation/numbered/025-implement-controlled-sms-infrastructure-behind-a-disabled-feature-flag.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-controlled-sms-infrastructure-behind-a-disabled-fe",
+      "prerequisites": [
+        "024"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "026",
+      "sequence": 26,
+      "title": "Build Internal Review and Source Operations Tooling",
+      "stage_group": "S7 - Notifications and Operations",
+      "prompt_file": "automation/numbered/026-build-internal-review-and-source-operations-tooling.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "build-internal-review-and-source-operations-tooling",
+      "prerequisites": [
+        "025"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "027",
+      "sequence": 27,
+      "title": "Notification, SMS, and Operations Audit",
+      "stage_group": "S7 - Notifications and Operations",
+      "prompt_file": "automation/numbered/027-notification-sms-and-operations-audit.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "branch_slug": "notification-sms-and-operations-audit",
+      "prerequisites": [
+        "026"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "notification-sms-and-operations-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "028",
+      "sequence": 28,
+      "title": "Implement the Privacy-Conscious Analytics Event Model",
+      "stage_group": "S8 - Operational and Release Readiness",
+      "prompt_file": "automation/numbered/028-implement-the-privacy-conscious-analytics-event-model.md",
+      "effort_label": "High",
+      "reasoning_effort": "high",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-the-privacy-conscious-analytics-event-model",
+      "prerequisites": [
+        "027"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "029",
+      "sequence": 29,
+      "title": "Implement Observability, Health, Alerting, and Operational Runbooks",
+      "stage_group": "S8 - Operational and Release Readiness",
+      "prompt_file": "automation/numbered/029-implement-observability-health-alerting-and-operational-runbooks.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-observability-health-alerting-and-operational-runb",
+      "prerequisites": [
+        "028"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "030",
+      "sequence": 30,
+      "title": "Implement Backup, Restore, Reconciliation, and Rollback Procedures",
+      "stage_group": "S8 - Operational and Release Readiness",
+      "prompt_file": "automation/numbered/030-implement-backup-restore-reconciliation-and-rollback-procedures.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-backup-restore-reconciliation-and-rollback-procedu",
+      "prerequisites": [
+        "029"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "031",
+      "sequence": 31,
+      "title": "Perform Security, Privacy, Performance, and Recovery Hardening",
+      "stage_group": "S8 - Operational and Release Readiness",
+      "prompt_file": "automation/numbered/031-perform-security-privacy-performance-and-recovery-hardening.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "perform-security-privacy-performance-and-recovery-hardening",
+      "prerequisites": [
+        "030"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "032",
+      "sequence": 32,
+      "title": "Formal Pilot Release Test Matrix and Release Gate Audit",
+      "stage_group": "S8 - Operational and Release Readiness",
+      "prompt_file": "automation/numbered/032-formal-pilot-release-test-matrix-and-release-gate-audit.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "branch_slug": "formal-pilot-release-test-matrix-and-release-gate-audit",
+      "prerequisites": [
+        "031"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "formal-pilot-release-test-matrix-and-release-gate-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "033",
+      "sequence": 33,
+      "title": "Prepare and Execute the Controlled Staging Deployment",
+      "stage_group": "S9 - Staging and Production Pilot",
+      "prompt_file": "automation/numbered/033-prepare-and-execute-the-controlled-staging-deployment.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "prepare-and-execute-the-controlled-staging-deployment",
+      "prerequisites": [
+        "032"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "034",
+      "sequence": 34,
+      "title": "Final Staging and Pilot Readiness Audit",
+      "stage_group": "S9 - Staging and Production Pilot",
+      "prompt_file": "automation/numbered/034-final-staging-and-pilot-readiness-audit.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "branch_slug": "final-staging-and-pilot-readiness-audit",
+      "prerequisites": [
+        "033"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "final-staging-and-pilot-readiness-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "035",
+      "sequence": 35,
+      "title": "Deploy the Controlled Production Pilot",
+      "stage_group": "S9 - Staging and Production Pilot",
+      "prompt_file": "automation/numbered/035-deploy-the-controlled-production-pilot.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "deploy-the-controlled-production-pilot",
+      "prerequisites": [
+        "034"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": true,
+        "approval_files": [
+          "automation/approvals/035-production-deployment-approved.json"
+        ]
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "036",
+      "sequence": 36,
+      "title": "Production Pilot Launch Verification Audit",
+      "stage_group": "S9 - Staging and Production Pilot",
+      "prompt_file": "automation/numbered/036-production-pilot-launch-verification-audit.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "branch_slug": "production-pilot-launch-verification-audit",
+      "prerequisites": [
+        "035"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "production-pilot-launch-verification-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "037",
+      "sequence": 37,
+      "title": "Implement Pilot Feedback and Business Validation Workflow",
+      "stage_group": "S10 - Pilot Learning",
+      "prompt_file": "automation/numbered/037-implement-pilot-feedback-and-business-validation-workflow.md",
+      "effort_label": "High",
+      "reasoning_effort": "high",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-pilot-feedback-and-business-validation-workflow",
+      "prerequisites": [
+        "036"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md",
+        ".github/**",
+        "frontend/**",
+        "app/**",
+        "migrations/**"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    },
+    {
+      "id": "038",
+      "sequence": 38,
+      "title": "Pilot Feedback and Business Validation Audit",
+      "stage_group": "S10 - Pilot Learning",
+      "prompt_file": "automation/numbered/038-pilot-feedback-and-business-validation-audit.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "branch_slug": "pilot-feedback-and-business-validation-audit",
+      "prerequisites": [
+        "037"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "README.md",
+        "docs/current/",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/index.json"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "pilot-feedback-and-business-validation-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Example metadata only; regenerate from the live repository before activation."
+      ]
+    }
+  ],
+  "appendices": {
+    "A": {
+      "appendix_id": "A",
+      "title": "Audit Correction Prompt",
+      "prompt_file": "automation/appendices/appendix-a-audit-correction-prompt.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "normal_execution_eligible": false,
+      "requires_explicit_invocation": false,
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "hard_lock": {
+        "enabled_by_default": false,
+        "confirmation_phrase": ""
+      },
+      "context_files": [
+        "docs/audits/index.json",
+        "docs/current/",
+        "docs/runbooks/"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Appendix A: audit corrections [{outcome}]"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Runs only for controller-authorized corrections and requires the same audit rerun."
+      ]
+    },
+    "B": {
+      "appendix_id": "B",
+      "title": "Optional Controlled SMS Canary Enablement Prompt",
+      "prompt_file": "automation/appendices/appendix-b-optional-controlled-sms-canary-enablement-prompt.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "normal_execution_eligible": false,
+      "requires_explicit_invocation": true,
+      "human_approval": {
+        "required_before_run": true,
+        "approval_files": [
+          "automation/approvals/post-mvp-project-review-approved.json",
+          "automation/approvals/sms-canary-approved.json"
+        ]
+      },
+      "hard_lock": {
+        "enabled_by_default": false,
+        "confirmation_phrase": "ENABLE CONTROLLED SMS CANARY"
+      },
+      "context_files": [
+        "docs/audits/index.json",
+        "docs/current/",
+        "docs/runbooks/"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "docs/**",
+        "scripts/**",
+        "pyproject.toml",
+        "README.md"
+      ],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Appendix B: controlled SMS canary [{outcome}]"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Never included in normal execution. Disabled until post-MVP review and explicit approval."
+      ]
+    },
+    "C": {
+      "appendix_id": "C",
+      "title": "Optional Controlled SMS Canary Activation Audit",
+      "prompt_file": "automation/appendices/appendix-c-optional-controlled-sms-canary-activation-audit.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "normal_execution_eligible": false,
+      "requires_explicit_invocation": true,
+      "human_approval": {
+        "required_before_run": true,
+        "approval_files": [
+          "automation/approvals/sms-canary-audit-approved.json"
+        ]
+      },
+      "hard_lock": {
+        "enabled_by_default": false,
+        "confirmation_phrase": "AUDIT CONTROLLED SMS CANARY"
+      },
+      "context_files": [
+        "docs/audits/index.json",
+        "docs/current/",
+        "docs/runbooks/"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        "automation/**",
+        ".codex-loop/**",
+        ".git/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Appendix C: SMS canary audit [{outcome}]"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Never launches automatically after Appendix B."
+      ]
+    }
+  }
+}

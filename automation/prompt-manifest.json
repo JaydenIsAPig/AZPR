@@ -1,0 +1,194 @@
+{
+  "numbered_prompts": [
+    {
+      "id": "001",
+      "file": "automation/numbered/001-close-the-post-core-traceability-release-gate.md",
+      "title": "Close the Post-Core Traceability Release Gate"
+    },
+    {
+      "id": "002",
+      "file": "automation/numbered/002-post-core-traceability-corrective-audit.md",
+      "title": "Post-Core Traceability Corrective Audit"
+    },
+    {
+      "id": "003",
+      "file": "automation/numbered/003-define-and-govern-the-narrow-pilot-scope.md",
+      "title": "Define and Govern the Narrow Pilot Scope"
+    },
+    {
+      "id": "004",
+      "file": "automation/numbered/004-select-and-govern-the-production-application-stack.md",
+      "title": "Select and Govern the Production Application Stack"
+    },
+    {
+      "id": "005",
+      "file": "automation/numbered/005-bootstrap-the-production-application-shell-and-engineering-baseline.md",
+      "title": "Bootstrap the Production Application Shell and Engineering Baseline"
+    },
+    {
+      "id": "006",
+      "file": "automation/numbered/006-mvp-scope-and-architecture-decision-audit.md",
+      "title": "MVP Scope and Architecture Decision Audit"
+    },
+    {
+      "id": "007",
+      "file": "automation/numbered/007-design-and-implement-the-durable-database-schema-and-migrations.md",
+      "title": "Design and Implement the Durable Database Schema and Migrations"
+    },
+    {
+      "id": "008",
+      "file": "automation/numbered/008-implement-durable-repositories-and-transaction-boundaries.md",
+      "title": "Implement Durable Repositories and Transaction Boundaries"
+    },
+    {
+      "id": "009",
+      "file": "automation/numbered/009-implement-immutable-artifact-storage-outbox-workers-and-crash-recovery.md",
+      "title": "Implement Immutable Artifact Storage, Outbox, Workers, and Crash Recovery"
+    },
+    {
+      "id": "010",
+      "file": "automation/numbered/010-durable-platform-and-persistence-audit.md",
+      "title": "Durable Platform and Persistence Audit"
+    },
+    {
+      "id": "011",
+      "file": "automation/numbered/011-implement-authentication-session-security-and-accesscontext-construction.md",
+      "title": "Implement Authentication, Session Security, and AccessContext Construction"
+    },
+    {
+      "id": "012",
+      "file": "automation/numbered/012-implement-customer-account-lifecycle-versioned-configuration-and-onboarding-api.md",
+      "title": "Implement Customer Account Lifecycle, Versioned Configuration, and Onboarding API"
+    },
+    {
+      "id": "013",
+      "file": "automation/numbered/013-identity-authorization-and-customer-isolation-audit.md",
+      "title": "Identity, Authorization, and Customer-Isolation Audit"
+    },
+    {
+      "id": "014",
+      "file": "automation/numbered/014-select-and-approve-the-first-tucson-or-pima-county-production-source.md",
+      "title": "Select and Approve the First Tucson or Pima County Production Source"
+    },
+    {
+      "id": "015",
+      "file": "automation/numbered/015-implement-durable-scheduled-acquisition-and-the-approved-live-connector.md",
+      "title": "Implement Durable Scheduled Acquisition and the Approved Live Connector"
+    },
+    {
+      "id": "016",
+      "file": "automation/numbered/016-implement-the-production-source-parser-replay-and-backfill-contract.md",
+      "title": "Implement the Production Source Parser, Replay, and Backfill Contract"
+    },
+    {
+      "id": "017",
+      "file": "automation/numbered/017-implement-required-production-geography-and-address-resolution.md",
+      "title": "Implement Required Production Geography and Address Resolution"
+    },
+    {
+      "id": "018",
+      "file": "automation/numbered/018-pilot-source-ingestion-normalization-and-geography-audit.md",
+      "title": "Pilot Source, Ingestion, Normalization, and Geography Audit"
+    },
+    {
+      "id": "019",
+      "file": "automation/numbered/019-implement-the-authorized-customer-api-and-query-projections.md",
+      "title": "Implement the Authorized Customer API and Query Projections"
+    },
+    {
+      "id": "020",
+      "file": "automation/numbered/020-build-the-authenticated-frontend-foundation-and-onboarding-experience.md",
+      "title": "Build the Authenticated Frontend Foundation and Onboarding Experience"
+    },
+    {
+      "id": "021",
+      "file": "automation/numbered/021-build-the-explainable-opportunity-dashboard-and-lead-workflow.md",
+      "title": "Build the Explainable Opportunity Dashboard and Lead Workflow"
+    },
+    {
+      "id": "022",
+      "file": "automation/numbered/022-customer-api-frontend-and-data-exposure-audit.md",
+      "title": "Customer API, Frontend, and Data-Exposure Audit"
+    },
+    {
+      "id": "023",
+      "file": "automation/numbered/023-implement-email-notification-orchestration-and-delivery.md",
+      "title": "Implement Email Notification Orchestration and Delivery"
+    },
+    {
+      "id": "024",
+      "file": "automation/numbered/024-email-delivery-audit.md",
+      "title": "Email Delivery Audit"
+    },
+    {
+      "id": "025",
+      "file": "automation/numbered/025-implement-controlled-sms-infrastructure-behind-a-disabled-feature-flag.md",
+      "title": "Implement Controlled SMS Infrastructure Behind a Disabled Feature Flag"
+    },
+    {
+      "id": "026",
+      "file": "automation/numbered/026-build-internal-review-and-source-operations-tooling.md",
+      "title": "Build Internal Review and Source Operations Tooling"
+    },
+    {
+      "id": "027",
+      "file": "automation/numbered/027-notification-sms-and-operations-audit.md",
+      "title": "Notification, SMS, and Operations Audit"
+    },
+    {
+      "id": "028",
+      "file": "automation/numbered/028-implement-the-privacy-conscious-analytics-event-model.md",
+      "title": "Implement the Privacy-Conscious Analytics Event Model"
+    },
+    {
+      "id": "029",
+      "file": "automation/numbered/029-implement-observability-health-alerting-and-operational-runbooks.md",
+      "title": "Implement Observability, Health, Alerting, and Operational Runbooks"
+    },
+    {
+      "id": "030",
+      "file": "automation/numbered/030-implement-backup-restore-reconciliation-and-rollback-procedures.md",
+      "title": "Implement Backup, Restore, Reconciliation, and Rollback Procedures"
+    },
+    {
+      "id": "031",
+      "file": "automation/numbered/031-perform-security-privacy-performance-and-recovery-hardening.md",
+      "title": "Perform Security, Privacy, Performance, and Recovery Hardening"
+    },
+    {
+      "id": "032",
+      "file": "automation/numbered/032-formal-pilot-release-test-matrix-and-release-gate-audit.md",
+      "title": "Formal Pilot Release Test Matrix and Release Gate Audit"
+    },
+    {
+      "id": "033",
+      "file": "automation/numbered/033-prepare-and-execute-the-controlled-staging-deployment.md",
+      "title": "Prepare and Execute the Controlled Staging Deployment"
+    },
+    {
+      "id": "034",
+      "file": "automation/numbered/034-final-staging-and-pilot-readiness-audit.md",
+      "title": "Final Staging and Pilot Readiness Audit"
+    },
+    {
+      "id": "035",
+      "file": "automation/numbered/035-deploy-the-controlled-production-pilot.md",
+      "title": "Deploy the Controlled Production Pilot"
+    },
+    {
+      "id": "036",
+      "file": "automation/numbered/036-production-pilot-launch-verification-audit.md",
+      "title": "Production Pilot Launch Verification Audit"
+    },
+    {
+      "id": "037",
+      "file": "automation/numbered/037-implement-pilot-feedback-and-business-validation-workflow.md",
+      "title": "Implement Pilot Feedback and Business Validation Workflow"
+    },
+    {
+      "id": "038",
+      "file": "automation/numbered/038-pilot-feedback-and-business-validation-audit.md",
+      "title": "Pilot Feedback and Business Validation Audit"
+    }
+  ]
+}

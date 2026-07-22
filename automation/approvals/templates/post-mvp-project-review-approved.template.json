@@ -1,0 +1,21 @@
+{
+  "approved": false,
+  "decision_id": "POST-MVP-PROJECT-REVIEW",
+  "decision": "Approve the completed numbered MVP roadmap for consideration of optional post-roadmap SMS canary work.",
+  "approved_by": "project owner",
+  "approved_on": "YYYY-MM-DD",
+  "final_numbered_audit": "docs/audits/REPLACE-ME.md",
+  "final_numbered_audit_outcome": "PASS",
+  "reviewed_areas": [
+    "customer isolation",
+    "source provenance",
+    "notification consent",
+    "email delivery evidence",
+    "security and recovery",
+    "production pilot stability"
+  ],
+  "constraints": [
+    "This approval does not itself enable SMS.",
+    "Appendix B remains subject to its separate approval and controller hard lock."
+  ]
+}

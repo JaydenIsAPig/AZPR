@@ -1,0 +1,54 @@
+{
+  "format_version": "1.0",
+  "base_branch": "main",
+  "branch_prefix": "automation",
+  "codex_timeout_seconds": 7200,
+  "xhigh_fallback_to_high": true,
+  "allowed_validation_executables": [
+    "python3",
+    "python",
+    "pytest",
+    "ruff",
+    "mypy",
+    "pyright",
+    "uv",
+    "poetry",
+    "hatch",
+    "tox",
+    "npm",
+    "npx",
+    "pnpm",
+    "yarn",
+    "node"
+  ],
+  "global_forbidden_change_paths": [
+    ".git/**",
+    ".codex-loop/**",
+    "automation/controller.py",
+    "automation/controller.config.json",
+    "automation/result.schema.json",
+    "automation/roadmap.schema.json",
+    "automation/roadmap.json",
+    "automation/roadmap.proposed.json",
+    "automation/numbered/**",
+    "automation/appendices/**"
+  ],
+  "structural_checks": [
+    {
+      "name": "Documentation consistency check when present",
+      "argv": ["python3", "scripts/check_docs.py"],
+      "timeout_seconds": 900,
+      "if_exists": "scripts/check_docs.py"
+    }
+  ],
+  "appendix_locks": {
+    "B": {
+      "enabled": false,
+      "reason": "Must remain disabled until the numbered roadmap, final project review, and SMS canary approval are complete."
+    },
+    "C": {
+      "enabled": false,
+      "reason": "Must remain disabled until Appendix B is completed, merged, deployed, and separately approved for audit."
+    }
+  }
+}

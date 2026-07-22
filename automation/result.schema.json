@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://az-permit-radar.local/schemas/autonomous-result.schema.json",
+  "title": "AZ Permit Radar Autonomous Stage Result",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "stage_id": {
+      "type": "string",
+      "pattern": "^(\\d{3}|[ABC])$"
+    },
+    "outcome": {
+      "type": "string",
+      "enum": [
+        "COMPLETED",
+        "PASS",
+        "PASS_WITH_REQUIRED_CORRECTIONS",
+        "BLOCKED",
+        "APPROVAL_REQUIRED",
+        "FAILED"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pre_change_report": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "current_behavior": {"type": "array", "items": {"type": "string"}},
+        "proposed_behavior": {"type": "array", "items": {"type": "string"}},
+        "expected_files": {"type": "array", "items": {"type": "string"}},
+        "expected_tests": {"type": "array", "items": {"type": "string"}},
+        "assumptions": {"type": "array", "items": {"type": "string"}},
+        "risks": {"type": "array", "items": {"type": "string"}},
+        "documentation_conflicts": {"type": "array", "items": {"type": "string"}}
+      },
+      "required": [
+        "current_behavior",
+        "proposed_behavior",
+        "expected_files",
+        "expected_tests",
+        "assumptions",
+        "risks",
+        "documentation_conflicts"
+      ]
+    },
+    "files_changed": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "validations_claimed": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "command": {"type": "string"},
+          "result": {"type": "string", "enum": ["PASS", "FAIL", "NOT_RUN"]},
+          "details": {"type": "string"}
+        },
+        "required": ["command", "result", "details"]
+      }
+    },
+    "lightweight_structure_check": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "result": {"type": "string", "enum": ["PASS", "FAIL", "NOT_APPLICABLE"]},
+        "details": {"type": "array", "items": {"type": "string"}}
+      },
+      "required": ["result", "details"]
+    },
+    "audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "is_audit": {"type": "boolean"},
+        "verdict": {
+          "type": "string",
+          "enum": ["PASS", "PASS_WITH_REQUIRED_CORRECTIONS", "BLOCKED", "NOT_APPLICABLE"]
+        },
+        "audited_commit": {"type": "string"},
+        "report_markdown": {"type": "string"},
+        "evidence_files": {"type": "array", "items": {"type": "string"}}
+      },
+      "required": ["is_audit", "verdict", "audited_commit", "report_markdown", "evidence_files"]
+    },
+    "corrections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "severity": {"type": "string", "enum": ["critical", "high", "medium", "low"]},
+          "blocking": {"type": "boolean"},
+          "description": {"type": "string", "minLength": 1},
+          "evidence": {"type": "array", "items": {"type": "string"}},
+          "required_before": {"type": "string"},
+          "authorized_handler": {
+            "type": "string",
+            "enum": ["APPENDIX_A", "HUMAN_DECISION_REQUIRED", "NONE"]
+          }
+        },
+        "required": [
+          "id",
+          "severity",
+          "blocking",
+          "description",
+          "evidence",
+          "required_before",
+          "authorized_handler"
+        ]
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "required": {"type": "boolean"},
+        "question": {"type": "string"},
+        "options": {"type": "array", "items": {"type": "string"}},
+        "recommended_option": {"type": "string"},
+        "required_approval_files": {"type": "array", "items": {"type": "string"}}
+      },
+      "required": ["required", "question", "options", "recommended_option", "required_approval_files"]
+    },
+    "remaining_risks": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "deferred_items": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "next_action": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "stage_id",
+    "outcome",
+    "summary",
+    "pre_change_report",
+    "files_changed",
+    "validations_claimed",
+    "lightweight_structure_check",
+    "audit",
+    "corrections",
+    "approval",
+    "remaining_risks",
+    "deferred_items",
+    "next_action"
+  ]
+}
