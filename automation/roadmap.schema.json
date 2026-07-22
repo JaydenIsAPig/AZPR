@@ -9,30 +9,56 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "name": {"type": "string", "minLength": 1},
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
         "argv": {
           "type": "array",
           "minItems": 1,
-          "items": {"type": "string", "minLength": 1}
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         },
-        "timeout_seconds": {"type": "integer", "minimum": 1, "maximum": 7200}
+        "timeout_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 7200
+        }
       },
-      "required": ["name", "argv", "timeout_seconds"]
+      "required": [
+        "name",
+        "argv",
+        "timeout_seconds"
+      ]
     },
     "approvalGate": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "required_before_run": {"type": "boolean"},
-        "approval_files": {"type": "array", "items": {"type": "string"}}
+        "required_before_run": {
+          "type": "boolean"
+        },
+        "approval_files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       },
-      "required": ["required_before_run", "approval_files"]
+      "required": [
+        "required_before_run",
+        "approval_files"
+      ]
     },
     "commitPolicy": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "required": {"type": "boolean"},
+        "required": {
+          "type": "boolean"
+        },
         "allowed_outcomes": {
           "type": "array",
           "items": {
@@ -47,79 +73,182 @@
             ]
           }
         },
-        "message_template": {"type": "string", "minLength": 1}
+        "message_template": {
+          "type": "string",
+          "minLength": 1
+        }
       },
-      "required": ["required", "allowed_outcomes", "message_template"]
+      "required": [
+        "required",
+        "allowed_outcomes",
+        "message_template"
+      ]
     },
     "stage": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "id": {"type": "string", "pattern": "^\\d{3}$"},
-        "sequence": {"type": "integer", "minimum": 1},
-        "title": {"type": "string", "minLength": 1},
-        "stage_group": {"type": "string", "minLength": 1},
-        "prompt_file": {"type": "string", "pattern": "^automation/numbered/.+\\.md$"},
+        "id": {
+          "type": "string",
+          "pattern": "^\\d{3}$"
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stage_group": {
+          "type": "string",
+          "minLength": 1
+        },
+        "prompt_file": {
+          "type": "string",
+          "pattern": "^automation/numbered/.+\\.md$"
+        },
         "effort_label": {
           "type": "string",
-          "enum": ["Light", "Medium", "High", "Extra High", "Ultra"]
+          "enum": [
+            "Light",
+            "Medium",
+            "High",
+            "Extra High",
+            "Ultra"
+          ]
         },
         "reasoning_effort": {
           "type": "string",
-          "enum": ["low", "medium", "high", "xhigh"]
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ]
         },
         "kind": {
           "type": "string",
-          "enum": ["implementation", "documentation", "decision_gate", "audit", "release_gate"]
+          "enum": [
+            "implementation",
+            "documentation",
+            "decision_gate",
+            "audit",
+            "release_gate"
+          ]
         },
-        "sandbox": {"type": "string", "enum": ["read-only", "workspace-write"]},
-        "branch_slug": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+        "sandbox": {
+          "type": "string",
+          "enum": [
+            "read-only",
+            "workspace-write"
+          ]
+        },
+        "branch_slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
         "prerequisites": {
           "type": "array",
-          "items": {"type": "string", "pattern": "^\\d{3}$"}
+          "items": {
+            "type": "string",
+            "pattern": "^\\d{3}$"
+          }
         },
         "audit_gate": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "mode": {"type": "string", "enum": ["none", "latest_formal"]},
+            "mode": {
+              "type": "string",
+              "enum": [
+                "none",
+                "latest_formal"
+              ]
+            },
             "allowed_outcomes": {
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["PASS", "PASS_WITH_REQUIRED_CORRECTIONS", "BLOCKED"]
+                "enum": [
+                  "PASS",
+                  "PASS_WITH_REQUIRED_CORRECTIONS",
+                  "BLOCKED"
+                ]
               }
             }
           },
-          "required": ["mode", "allowed_outcomes"]
+          "required": [
+            "mode",
+            "allowed_outcomes"
+          ]
         },
-        "human_approval": {"$ref": "#/$defs/approvalGate"},
-        "context_files": {"type": "array", "items": {"type": "string"}},
-        "allowed_change_paths": {"type": "array", "items": {"type": "string"}},
-        "forbidden_change_paths": {"type": "array", "items": {"type": "string"}},
+        "human_approval": {
+          "$ref": "#/$defs/approvalGate"
+        },
+        "context_files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowed_change_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "forbidden_change_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "validation": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
             "commands": {
               "type": "array",
-              "items": {"$ref": "#/$defs/validationCommand"}
+              "items": {
+                "$ref": "#/$defs/validationCommand"
+              }
             }
           },
-          "required": ["commands"]
+          "required": [
+            "commands"
+          ]
         },
-        "commit": {"$ref": "#/$defs/commitPolicy"},
+        "commit": {
+          "$ref": "#/$defs/commitPolicy"
+        },
         "audit": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "formal": {"type": "boolean"},
-            "report_slug": {"type": "string"}
+            "formal": {
+              "type": "boolean"
+            },
+            "report_slug": {
+              "type": "string"
+            }
           },
-          "required": ["formal", "report_slug"]
+          "required": [
+            "formal",
+            "report_slug"
+          ]
         },
-        "codex_timeout_seconds": {"type": "integer", "minimum": 60, "maximum": 14400},
-        "notes": {"type": "array", "items": {"type": "string"}}
+        "codex_timeout_seconds": {
+          "type": "integer",
+          "minimum": 60,
+          "maximum": 14400
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       },
       "required": [
         "id",
@@ -149,51 +278,128 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "appendix_id": {"type": "string", "enum": ["A", "B", "C"]},
-        "title": {"type": "string", "minLength": 1},
-        "prompt_file": {"type": "string", "pattern": "^automation/appendices/.+\\.md$"},
+        "appendix_id": {
+          "type": "string",
+          "enum": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "prompt_file": {
+          "type": "string",
+          "pattern": "^automation/appendices/.+\\.md$"
+        },
         "effort_label": {
           "type": "string",
-          "enum": ["Light", "Medium", "High", "Extra High", "Ultra"]
+          "enum": [
+            "Light",
+            "Medium",
+            "High",
+            "Extra High",
+            "Ultra"
+          ]
         },
         "reasoning_effort": {
           "type": "string",
-          "enum": ["low", "medium", "high", "xhigh"]
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ]
         },
         "kind": {
           "type": "string",
-          "enum": ["implementation", "audit", "release_gate"]
+          "enum": [
+            "implementation",
+            "audit",
+            "release_gate"
+          ]
         },
-        "sandbox": {"type": "string", "enum": ["read-only", "workspace-write"]},
-        "normal_execution_eligible": {"type": "boolean"},
-        "requires_explicit_invocation": {"type": "boolean"},
-        "human_approval": {"$ref": "#/$defs/approvalGate"},
+        "sandbox": {
+          "type": "string",
+          "enum": [
+            "read-only",
+            "workspace-write"
+          ]
+        },
+        "normal_execution_eligible": {
+          "type": "boolean"
+        },
+        "requires_explicit_invocation": {
+          "type": "boolean"
+        },
+        "human_approval": {
+          "$ref": "#/$defs/approvalGate"
+        },
         "hard_lock": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "enabled_by_default": {"type": "boolean"},
-            "confirmation_phrase": {"type": "string"}
+            "enabled_by_default": {
+              "type": "boolean"
+            },
+            "confirmation_phrase": {
+              "type": "string"
+            }
           },
-          "required": ["enabled_by_default", "confirmation_phrase"]
+          "required": [
+            "enabled_by_default",
+            "confirmation_phrase"
+          ]
         },
-        "context_files": {"type": "array", "items": {"type": "string"}},
-        "allowed_change_paths": {"type": "array", "items": {"type": "string"}},
-        "forbidden_change_paths": {"type": "array", "items": {"type": "string"}},
+        "context_files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowed_change_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "forbidden_change_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "validation": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
             "commands": {
               "type": "array",
-              "items": {"$ref": "#/$defs/validationCommand"}
+              "items": {
+                "$ref": "#/$defs/validationCommand"
+              }
             }
           },
-          "required": ["commands"]
+          "required": [
+            "commands"
+          ]
         },
-        "commit": {"$ref": "#/$defs/commitPolicy"},
-        "codex_timeout_seconds": {"type": "integer", "minimum": 60, "maximum": 14400},
-        "notes": {"type": "array", "items": {"type": "string"}}
+        "commit": {
+          "$ref": "#/$defs/commitPolicy"
+        },
+        "codex_timeout_seconds": {
+          "type": "integer",
+          "minimum": 60,
+          "maximum": 14400
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       },
       "required": [
         "appendix_id",
@@ -218,30 +424,70 @@
     }
   },
   "properties": {
-    "format_version": {"const": "1.0"},
-    "roadmap_version": {"type": "string", "minLength": 1},
-    "project_name": {"const": "AZ Permit Radar"},
-    "repository_root_name": {"const": "AZPR"},
-    "base_branch": {"type": "string", "minLength": 1},
+    "format_version": {
+      "const": "1.0",
+      "type": "string"
+    },
+    "roadmap_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "project_name": {
+      "const": "AZ Permit Radar",
+      "type": "string"
+    },
+    "repository_root_name": {
+      "const": "AZPR",
+      "type": "string"
+    },
+    "base_branch": {
+      "type": "string",
+      "minLength": 1
+    },
     "generated_from": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "prompt_manifest": {"type": "string"},
-        "prompt_count": {"type": "integer", "minimum": 1},
-        "generated_at": {"type": "string"},
-        "generator_prompt": {"type": "string"}
+        "prompt_manifest": {
+          "type": "string"
+        },
+        "prompt_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "generated_at": {
+          "type": "string"
+        },
+        "generator_prompt": {
+          "type": "string"
+        }
       },
-      "required": ["prompt_manifest", "prompt_count", "generated_at", "generator_prompt"]
+      "required": [
+        "prompt_manifest",
+        "prompt_count",
+        "generated_at",
+        "generator_prompt"
+      ]
     },
     "normal_execution": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "maximum_stages_per_run": {"const": 1},
-        "include_appendix_a": {"type": "boolean"},
-        "include_appendix_b": {"const": false},
-        "include_appendix_c": {"const": false}
+        "maximum_stages_per_run": {
+          "const": 1,
+          "type": "integer"
+        },
+        "include_appendix_a": {
+          "type": "boolean"
+        },
+        "include_appendix_b": {
+          "const": false,
+          "type": "boolean"
+        },
+        "include_appendix_c": {
+          "const": false,
+          "type": "boolean"
+        }
       },
       "required": [
         "maximum_stages_per_run",
@@ -253,17 +499,29 @@
     "stages": {
       "type": "array",
       "minItems": 1,
-      "items": {"$ref": "#/$defs/stage"}
+      "items": {
+        "$ref": "#/$defs/stage"
+      }
     },
     "appendices": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "A": {"$ref": "#/$defs/appendix"},
-        "B": {"$ref": "#/$defs/appendix"},
-        "C": {"$ref": "#/$defs/appendix"}
+        "A": {
+          "$ref": "#/$defs/appendix"
+        },
+        "B": {
+          "$ref": "#/$defs/appendix"
+        },
+        "C": {
+          "$ref": "#/$defs/appendix"
+        }
       },
-      "required": ["A", "B", "C"]
+      "required": [
+        "A",
+        "B",
+        "C"
+      ]
     }
   },
   "required": [
