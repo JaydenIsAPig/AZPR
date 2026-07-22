@@ -1,12 +1,12 @@
-Effort Level: Ultra
+Effort Level: Extra High
 
 BEGIN PROMPT
 
 You are the implementation agent for AZ Permit Radar. Execute this task as one controlled, reviewable change within the existing domain-driven modular monolith.
 
 REQUIRED PREDECESSOR
-- Governing audit: Prompt 27 Notification and Operations Audit with result PASS.
-- Required predecessor evidence: Prompt 29 validated observability/alerting commit.
+- Governing audit: Prompt 18 Pilot Source, Ingestion, Normalization, and Geography Audit with result PASS.
+- Required predecessor evidence: Prompt 20 validated frontend foundation commit.
 - Confirm the repository is at the intended committed HEAD and the worktree contains no unrelated changes before editing.
 
 MANDATORY SOURCE AND STATE INSPECTION
@@ -37,19 +37,29 @@ IMPLEMENTATION DISCIPLINE
 - Do not weaken tests or validation. Do not expose secrets or log unnecessary authentication, customer, address, party, parcel, coordinate, description, or raw parsed data.
 
 TASK
-Implement and validate backup, restore, retention, reconciliation, and rollback procedures for the durable database, raw-artifact storage, configuration, and integration state.
+Implement the narrow-pilot dashboard with new/active, saved, contacted, and dismissed Match views plus Match/Opportunity/Permit detail reached only through the authorized Match.
 
-REQUIRED WORK
-- Define backup scope, schedule, encryption, access, retention, and restore ownership for database and immutable artifact storage.
-- Define recovery objectives as approved categories/ranges; do not promise unsupported exact guarantees.
-- Implement isolated restore tests using representative data and verify provenance links, customer ownership, outbox state, worker leases, Opportunity revisions, Match histories, Review Tasks, and Notification Attempts.
-- Implement reconciliation reports for database-to-blob references, artifact checksums, outbox/backlog, source/batch completeness, current projections, customer Match ownership, and notification state.
-- Define application rollback, migration rollback/forward-fix strategy, configuration rollback, source disablement, worker pause/resume, and provider disablement.
-- Preserve immutable raw evidence and audit history during recovery. Do not silently delete or rewrite inconsistent records.
-- Add runbooks and test evidence for accidental configuration change, partial restore, missing artifact, corrupted checksum, stuck outbox, and failed migration.
+CARD AND DETAIL CONTENT
+Show factual headline, safe location presentation, source date or explicit unknown state, jurisdiction, trade/project tags, declared/estimated value signal or unknown, distance when verified, Match score, concise explanation, confidence/verification status, freshness basis, current Opportunity revision, and customer-safe provenance.
+
+INTERACTIONS
+- Sort/filter through API-supported fields; save, dismiss, and mark contacted through forward-only lead-state transitions.
+- Handle stale Match recalculation and partial failure without presenting obsolete data as current.
+- Preserve the score explanation and configuration version associated with historical results.
+- Display exact radius-boundary results consistently with backend units/precision.
+
+SAFETY AND UX RULES
+- Do not show pending low-confidence review records in the customer feed. Accepted publishable confidence can be described accurately without implying certainty.
+- Do not treat missing valuation as $0 or unknown dates as recent.
+- Do not embed scoring, territory, eligibility, or authorization logic in visual components.
+- Do not expose raw artifacts, sensitive permit parties, customer notes, or relevance feedback.
+- Provide accessible loading, empty, stale, error, offline/retry, forbidden, and not-found states.
+
+TESTS
+Cover authorization, filtering/sorting, lead transitions, stale revisions, unknown value/date, exact-radius display, responsive accessibility, and cross-customer route/query probes.
 
 ACCEPTANCE CRITERIA
-A clean isolated environment can restore the durable pilot state and reconcile it to immutable evidence with documented exceptions, while rollback procedures do not weaken provenance, customer isolation, or notification idempotency.
+The customer can understand why each current Match exists and take a lead action without seeing unresolved, stale, or unauthorized data.
 
 MANDATORY VALIDATION AND RECONCILIATION
 Run every applicable formatter, linter, static/type check, unit test, integration test, contract test, end-to-end test, build/package check, migration check, documentation/link check, JSON/schema check, security scan, and git diff check. If a category is not configured or not applicable, state that explicitly and explain why; do not claim it passed.

@@ -1,12 +1,12 @@
-Effort Level: Ultra
+Effort Level: Extra High
 
 BEGIN PROMPT
 
 You are the implementation agent for AZ Permit Radar. Execute this task as one controlled, reviewable change within the existing domain-driven modular monolith.
 
 REQUIRED PREDECESSOR
-- Governing audit: Prompt 13 Identity, Authorization, and Customer-Isolation Audit with result PASS.
-- Required predecessor evidence: Approved Prompt 14 source decision and decision-finalization commit.
+- Governing audit: Latest Post-Prompt-10 Corrective Audit and any newer audit affecting normalization, scoring, or processing traceability.
+- Required predecessor evidence: The audited pre-Prompt-1 baseline commit identified by the governing audit. No Prompt 1 commit exists yet.
 - Confirm the repository is at the intended committed HEAD and the worktree contains no unrelated changes before editing.
 
 MANDATORY SOURCE AND STATE INSPECTION
@@ -37,23 +37,35 @@ IMPLEMENTATION DISCIPLINE
 - Do not weaken tests or validation. Do not expose secrets or log unnecessary authentication, customer, address, party, parcel, coordinate, description, or raw parsed data.
 
 TASK
-Implement the approved Tucson or Pima County live connector and durable scheduled acquisition path. Keep source-specific behavior behind the connector/source-profile boundary.
+Implement the two required post-Prompt-10 traceability corrections and resolve the audit's unexplained missing-valuation score discrepancy without expanding product scope.
 
 REQUIRED WORK
-- Implement only the approved acquisition method with explicit user agent, timeout, retry policy, request/rate limits, conditional requests where supported, content-type/size validation, and safe response metadata capture.
-- Store every accepted raw artifact immutably with checksum, acquisition timestamp, source identity, and access metadata allowed by policy.
-- Detect exact duplicate content before downstream processing.
-- Create durable acquisition jobs, attempts, Import Batches, source-health state, and outbox events.
-- Configure scheduling, worker ownership/leases, downtime behavior, manual reprocessing, bounded backfill, and publication-disable behavior when factual integrity is uncertain.
-- Keep parsing out of the connector.
-- Do not enable unrestricted production scheduling. Use environment and feature gates so the connector can be exercised in tests/staging before release approval.
-- Redact URLs or headers if they contain credentials or sensitive query values.
-
-TESTS
-Use fake HTTP/file servers and approved fixtures to cover success, unchanged content, changed content, timeout, rate limit, malformed response, oversized content, storage failure, disabled source, concurrent acquisition, retry, source downtime, and source schema-change indicators.
+1. Add a governed normalizer identity and semantic version to the deterministic permit normalizer.
+2. Retain normalizer identifier/version with every normalization result, Permit provenance record, correction snapshot, duplicate decision context, and any reprocessing result that depends on normalization.
+3. Ensure a correction executed under a new normalizer version retains the prior normalized snapshot and all linked Source Record and raw-artifact evidence.
+4. Implement a self-contained immutable processing trace query or projection. It must expose, without requiring callers to reconstruct the chain through arbitrary repository joins:
+   - correlation/command identity and final status;
+   - Source, Source Artifact hash, Import Batch, Source Record, external identifier when available, acquisition timestamp, and source publication/issue date when available;
+   - parser identifier/version;
+   - normalizer identifier/version;
+   - Permit identity, canonical/superseded/voided state, duplicate and address-review state;
+   - classifier identifier/version, origin, confidence, review state, and AI provider/model version when an AI proposal exists;
+   - Opportunity identity and revision/currentness;
+   - score-policy version, customer-configuration version, component values, exclusions, and final Match state.
+5. Keep the trace customer-safe by design. Do not log or project raw addresses, descriptions, parties, parcel values, coordinates, or raw parsed values into routine log/metric labels.
+6. Investigate the corrective audit discrepancy where one missing-valuation trace reports a score of 80 while the score-case matrix reports 85. Determine whether the cases use different customer configuration, notification readiness, fixture data, or whether code/documentation is wrong. Add regression evidence. Do not change score weights merely to make the numbers match.
+7. Update the Permit Normalization runbook, source-integrity requirements, business logic, backend structure, business data/schema, glossary, definition of done, and tests as required.
 
 ACCEPTANCE CRITERIA
-The selected source can be acquired on a durable, retry-safe schedule into immutable evidence without duplicate processing or source-specific logic leaking into shared domain code.
+- A trace can independently identify every processing and policy version required by the corrective audit.
+- Replaying unchanged input under the same versions adds no duplicate trace/result.
+- Reprocessing under a new normalizer version creates a distinguishable retained result without mutating the raw artifact.
+- Corrected records preserve prior normalized snapshots and both old/new provenance.
+- The missing-valuation 80-versus-85 difference is either reproducibly explained or corrected with tests and synchronized documentation.
+- Existing unsafe publication gates and customer isolation remain unchanged.
+
+BOUNDARY
+Do not select a production framework, database, provider, or durable persistence mechanism in this prompt. Close the in-memory traceability release gate first.
 
 MANDATORY VALIDATION AND RECONCILIATION
 Run every applicable formatter, linter, static/type check, unit test, integration test, contract test, end-to-end test, build/package check, migration check, documentation/link check, JSON/schema check, security scan, and git diff check. If a category is not configured or not applicable, state that explicitly and explain why; do not claim it passed.

@@ -1,12 +1,12 @@
-Effort Level: Ultra
+Effort Level: Extra High
 
 BEGIN PROMPT
 
 You are the implementation agent for AZ Permit Radar. Execute this task as one controlled, reviewable change within the existing domain-driven modular monolith.
 
 REQUIRED PREDECESSOR
-- Governing audit: Prompt 2 Post-Core Traceability Corrective Audit with result PASS.
-- Required predecessor evidence: Prompt 2 audit commit.
+- Governing audit: Prompt 27 Notification and Operations Audit with result PASS.
+- Required predecessor evidence: Prompt 29 validated observability/alerting commit.
 - Confirm the repository is at the intended committed HEAD and the worktree contains no unrelated changes before editing.
 
 MANDATORY SOURCE AND STATE INSPECTION
@@ -37,32 +37,19 @@ IMPLEMENTATION DISCIPLINE
 - Do not weaken tests or validation. Do not expose secrets or log unnecessary authentication, customer, address, party, parcel, coordinate, description, or raw parsed data.
 
 TASK
-Define and govern the narrow Minimum Viable Product pilot scope without prematurely activating unapproved sources, trades, providers, or channels.
+Implement and validate backup, restore, retention, reconciliation, and rollback procedures for the durable database, raw-artifact storage, configuration, and integration state.
 
-DECISION MODE
-- If all required scope decisions already exist as approved, validate them and implement only the governed registry/configuration updates.
-- If any required decision is missing, create a clearly labeled proposed decision package and stop for explicit human approval before activating runtime configuration.
-- A proposal-only run may create a dedicated decision-proposal commit containing only proposed decision documents. After approval, rerun this prompt to create a separate decision-finalization/implementation commit. Never change proposed status to approved without explicit human instruction.
-
-REQUIRED SCOPE PACKAGE
-1. Define Tucson/Pima County as the pilot source family, but defer selection of the first enabled production endpoint to Prompt 14's source-access gate.
-2. Define evidence-based criteria for choosing the first source: access legality/terms, publication frequency, stable identifiers, historical availability, field quality, operational owner, rate limits, expected maintenance, and replay/backfill value.
-3. Compare pilot trade candidates using available fixture/source fields, deterministic classification precision, expected permit volume, geographic relevance, value-signal usefulness, review burden, and customer-action clarity.
-4. Recommend a deliberately limited initial trade set only when evidence supports it. Otherwise record the missing evidence and keep the business-data trades registry empty/pending.
-5. Define supported territory types for the pilot and the governed treatment of uncertain geography. Unverified geography remains excluded unless a customer explicitly opts in under approved rules.
-6. Confirm email as the first fully enabled delivery channel.
-7. Confirm controlled SMS capability is implemented only after email passes its dedicated audit; production SMS remains disabled behind feature/environment gates until separate approval and all consent, verification, suppression, webhook, quiet-hour, provider-failure, and rollback tests pass.
-8. Confirm billing, CRM integration, marketplace behavior, permit application submission, national coverage, multiple active production jurisdictions, and microservice extraction are outside the current scope.
-9. Define measurable acceptance journey, stage exit criteria, pilot-user boundaries, and what evidence is required to claim the Minimum Viable Product exists.
-
-IMPLEMENTATION AFTER APPROVAL
-- Add only approved sources/trades/geography/matching/notification policies to versioned governed business data.
-- Preserve empty arrays or explicit pending registries for unapproved entries.
-- Add validation preventing proposed/deferred entries from becoming active runtime configuration.
-- Synchronize product, backend, business logic/data, frontend planning, roadmap/handoff, glossary, and source-onboarding documentation.
+REQUIRED WORK
+- Define backup scope, schedule, encryption, access, retention, and restore ownership for database and immutable artifact storage.
+- Define recovery objectives as approved categories/ranges; do not promise unsupported exact guarantees.
+- Implement isolated restore tests using representative data and verify provenance links, customer ownership, outbox state, worker leases, Opportunity revisions, Match histories, Review Tasks, and Notification Attempts.
+- Implement reconciliation reports for database-to-blob references, artifact checksums, outbox/backlog, source/batch completeness, current projections, customer Match ownership, and notification state.
+- Define application rollback, migration rollback/forward-fix strategy, configuration rollback, source disablement, worker pause/resume, and provider disablement.
+- Preserve immutable raw evidence and audit history during recovery. Do not silently delete or rewrite inconsistent records.
+- Add runbooks and test evidence for accidental configuration change, partial restore, missing artifact, corrupted checksum, stuck outbox, and failed migration.
 
 ACCEPTANCE CRITERIA
-The repository clearly distinguishes source family from first enabled source, approved from proposed trades, supported from deferred territory behavior, enabled email from disabled SMS, and Minimum Viable Product scope from future expansion. No business scope is implied only by code comments or marketing language.
+A clean isolated environment can restore the durable pilot state and reconcile it to immutable evidence with documented exceptions, while rollback procedures do not weaken provenance, customer isolation, or notification idempotency.
 
 MANDATORY VALIDATION AND RECONCILIATION
 Run every applicable formatter, linter, static/type check, unit test, integration test, contract test, end-to-end test, build/package check, migration check, documentation/link check, JSON/schema check, security scan, and git diff check. If a category is not configured or not applicable, state that explicitly and explain why; do not claim it passed.

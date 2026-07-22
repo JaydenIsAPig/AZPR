@@ -1,12 +1,12 @@
-Effort Level: Ultra
+Effort Level: Extra High
 
 BEGIN PROMPT
 
 You are the implementation agent for AZ Permit Radar. Execute this task as one controlled, reviewable change within the existing domain-driven modular monolith.
 
 REQUIRED PREDECESSOR
-- Governing audit: Prompt 10 Durable Platform and Persistence Audit with result PASS.
-- Required predecessor evidence: Prompt 11 validated identity/middleware commit.
+- Governing audit: Prompt 24 Email Delivery Audit with result PASS.
+- Required predecessor evidence: Prompt 25 validated disabled-SMS infrastructure commit.
 - Confirm the repository is at the intended committed HEAD and the worktree contains no unrelated changes before editing.
 
 MANDATORY SOURCE AND STATE INSPECTION
@@ -37,23 +37,27 @@ IMPLEMENTATION DISCIPLINE
 - Do not weaken tests or validation. Do not expose secrets or log unnecessary authentication, customer, address, party, parcel, coordinate, description, or raw parsed data.
 
 TASK
-Implement the minimum customer-account and onboarding workflow required by the narrow pilot.
+Build the restricted internal operations interface and application services needed to keep the pilot accurate and recoverable.
 
-REQUIRED BEHAVIOR
-- Create or relate a verified actor to exactly the authorized Customer Account through the approved membership model.
-- Collect only approved fields: user/display name as needed, business name, verified email, primary trade, approved optional trades, service territory, customer filters, timezone, and notification preference/consent.
-- Do not collect a phone number unless the customer explicitly selects SMS and the SMS feature is available for enrollment. Because production SMS is disabled at this stage, keep phone enrollment hidden or disabled unless an approved test-only path exists.
-- Persist customer configuration as versioned snapshots so historical Match explanations retain the exact trade, territory, filter, and notification settings used.
-- Implement deterministic validation of territory limits, trade registry values, filter ranges, consent state, and timezone.
-- Support account disablement/deletion request and notification revocation paths. Distinguish deletion/anonymization of customer personal data from retained non-personal operational, financial-free, provenance, security, and scoring history. Stop if retention behavior lacks approval.
-- Redirect authenticated configured users to the dashboard route contract and incomplete users to onboarding.
-- Do not implement billing, trial logic, notes, or relevance feedback.
+REQUIRED CAPABILITIES
+- Source health, acquisition attempts, Import Batches, artifact metadata, parser reports, failed/quarantined rows, worker/outbox backlog, and notification failures.
+- Review queues for low-confidence classification, probable duplicates, address/geography failures, and other approved Review Task reasons.
+- Inspect all linked Source Records and raw-artifact references through a controlled internal path.
+- Correct deterministic normalized fields by creating a new normalization result/version; never mutate the raw artifact or erase prior snapshots.
+- Approve/reject classification tags with actor, rationale, before/after values, and new revision.
+- Merge or keep distinct probable duplicates. Merge only with explicit actor/rationale; retain the earlier Permit as canonical and mark the other superseded. Never delete evidence.
+- Reprocess an artifact, replay matching, reconcile stuck work, disable a broken source/parser, and record reason/actor.
+- Review email/SMS attempts and retry only through idempotent orchestration.
+- Link operational runbooks from error states.
 
-API AND TESTS
-Provide versioned request/response contracts and integration tests for valid onboarding, invalid input, duplicate membership, unauthorized configuration access, configuration version changes, consent removal, account disablement, and cross-customer isolation.
+AUTHORIZATION AND SAFETY
+Use a separate internal role/service/repository path with least-privilege permissions. Do not add an override flag to customer handlers. Add confirmation and reason capture for destructive-like operational actions. No hard deletion in normal correction workflows.
+
+TESTS
+Cover customer denial, internal permission levels, before/after audit, correction history, duplicate merge/distinct replay, source disable, reprocessing idempotency, outbox retry, pagination/filtering, and prohibited raw/sensitive data in logs.
 
 ACCEPTANCE CRITERIA
-A verified user can create or join only the authorized Customer Account, configure the approved pilot preferences, and produce a versioned configuration usable by matching without affecting another customer.
+Operations can identify, review, correct, retry, and reconcile failures while preserving evidence, versions, customer isolation, and explainability.
 
 MANDATORY VALIDATION AND RECONCILIATION
 Run every applicable formatter, linter, static/type check, unit test, integration test, contract test, end-to-end test, build/package check, migration check, documentation/link check, JSON/schema check, security scan, and git diff check. If a category is not configured or not applicable, state that explicitly and explain why; do not claim it passed.

@@ -1,12 +1,12 @@
-Effort Level: Ultra
+Effort Level: Extra High
 
 BEGIN PROMPT
 
 You are the implementation agent for AZ Permit Radar. Execute this task as one controlled, reviewable change within the existing domain-driven modular monolith.
 
 REQUIRED PREDECESSOR
-- Governing audit: Prompt 18 Pilot Source, Ingestion, Normalization, and Geography Audit with result PASS.
-- Required predecessor evidence: Prompt 18 audit commit.
+- Governing audit: Prompt 24 Email Delivery Audit with result PASS.
+- Required predecessor evidence: Prompt 24 audit commit. Email must be validated before SMS infrastructure begins.
 - Confirm the repository is at the intended committed HEAD and the worktree contains no unrelated changes before editing.
 
 MANDATORY SOURCE AND STATE INSPECTION
@@ -37,29 +37,26 @@ IMPLEMENTATION DISCIPLINE
 - Do not weaken tests or validation. Do not expose secrets or log unnecessary authentication, customer, address, party, parcel, coordinate, description, or raw parsed data.
 
 TASK
-Expose the existing customer-scoped application contracts through a versioned API suitable for the authenticated dashboard.
+After the dedicated email audit returns PASS, implement the minimum controlled SMS infrastructure required by the Master Operating Prompt, but keep production SMS disabled by default until a later explicit approval.
 
-REQUIRED ENDPOINT CAPABILITIES
-- Current customer's Match list with approved filtering and sorting by relevance, newest source date, declared/estimated value signal, distance, trade, jurisdiction, permit category, value band, confidence, and lead state.
-- One authorized Match with linked shared Opportunity and Permit facts, customer-specific explanation, score/history, source freshness basis, verification state, and safe provenance.
-- Customer configuration read/update through versioned contracts.
-- Save, dismiss, and contacted lead-state transitions.
-- Explicit stale, partial-failure, empty, authentication-required, forbidden, and anti-enumerating not-found outcomes.
+REQUIRED WORK
+- Add a feature flag and environment guard that prevents production SMS enrollment and sending by default.
+- Implement explicit SMS consent records, phone-number normalization, masked display, verification workflow, consent timestamp/source, revocation, suppression, and audit events.
+- Implement approved provider adapter, signed webhook verification, delivery status, retry/terminal state, rate limits, quiet hours, customer timezone, STOP/HELP or provider-equivalent opt-out handling, and complaint/suppression behavior.
+- Use notification idempotency keyed to customer, Match, Opportunity revision, channel, template version, and intent.
+- Recheck current eligibility and consent before send.
+- Keep SMS content minimal and direct customers to authenticated detail; do not place unnecessary permit-sensitive information in messages.
+- Provide deterministic fake-provider tests and a non-production sandbox path.
+- Do not turn on production sending, publish a phone enrollment UI, or change default notification policy in this prompt.
 
-SAFETY RULES
-- Begin from the authenticated customer's Matches; do not expose broad Permit or Opportunity enumeration.
-- Permit/Opportunity detail is reachable only through an authorized linking Match.
-- Expose only current, eligible, canonical, active Match projections. Pending review, rejected classification, unresolved probable duplicate, superseded/voided/noncanonical Permit, stale Opportunity projection, and disallowed uncertain geography must not appear as active feed items.
-- Represent unknown valuation as unknown, never as a zero-dollar project.
-- Represent unknown source date/freshness as unknown with zero freshness credit, never as newly published based only on ingestion time.
-- Do not expose raw artifacts, contractor/applicant personal data, raw provider payloads, or another customer's explanation/configuration/lead state.
-- Keep business rules in application/domain services, not serializers/controllers.
-
-DELIVERABLES
-Deliver versioned schemas/OpenAPI, pagination, stable errors, correlation IDs, authorization/integration tests, and pilot query/index evidence.
+TESTS
+Cover disabled flag, attempted enrollment while disabled, verification success/failure/expiry, duplicate consent, consent revocation, STOP suppression, forged webhook, duplicate event, quiet hours, provider outage, stale Opportunity revision, and redacted logging.
 
 ACCEPTANCE CRITERIA
-The dashboard receives a complete customer-safe feed without bypassing AccessContext or querying private persistence tables.
+The codebase can support controlled SMS safely, but no production customer can enroll or receive SMS until a separate explicit enablement decision and the notification audit passes.
+
+PROVIDER APPROVAL RULE
+If no SMS provider is approved, create provider-neutral contracts and fake tests, compare security, consent, webhook, cost, and portability, then stop for explicit approval before real-provider integration. Do not enable production enrollment or sending.
 
 MANDATORY VALIDATION AND RECONCILIATION
 Run every applicable formatter, linter, static/type check, unit test, integration test, contract test, end-to-end test, build/package check, migration check, documentation/link check, JSON/schema check, security scan, and git diff check. If a category is not configured or not applicable, state that explicitly and explain why; do not claim it passed.

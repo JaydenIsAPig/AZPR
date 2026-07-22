@@ -1,12 +1,12 @@
-Effort Level: Ultra
+Effort Level: Extra High
 
 BEGIN PROMPT
 
 You are the implementation agent for AZ Permit Radar. Execute this task as one controlled, reviewable change within the existing domain-driven modular monolith.
 
 REQUIRED PREDECESSOR
-- Governing audit: Prompt 32 Formal Pilot Release Test Matrix and Release Gate Audit with result PASS.
-- Required predecessor evidence: Prompt 32 audit commit and explicit authorization for staging deployment.
+- Governing audit: Prompt 22 Customer API, Frontend, and Data-Exposure Audit with result PASS.
+- Required predecessor evidence: Prompt 22 audit commit.
 - Confirm the repository is at the intended committed HEAD and the worktree contains no unrelated changes before editing.
 
 MANDATORY SOURCE AND STATE INSPECTION
@@ -37,24 +37,24 @@ IMPLEMENTATION DISCIPLINE
 - Do not weaken tests or validation. Do not expose secrets or log unnecessary authentication, customer, address, party, parcel, coordinate, description, or raw parsed data.
 
 TASK
-Prepare and execute the approved pilot vertical slice deployment to staging only after the formal release gate audit returns PASS and the human invocation authorizes staging deployment.
+Implement email as the first fully enabled pilot notification channel using provider-neutral orchestration, the durable transactional outbox, and an approved provider adapter.
+
+EMAIL PROVIDER DECISION GATE
+If no email provider is approved, compare a small viable set for security, domain authentication, webhook verification, bounce/complaint handling, suppression, data retention, cost, testing/sandbox support, portability, and exit path. Because customer email and delivery reputation create an external trust boundary, stop for explicit human approval unless an approved ADR already exists. Provider-neutral orchestration and deterministic fake tests may be prepared, but do not claim pilot email is complete until the approved adapter is integrated and validated.
 
 REQUIRED WORK
-- Provision the approved staging application, database, worker, artifact storage, secrets, networking, domain/email sandbox configuration, monitoring, and backups using reproducible infrastructure/configuration.
-- Apply migrations through the approved gated process.
-- Configure exactly the approved first source and bounded schedule/backfill.
-- Keep production SMS disabled. Keep AI classification and any experimental scoring behind approved feature flags.
-- Seed only safe staging test/customer data; do not copy production personal data.
-- Execute smoke tests for authentication, onboarding, source acquisition, parse/normalize/review, Match creation, dashboard, lead transitions, email sandbox delivery, operations review, alerts, and audit traces.
-- Execute a staging backup and isolated restore, reconciliation, application rollback, migration rollback where supported, and source/worker disable procedure.
-- Verify deployment observability, health/readiness, alerts, log redaction, and provider webhook endpoints.
-- Create deployment checklist, rollback procedure, support/escalation process, and staging evidence report.
-
-BOUNDARIES
-Do not deploy to production, enable production SMS, charge customers, broaden sources/trades, or bypass failed checks.
+- Generate notification intent only from an eligible active Customer Match and approved preference.
+- Recheck current Opportunity revision, Match eligibility/state, account activity, consent, suppression, and customer configuration immediately before send.
+- Define stable idempotency identity using Customer Account, Match, Opportunity revision, channel, template version, and intended delivery window/event.
+- Implement daily digest first. Add immediate email only when explicitly approved and feature-gated.
+- Implement customer timezone, quiet-hour policy where applicable, rate limits, retries, terminal/dead-letter state, duplicate suppression, unsubscribe, bounce, complaint, provider-failure, and verified webhook handling.
+- Version templates separately from delivery code.
+- Include why the Match exists, safe location, permit/project type, value signal when available, source freshness/unknown state, uncertainty, and authenticated detail link.
+- Never send pending/rejected classification, unresolved duplicate, superseded/voided/noncanonical Permit, stale Opportunity projection, disallowed uncertain geography, or inactive-account data.
+- Expose delivery state to authorized customers and internal operations without exposing provider secrets.
 
 ACCEPTANCE CRITERIA
-Staging reproduces the complete narrow acceptance journey with one approved source, limited trades, authenticated dashboard, email delivery, internal review, observability, and tested rollback/restore.
+A consented eligible Match produces exactly one intended email per policy; stale or ineligible queued data is suppressed at send time; historical attempts and template/policy/revision context remain traceable; and provider failures are retryable/observable without duplicate customer delivery.
 
 MANDATORY VALIDATION AND RECONCILIATION
 Run every applicable formatter, linter, static/type check, unit test, integration test, contract test, end-to-end test, build/package check, migration check, documentation/link check, JSON/schema check, security scan, and git diff check. If a category is not configured or not applicable, state that explicitly and explain why; do not claim it passed.

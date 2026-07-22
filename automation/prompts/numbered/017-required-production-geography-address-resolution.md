@@ -1,12 +1,12 @@
-Effort Level: Ultra
+Effort Level: Extra High
 
 BEGIN PROMPT
 
 You are the implementation agent for AZ Permit Radar. Execute this task as one controlled, reviewable change within the existing domain-driven modular monolith.
 
 REQUIRED PREDECESSOR
-- Governing audit: Prompt 2 Post-Core Traceability Corrective Audit with result PASS.
-- Required predecessor evidence: Approved Prompt 4 architecture decisions and decision-finalization commit.
+- Governing audit: Prompt 13 Identity, Authorization, and Customer-Isolation Audit with result PASS.
+- Required predecessor evidence: Prompt 16 validated parser/replay commit.
 - Confirm the repository is at the intended committed HEAD and the worktree contains no unrelated changes before editing.
 
 MANDATORY SOURCE AND STATE INSPECTION
@@ -37,26 +37,25 @@ IMPLEMENTATION DISCIPLINE
 - Do not weaken tests or validation. Do not expose secrets or log unnecessary authentication, customer, address, party, parcel, coordinate, description, or raw parsed data.
 
 TASK
-Using only approved architecture decisions, create the minimal production application shell and engineering-quality baseline without implementing authentication, durable domain persistence, live source access, dashboard behavior, or provider delivery.
+Implement only the production geography/address capabilities required by the approved source and pilot territory rules, behind existing adapters, without silently broadening service territory.
 
-IN SCOPE
-- Package/build metadata appropriate to the approved Python application structure.
-- API/application entry point, configuration layering, dependency-injection/composition root, and environment validation.
-- Separate development, test, staging, and production configuration contracts without embedding secrets.
-- Liveness and readiness endpoints that honestly report only implemented dependencies.
-- Standard error envelope and correlation identifier propagation, without exposing internal object existence.
-- Formatter, linter, static/type checking, unit/integration command conventions, package/build validation, secret scanning, dependency vulnerability scanning, and CI workflow.
-- A fake/test composition that continues to run the existing in-memory kernel.
-- Developer setup documentation and exact local validation commands.
+NEED AND PROVIDER DECISION GATE
+1. First determine whether approved source coordinates, parcel/jurisdiction data, city/ZIP rules, and pilot territory configuration can satisfy the Minimum Viable Product without an external geocoder.
+2. If an external provider is not required, implement the source-coordinate/verified-jurisdiction path, retain the adapter boundary, document the deferred provider decision, and do not add an unnecessary dependency.
+3. If a provider is required and not approved, compare viable options for terms, address-data handling, security/privacy, quality, coverage, rate limits, caching rights, cost controls, provenance, outage behavior, and exit path. Stop for explicit human approval when the choice introduces an external trust boundary, recurring cost, or material lock-in.
+4. After approval, implement the provider adapter and create a separate decision-finalization/implementation commit.
 
-CONSTRAINTS
-- Keep framework code at the transport/composition boundary.
-- Do not import web framework types into domain entities or application ports.
-- Do not claim database, authentication, queue, provider, or frontend readiness before those layers exist.
-- Prefer a minimal dependency set. Record the reason for every new dependency.
+REQUIRED BEHAVIOR
+- Store provider, request-normalization version, response timestamp, quality, confidence, selected candidate/rationale, cache key/version, and permitted provenance.
+- Add timeouts, bounded retries, circuit behavior, caching, rate limits, cost controls, and deterministic fake adapters.
+- Never fabricate coordinates or silently accept a low-quality guess.
+- Route unresolved, conflicting, or below-threshold results to Address/Geography Review Tasks.
+- Preserve the exact radius-boundary inclusion semantics and governed units/formula.
+- Do not include unverified geography unless the customer has explicitly enabled the approved uncertain-geography behavior.
+- Do not place raw addresses or coordinates in routine logs/metric labels.
 
 ACCEPTANCE CRITERIA
-A clean checkout can install, format, lint, type-check, test, build, and start the application shell using documented commands. Existing 160-test behavior remains protected, and readiness output distinguishes available in-memory capability from absent production dependencies.
+Every production geography result is either source-verified/provider-traceable at approved quality or explicitly review-required. The implementation uses the least complex capability needed for the pilot and cannot silently widen a customer's territory.
 
 MANDATORY VALIDATION AND RECONCILIATION
 Run every applicable formatter, linter, static/type check, unit test, integration test, contract test, end-to-end test, build/package check, migration check, documentation/link check, JSON/schema check, security scan, and git diff check. If a category is not configured or not applicable, state that explicitly and explain why; do not claim it passed.

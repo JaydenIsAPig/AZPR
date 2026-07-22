@@ -1,12 +1,12 @@
-Effort Level: Ultra
+Effort Level: Medium
 
 BEGIN PROMPT
 
 You are the implementation agent for AZ Permit Radar. Execute this task as one controlled, reviewable change within the existing domain-driven modular monolith.
 
 REQUIRED PREDECESSOR
-- Governing audit: Prompt 10 Durable Platform and Persistence Audit with result PASS.
-- Required predecessor evidence: Prompt 10 audit commit.
+- Governing audit: Prompt 2 Post-Core Traceability Corrective Audit with result PASS.
+- Required predecessor evidence: Approved Prompt 4 architecture decisions and decision-finalization commit.
 - Confirm the repository is at the intended committed HEAD and the worktree contains no unrelated changes before editing.
 
 MANDATORY SOURCE AND STATE INSPECTION
@@ -37,23 +37,26 @@ IMPLEMENTATION DISCIPLINE
 - Do not weaken tests or validation. Do not expose secrets or log unnecessary authentication, customer, address, party, parcel, coordinate, description, or raw parsed data.
 
 TASK
-Using the approved identity decision, implement authentication and transport middleware that constructs AccessContext only from verified claims.
+Using only approved architecture decisions, create the minimal production application shell and engineering-quality baseline without implementing authentication, durable domain persistence, live source access, dashboard behavior, or provider delivery.
 
-REQUIRED WORK
-- Integrate the approved authentication provider/library. Do not create custom cryptography.
-- Define sign-up or invitation behavior, login, email verification, session/token handling, expiration, rotation where applicable, logout, revocation, disabled-account behavior, and reauthentication for sensitive changes.
-- Map verified subject, Customer Account membership, role, and permissions into AccessContext at the middleware boundary.
-- Never accept customer ID, role, or permission claims directly from request payloads as authorization proof.
-- Map AuthenticationRequired, ForbiddenAccess, and anti-enumerating ResourceNotFound behavior to the approved transport status/response without revealing cross-customer existence.
-- Implement CSRF and CORS policy appropriate to the approved rendering/session model, secure cookie/header policy, abuse controls, login and recovery rate limits, and account-enumeration resistance.
-- Record privacy-conscious security audit events for login, failure, verification, revocation, membership/role change, and suspicious access. Do not log credentials, tokens, full phone numbers, or unnecessary personal data.
-- Separate customer roles from internal operations roles. Never combine them in one AccessContext.
+IN SCOPE
+- Package/build metadata appropriate to the approved Python application structure.
+- API/application entry point, configuration layering, dependency-injection/composition root, and environment validation.
+- Separate development, test, staging, and production configuration contracts without embedding secrets.
+- Liveness and readiness endpoints that honestly report only implemented dependencies.
+- Standard error envelope and correlation identifier propagation, without exposing internal object existence.
+- Formatter, linter, static/type checking, unit/integration command conventions, package/build validation, secret scanning, dependency vulnerability scanning, and CI workflow.
+- A fake/test composition that continues to run the existing in-memory kernel.
+- Developer setup documentation and exact local validation commands.
 
-TESTS
-Cover forged claims, expired/revoked sessions, wrong customer membership, missing permission, internal/customer role mixing, cross-customer ID probing, rate limits, CSRF/CORS behavior, and security-event redaction.
+CONSTRAINTS
+- Keep framework code at the transport/composition boundary.
+- Do not import web framework types into domain entities or application ports.
+- Do not claim database, authentication, queue, provider, or frontend readiness before those layers exist.
+- Prefer a minimal dependency set. Record the reason for every new dependency.
 
 ACCEPTANCE CRITERIA
-Every protected request reaches application services with a verified AccessContext or fails at the boundary. Existing application authorization remains the final defense rather than being replaced by UI or middleware assumptions.
+A clean checkout can install, format, lint, type-check, test, build, and start the application shell using documented commands. Existing 160-test behavior remains protected, and readiness output distinguishes available in-memory capability from absent production dependencies.
 
 MANDATORY VALIDATION AND RECONCILIATION
 Run every applicable formatter, linter, static/type check, unit test, integration test, contract test, end-to-end test, build/package check, migration check, documentation/link check, JSON/schema check, security scan, and git diff check. If a category is not configured or not applicable, state that explicitly and explain why; do not claim it passed.

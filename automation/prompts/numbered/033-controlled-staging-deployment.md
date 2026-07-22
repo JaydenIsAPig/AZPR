@@ -1,12 +1,12 @@
-Effort Level: Ultra
+Effort Level: Extra High
 
 BEGIN PROMPT
 
 You are the implementation agent for AZ Permit Radar. Execute this task as one controlled, reviewable change within the existing domain-driven modular monolith.
 
 REQUIRED PREDECESSOR
-- Governing audit: Prompt 6 MVP Scope and Architecture Decision Audit with result PASS.
-- Required predecessor evidence: Prompt 6 audit commit.
+- Governing audit: Prompt 32 Formal Pilot Release Test Matrix and Release Gate Audit with result PASS.
+- Required predecessor evidence: Prompt 32 audit commit and explicit authorization for staging deployment.
 - Confirm the repository is at the intended committed HEAD and the worktree contains no unrelated changes before editing.
 
 MANDATORY SOURCE AND STATE INSPECTION
@@ -37,32 +37,24 @@ IMPLEMENTATION DISCIPLINE
 - Do not weaken tests or validation. Do not expose secrets or log unnecessary authentication, customer, address, party, parcel, coordinate, description, or raw parsed data.
 
 TASK
-Implement the approved production database schema and migration system for the existing domain and application contracts. Preserve the in-memory adapters for fast domain tests while adding durable mappings behind ports.
+Prepare and execute the approved pilot vertical slice deployment to staging only after the formal release gate audit returns PASS and the human invocation authorizes staging deployment.
 
-REQUIRED DATA MODEL
-Persist the approved minimum set for:
-- Source Registry, acquisition jobs/attempts, immutable Source Artifacts, Import Batches, Source Records, parsing results, and quarantine/failure summaries;
-- Permits, addresses, parcels, parties where approved, normalization results/versions, corrections, duplicate candidates, merge/distinct decisions, and Review Tasks;
-- Classification versions, evidence, confidence, review state, AI provenance when used, and human decisions;
-- Opportunities, revisions, current projection state, Matches, score/explanation history, customer configuration versions, and lead state;
-- Customer Accounts, memberships, roles/permissions references, notification preferences/consent records, and audit events required by approved scope;
-- self-contained processing trace records or durable trace projection inputs;
-- outbox records and idempotency records needed by the next prompt.
+REQUIRED WORK
+- Provision the approved staging application, database, worker, artifact storage, secrets, networking, domain/email sandbox configuration, monitoring, and backups using reproducible infrastructure/configuration.
+- Apply migrations through the approved gated process.
+- Configure exactly the approved first source and bounded schedule/backfill.
+- Keep production SMS disabled. Keep AI classification and any experimental scoring behind approved feature flags.
+- Seed only safe staging test/customer data; do not copy production personal data.
+- Execute smoke tests for authentication, onboarding, source acquisition, parse/normalize/review, Match creation, dashboard, lead transitions, email sandbox delivery, operations review, alerts, and audit traces.
+- Execute a staging backup and isolated restore, reconciliation, application rollback, migration rollback where supported, and source/worker disable procedure.
+- Verify deployment observability, health/readiness, alerts, log redaction, and provider webhook endpoints.
+- Create deployment checklist, rollback procedure, support/escalation process, and staging evidence report.
 
-INVARIANTS AND CONSTRAINTS
-- Customer-owned tables use customer-keyed foreign keys and uniqueness constraints.
-- Shared Permit/Opportunity state is not copied into customer-owned state except immutable snapshots required for explanation/history.
-- Cross-customer object references are structurally prevented where practical.
-- Exact duplicate, active Opportunity revision, active customer-Opportunity Match, Review Task, artifact hash, parser-version record, and processing-correlation uniqueness are enforced.
-- Use optimistic concurrency/version columns where concurrent writes are possible.
-- Money is exact, timestamps are timezone-aware, units are explicit, and version metadata is retained.
-- Migrations are additive and reversible where practical. No destructive migration without explicit approval.
-
-TESTS
-Add migration-up/down or forward/rollback tests as supported, schema-constraint tests, repository mapping tests, concurrency tests, and representative persistence/reload tests for provenance and history.
+BOUNDARIES
+Do not deploy to production, enable production SMS, charge customers, broaden sources/trades, or bypass failed checks.
 
 ACCEPTANCE CRITERIA
-A new database can be created from zero, upgraded through migrations, loaded with representative fixtures, and queried without losing domain distinctions, audit history, traceability, or customer ownership.
+Staging reproduces the complete narrow acceptance journey with one approved source, limited trades, authenticated dashboard, email delivery, internal review, observability, and tested rollback/restore.
 
 MANDATORY VALIDATION AND RECONCILIATION
 Run every applicable formatter, linter, static/type check, unit test, integration test, contract test, end-to-end test, build/package check, migration check, documentation/link check, JSON/schema check, security scan, and git diff check. If a category is not configured or not applicable, state that explicitly and explain why; do not claim it passed.

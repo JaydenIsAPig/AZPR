@@ -1,16 +1,16 @@
-Effort Level: Ultra
+Effort Level: Extra High
 
 BEGIN PROMPT
 
 You are the read-only audit agent for AZ Permit Radar. Audit the repository at the current committed HEAD. Do not correct implementation defects during this prompt.
 
 REQUIRED PREDECESSOR
-- Prompts 3-5 validated commits and every required human approval recorded in approved ADRs/decisions.
+- Prompt 1 validated implementation commit.
 - Confirm the worktree is clean and record branch, full commit, short commit, repository status, and audit date.
 
 READ-ONLY WRITE SCOPE
 - Do not change product code, tests, schemas, migrations, configuration, source profiles, governed current documents, ADRs, runbooks, or runtime behavior.
-- Create one new immutable report at docs/audits/mvp-scope-architecture-audit-<YYYY-MM-DD>-<shortsha>.md. Never overwrite a prior audit report.
+- Create one new immutable report at docs/audits/post-core-traceability-corrective-audit-<YYYY-MM-DD>-<shortsha>.md. Never overwrite a prior audit report.
 - Update only docs/audits/README.md or the existing audit index to identify the new report as the latest audit for this stage.
 
 MANDATORY INSPECTION
@@ -29,20 +29,20 @@ FINDING STANDARD
 Every finding must include severity, status, evidence with file paths and test names/commands, impact, required action, owner prompt/stage, and whether it blocks progression. Distinguish implemented, partially implemented, planned, proposed, and unapproved behavior. Do not treat a compiling build or passing unit suite alone as release evidence.
 
 AUDIT OBJECTIVE
-Verify that the project has an approved, narrow pilot scope and a coherent production stack plan before durable persistence begins.
+Determine whether Prompt 1 fully closes the release gate that previously blocked production-application work.
 
-CHECKS
-- Prompt 2 traceability audit is PASS.
-- Pilot source family, first enabled source decision status, limited trades, territory scope, email-first rule, and disabled-by-default SMS rule are explicit and governed.
-- No proposed or unapproved registry entry is treated as active.
-- Material stack ADRs are approved, internally consistent, and preserve the Python domain kernel and modular-monolith boundaries.
-- Core framework, authentication, database, worker, frontend, deployment, and storage decisions are approved or validly auto-selected. Email, SMS, and geocoder provider decisions are either approved or explicitly deferred to their integration gates with security, cost, portability, and rollback criteria documented.
-- The application shell does not claim capabilities that are not implemented.
-- Tooling and CI categories previously reported as NOT CONFIGURED are now configured or explicitly deferred with a blocking rationale.
-- Current documents, ADRs, configuration, and dependency graph agree.
+MANDATORY CASES
+- Governed normalizer identifier/version is present and retained in Permit provenance and normalization history.
+- A correction under a new normalizer version retains the prior snapshot and unchanged raw evidence.
+- The processing trace is self-contained for parser, normalizer, classifier, confidence, review state, Opportunity revision, score policy, customer configuration, score components/exclusions, and final state.
+- Unchanged replay remains idempotent and does not multiply trace entries.
+- Probable duplicate, merge, keep-distinct, address-review, classification-review, superseded, voided, noncanonical, stale projection, and customer-isolation paths remain safe.
+- The missing-valuation score discrepancy is explicitly reconciled with test evidence.
+- Documentation no longer promises versioned normalization without modeling it.
+- Logs and metric labels remain free of prohibited permit-sensitive fields.
 
-NEXT STAGE
-Prompt 7 may run only on PASS. Pending human decisions or contradictory ADRs require BLOCKED.
+REQUIRED DECISION
+Prompt 3 may run only if this audit returns PASS. Any unresolved traceability or scoring ambiguity must produce PASS WITH REQUIRED CORRECTIONS or BLOCKED.
 
 VALIDATION
 Run the complete non-mutating validation set applicable to the audited stage. Include exact commands and results. Do not edit files to force success. Confirm no product files changed during audit execution.

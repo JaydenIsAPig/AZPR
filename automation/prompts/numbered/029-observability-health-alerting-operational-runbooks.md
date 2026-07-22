@@ -1,12 +1,12 @@
-Effort Level: Ultra
+Effort Level: Extra High
 
 BEGIN PROMPT
 
 You are the implementation agent for AZ Permit Radar. Execute this task as one controlled, reviewable change within the existing domain-driven modular monolith.
 
 REQUIRED PREDECESSOR
-- Governing audit: Prompt 24 Email Delivery Audit with result PASS.
-- Required predecessor evidence: Prompt 25 validated disabled-SMS infrastructure commit.
+- Governing audit: Prompt 27 Notification and Operations Audit with result PASS.
+- Required predecessor evidence: Prompt 28 validated analytics/event-model commit.
 - Confirm the repository is at the intended committed HEAD and the worktree contains no unrelated changes before editing.
 
 MANDATORY SOURCE AND STATE INSPECTION
@@ -37,27 +37,19 @@ IMPLEMENTATION DISCIPLINE
 - Do not weaken tests or validation. Do not expose secrets or log unnecessary authentication, customer, address, party, parcel, coordinate, description, or raw parsed data.
 
 TASK
-Build the restricted internal operations interface and application services needed to keep the pilot accurate and recoverable.
+Implement production observability, health/readiness behavior, alerting rules, and operational runbooks for the completed pilot vertical slice.
 
-REQUIRED CAPABILITIES
-- Source health, acquisition attempts, Import Batches, artifact metadata, parser reports, failed/quarantined rows, worker/outbox backlog, and notification failures.
-- Review queues for low-confidence classification, probable duplicates, address/geography failures, and other approved Review Task reasons.
-- Inspect all linked Source Records and raw-artifact references through a controlled internal path.
-- Correct deterministic normalized fields by creating a new normalization result/version; never mutate the raw artifact or erase prior snapshots.
-- Approve/reject classification tags with actor, rationale, before/after values, and new revision.
-- Merge or keep distinct probable duplicates. Merge only with explicit actor/rationale; retain the earlier Permit as canonical and mark the other superseded. Never delete evidence.
-- Reprocess an artifact, replay matching, reconcile stuck work, disable a broken source/parser, and record reason/actor.
-- Review email/SMS attempts and retry only through idempotent orchestration.
-- Link operational runbooks from error states.
-
-AUTHORIZATION AND SAFETY
-Use a separate internal role/service/repository path with least-privilege permissions. Do not add an override flag to customer handlers. Add confirmation and reason capture for destructive-like operational actions. No hard deletion in normal correction workflows.
-
-TESTS
-Cover customer denial, internal permission levels, before/after audit, correction history, duplicate merge/distinct replay, source disable, reprocessing idempotency, outbox retry, pagination/filtering, and prohibited raw/sensitive data in logs.
+REQUIRED WORK
+- Structured logs with correlation, Source, Import Batch, processing trace, worker, outbox, Match, and Notification Attempt identifiers where operationally appropriate.
+- Metrics and traces for acquisition, parser rejection, normalization/review, duplicate rate, classification review, Opportunity/Match generation, API latency/errors, authentication/authorization outcomes, outbox/worker backlog, email delivery, and operations actions.
+- Liveness and dependency-aware readiness that never claims unimplemented/unavailable dependencies are healthy.
+- Alerts for source staleness/unavailability, source format change, parser rejection spike, duplicate spike, geocoder outage/quality degradation, AI provider failure, outbox backlog, worker lease failure, email failure, authentication abuse, storage/database health, and backup failure.
+- Runbooks for each alert with safe disable/retry/reprocess/reconcile steps and escalation ownership.
+- Demonstrate deterministic processing continues when the AI provider is unavailable.
+- Enforce log/metric redaction and bounded label cardinality.
 
 ACCEPTANCE CRITERIA
-Operations can identify, review, correct, retry, and reconcile failures while preserving evidence, versions, customer isolation, and explainability.
+Operators can detect and correlate a failure from acquisition through customer delivery without using sensitive payloads, and readiness/alerts truthfully reflect the deployed dependencies and current source freshness.
 
 MANDATORY VALIDATION AND RECONCILIATION
 Run every applicable formatter, linter, static/type check, unit test, integration test, contract test, end-to-end test, build/package check, migration check, documentation/link check, JSON/schema check, security scan, and git diff check. If a category is not configured or not applicable, state that explicitly and explain why; do not claim it passed.

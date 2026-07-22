@@ -1,16 +1,16 @@
-Effort Level: Ultra
+Effort Level: Extra High
 
 BEGIN PROMPT
 
 You are the read-only audit agent for AZ Permit Radar. Audit the repository at the current committed HEAD. Do not correct implementation defects during this prompt.
 
 REQUIRED PREDECESSOR
-- Prompts 19-21 validated commits.
+- Prompt 23 validated email implementation commit.
 - Confirm the worktree is clean and record branch, full commit, short commit, repository status, and audit date.
 
 READ-ONLY WRITE SCOPE
 - Do not change product code, tests, schemas, migrations, configuration, source profiles, governed current documents, ADRs, runbooks, or runtime behavior.
-- Create one new immutable report at docs/audits/customer-api-frontend-data-exposure-audit-<YYYY-MM-DD>-<shortsha>.md. Never overwrite a prior audit report.
+- Create one new immutable report at docs/audits/email-delivery-audit-<YYYY-MM-DD>-<shortsha>.md. Never overwrite a prior audit report.
 - Update only docs/audits/README.md or the existing audit index to identify the new report as the latest audit for this stage.
 
 MANDATORY INSPECTION
@@ -29,21 +29,21 @@ FINDING STANDARD
 Every finding must include severity, status, evidence with file paths and test names/commands, impact, required action, owner prompt/stage, and whether it blocks progression. Distinguish implemented, partially implemented, planned, proposed, and unapproved behavior. Do not treat a compiling build or passing unit suite alone as release evidence.
 
 AUDIT OBJECTIVE
-Verify that the authenticated dashboard is a customer-safe projection of eligible Matches rather than a broad Permit browser.
+Validate email orchestration and the approved provider path before any SMS infrastructure work begins.
 
 MANDATORY CASES
-- All API and UI access begins from customer-owned Matches and rechecks ownership.
-- Cross-customer and nonexistent objects remain indistinguishable.
-- Pending/rejected classification, unresolved duplicate, superseded/voided/noncanonical Permit, stale Opportunity projection, and disallowed uncertain geography never appear as active customer items.
-- Unknown valuation/date/freshness are rendered accurately.
-- Score components, policy version, customer configuration version, Opportunity revision, and explanation are consistent across API and UI.
-- Save/dismiss/contacted affects only the owned Match and follows valid transitions.
-- Raw artifacts, prohibited personal/source fields, internal review data, and another customer's state are not exposed through API, HTML, client cache, logs, analytics, or error payloads.
-- Accessibility, keyboard, responsive, stale, partial-failure, empty, and error states are tested.
-- UI contains no duplicated business rules that can disagree with the backend.
+- Notification intent originates only from eligible active Customer Matches.
+- Eligibility and current Opportunity revision are rechecked immediately before send.
+- Idempotency prevents duplicate email under repeated events, worker retry, provider timeout, webhook replay, and crash/restart scenarios.
+- Daily digest policy, timezone, rate limits, unsubscribe, bounce, complaint, suppression, retry, dead-letter, and provider-failure behavior are deterministic and tested.
+- Provider webhooks are authenticated/verified and cannot mutate another customer's state.
+- Email content is factual, source-safe, revision-aware, and does not treat unknown valuation as zero or unknown source date as recent.
+- Historical Notification Attempts retain customer, Match, Opportunity revision, template version, policy/configuration version, provider reference/status, and rationale.
+- Logs/metrics exclude secrets, full email addresses when unnecessary, raw addresses, parties, descriptions, parcel values, coordinates, and raw parsed values.
+- Email delivery state is customer-scoped and operations access is separately authorized.
 
-NEXT STAGE
-Prompt 23 may run only on PASS. Any customer data leak or eligibility bypass is BLOCKED.
+REQUIRED DECISION
+Prompt 25 may run only on PASS. Any duplicate-send path, consent/unsubscribe bypass, stale delivery, unverified webhook, missing traceability, or customer-isolation failure is BLOCKED. Other required corrections produce PASS WITH REQUIRED CORRECTIONS and require this audit to be rerun.
 
 VALIDATION
 Run the complete non-mutating validation set applicable to the audited stage. Include exact commands and results. Do not edit files to force success. Confirm no product files changed during audit execution.

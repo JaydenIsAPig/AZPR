@@ -1,12 +1,12 @@
-Effort Level: Ultra
+Effort Level: High
 
 BEGIN PROMPT
 
 You are the implementation agent for AZ Permit Radar. Execute this task as one controlled, reviewable change within the existing domain-driven modular monolith.
 
 REQUIRED PREDECESSOR
-- Governing audit: Prompt 13 Identity, Authorization, and Customer-Isolation Audit with result PASS.
-- Required predecessor evidence: Prompt 16 validated parser/replay commit.
+- Governing audit: Prompt 27 Notification and Operations Audit with result PASS.
+- Required predecessor evidence: Prompt 27 audit commit.
 - Confirm the repository is at the intended committed HEAD and the worktree contains no unrelated changes before editing.
 
 MANDATORY SOURCE AND STATE INSPECTION
@@ -37,25 +37,23 @@ IMPLEMENTATION DISCIPLINE
 - Do not weaken tests or validation. Do not expose secrets or log unnecessary authentication, customer, address, party, parcel, coordinate, description, or raw parsed data.
 
 TASK
-Implement only the production geography/address capabilities required by the approved source and pilot territory rules, behind existing adapters, without silently broadening service territory.
+Implement a privacy-conscious, versioned analytics event model for product outcomes and data quality without coupling the domain to an external analytics vendor.
 
-NEED AND PROVIDER DECISION GATE
-1. First determine whether approved source coordinates, parcel/jurisdiction data, city/ZIP rules, and pilot territory configuration can satisfy the Minimum Viable Product without an external geocoder.
-2. If an external provider is not required, implement the source-coordinate/verified-jurisdiction path, retain the adapter boundary, document the deferred provider decision, and do not add an unnecessary dependency.
-3. If a provider is required and not approved, compare viable options for terms, address-data handling, security/privacy, quality, coverage, rate limits, caching rights, cost controls, provenance, outage behavior, and exit path. Stop for explicit human approval when the choice introduces an external trust boundary, recurring cost, or material lock-in.
-4. After approval, implement the provider adapter and create a separate decision-finalization/implementation commit.
+REQUIRED WORK
+- Define stable event names and schema versions for acquisition success/failure, artifact parsing, record rejection, classification review, Opportunity/Match creation, dashboard Match view, lead-state transitions, notification intent/delivery, account/configuration lifecycle, and later pilot feedback.
+- Keep product events, security/audit events, source-quality metrics, and customer-engagement metrics explicitly separate.
+- Include only identifiers/version references needed for analysis: source, parser/normalizer/classifier versions, Opportunity revision, score-policy version, customer-configuration version, Match/notification state, and coarse outcome fields.
+- Exclude unnecessary personal data, raw addresses, descriptions, parties, parcel values, coordinates, raw parsed values, authentication secrets, and free text.
+- Define retention, customer isolation, internal access, deletion/anonymization behavior, and schema evolution.
+- Store metric definitions and governed dimensions in business-data or the approved analytics registry.
+- Implement deterministic server-side emission and tests. Do not infer causation or successful jobs from views/clicks.
+- If an external analytics platform is proposed, apply the technology approval rules and stop before integration when it creates a new trust boundary or recurring cost.
 
-REQUIRED BEHAVIOR
-- Store provider, request-normalization version, response timestamp, quality, confidence, selected candidate/rationale, cache key/version, and permitted provenance.
-- Add timeouts, bounded retries, circuit behavior, caching, rate limits, cost controls, and deterministic fake adapters.
-- Never fabricate coordinates or silently accept a low-quality guess.
-- Route unresolved, conflicting, or below-threshold results to Address/Geography Review Tasks.
-- Preserve the exact radius-boundary inclusion semantics and governed units/formula.
-- Do not include unverified geography unless the customer has explicitly enabled the approved uncertain-geography behavior.
-- Do not place raw addresses or coordinates in routine logs/metric labels.
+INITIAL REPORT DEFINITIONS
+Ingestion freshness, parsing quality, classification review rate, Match relevance readiness, alert delivery, and customer action funnel. Mark metrics unavailable until required product events exist.
 
 ACCEPTANCE CRITERIA
-Every production geography result is either source-verified/provider-traceable at approved quality or explicitly review-required. The implementation uses the least complex capability needed for the pilot and cannot silently widen a customer's territory.
+The product can emit versioned, privacy-minimized analytics events that preserve traceability and customer isolation without turning logs or vendor payloads into a copy of permit/customer data.
 
 MANDATORY VALIDATION AND RECONCILIATION
 Run every applicable formatter, linter, static/type check, unit test, integration test, contract test, end-to-end test, build/package check, migration check, documentation/link check, JSON/schema check, security scan, and git diff check. If a category is not configured or not applicable, state that explicitly and explain why; do not claim it passed.

@@ -1,12 +1,12 @@
-Effort Level: Ultra
+Effort Level: Extra High
 
 BEGIN PROMPT
 
 You are the implementation agent for AZ Permit Radar. Execute this task as one controlled, reviewable change within the existing domain-driven modular monolith.
 
 REQUIRED PREDECESSOR
-- Governing audit: Prompt 27 Notification and Operations Audit with result PASS.
-- Required predecessor evidence: Prompt 27 audit commit.
+- Governing audit: Prompt 13 Identity, Authorization, and Customer-Isolation Audit with result PASS.
+- Required predecessor evidence: Prompt 15 validated acquisition/connector commit.
 - Confirm the repository is at the intended committed HEAD and the worktree contains no unrelated changes before editing.
 
 MANDATORY SOURCE AND STATE INSPECTION
@@ -37,23 +37,23 @@ IMPLEMENTATION DISCIPLINE
 - Do not weaken tests or validation. Do not expose secrets or log unnecessary authentication, customer, address, party, parcel, coordinate, description, or raw parsed data.
 
 TASK
-Implement a privacy-conscious, versioned analytics event model for product outcomes and data quality without coupling the domain to an external analytics vendor.
+Implement or extend the source-specific parser required by the approved live source while preserving backward-compatible historical replay.
 
 REQUIRED WORK
-- Define stable event names and schema versions for acquisition success/failure, artifact parsing, record rejection, classification review, Opportunity/Match creation, dashboard Match view, lead-state transitions, notification intent/delivery, account/configuration lifecycle, and later pilot feedback.
-- Keep product events, security/audit events, source-quality metrics, and customer-engagement metrics explicitly separate.
-- Include only identifiers/version references needed for analysis: source, parser/normalizer/classifier versions, Opportunity revision, score-policy version, customer-configuration version, Match/notification state, and coarse outcome fields.
-- Exclude unnecessary personal data, raw addresses, descriptions, parties, parcel values, coordinates, raw parsed values, authentication secrets, and free text.
-- Define retention, customer isolation, internal access, deletion/anonymization behavior, and schema evolution.
-- Store metric definitions and governed dimensions in business-data or the approved analytics registry.
-- Implement deterministic server-side emission and tests. Do not infer causation or successful jobs from views/clicks.
-- If an external analytics platform is proposed, apply the technology approval rules and stop before integration when it creates a new trust boundary or recurring cost.
+- Separate decoding, format validation, entry extraction, source-field mapping, deterministic normalization inputs, validation, quarantine, and reporting.
+- Define a governed parser identifier/version and stable external-record key strategy for the selected source.
+- Preserve raw values where useful, normalized values, source field, validation outcome, warning/error, parser version, Source Artifact, and Import Batch linkage.
+- Handle changing columns safely. A format change creates a new fixture and parser version; it does not overwrite old fixtures or mutate archived artifacts.
+- Quarantine malformed rows without discarding a usable batch.
+- Produce accepted, warned, rejected, duplicate, unchanged, and failed counts.
+- Implement bounded historical backfill/replay using immutable artifacts. Ensure parser-version changes create new processing results without duplicate Permits/Opportunities/Matches.
+- If the live format conflicts materially with current shared contracts, create an ADR rather than embedding source quirks in domain code.
 
-INITIAL REPORT DEFINITIONS
-Ingestion freshness, parsing quality, classification review rate, Match relevance readiness, alert delivery, and customer action funnel. Mark metrics unavailable until required product events exist.
+TESTS
+Cover official representative fixtures, schema drift, encoding, empty values, money/date edge cases, missing identifiers, duplicate rows, corrected source records, malformed entries, old parser replay, and new parser version replay.
 
 ACCEPTANCE CRITERIA
-The product can emit versioned, privacy-minimized analytics events that preserve traceability and customer isolation without turning logs or vendor payloads into a copy of permit/customer data.
+The live source moves from immutable artifact to versioned Source Records and explicit failures with reproducible reports, while historical formats remain reprocessable.
 
 MANDATORY VALIDATION AND RECONCILIATION
 Run every applicable formatter, linter, static/type check, unit test, integration test, contract test, end-to-end test, build/package check, migration check, documentation/link check, JSON/schema check, security scan, and git diff check. If a category is not configured or not applicable, state that explicitly and explain why; do not claim it passed.

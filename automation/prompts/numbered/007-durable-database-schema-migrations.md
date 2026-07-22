@@ -1,12 +1,12 @@
-Effort Level: Ultra
+Effort Level: Extra High
 
 BEGIN PROMPT
 
 You are the implementation agent for AZ Permit Radar. Execute this task as one controlled, reviewable change within the existing domain-driven modular monolith.
 
 REQUIRED PREDECESSOR
-- Governing audit: Prompt 13 Identity, Authorization, and Customer-Isolation Audit with result PASS.
-- Required predecessor evidence: Prompt 15 validated acquisition/connector commit.
+- Governing audit: Prompt 6 MVP Scope and Architecture Decision Audit with result PASS.
+- Required predecessor evidence: Prompt 6 audit commit.
 - Confirm the repository is at the intended committed HEAD and the worktree contains no unrelated changes before editing.
 
 MANDATORY SOURCE AND STATE INSPECTION
@@ -37,23 +37,32 @@ IMPLEMENTATION DISCIPLINE
 - Do not weaken tests or validation. Do not expose secrets or log unnecessary authentication, customer, address, party, parcel, coordinate, description, or raw parsed data.
 
 TASK
-Implement or extend the source-specific parser required by the approved live source while preserving backward-compatible historical replay.
+Implement the approved production database schema and migration system for the existing domain and application contracts. Preserve the in-memory adapters for fast domain tests while adding durable mappings behind ports.
 
-REQUIRED WORK
-- Separate decoding, format validation, entry extraction, source-field mapping, deterministic normalization inputs, validation, quarantine, and reporting.
-- Define a governed parser identifier/version and stable external-record key strategy for the selected source.
-- Preserve raw values where useful, normalized values, source field, validation outcome, warning/error, parser version, Source Artifact, and Import Batch linkage.
-- Handle changing columns safely. A format change creates a new fixture and parser version; it does not overwrite old fixtures or mutate archived artifacts.
-- Quarantine malformed rows without discarding a usable batch.
-- Produce accepted, warned, rejected, duplicate, unchanged, and failed counts.
-- Implement bounded historical backfill/replay using immutable artifacts. Ensure parser-version changes create new processing results without duplicate Permits/Opportunities/Matches.
-- If the live format conflicts materially with current shared contracts, create an ADR rather than embedding source quirks in domain code.
+REQUIRED DATA MODEL
+Persist the approved minimum set for:
+- Source Registry, acquisition jobs/attempts, immutable Source Artifacts, Import Batches, Source Records, parsing results, and quarantine/failure summaries;
+- Permits, addresses, parcels, parties where approved, normalization results/versions, corrections, duplicate candidates, merge/distinct decisions, and Review Tasks;
+- Classification versions, evidence, confidence, review state, AI provenance when used, and human decisions;
+- Opportunities, revisions, current projection state, Matches, score/explanation history, customer configuration versions, and lead state;
+- Customer Accounts, memberships, roles/permissions references, notification preferences/consent records, and audit events required by approved scope;
+- self-contained processing trace records or durable trace projection inputs;
+- outbox records and idempotency records needed by the next prompt.
+
+INVARIANTS AND CONSTRAINTS
+- Customer-owned tables use customer-keyed foreign keys and uniqueness constraints.
+- Shared Permit/Opportunity state is not copied into customer-owned state except immutable snapshots required for explanation/history.
+- Cross-customer object references are structurally prevented where practical.
+- Exact duplicate, active Opportunity revision, active customer-Opportunity Match, Review Task, artifact hash, parser-version record, and processing-correlation uniqueness are enforced.
+- Use optimistic concurrency/version columns where concurrent writes are possible.
+- Money is exact, timestamps are timezone-aware, units are explicit, and version metadata is retained.
+- Migrations are additive and reversible where practical. No destructive migration without explicit approval.
 
 TESTS
-Cover official representative fixtures, schema drift, encoding, empty values, money/date edge cases, missing identifiers, duplicate rows, corrected source records, malformed entries, old parser replay, and new parser version replay.
+Add migration-up/down or forward/rollback tests as supported, schema-constraint tests, repository mapping tests, concurrency tests, and representative persistence/reload tests for provenance and history.
 
 ACCEPTANCE CRITERIA
-The live source moves from immutable artifact to versioned Source Records and explicit failures with reproducible reports, while historical formats remain reprocessable.
+A new database can be created from zero, upgraded through migrations, loaded with representative fixtures, and queried without losing domain distinctions, audit history, traceability, or customer ownership.
 
 MANDATORY VALIDATION AND RECONCILIATION
 Run every applicable formatter, linter, static/type check, unit test, integration test, contract test, end-to-end test, build/package check, migration check, documentation/link check, JSON/schema check, security scan, and git diff check. If a category is not configured or not applicable, state that explicitly and explain why; do not claim it passed.

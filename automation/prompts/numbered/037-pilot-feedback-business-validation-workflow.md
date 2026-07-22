@@ -1,4 +1,4 @@
-Effort Level: Ultra
+Effort Level: High
 
 BEGIN PROMPT
 

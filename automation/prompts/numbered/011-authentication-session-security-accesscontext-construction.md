@@ -1,12 +1,12 @@
-Effort Level: Ultra
+Effort Level: Extra High
 
 BEGIN PROMPT
 
 You are the implementation agent for AZ Permit Radar. Execute this task as one controlled, reviewable change within the existing domain-driven modular monolith.
 
 REQUIRED PREDECESSOR
-- Governing audit: Prompt 18 Pilot Source, Ingestion, Normalization, and Geography Audit with result PASS.
-- Required predecessor evidence: Prompt 19 validated customer API commit.
+- Governing audit: Prompt 10 Durable Platform and Persistence Audit with result PASS.
+- Required predecessor evidence: Prompt 10 audit commit.
 - Confirm the repository is at the intended committed HEAD and the worktree contains no unrelated changes before editing.
 
 MANDATORY SOURCE AND STATE INSPECTION
@@ -37,25 +37,23 @@ IMPLEMENTATION DISCIPLINE
 - Do not weaken tests or validation. Do not expose secrets or log unnecessary authentication, customer, address, party, parcel, coordinate, description, or raw parsed data.
 
 TASK
-Using the approved frontend architecture, build the mobile-first application shell, authentication flows, and customer onboarding/configuration experience.
+Using the approved identity decision, implement authentication and transport middleware that constructs AccessContext only from verified claims.
 
 REQUIRED WORK
-- Implement routes/layouts for sign in, verification/recovery as supported, onboarding, dashboard shell, account/preferences, and safe error states.
-- Consume only the authorized API; never connect frontend code directly to persistence adapters.
-- Construct no authorization decisions from route IDs or client state. Treat server responses as authoritative.
-- Render authentication-required, forbidden, anti-enumerating not-found, stale, partial failure, success, empty, loading, and recoverable error as distinct states.
-- Implement the approved pilot trade, territory, filter, timezone, and email-notification configuration fields.
-- Keep SMS enrollment hidden or clearly unavailable while the feature flag is disabled.
-- Redirect returning configured users to the dashboard and incomplete users to onboarding.
-- Implement centralized design tokens, typography, responsive breakpoints, keyboard navigation, focus management, semantic structure, and the approved accessibility/browser targets.
-- Add no Model-View-Presenter or BLoC pattern unless the approved frontend ADR explicitly requires it.
-- Do not add notes, relevance feedback, billing, CRM, or unsupported marketing claims.
+- Integrate the approved authentication provider/library. Do not create custom cryptography.
+- Define sign-up or invitation behavior, login, email verification, session/token handling, expiration, rotation where applicable, logout, revocation, disabled-account behavior, and reauthentication for sensitive changes.
+- Map verified subject, Customer Account membership, role, and permissions into AccessContext at the middleware boundary.
+- Never accept customer ID, role, or permission claims directly from request payloads as authorization proof.
+- Map AuthenticationRequired, ForbiddenAccess, and anti-enumerating ResourceNotFound behavior to the approved transport status/response without revealing cross-customer existence.
+- Implement CSRF and CORS policy appropriate to the approved rendering/session model, secure cookie/header policy, abuse controls, login and recovery rate limits, and account-enumeration resistance.
+- Record privacy-conscious security audit events for login, failure, verification, revocation, membership/role change, and suspicious access. Do not log credentials, tokens, full phone numbers, or unnecessary personal data.
+- Separate customer roles from internal operations roles. Never combine them in one AccessContext.
 
 TESTS
-Component and browser tests must cover onboarding validation, auth redirects, session expiry, unauthorized and anti-enumeration states, keyboard operation, responsive layouts, configuration version updates, and no cross-customer data leakage in cached/client state.
+Cover forged claims, expired/revoked sessions, wrong customer membership, missing permission, internal/customer role mixing, cross-customer ID probing, rate limits, CSRF/CORS behavior, and security-event redaction.
 
 ACCEPTANCE CRITERIA
-A verified pilot user can complete approved onboarding securely on phone or desktop and reach an authenticated dashboard shell with truthful states.
+Every protected request reaches application services with a verified AccessContext or fails at the boundary. Existing application authorization remains the final defense rather than being replaced by UI or middleware assumptions.
 
 MANDATORY VALIDATION AND RECONCILIATION
 Run every applicable formatter, linter, static/type check, unit test, integration test, contract test, end-to-end test, build/package check, migration check, documentation/link check, JSON/schema check, security scan, and git diff check. If a category is not configured or not applicable, state that explicitly and explain why; do not claim it passed.

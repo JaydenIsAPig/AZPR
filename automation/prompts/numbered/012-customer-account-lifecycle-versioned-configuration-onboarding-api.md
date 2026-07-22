@@ -1,12 +1,12 @@
-Effort Level: Ultra
+Effort Level: Extra High
 
 BEGIN PROMPT
 
 You are the implementation agent for AZ Permit Radar. Execute this task as one controlled, reviewable change within the existing domain-driven modular monolith.
 
 REQUIRED PREDECESSOR
-- Governing audit: Prompt 18 Pilot Source, Ingestion, Normalization, and Geography Audit with result PASS.
-- Required predecessor evidence: Prompt 20 validated frontend foundation commit.
+- Governing audit: Prompt 10 Durable Platform and Persistence Audit with result PASS.
+- Required predecessor evidence: Prompt 11 validated identity/middleware commit.
 - Confirm the repository is at the intended committed HEAD and the worktree contains no unrelated changes before editing.
 
 MANDATORY SOURCE AND STATE INSPECTION
@@ -37,29 +37,23 @@ IMPLEMENTATION DISCIPLINE
 - Do not weaken tests or validation. Do not expose secrets or log unnecessary authentication, customer, address, party, parcel, coordinate, description, or raw parsed data.
 
 TASK
-Implement the narrow-pilot dashboard with new/active, saved, contacted, and dismissed Match views plus Match/Opportunity/Permit detail reached only through the authorized Match.
+Implement the minimum customer-account and onboarding workflow required by the narrow pilot.
 
-CARD AND DETAIL CONTENT
-Show factual headline, safe location presentation, source date or explicit unknown state, jurisdiction, trade/project tags, declared/estimated value signal or unknown, distance when verified, Match score, concise explanation, confidence/verification status, freshness basis, current Opportunity revision, and customer-safe provenance.
+REQUIRED BEHAVIOR
+- Create or relate a verified actor to exactly the authorized Customer Account through the approved membership model.
+- Collect only approved fields: user/display name as needed, business name, verified email, primary trade, approved optional trades, service territory, customer filters, timezone, and notification preference/consent.
+- Do not collect a phone number unless the customer explicitly selects SMS and the SMS feature is available for enrollment. Because production SMS is disabled at this stage, keep phone enrollment hidden or disabled unless an approved test-only path exists.
+- Persist customer configuration as versioned snapshots so historical Match explanations retain the exact trade, territory, filter, and notification settings used.
+- Implement deterministic validation of territory limits, trade registry values, filter ranges, consent state, and timezone.
+- Support account disablement/deletion request and notification revocation paths. Distinguish deletion/anonymization of customer personal data from retained non-personal operational, financial-free, provenance, security, and scoring history. Stop if retention behavior lacks approval.
+- Redirect authenticated configured users to the dashboard route contract and incomplete users to onboarding.
+- Do not implement billing, trial logic, notes, or relevance feedback.
 
-INTERACTIONS
-- Sort/filter through API-supported fields; save, dismiss, and mark contacted through forward-only lead-state transitions.
-- Handle stale Match recalculation and partial failure without presenting obsolete data as current.
-- Preserve the score explanation and configuration version associated with historical results.
-- Display exact radius-boundary results consistently with backend units/precision.
-
-SAFETY AND UX RULES
-- Do not show pending low-confidence review records in the customer feed. Accepted publishable confidence can be described accurately without implying certainty.
-- Do not treat missing valuation as $0 or unknown dates as recent.
-- Do not embed scoring, territory, eligibility, or authorization logic in visual components.
-- Do not expose raw artifacts, sensitive permit parties, customer notes, or relevance feedback.
-- Provide accessible loading, empty, stale, error, offline/retry, forbidden, and not-found states.
-
-TESTS
-Cover authorization, filtering/sorting, lead transitions, stale revisions, unknown value/date, exact-radius display, responsive accessibility, and cross-customer route/query probes.
+API AND TESTS
+Provide versioned request/response contracts and integration tests for valid onboarding, invalid input, duplicate membership, unauthorized configuration access, configuration version changes, consent removal, account disablement, and cross-customer isolation.
 
 ACCEPTANCE CRITERIA
-The customer can understand why each current Match exists and take a lead action without seeing unresolved, stale, or unauthorized data.
+A verified user can create or join only the authorized Customer Account, configure the approved pilot preferences, and produce a versioned configuration usable by matching without affecting another customer.
 
 MANDATORY VALIDATION AND RECONCILIATION
 Run every applicable formatter, linter, static/type check, unit test, integration test, contract test, end-to-end test, build/package check, migration check, documentation/link check, JSON/schema check, security scan, and git diff check. If a category is not configured or not applicable, state that explicitly and explain why; do not claim it passed.
