@@ -1,0 +1,3673 @@
+{
+  "format_version": "1.0",
+  "roadmap_version": "2026-07-23.1",
+  "project_name": "AZ Permit Radar",
+  "repository_root_name": "AZPR",
+  "base_branch": "main",
+  "generated_from": {
+    "prompt_manifest": "automation/prompt-manifest.json",
+    "prompt_count": 38,
+    "generated_at": "2026-07-23T21:36:31Z",
+    "generator_prompt": "automation/roadmap-generator-prompt.md"
+  },
+  "normal_execution": {
+    "maximum_stages_per_run": 1,
+    "include_appendix_a": true,
+    "include_appendix_b": false,
+    "include_appendix_c": false
+  },
+  "stages": [
+    {
+      "id": "001",
+      "sequence": 1,
+      "title": "Close the Post-Core Traceability Release Gate",
+      "stage_group": "S1 - Traceability Gate",
+      "prompt_file": "automation/numbered/001-close-the-post-core-traceability-release-gate.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "close-post-core-traceability-gate",
+      "prerequisites": [],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/az_permit_radar/application/**",
+        "src/az_permit_radar/domain/**",
+        "src/az_permit_radar/infrastructure/**",
+        "tests/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "docs/schema/**",
+        "README.md"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. The repository has no docs/audits/index.json yet; resolve the governing post-Prompt-10 audit from docs/audits/ and stop if commit applicability cannot be proven."
+      ]
+    },
+    {
+      "id": "002",
+      "sequence": 2,
+      "title": "Post-Core Traceability Corrective Audit",
+      "stage_group": "S1 - Traceability Gate",
+      "prompt_file": "automation/numbered/002-post-core-traceability-corrective-audit.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "branch_slug": "audit-post-core-traceability",
+      "prerequisites": [
+        "001"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "post-core-traceability-corrective-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. This audit establishes the first controller-indexed formal gate; the controller alone materializes the immutable report and audit index."
+      ]
+    },
+    {
+      "id": "003",
+      "sequence": 3,
+      "title": "Define and Govern the Narrow Pilot Scope",
+      "stage_group": "S2 - MVP Scope and Architecture",
+      "prompt_file": "automation/numbered/003-define-and-govern-the-narrow-pilot-scope.md",
+      "effort_label": "High",
+      "reasoning_effort": "high",
+      "kind": "decision_gate",
+      "sandbox": "workspace-write",
+      "branch_slug": "govern-narrow-pilot-scope",
+      "prerequisites": [
+        "002"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/source_registry.py",
+        "src/az_permit_radar/domain/customer.py",
+        "src/az_permit_radar/domain/notification.py",
+        "src/az_permit_radar/application/geography.py",
+        "tests/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "docs/schema/**",
+        "docs/adr/**",
+        "README.md"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED",
+          "APPROVAL_REQUIRED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Prompt 2 must be the latest formal PASS; proposed scope entries remain inactive until explicit approval."
+      ]
+    },
+    {
+      "id": "004",
+      "sequence": 4,
+      "title": "Select and Govern the Production Application Stack",
+      "stage_group": "S2 - MVP Scope and Architecture",
+      "prompt_file": "automation/numbered/004-select-and-govern-the-production-application-stack.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "decision_gate",
+      "sandbox": "workspace-write",
+      "branch_slug": "select-production-stack",
+      "prerequisites": [
+        "003"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": true,
+        "approval_files": [
+          "automation/approvals/003-pilot-scope-approved.json"
+        ]
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "README.md"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED",
+          "APPROVAL_REQUIRED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Requires recorded approval of the Prompt 3 scope package before run; core stack decisions may produce a proposal-only APPROVAL_REQUIRED commit."
+      ]
+    },
+    {
+      "id": "005",
+      "sequence": 5,
+      "title": "Bootstrap the Production Application Shell and Engineering Baseline",
+      "stage_group": "S2 - MVP Scope and Architecture",
+      "prompt_file": "automation/numbered/005-bootstrap-the-production-application-shell-and-engineering-baseline.md",
+      "effort_label": "Medium",
+      "reasoning_effort": "medium",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "bootstrap-application-shell",
+      "prerequisites": [
+        "004"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": true,
+        "approval_files": [
+          "automation/approvals/004-production-stack-approved.json"
+        ]
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "scripts/**",
+        "config/**",
+        ".github/**",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "pyproject.toml",
+        "README.md"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Requires approved production-stack decisions; do not scaffold while any material decision remains proposed."
+      ]
+    },
+    {
+      "id": "006",
+      "sequence": 6,
+      "title": "MVP Scope and Architecture Decision Audit",
+      "stage_group": "S2 - MVP Scope and Architecture",
+      "prompt_file": "automation/numbered/006-mvp-scope-and-architecture-decision-audit.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "branch_slug": "audit-mvp-scope-architecture",
+      "prerequisites": [
+        "005"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "mvp-scope-architecture-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Prompt 7 is blocked unless this formal decision audit returns PASS."
+      ]
+    },
+    {
+      "id": "007",
+      "sequence": 7,
+      "title": "Design and Implement the Durable Database Schema and Migrations",
+      "stage_group": "S3 - Durable Platform Foundation",
+      "prompt_file": "automation/numbered/007-design-and-implement-the-durable-database-schema-and-migrations.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-durable-schema",
+      "prerequisites": [
+        "006"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/**",
+        "src/az_permit_radar/application/repositories.py",
+        "src/az_permit_radar/infrastructure/**",
+        "migrations/**",
+        "tests/**",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**",
+        "docs/schema/**",
+        "pyproject.toml"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Requires the latest Prompt 6 formal PASS and approved persistence decisions."
+      ]
+    },
+    {
+      "id": "008",
+      "sequence": 8,
+      "title": "Implement Durable Repositories and Transaction Boundaries",
+      "stage_group": "S3 - Durable Platform Foundation",
+      "prompt_file": "automation/numbered/008-implement-durable-repositories-and-transaction-boundaries.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-durable-repositories",
+      "prerequisites": [
+        "007"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/**",
+        "src/az_permit_radar/application/**",
+        "src/az_permit_radar/infrastructure/**",
+        "migrations/**",
+        "tests/**",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**",
+        "pyproject.toml"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Preserve parity between durable and in-memory adapters and database-enforced customer isolation."
+      ]
+    },
+    {
+      "id": "009",
+      "sequence": 9,
+      "title": "Implement Immutable Artifact Storage, Outbox, Workers, and Crash Recovery",
+      "stage_group": "S3 - Durable Platform Foundation",
+      "prompt_file": "automation/numbered/009-implement-immutable-artifact-storage-outbox-workers-and-crash-recovery.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-artifacts-outbox-workers",
+      "prerequisites": [
+        "008"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/**",
+        "src/az_permit_radar/application/**",
+        "src/az_permit_radar/infrastructure/**",
+        "migrations/**",
+        "tests/**",
+        "config/**",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**",
+        "pyproject.toml"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Exactly-once domain effects rely on idempotency and constraints, not transport claims."
+      ]
+    },
+    {
+      "id": "010",
+      "sequence": 10,
+      "title": "Durable Platform and Persistence Audit",
+      "stage_group": "S3 - Durable Platform Foundation",
+      "prompt_file": "automation/numbered/010-durable-platform-and-persistence-audit.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "branch_slug": "audit-durable-platform",
+      "prerequisites": [
+        "009"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "durable-platform-persistence-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Prompt 11 is blocked unless durability, provenance, migration, and ownership checks PASS."
+      ]
+    },
+    {
+      "id": "011",
+      "sequence": 11,
+      "title": "Implement Authentication, Session Security, and AccessContext Construction",
+      "stage_group": "S4 - Identity and Customer Configuration",
+      "prompt_file": "automation/numbered/011-implement-authentication-session-security-and-accesscontext-construction.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-authentication-access-context",
+      "prerequisites": [
+        "010"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "migrations/**",
+        "tests/**",
+        "config/**",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "pyproject.toml"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Authentication technology and trust boundary must already be approved; no custom cryptography."
+      ]
+    },
+    {
+      "id": "012",
+      "sequence": 12,
+      "title": "Implement Customer Account Lifecycle, Versioned Configuration, and Onboarding API",
+      "stage_group": "S4 - Identity and Customer Configuration",
+      "prompt_file": "automation/numbered/012-implement-customer-account-lifecycle-versioned-configuration-and-onboarding-api.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-customer-onboarding",
+      "prerequisites": [
+        "011"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/**",
+        "src/az_permit_radar/application/**",
+        "src/az_permit_radar/infrastructure/**",
+        "migrations/**",
+        "tests/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "docs/schema/**"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Stop if customer personal-data retention or deletion/anonymization behavior lacks approval."
+      ]
+    },
+    {
+      "id": "013",
+      "sequence": 13,
+      "title": "Identity, Authorization, and Customer-Isolation Audit",
+      "stage_group": "S4 - Identity and Customer Configuration",
+      "prompt_file": "automation/numbered/013-identity-authorization-and-customer-isolation-audit.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "branch_slug": "audit-identity-customer-isolation",
+      "prerequisites": [
+        "012"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "identity-authorization-isolation-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Any authentication bypass or customer-isolation failure is BLOCKED."
+      ]
+    },
+    {
+      "id": "014",
+      "sequence": 14,
+      "title": "Select and Approve the First Tucson or Pima County Production Source",
+      "stage_group": "S5 - Live Source and Geography",
+      "prompt_file": "automation/numbered/014-select-and-approve-the-first-tucson-or-pima-county-production-source.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "decision_gate",
+      "sandbox": "workspace-write",
+      "branch_slug": "select-first-production-source",
+      "prerequisites": [
+        "013"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/source_registry.py",
+        "tests/fixtures/**",
+        "tests/test_source_acquisition.py",
+        "config/sources/**",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "README.md"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED",
+          "APPROVAL_REQUIRED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. May create a proposal-only APPROVAL_REQUIRED commit; no live access under uncertain terms."
+      ]
+    },
+    {
+      "id": "015",
+      "sequence": 15,
+      "title": "Implement Durable Scheduled Acquisition and the Approved Live Connector",
+      "stage_group": "S5 - Live Source and Geography",
+      "prompt_file": "automation/numbered/015-implement-durable-scheduled-acquisition-and-the-approved-live-connector.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-live-source-acquisition",
+      "prerequisites": [
+        "014"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": true,
+        "approval_files": [
+          "automation/approvals/014-pilot-source-approved.json"
+        ]
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/acquisition.py",
+        "src/az_permit_radar/domain/source_registry.py",
+        "src/az_permit_radar/application/acquisition.py",
+        "src/az_permit_radar/infrastructure/source_acquisition.py",
+        "migrations/**",
+        "tests/**",
+        "config/sources/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**",
+        "docs/adr/**",
+        "pyproject.toml"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Requires the explicit Prompt 14 source approval file; production scheduling remains gated."
+      ]
+    },
+    {
+      "id": "016",
+      "sequence": 16,
+      "title": "Implement the Production Source Parser, Replay, and Backfill Contract",
+      "stage_group": "S5 - Live Source and Geography",
+      "prompt_file": "automation/numbered/016-implement-the-production-source-parser-replay-and-backfill-contract.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-production-parser",
+      "prerequisites": [
+        "015"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/parsing.py",
+        "src/az_permit_radar/domain/ingestion.py",
+        "src/az_permit_radar/application/parsing.py",
+        "src/az_permit_radar/infrastructure/source_parsing.py",
+        "migrations/**",
+        "tests/**",
+        "config/sources/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**",
+        "docs/adr/**"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Historical artifacts and parser versions remain replayable; format changes never rewrite evidence."
+      ]
+    },
+    {
+      "id": "017",
+      "sequence": 17,
+      "title": "Implement Required Production Geography and Address Resolution",
+      "stage_group": "S5 - Live Source and Geography",
+      "prompt_file": "automation/numbered/017-implement-required-production-geography-and-address-resolution.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-production-geography",
+      "prerequisites": [
+        "016"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/permit.py",
+        "src/az_permit_radar/application/geography.py",
+        "src/az_permit_radar/application/normalization.py",
+        "src/az_permit_radar/infrastructure/geography.py",
+        "src/az_permit_radar/infrastructure/permit_normalization.py",
+        "migrations/**",
+        "tests/**",
+        "config/geography/**",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**",
+        "pyproject.toml"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Use source-verified geography when sufficient; an external provider decision requires explicit approval before integration."
+      ]
+    },
+    {
+      "id": "018",
+      "sequence": 18,
+      "title": "Pilot Source, Ingestion, Normalization, and Geography Audit",
+      "stage_group": "S5 - Live Source and Geography",
+      "prompt_file": "automation/numbered/018-pilot-source-ingestion-normalization-and-geography-audit.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "branch_slug": "audit-source-ingestion-geography",
+      "prerequisites": [
+        "017"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "pilot-source-ingestion-geography-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Source-access uncertainty, missing raw evidence, or unsafe geography is BLOCKED."
+      ]
+    },
+    {
+      "id": "019",
+      "sequence": 19,
+      "title": "Implement the Authorized Customer API and Query Projections",
+      "stage_group": "S6 - Customer API and Dashboard",
+      "prompt_file": "automation/numbered/019-implement-the-authorized-customer-api-and-query-projections.md",
+      "effort_label": "High",
+      "reasoning_effort": "high",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-customer-api",
+      "prerequisites": [
+        "018"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/az_permit_radar/application/queries.py",
+        "src/az_permit_radar/application/commands.py",
+        "src/az_permit_radar/application/**",
+        "src/az_permit_radar/infrastructure/**",
+        "tests/**",
+        "migrations/**",
+        "openapi/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**",
+        "docs/adr/**"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Customer API enumeration begins from authorized Customer Matches only."
+      ]
+    },
+    {
+      "id": "020",
+      "sequence": 20,
+      "title": "Build the Authenticated Frontend Foundation and Onboarding Experience",
+      "stage_group": "S6 - Customer API and Dashboard",
+      "prompt_file": "automation/numbered/020-build-the-authenticated-frontend-foundation-and-onboarding-experience.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "build-frontend-onboarding",
+      "prerequisites": [
+        "019"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "frontend/**",
+        "tests/**",
+        "package.json",
+        "package-lock.json",
+        "pnpm-lock.yaml",
+        "yarn.lock",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "README.md"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. SMS enrollment stays hidden or unavailable while the production flag is disabled."
+      ]
+    },
+    {
+      "id": "021",
+      "sequence": 21,
+      "title": "Build the Explainable Opportunity Dashboard and Lead Workflow",
+      "stage_group": "S6 - Customer API and Dashboard",
+      "prompt_file": "automation/numbered/021-build-the-explainable-opportunity-dashboard-and-lead-workflow.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "build-opportunity-dashboard",
+      "prerequisites": [
+        "020"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "frontend/**",
+        "tests/**",
+        "package.json",
+        "package-lock.json",
+        "pnpm-lock.yaml",
+        "yarn.lock",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. The UI must not duplicate authorization, eligibility, scoring, or territory rules."
+      ]
+    },
+    {
+      "id": "022",
+      "sequence": 22,
+      "title": "Customer API, Frontend, and Data-Exposure Audit",
+      "stage_group": "S6 - Customer API and Dashboard",
+      "prompt_file": "automation/numbered/022-customer-api-frontend-and-data-exposure-audit.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "branch_slug": "audit-customer-data-exposure",
+      "prerequisites": [
+        "021"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "customer-api-frontend-data-exposure-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Any customer data leak or eligibility bypass is BLOCKED."
+      ]
+    },
+    {
+      "id": "023",
+      "sequence": 23,
+      "title": "Implement Email Notification Orchestration and Delivery",
+      "stage_group": "S7 - Notifications and Operations",
+      "prompt_file": "automation/numbered/023-implement-email-notification-orchestration-and-delivery.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-email-delivery",
+      "prerequisites": [
+        "022"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/notification.py",
+        "src/az_permit_radar/application/**",
+        "src/az_permit_radar/infrastructure/**",
+        "migrations/**",
+        "tests/**",
+        "config/notifications/**",
+        "templates/email/**",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**",
+        "pyproject.toml"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Email-provider approval is a consequential external trust-boundary decision; stop before integration if absent."
+      ]
+    },
+    {
+      "id": "024",
+      "sequence": 24,
+      "title": "Email Delivery Audit",
+      "stage_group": "S7 - Notifications and Operations",
+      "prompt_file": "automation/numbered/024-email-delivery-audit.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "branch_slug": "audit-email-delivery",
+      "prerequisites": [
+        "023"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "email-delivery-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Prompt 25 is authorized only by PASS; duplicate sends, consent bypass, stale delivery, or unverified webhooks are BLOCKED."
+      ]
+    },
+    {
+      "id": "025",
+      "sequence": 25,
+      "title": "Implement Controlled SMS Infrastructure Behind a Disabled Feature Flag",
+      "stage_group": "S7 - Notifications and Operations",
+      "prompt_file": "automation/numbered/025-implement-controlled-sms-infrastructure-behind-a-disabled-feature-flag.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-disabled-sms-infrastructure",
+      "prerequisites": [
+        "024"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/notification.py",
+        "src/az_permit_radar/application/**",
+        "src/az_permit_radar/infrastructure/**",
+        "migrations/**",
+        "tests/**",
+        "config/notifications/**",
+        "templates/sms/**",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**",
+        "pyproject.toml"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Implement infrastructure only; production SMS enrollment and sending remain disabled by default."
+      ]
+    },
+    {
+      "id": "026",
+      "sequence": 26,
+      "title": "Build Internal Review and Source Operations Tooling",
+      "stage_group": "S7 - Notifications and Operations",
+      "prompt_file": "automation/numbered/026-build-internal-review-and-source-operations-tooling.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "build-internal-operations",
+      "prerequisites": [
+        "025"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/az_permit_radar/application/**",
+        "src/az_permit_radar/infrastructure/**",
+        "frontend/internal/**",
+        "migrations/**",
+        "tests/**",
+        "config/operations/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "docs/adr/**"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Internal operations use separate roles, services, and repositories; ordinary correction workflows never hard-delete evidence."
+      ]
+    },
+    {
+      "id": "027",
+      "sequence": 27,
+      "title": "Notification, SMS, and Operations Audit",
+      "stage_group": "S7 - Notifications and Operations",
+      "prompt_file": "automation/numbered/027-notification-sms-and-operations-audit.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "branch_slug": "audit-notifications-operations",
+      "prerequisites": [
+        "026"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "notification-sms-operations-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Duplicate delivery, consent bypass, production-enabled SMS, or unsafe operator access is BLOCKED."
+      ]
+    },
+    {
+      "id": "028",
+      "sequence": 28,
+      "title": "Implement the Privacy-Conscious Analytics Event Model",
+      "stage_group": "S8 - Operational and Release Readiness",
+      "prompt_file": "automation/numbered/028-implement-the-privacy-conscious-analytics-event-model.md",
+      "effort_label": "High",
+      "reasoning_effort": "high",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-privacy-analytics",
+      "prerequisites": [
+        "027"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/**",
+        "src/az_permit_radar/application/**",
+        "src/az_permit_radar/infrastructure/**",
+        "migrations/**",
+        "tests/**",
+        "config/analytics/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/schema/**",
+        "docs/adr/**"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Remain vendor-neutral unless a separately approved external analytics trust boundary exists."
+      ]
+    },
+    {
+      "id": "029",
+      "sequence": 29,
+      "title": "Implement Observability, Health, Alerting, and Operational Runbooks",
+      "stage_group": "S8 - Operational and Release Readiness",
+      "prompt_file": "automation/numbered/029-implement-observability-health-alerting-and-operational-runbooks.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-observability-runbooks",
+      "prerequisites": [
+        "028"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "config/observability/**",
+        "ops/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "docs/adr/**",
+        "pyproject.toml"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Readiness must fail truthfully for unavailable dependencies and source staleness."
+      ]
+    },
+    {
+      "id": "030",
+      "sequence": 30,
+      "title": "Implement Backup, Restore, Reconciliation, and Rollback Procedures",
+      "stage_group": "S8 - Operational and Release Readiness",
+      "prompt_file": "automation/numbered/030-implement-backup-restore-reconciliation-and-rollback-procedures.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-backup-restore",
+      "prerequisites": [
+        "029"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "scripts/backup/**",
+        "scripts/reconciliation/**",
+        "config/backup/**",
+        "ops/**",
+        "migrations/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "docs/adr/**"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Recovery never rewrites immutable source evidence or audit history."
+      ]
+    },
+    {
+      "id": "031",
+      "sequence": 31,
+      "title": "Perform Security, Privacy, Performance, and Recovery Hardening",
+      "stage_group": "S8 - Operational and Release Readiness",
+      "prompt_file": "automation/numbered/031-perform-security-privacy-performance-and-recovery-hardening.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "harden-security-privacy-recovery",
+      "prerequisites": [
+        "030"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "frontend/**",
+        "tests/**",
+        "scripts/**",
+        "config/**",
+        "ops/**",
+        "deploy/**",
+        "migrations/**",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "pyproject.toml",
+        "package.json",
+        "package-lock.json",
+        "pnpm-lock.yaml",
+        "yarn.lock",
+        "README.md"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Stop for destructive migrations, provider/architecture replacement, material cost, or legal/compliance decisions."
+      ]
+    },
+    {
+      "id": "032",
+      "sequence": 32,
+      "title": "Formal Pilot Release Test Matrix and Release Gate Audit",
+      "stage_group": "S8 - Operational and Release Readiness",
+      "prompt_file": "automation/numbered/032-formal-pilot-release-test-matrix-and-release-gate-audit.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "release_gate",
+      "sandbox": "read-only",
+      "branch_slug": "audit-pilot-release-gate",
+      "prerequisites": [
+        "031"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "pilot-release-gate-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. This is a formal release gate; staging is forbidden unless every release-matrix blocker is absent and the result is PASS."
+      ]
+    },
+    {
+      "id": "033",
+      "sequence": 33,
+      "title": "Prepare and Execute the Controlled Staging Deployment",
+      "stage_group": "S9 - Staging and Production Pilot",
+      "prompt_file": "automation/numbered/033-prepare-and-execute-the-controlled-staging-deployment.md",
+      "effort_label": "Extra High",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "deploy-controlled-staging",
+      "prerequisites": [
+        "032"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": true,
+        "approval_files": [
+          "automation/approvals/033-staging-deployment-approved.json"
+        ]
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "deploy/staging/**",
+        "infra/staging/**",
+        "config/staging/**",
+        "scripts/deploy/**",
+        "tests/smoke/**",
+        "docs/deployments/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**",
+        "docs/adr/**",
+        "README.md"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Requires explicit staging-deployment approval; do not deploy production or enable SMS."
+      ]
+    },
+    {
+      "id": "034",
+      "sequence": 34,
+      "title": "Final Staging and Pilot Readiness Audit",
+      "stage_group": "S9 - Staging and Production Pilot",
+      "prompt_file": "automation/numbered/034-final-staging-and-pilot-readiness-audit.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "release_gate",
+      "sandbox": "read-only",
+      "branch_slug": "audit-staging-readiness",
+      "prerequisites": [
+        "033"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "staging-pilot-readiness-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. PASS permits only a proposal for an explicitly approved production pilot, not deployment itself."
+      ]
+    },
+    {
+      "id": "035",
+      "sequence": 35,
+      "title": "Deploy the Controlled Production Pilot",
+      "stage_group": "S9 - Staging and Production Pilot",
+      "prompt_file": "automation/numbered/035-deploy-the-controlled-production-pilot.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "deploy-controlled-production-pilot",
+      "prerequisites": [
+        "034"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": true,
+        "approval_files": [
+          "automation/approvals/035-production-deployment-approved.json"
+        ]
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "deploy/production/**",
+        "infra/production/**",
+        "config/production/**",
+        "scripts/deploy/**",
+        "tests/smoke/**",
+        "docs/deployments/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**",
+        "docs/adr/**",
+        "README.md"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Requires explicit production-deployment approval and the exact Prompt 34 formal PASS baseline."
+      ]
+    },
+    {
+      "id": "036",
+      "sequence": 36,
+      "title": "Production Pilot Launch Verification Audit",
+      "stage_group": "S9 - Staging and Production Pilot",
+      "prompt_file": "automation/numbered/036-production-pilot-launch-verification-audit.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "branch_slug": "audit-production-pilot-launch",
+      "prerequisites": [
+        "035"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "production-pilot-launch-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. PASS establishes only a controlled-learning baseline; it authorizes no expansion, billing, additional source, or SMS activation."
+      ]
+    },
+    {
+      "id": "037",
+      "sequence": 37,
+      "title": "Implement Pilot Feedback and Business Validation Workflow",
+      "stage_group": "S10 - Pilot Learning",
+      "prompt_file": "automation/numbered/037-implement-pilot-feedback-and-business-validation-workflow.md",
+      "effort_label": "High",
+      "reasoning_effort": "high",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "branch_slug": "implement-pilot-feedback",
+      "prerequisites": [
+        "036"
+      ],
+      "audit_gate": {
+        "mode": "latest_formal",
+        "allowed_outcomes": [
+          "PASS"
+        ]
+      },
+      "human_approval": {
+        "required_before_run": true,
+        "approval_files": [
+          "automation/approvals/037-controlled-pilot-active.json"
+        ]
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/**",
+        "src/az_permit_radar/application/**",
+        "src/az_permit_radar/infrastructure/**",
+        "frontend/**",
+        "migrations/**",
+        "tests/**",
+        "config/analytics/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "docs/schema/**",
+        "docs/adr/**"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": false,
+        "report_slug": ""
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Requires explicit confirmation that the controlled production pilot is active."
+      ]
+    },
+    {
+      "id": "038",
+      "sequence": 38,
+      "title": "Pilot Feedback and Business Validation Audit",
+      "stage_group": "S10 - Pilot Learning",
+      "prompt_file": "automation/numbered/038-pilot-feedback-and-business-validation-audit.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "branch_slug": "audit-pilot-business-validation",
+      "prerequisites": [
+        "037"
+      ],
+      "audit_gate": {
+        "mode": "none",
+        "allowed_outcomes": []
+      },
+      "human_approval": {
+        "required_before_run": true,
+        "approval_files": [
+          "automation/approvals/038-pilot-review-snapshot-approved.json"
+        ]
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Stage {id}: {title} [{outcome}]"
+      },
+      "audit": {
+        "formal": true,
+        "report_slug": "pilot-feedback-business-validation-audit"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Master Operating Prompt absent from the repository; the controller must supply it. Current validation config provides Python unittest and the controller-level scripts/check_docs.py structural check. Requires an approved pilot review-point snapshot; PASS completes the numbered roadmap but does not authorize expansion."
+      ]
+    }
+  ],
+  "appendices": {
+    "A": {
+      "appendix_id": "A",
+      "title": "Audit Correction Prompt",
+      "prompt_file": "automation/appendices/appendix-a-audit-correction-prompt.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "normal_execution_eligible": false,
+      "requires_explicit_invocation": false,
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "hard_lock": {
+        "enabled_by_default": false,
+        "confirmation_phrase": ""
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "frontend/**",
+        "migrations/**",
+        "scripts/**",
+        "config/**",
+        "ops/**",
+        "deploy/**",
+        ".github/**",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "docs/schema/**",
+        "pyproject.toml",
+        "package.json",
+        "package-lock.json",
+        "pnpm-lock.yaml",
+        "yarn.lock",
+        "README.md"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Appendix A: audit corrections [{outcome}]"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Available only when every blocking correction in a PASS_WITH_REQUIRED_CORRECTIONS audit explicitly authorizes APPENDIX_A.",
+        "A correction commit never advances the numbered roadmap; rerun the same audit and require PASS.",
+        "No repository copy of the Master Operating Prompt was found; stop if the controller does not supply it."
+      ]
+    },
+    "B": {
+      "appendix_id": "B",
+      "title": "Optional Controlled SMS Canary Enablement Prompt",
+      "prompt_file": "automation/appendices/appendix-b-optional-controlled-sms-canary-enablement-prompt.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "implementation",
+      "sandbox": "workspace-write",
+      "normal_execution_eligible": false,
+      "requires_explicit_invocation": true,
+      "human_approval": {
+        "required_before_run": true,
+        "approval_files": [
+          "automation/approvals/post-mvp-project-review-approved.json",
+          "automation/approvals/sms-canary-approved.json"
+        ]
+      },
+      "hard_lock": {
+        "enabled_by_default": false,
+        "confirmation_phrase": "ENABLE CONTROLLED SMS CANARY"
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/notification.py",
+        "src/az_permit_radar/application/**",
+        "src/az_permit_radar/infrastructure/**",
+        "frontend/**",
+        "migrations/**",
+        "tests/**",
+        "config/notifications/**",
+        "templates/sms/**",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "pyproject.toml",
+        "package.json",
+        "package-lock.json",
+        "pnpm-lock.yaml",
+        "yarn.lock"
+      ],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**",
+        "docs/audits/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "COMPLETED"
+        ],
+        "message_template": "Appendix B: controlled SMS canary [{outcome}]"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Never included in normal execution or numbered-stage prerequisites.",
+        "Requires the numbered roadmap and project review to be complete plus both approval files; the controller hard lock remains disabled by default.",
+        "No repository copy of the Master Operating Prompt was found; stop if the controller does not supply it."
+      ]
+    },
+    "C": {
+      "appendix_id": "C",
+      "title": "Optional Controlled SMS Canary Activation Audit",
+      "prompt_file": "automation/appendices/appendix-c-optional-controlled-sms-canary-activation-audit.md",
+      "effort_label": "Ultra",
+      "reasoning_effort": "xhigh",
+      "kind": "audit",
+      "sandbox": "read-only",
+      "normal_execution_eligible": false,
+      "requires_explicit_invocation": true,
+      "human_approval": {
+        "required_before_run": true,
+        "approval_files": [
+          "automation/approvals/sms-canary-audit-approved.json"
+        ]
+      },
+      "hard_lock": {
+        "enabled_by_default": false,
+        "confirmation_phrase": "AUDIT CONTROLLED SMS CANARY"
+      },
+      "context_files": [
+        "AGENTS.md",
+        "README.md",
+        "docs/automation/current-status.md",
+        "docs/current/",
+        "docs/logs/",
+        "docs/governance/domain-glossary.md",
+        "docs/adr/",
+        "docs/runbooks/",
+        "docs/audits/",
+        "src/",
+        "tests/",
+        "pyproject.toml"
+      ],
+      "allowed_change_paths": [],
+      "forbidden_change_paths": [
+        ".git/**",
+        ".codex-loop/**",
+        "automation/**",
+        ".env",
+        "secrets/**"
+      ],
+      "validation": {
+        "commands": [
+          {
+            "name": "Complete Python test suite",
+            "argv": [
+              "python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "tests",
+              "-v"
+            ],
+            "timeout_seconds": 1800
+          }
+        ]
+      },
+      "commit": {
+        "required": true,
+        "allowed_outcomes": [
+          "PASS",
+          "PASS_WITH_REQUIRED_CORRECTIONS",
+          "BLOCKED"
+        ],
+        "message_template": "Appendix C: SMS canary audit [{outcome}]"
+      },
+      "codex_timeout_seconds": 7200,
+      "notes": [
+        "Requires a completed, merged, deployed, and reconciled Appendix B plus the audit approval file.",
+        "Never launches automatically after Appendix B; PASS authorizes only the exact approved canary window and cohort.",
+        "The controller alone materializes the immutable audit report and index.",
+        "No repository copy of the Master Operating Prompt was found; stop if the controller does not supply it."
+      ]
+    }
+  }
+}
