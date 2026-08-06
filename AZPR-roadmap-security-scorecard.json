@@ -1,0 +1,1593 @@
+{
+  "assessment_version": "2026-07-23.1-security-review",
+  "thresholds": {
+    "acceptable_security_min": 85,
+    "acceptable_confidence_min": 85
+  },
+  "overall": "NOT_ACCEPTABLE_FOR_UNATTENDED_AUTONOMOUS_EXECUTION",
+  "counts": {
+    "acceptable": 3,
+    "conditional": 22,
+    "unacceptable": 13
+  },
+  "file_hashes_sha256": {
+    "roadmap.proposed.json": "30c858b8ec02a2e6dae94a991395e1c0baabbf4b65bcf07e25d8dc30334f18c7",
+    "markdown-prompts.zip": "67fe18e625209d860eedcfdde40f0161b1a57efa1f060381105a30e4edb0cb15",
+    "AZ Permit Radar Master Operating Prompt(2).docx": "37800ebde204070d1ac20c2cfff5c809ee4f318cfcc44312514c393077334ae6"
+  },
+  "missing_numbered_prompts": [],
+  "missing_appendix_prompts": [
+    "appendix-a-audit-correction-prompt.md",
+    "appendix-b-optional-controlled-sms-canary-enablement-prompt.md",
+    "appendix-c-optional-controlled-sms-canary-activation-audit.md"
+  ],
+  "stages": [
+    {
+      "id": "001",
+      "title": "Close the Post-Core Traceability Release Gate",
+      "kind": "implementation",
+      "security_score": 76,
+      "execution_confidence_score": 82,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Narrow after preflight; no broader generic access",
+      "finding": "Cross-layer traceability work can justify several modules, but three whole source layers plus all tests permit unrelated changes. Add docs/adr/** only when the pre-change report proves an ADR is required.",
+      "allowed_change_paths": [
+        "src/az_permit_radar/application/**",
+        "src/az_permit_radar/domain/**",
+        "src/az_permit_radar/infrastructure/**",
+        "tests/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "docs/schema/**",
+        "README.md"
+      ],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "002",
+      "title": "Post-Core Traceability Corrective Audit",
+      "kind": "audit",
+      "security_score": 93,
+      "execution_confidence_score": 72,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Fix audit materialization contract",
+      "finding": "Product read-only is strong, but the prompt orders the agent to create docs/audits files and commit while the roadmap grants no write paths and a read-only sandbox. Make the agent return a report payload and let the controller write/commit, or grant only the exact report and index paths.",
+      "allowed_change_paths": [],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "read-only",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "003",
+      "title": "Define and Govern the Narrow Pilot Scope",
+      "kind": "decision_gate",
+      "security_score": 88,
+      "execution_confidence_score": 88,
+      "verdict": "ACCEPTABLE",
+      "access_decision": "Keep; narrow tests where practical",
+      "finding": "The named domain files and governed documentation fit pilot-scope decisions. Runtime activation remains approval-sensitive. No broader write access is justified.",
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/source_registry.py",
+        "src/az_permit_radar/domain/customer.py",
+        "src/az_permit_radar/domain/notification.py",
+        "src/az_permit_radar/application/geography.py",
+        "tests/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "docs/schema/**",
+        "docs/adr/**",
+        "README.md"
+      ],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "004",
+      "title": "Select and Govern the Production Application Stack",
+      "kind": "decision_gate",
+      "security_score": 95,
+      "execution_confidence_score": 93,
+      "verdict": "ACCEPTABLE",
+      "access_decision": "Keep docs-only",
+      "finding": "This is a decision gate and correctly excludes implementation code. ADR/current/log/runbook access is appropriate.",
+      "allowed_change_paths": [
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "README.md"
+      ],
+      "human_approval": {
+        "required_before_run": true,
+        "approval_files": [
+          "automation/approvals/003-pilot-scope-approved.json"
+        ]
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "005",
+      "title": "Bootstrap the Production Application Shell and Engineering Baseline",
+      "kind": "implementation",
+      "security_score": 62,
+      "execution_confidence_score": 86,
+      "verdict": "UNACCEPTABLE",
+      "access_decision": "Narrow CI, scripts, config, and source paths",
+      "finding": "src/**, scripts/**, config/**, and .github/** allow broad code, workflow, and supply-chain changes. Restrict to the approved composition root, health/config modules, validation scripts, and exact CI workflow files.",
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "scripts/**",
+        "config/**",
+        ".github/**",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "pyproject.toml",
+        "README.md"
+      ],
+      "human_approval": {
+        "required_before_run": true,
+        "approval_files": [
+          "automation/approvals/004-production-stack-approved.json"
+        ]
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "006",
+      "title": "MVP Scope and Architecture Decision Audit",
+      "kind": "audit",
+      "security_score": 93,
+      "execution_confidence_score": 72,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Fix audit materialization contract",
+      "finding": "Same read-only-versus-report-write/commit contradiction as Stage 002.",
+      "allowed_change_paths": [],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "read-only",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "007",
+      "title": "Design and Implement the Durable Database Schema and Migrations",
+      "kind": "implementation",
+      "security_score": 76,
+      "execution_confidence_score": 78,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Narrow persistence modules; allow exact migration config if needed",
+      "finding": "The stage may need a selected migration-tool config file not listed. Whole domain and infrastructure globs are broader than schema/mapping work requires. Bind paths to the approved Stage 004 stack.",
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/**",
+        "src/az_permit_radar/application/repositories.py",
+        "src/az_permit_radar/infrastructure/**",
+        "migrations/**",
+        "tests/**",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**",
+        "docs/schema/**",
+        "pyproject.toml"
+      ],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "008",
+      "title": "Implement Durable Repositories and Transaction Boundaries",
+      "kind": "implementation",
+      "security_score": 74,
+      "execution_confidence_score": 84,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Narrow to repositories, UoW, transaction adapters, and exact migrations",
+      "finding": "Whole application/domain/infrastructure trees exceed the repository/transaction scope. Add docs/schema/** only if this stage legitimately changes the approved schema.",
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/**",
+        "src/az_permit_radar/application/**",
+        "src/az_permit_radar/infrastructure/**",
+        "migrations/**",
+        "tests/**",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**",
+        "pyproject.toml"
+      ],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "009",
+      "title": "Implement Immutable Artifact Storage, Outbox, Workers, and Crash Recovery",
+      "kind": "implementation",
+      "security_score": 70,
+      "execution_confidence_score": 82,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Narrow to artifact, outbox, worker, and reconciliation modules",
+      "finding": "config/** and whole application/domain/infrastructure trees are too broad. Permit one exact reconciliation command location if the repository convention requires it.",
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/**",
+        "src/az_permit_radar/application/**",
+        "src/az_permit_radar/infrastructure/**",
+        "migrations/**",
+        "tests/**",
+        "config/**",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**",
+        "pyproject.toml"
+      ],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "010",
+      "title": "Durable Platform and Persistence Audit",
+      "kind": "audit",
+      "security_score": 93,
+      "execution_confidence_score": 72,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Fix audit materialization contract",
+      "finding": "Same audit-control contradiction; validation also needs persistence, migration, and concurrency profiles beyond the single unit command.",
+      "allowed_change_paths": [],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "read-only",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "011",
+      "title": "Implement Authentication, Session Security, and AccessContext Construction",
+      "kind": "implementation",
+      "security_score": 58,
+      "execution_confidence_score": 88,
+      "verdict": "UNACCEPTABLE",
+      "access_decision": "Strongly narrow auth/session/middleware paths",
+      "finding": "An authentication stage with src/** and config/** can alter unrelated authorization, domain, notification, or deployment behavior. Limit it to verified-claim middleware, AccessContext, session/auth adapters, config/auth/**, exact migrations, and security tests.",
+      "allowed_change_paths": [
+        "src/**",
+        "migrations/**",
+        "tests/**",
+        "config/**",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "pyproject.toml"
+      ],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "012",
+      "title": "Implement Customer Account Lifecycle, Versioned Configuration, and Onboarding API",
+      "kind": "implementation",
+      "security_score": 76,
+      "execution_confidence_score": 78,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Narrow customer modules; add exact API-contract and ADR paths",
+      "finding": "Versioned request/response contracts are required, but openapi/** or the approved transport-contract path is absent. docs/adr/** may be needed for retention/anonymization decisions.",
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/**",
+        "src/az_permit_radar/application/**",
+        "src/az_permit_radar/infrastructure/**",
+        "migrations/**",
+        "tests/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "docs/schema/**"
+      ],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "013",
+      "title": "Identity, Authorization, and Customer-Isolation Audit",
+      "kind": "audit",
+      "security_score": 93,
+      "execution_confidence_score": 72,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Fix audit materialization contract",
+      "finding": "Read-only is appropriate, but report creation and commit ownership must be made controller-only and machine-verifiable.",
+      "allowed_change_paths": [],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "read-only",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "014",
+      "title": "Select and Approve the First Tucson or Pima County Production Source",
+      "kind": "decision_gate",
+      "security_score": 80,
+      "execution_confidence_score": 84,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Keep write scope; add network read policy and exact registry tests",
+      "finding": "Write access is narrow, but source comparison can involve live external access. Enforce destination allowlists, read-only HTTP methods, response-size limits, and no credentials. The single named test file may be under-inclusive.",
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/source_registry.py",
+        "tests/fixtures/**",
+        "tests/test_source_acquisition.py",
+        "config/sources/**",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "README.md"
+      ],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "015",
+      "title": "Implement Durable Scheduled Acquisition and the Approved Live Connector",
+      "kind": "implementation",
+      "security_score": 78,
+      "execution_confidence_score": 76,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Add exact scheduler/worker and manual-replay paths; narrow everything else",
+      "finding": "The task includes scheduling, leases, and manual reprocessing, but only acquisition-specific files are allowed. This may force code into the wrong layer unless exact existing worker/command modules are added.",
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/acquisition.py",
+        "src/az_permit_radar/domain/source_registry.py",
+        "src/az_permit_radar/application/acquisition.py",
+        "src/az_permit_radar/infrastructure/source_acquisition.py",
+        "migrations/**",
+        "tests/**",
+        "config/sources/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**",
+        "docs/adr/**",
+        "pyproject.toml"
+      ],
+      "human_approval": {
+        "required_before_run": true,
+        "approval_files": [
+          "automation/approvals/014-pilot-source-approved.json"
+        ]
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "016",
+      "title": "Implement the Production Source Parser, Replay, and Backfill Contract",
+      "kind": "implementation",
+      "security_score": 87,
+      "execution_confidence_score": 88,
+      "verdict": "ACCEPTABLE",
+      "access_decision": "Keep; add schema docs only if contract changes",
+      "finding": "The source-specific parser paths are focused and replay/backfill remains bounded. New dependencies should require a separate approved path change.",
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/parsing.py",
+        "src/az_permit_radar/domain/ingestion.py",
+        "src/az_permit_radar/application/parsing.py",
+        "src/az_permit_radar/infrastructure/source_parsing.py",
+        "migrations/**",
+        "tests/**",
+        "config/sources/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**",
+        "docs/adr/**"
+      ],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "017",
+      "title": "Implement Required Production Geography and Address Resolution",
+      "kind": "implementation",
+      "security_score": 82,
+      "execution_confidence_score": 78,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Add docs/schema/** and only an approved provider-adapter path",
+      "finding": "Geography provenance can change schema documentation. If an external geocoder is approved, the exact adapter/transport path should be added rather than widening infrastructure generally.",
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/permit.py",
+        "src/az_permit_radar/application/geography.py",
+        "src/az_permit_radar/application/normalization.py",
+        "src/az_permit_radar/infrastructure/geography.py",
+        "src/az_permit_radar/infrastructure/permit_normalization.py",
+        "migrations/**",
+        "tests/**",
+        "config/geography/**",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**",
+        "pyproject.toml"
+      ],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "018",
+      "title": "Pilot Source, Ingestion, Normalization, and Geography Audit",
+      "kind": "audit",
+      "security_score": 93,
+      "execution_confidence_score": 72,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Fix audit materialization contract",
+      "finding": "Read-only safety is good; report write/commit and complete source/geography validation remain unresolved.",
+      "allowed_change_paths": [],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "read-only",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "019",
+      "title": "Implement the Authorized Customer API and Query Projections",
+      "kind": "implementation",
+      "security_score": 68,
+      "execution_confidence_score": 66,
+      "verdict": "UNACCEPTABLE",
+      "access_decision": "Add the exact API transport/router path; narrow application/infrastructure",
+      "finding": "The prompt must expose endpoints, but the roadmap omits the transport layer created by Stage 005 unless it happens to live under infrastructure. This can force architecture leakage or make completion impossible.",
+      "allowed_change_paths": [
+        "src/az_permit_radar/application/queries.py",
+        "src/az_permit_radar/application/commands.py",
+        "src/az_permit_radar/application/**",
+        "src/az_permit_radar/infrastructure/**",
+        "tests/**",
+        "migrations/**",
+        "openapi/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**",
+        "docs/adr/**"
+      ],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "020",
+      "title": "Build the Authenticated Frontend Foundation and Onboarding Experience",
+      "kind": "implementation",
+      "security_score": 69,
+      "execution_confidence_score": 72,
+      "verdict": "UNACCEPTABLE",
+      "access_decision": "Keep frontend subtree, permit only the selected package manager and exact config files",
+      "finding": "All major lockfiles are writable and validation contains no frontend lint/type/build/test command. Dependency and package-script execution need supply-chain controls.",
+      "allowed_change_paths": [
+        "frontend/**",
+        "tests/**",
+        "package.json",
+        "package-lock.json",
+        "pnpm-lock.yaml",
+        "yarn.lock",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "README.md"
+      ],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "021",
+      "title": "Build the Explainable Opportunity Dashboard and Lead Workflow",
+      "kind": "implementation",
+      "security_score": 78,
+      "execution_confidence_score": 76,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Keep frontend scope; make dependency files read-only unless explicitly needed",
+      "finding": "Dashboard work is focused, but broad tests and writable package/lock files allow unrelated dependency changes. The roadmap lacks browser, accessibility, build, and end-to-end validation.",
+      "allowed_change_paths": [
+        "frontend/**",
+        "tests/**",
+        "package.json",
+        "package-lock.json",
+        "pnpm-lock.yaml",
+        "yarn.lock",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**"
+      ],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "022",
+      "title": "Customer API, Frontend, and Data-Exposure Audit",
+      "kind": "audit",
+      "security_score": 93,
+      "execution_confidence_score": 72,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Fix audit materialization contract",
+      "finding": "Data-exposure auditing is correctly read-only, but the controller/report contract and full API/UI security test profile must be explicit.",
+      "allowed_change_paths": [],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "read-only",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "023",
+      "title": "Implement Email Notification Orchestration and Delivery",
+      "kind": "implementation",
+      "security_score": 54,
+      "execution_confidence_score": 74,
+      "verdict": "UNACCEPTABLE",
+      "access_decision": "Require provider approval file; add exact webhook route; narrow notification modules",
+      "finding": "Email introduces customer data, external delivery, reputation, webhooks, and cost, yet no machine-enforced provider approval exists. The transport path for verified webhooks is also absent.",
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/notification.py",
+        "src/az_permit_radar/application/**",
+        "src/az_permit_radar/infrastructure/**",
+        "migrations/**",
+        "tests/**",
+        "config/notifications/**",
+        "templates/email/**",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**",
+        "pyproject.toml"
+      ],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "024",
+      "title": "Email Delivery Audit",
+      "kind": "audit",
+      "security_score": 93,
+      "execution_confidence_score": 72,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Fix audit materialization contract",
+      "finding": "The dedicated audit is valuable, but its immutable report and commit must be controller-owned and provider evidence must be authenticated.",
+      "allowed_change_paths": [],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "read-only",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "025",
+      "title": "Implement Controlled SMS Infrastructure Behind a Disabled Feature Flag",
+      "kind": "implementation",
+      "security_score": 48,
+      "execution_confidence_score": 72,
+      "verdict": "UNACCEPTABLE",
+      "access_decision": "Require provider approval and immutable disabled-by-default enforcement",
+      "finding": "SMS has legal/consent/cost exposure. The prompt says approval is required, but the roadmap has no approval file. Add an exact webhook route and CI policy proving production enrollment/sending cannot be enabled in this stage.",
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/notification.py",
+        "src/az_permit_radar/application/**",
+        "src/az_permit_radar/infrastructure/**",
+        "migrations/**",
+        "tests/**",
+        "config/notifications/**",
+        "templates/sms/**",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**",
+        "pyproject.toml"
+      ],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "026",
+      "title": "Build Internal Review and Source Operations Tooling",
+      "kind": "implementation",
+      "security_score": 58,
+      "execution_confidence_score": 72,
+      "verdict": "UNACCEPTABLE",
+      "access_decision": "Narrow privileged operations and add exact internal transport/domain paths",
+      "finding": "This stage creates highly privileged review, reprocessing, merge, source-disable, and retry capabilities. Broad app/infra access plus no explicit internal API route and domain paths creates cross-tenant and evidence-destruction risk.",
+      "allowed_change_paths": [
+        "src/az_permit_radar/application/**",
+        "src/az_permit_radar/infrastructure/**",
+        "frontend/internal/**",
+        "migrations/**",
+        "tests/**",
+        "config/operations/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "docs/adr/**"
+      ],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "027",
+      "title": "Notification, SMS, and Operations Audit",
+      "kind": "audit",
+      "security_score": 93,
+      "execution_confidence_score": 72,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Fix audit materialization contract",
+      "finding": "Audit separation is good; controller-only report materialization and complete notification/operations validation are required.",
+      "allowed_change_paths": [],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "read-only",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "028",
+      "title": "Implement the Privacy-Conscious Analytics Event Model",
+      "kind": "implementation",
+      "security_score": 74,
+      "execution_confidence_score": 82,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Narrow to analytics-event modules and registry",
+      "finding": "Whole domain/application/infrastructure access is unnecessary for server-side event emission and increases privacy risk. External analytics integration should require its own approval artifact.",
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/**",
+        "src/az_permit_radar/application/**",
+        "src/az_permit_radar/infrastructure/**",
+        "migrations/**",
+        "tests/**",
+        "config/analytics/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/schema/**",
+        "docs/adr/**"
+      ],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "029",
+      "title": "Implement Observability, Health, Alerting, and Operational Runbooks",
+      "kind": "implementation",
+      "security_score": 58,
+      "execution_confidence_score": 78,
+      "verdict": "UNACCEPTABLE",
+      "access_decision": "Narrow to instrumentation middleware, health, alert rules, and runbooks",
+      "finding": "src/** and ops/** are excessively broad for observability. A mistake can leak PII/secrets into logs, expose health internals, or create unbounded metric cardinality and cost.",
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "config/observability/**",
+        "ops/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "docs/adr/**",
+        "pyproject.toml"
+      ],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "030",
+      "title": "Implement Backup, Restore, Reconciliation, and Rollback Procedures",
+      "kind": "implementation",
+      "security_score": 52,
+      "execution_confidence_score": 75,
+      "verdict": "UNACCEPTABLE",
+      "access_decision": "Remove migration write access by default; separate authoring from destructive recovery execution",
+      "finding": "Backup/restore code is inherently dangerous. src/**, ops/**, and migrations/** permit unrelated or destructive changes. Recovery execution needs a separate approval and environment capability gate.",
+      "allowed_change_paths": [
+        "src/**",
+        "tests/**",
+        "scripts/backup/**",
+        "scripts/reconciliation/**",
+        "config/backup/**",
+        "ops/**",
+        "migrations/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "docs/adr/**"
+      ],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "031",
+      "title": "Perform Security, Privacy, Performance, and Recovery Hardening",
+      "kind": "implementation",
+      "security_score": 35,
+      "execution_confidence_score": 80,
+      "verdict": "UNACCEPTABLE",
+      "access_decision": "Redesign as read-only audit plus per-finding correction stages",
+      "finding": "This mega-stage can modify almost the whole repository, dependencies, deployment, configuration, migrations, tests, and workflows. It defeats narrow-stage governance and can hide control weakening inside a hardening commit.",
+      "allowed_change_paths": [
+        "src/**",
+        "frontend/**",
+        "tests/**",
+        "scripts/**",
+        "config/**",
+        "ops/**",
+        "deploy/**",
+        "migrations/**",
+        "docs/adr/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "pyproject.toml",
+        "package.json",
+        "package-lock.json",
+        "pnpm-lock.yaml",
+        "yarn.lock",
+        "README.md"
+      ],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "032",
+      "title": "Formal Pilot Release Test Matrix and Release Gate Audit",
+      "kind": "release_gate",
+      "security_score": 93,
+      "execution_confidence_score": 68,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Fix audit contract and encode the full release matrix",
+      "finding": "The read-only gate is conceptually strong, but the roadmap runs only Python unittest despite requiring frontend, E2E, migration, security, performance, restore, and rollback evidence.",
+      "allowed_change_paths": [],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "read-only",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "033",
+      "title": "Prepare and Execute the Controlled Staging Deployment",
+      "kind": "implementation",
+      "security_score": 62,
+      "execution_confidence_score": 74,
+      "verdict": "UNACCEPTABLE",
+      "access_decision": "Add staging account/environment capability manifest and plan/apply split",
+      "finding": "Filesystem paths are focused, but they do not constrain cloud, DNS, email sandbox, database, or secret side effects. Pin the staging account, region, resource set, commit, and approved actions.",
+      "allowed_change_paths": [
+        "deploy/staging/**",
+        "infra/staging/**",
+        "config/staging/**",
+        "scripts/deploy/**",
+        "tests/smoke/**",
+        "docs/deployments/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**",
+        "docs/adr/**",
+        "README.md"
+      ],
+      "human_approval": {
+        "required_before_run": true,
+        "approval_files": [
+          "automation/approvals/033-staging-deployment-approved.json"
+        ]
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "034",
+      "title": "Final Staging and Pilot Readiness Audit",
+      "kind": "release_gate",
+      "security_score": 93,
+      "execution_confidence_score": 68,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Fix audit contract and verify immutable staging evidence",
+      "finding": "The readiness audit is safe only if staging evidence is signed, environment-bound, and controller materialization is explicit.",
+      "allowed_change_paths": [],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "read-only",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "035",
+      "title": "Deploy the Controlled Production Pilot",
+      "kind": "implementation",
+      "security_score": 42,
+      "execution_confidence_score": 70,
+      "verdict": "UNACCEPTABLE",
+      "access_decision": "Require two-person production approval, target pinning, plan/apply split, and canary",
+      "finding": "Production deployment can migrate data, change providers, enable schedules, and enroll users. Path controls cannot prevent wrong-account deployment, duplicate alerts, or destructive changes.",
+      "allowed_change_paths": [
+        "deploy/production/**",
+        "infra/production/**",
+        "config/production/**",
+        "scripts/deploy/**",
+        "tests/smoke/**",
+        "docs/deployments/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/runbooks/**",
+        "docs/adr/**",
+        "README.md"
+      ],
+      "human_approval": {
+        "required_before_run": true,
+        "approval_files": [
+          "automation/approvals/035-production-deployment-approved.json"
+        ]
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "036",
+      "title": "Production Pilot Launch Verification Audit",
+      "kind": "audit",
+      "security_score": 93,
+      "execution_confidence_score": 68,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Fix audit contract and authenticate production evidence",
+      "finding": "Read-only verification is appropriate, but production facts must come from trusted, signed deployment/monitoring evidence rather than self-reported agent output.",
+      "allowed_change_paths": [],
+      "human_approval": {
+        "required_before_run": false,
+        "approval_files": []
+      },
+      "sandbox": "read-only",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "037",
+      "title": "Implement Pilot Feedback and Business Validation Workflow",
+      "kind": "implementation",
+      "security_score": 65,
+      "execution_confidence_score": 70,
+      "verdict": "UNACCEPTABLE",
+      "access_decision": "Narrow feedback modules; add exact API/OpenAPI path and retention approval",
+      "finding": "The stage spans all backend layers, frontend, migrations, and analytics. The transport path is missing, and optional free text/customer outcomes create privacy and cross-customer risks.",
+      "allowed_change_paths": [
+        "src/az_permit_radar/domain/**",
+        "src/az_permit_radar/application/**",
+        "src/az_permit_radar/infrastructure/**",
+        "frontend/**",
+        "migrations/**",
+        "tests/**",
+        "config/analytics/**",
+        "docs/current/**",
+        "docs/legacy/**",
+        "docs/logs/**",
+        "docs/governance/**",
+        "docs/runbooks/**",
+        "docs/schema/**",
+        "docs/adr/**"
+      ],
+      "human_approval": {
+        "required_before_run": true,
+        "approval_files": [
+          "automation/approvals/037-controlled-pilot-active.json"
+        ]
+      },
+      "sandbox": "workspace-write",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    },
+    {
+      "id": "038",
+      "title": "Pilot Feedback and Business Validation Audit",
+      "kind": "audit",
+      "security_score": 93,
+      "execution_confidence_score": 68,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Fix audit contract and bind the approved review snapshot",
+      "finding": "The final audit is read-only, but the approval snapshot, evidence, report, and audited commit need cryptographic binding and controller-only materialization.",
+      "allowed_change_paths": [],
+      "human_approval": {
+        "required_before_run": true,
+        "approval_files": [
+          "automation/approvals/038-pilot-review-snapshot-approved.json"
+        ]
+      },
+      "sandbox": "read-only",
+      "validation_commands": [
+        {
+          "name": "Complete Python test suite",
+          "argv": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-v"
+          ],
+          "timeout_seconds": 1800
+        }
+      ]
+    }
+  ],
+  "appendices": [
+    {
+      "id": "A",
+      "title": "Audit Correction Prompt",
+      "security_score": 20,
+      "execution_confidence_score": 45,
+      "verdict": "CRITICAL",
+      "access_decision": "Disable until prompt exists and derive a per-finding allowlist",
+      "finding": "Appendix A is included in normal execution, requires no explicit invocation or approval, has no hard lock, and can change nearly the entire repository including deploy and CI. Its prompt file is absent from the supplied prompt pack, so its behavior cannot be cross-checked.",
+      "present_in_supplied_prompt_pack": false
+    },
+    {
+      "id": "B",
+      "title": "Optional Controlled SMS Canary Enablement Prompt",
+      "security_score": 52,
+      "execution_confidence_score": 55,
+      "verdict": "UNACCEPTABLE",
+      "access_decision": "Keep disabled; enable hard lock and exact canary capability scope",
+      "finding": "Approvals and explicit invocation are present, but the hard lock is disabled by default, the prompt is absent from the pack, and write access is broad across backend/frontend/migrations/dependencies. Activation must be cohort/window/provider/account bound.",
+      "present_in_supplied_prompt_pack": false
+    },
+    {
+      "id": "C",
+      "title": "Optional Controlled SMS Canary Activation Audit",
+      "security_score": 90,
+      "execution_confidence_score": 55,
+      "verdict": "CONDITIONAL",
+      "access_decision": "Keep read-only; supply and verify the missing prompt",
+      "finding": "Read-only scope is appropriate, but the referenced prompt is absent and the same report-write/commit ambiguity applies.",
+      "present_in_supplied_prompt_pack": false
+    }
+  ]
+}
