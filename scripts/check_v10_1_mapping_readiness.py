@@ -209,6 +209,7 @@ REQUIRED_H0_ANSIBLE_GENERATED_PATHS = {
     "infrastructure/ansible/tests/run_idempotence.py",
     "scripts/check_h0_ansible.py",
     "tests/test_h0_ansible_contract.py",
+    "tests/test_h0_ansible_live_paths.py",
 }
 REQUIRED_GENERATED_PATHS.update(REQUIRED_H0_ANSIBLE_GENERATED_PATHS)
 REQUIRED_PHASE_GATES = {

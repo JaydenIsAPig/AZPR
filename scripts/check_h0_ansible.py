@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import ast
 import hashlib
 import json
 import os
@@ -145,6 +146,14 @@ def validate(
             errors.append("inventory fabricates an approved environment identity")
         if variables.get("azpr_validation_root") != "/srv/azpr-validator":
             errors.append("bounded validation root drifted")
+        if variables.get("azpr_approved_inputs_root") != "/srv/azpr-approved-inputs":
+            errors.append("approved inputs root drifted")
+        if (
+            variables.get("azpr_reviewer_name") != "ubuntu"
+            or variables.get("azpr_reviewer_uid") != 1000
+            or variables.get("azpr_reviewer_gid") != 1000
+        ):
+            errors.append("qualification reviewer identity drifted")
     except (OSError, ValueError) as error:
         errors.append(f"qualification variables are not deterministic JSON/YAML: {error}")
 
@@ -179,6 +188,45 @@ def validate(
     for gate in contract.get("required_failure_gates", []):
         if gate not in yaml_text:
             errors.append(f"required failure gate is not implemented: {gate}")
+
+    runner_path = ANSIBLE_ROOT / "tests/run_idempotence.py"
+    try:
+        runner_tree = ast.parse(text_at(root, runner_path, overrides), filename=relative(runner_path))
+        qualification_values = []
+        for node in ast.walk(runner_tree):
+            if not isinstance(node, ast.Dict):
+                continue
+            for key, value in zip(node.keys, node.values):
+                if isinstance(key, ast.Constant) and key.value == "qualification_effect":
+                    qualification_values.append(value)
+        if not qualification_values or any(
+            not isinstance(value, ast.Constant) or value.value is not False
+            for value in qualification_values
+        ):
+            errors.append("idempotence evidence qualification_effect must be the Python boolean False")
+    except (OSError, SyntaxError) as error:
+        errors.append(f"idempotence runner is invalid Python: {error}")
+
+    isolation_path = ANSIBLE_ROOT / "roles/azpr_validator_isolation/tasks/main.yml"
+    seal_path = ANSIBLE_ROOT / "playbooks/qualification-seal.yml"
+    reset_path = ANSIBLE_ROOT / "playbooks/qualification-reset.yml"
+    try:
+        isolation_text = text_at(root, isolation_path, overrides)
+        seal_text = text_at(root, seal_path, overrides)
+        reset_text = text_at(root, reset_path, overrides)
+        passwd_home_expression = "getent_passwd[azpr_reviewer_name][4]"
+        if "HOME=/home/oai" in isolation_text or f"HOME={{{{ {passwd_home_expression} }}}}" not in isolation_text:
+            errors.append("generated verifier HOME is not derived from the configured reviewer passwd home")
+        if passwd_home_expression not in seal_text or "generated verifier HOME" not in seal_text:
+            errors.append("seal playbook does not verify reviewer passwd HOME consistency")
+        if (
+            "azpr_approved_inputs_root == '/srv/azpr-approved-inputs'" not in reset_text
+            or 'path: "/srv/azpr-validator"' not in reset_text
+            or "state: absent" not in reset_text
+        ):
+            errors.append("reset does not preserve approved inputs while targeting only the bounded root")
+    except OSError as error:
+        errors.append(f"H0 live-path safeguard is unreadable: {error}")
 
     try:
         approval = json_at(root, APPROVAL_TEMPLATE, overrides)

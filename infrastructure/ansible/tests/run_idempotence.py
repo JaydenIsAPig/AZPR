@@ -67,6 +67,54 @@ def atomic_json(path: Path, value: dict[str, Any]) -> None:
         raise
 
 
+def successful_ansible_result(
+    result: dict[str, Any],
+    *,
+    require_zero_changes: bool = False,
+) -> bool:
+    """Require an exit-zero Ansible result with an explicit successful recap."""
+
+    recap = result.get("recap")
+    recap_values_are_complete = isinstance(recap, dict) and all(
+        type(recap.get(field)) is int and recap[field] >= 0
+        for field in ("ok", "changed", "unreachable", "failed")
+    )
+    return bool(
+        result.get("exit_code") == 0
+        and recap_values_are_complete
+        and recap.get("unreachable") == 0
+        and recap.get("failed") == 0
+        and (not require_zero_changes or recap.get("changed") == 0)
+    )
+
+
+def build_evidence(
+    environment_scope: str,
+    preflight: dict[str, Any],
+    first: dict[str, Any],
+    second: dict[str, Any],
+) -> tuple[dict[str, Any], bool]:
+    """Construct the fail-closed, provisioning-only idempotence result."""
+
+    passed = (
+        successful_ansible_result(preflight)
+        and successful_ansible_result(first)
+        and successful_ansible_result(second, require_zero_changes=True)
+    )
+    evidence = {
+        "format_version": "1.0",
+        "classification": "NON_AUTHORITATIVE_PROVISIONING_EVIDENCE",
+        "status": "PASS" if passed else "FAIL",
+        "environment_scope": environment_scope,
+        "qualification_effect": False,
+        "preflight": preflight,
+        "first_apply": first,
+        "second_apply": second,
+        "idempotence_rule": "second apply changed=0, unreachable=0, failed=0",
+    }
+    return evidence, passed
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--inventory", type=Path, required=True)
@@ -89,28 +137,9 @@ def main() -> int:
     )
     base = [str(args.ansible_playbook), "-i", str(args.inventory.resolve())]
     preflight = run([*base, str(PREFLIGHT), "--diff"], environment)
-    first = run([*base, str(PREPARE), "--diff"], environment) if preflight["exit_code"] == 0 else {}
-    second = run([*base, str(PREPARE), "--diff"], environment) if first.get("exit_code") == 0 else {}
-    second_recap = second.get("recap") or {}
-    passed = (
-        preflight["exit_code"] == 0
-        and first.get("exit_code") == 0
-        and second.get("exit_code") == 0
-        and second_recap.get("changed") == 0
-        and second_recap.get("unreachable") == 0
-        and second_recap.get("failed") == 0
-    )
-    evidence = {
-        "format_version": "1.0",
-        "classification": "NON_AUTHORITATIVE_PROVISIONING_EVIDENCE",
-        "status": "PASS" if passed else "FAIL",
-        "environment_scope": args.environment_scope,
-        "qualification_effect": false,
-        "preflight": preflight,
-        "first_apply": first,
-        "second_apply": second,
-        "idempotence_rule": "second apply changed=0, unreachable=0, failed=0",
-    }
+    first = run([*base, str(PREPARE), "--diff"], environment) if successful_ansible_result(preflight) else {}
+    second = run([*base, str(PREPARE), "--diff"], environment) if successful_ansible_result(first) else {}
+    evidence, passed = build_evidence(args.environment_scope, preflight, first, second)
     if args.output:
         atomic_json(args.output, evidence)
     print(json.dumps(evidence, indent=2, sort_keys=True))
@@ -119,4 +148,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

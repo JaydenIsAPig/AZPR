@@ -21,7 +21,8 @@
       - getent_passwd[azpr_reviewer_name][1] | int == azpr_reviewer_uid
       - getent_passwd[azpr_reviewer_name][2] | int == azpr_reviewer_gid
       - azpr_reviewer_uid | int != 0
-    fail_msg: "WRONG_REVIEWER_UID or WRONG_REVIEWER_GID"
+      - getent_passwd[azpr_reviewer_name][4] is match('^/[^/]+(?:/[^/]+)*$')
+    fail_msg: "WRONG_REVIEWER_UID, WRONG_REVIEWER_GID, or WRONG_REVIEWER_HOME"
 
 - name: Install the approved validation-only OS packages
   ansible.builtin.apt:
@@ -46,4 +47,3 @@
   tags:
     - azpr_privileged
     - azpr_filesystem
-

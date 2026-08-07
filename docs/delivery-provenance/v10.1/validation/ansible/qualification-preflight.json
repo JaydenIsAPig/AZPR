@@ -4,9 +4,40 @@
   "status": "BLOCKED_HOST_TRANSPORT",
   "target_scope": "DISPOSABLE_TEST",
   "qualification_effect": false,
+  "observed_on": "2026-08-07",
   "attempted_targets": [
     "azpr-h0-ansible-test",
-    "azpr-h0-ansible-test-bridged"
+    "azpr-h0-ansible-test-bridged",
+    "azpr-h0-ansible-validation-20260807"
   ],
-  "reason": "Both fresh Ubuntu 24.04 guests received addresses but Multipass SSH returned No route to host; no host isolation, firewall, route, credential, or preserved validator state was changed."
+  "latest_disposable_target": {
+    "name": "azpr-h0-ansible-validation-20260807",
+    "release": "Ubuntu 24.04.4 LTS",
+    "image_hash_prefix": "aa6da05756e8",
+    "architecture": "aarch64",
+    "vcpu": 4,
+    "memory_gib_reported": 7.7,
+    "disk_gib_reported": 29.0,
+    "ipv4": "192.168.252.5",
+    "disposable": true
+  },
+  "transport_probe": {
+    "command": "multipass exec azpr-h0-ansible-validation-20260807 -- true",
+    "exit_code": 2,
+    "result": "NO_ROUTE_TO_HOST"
+  },
+  "host_observation": {
+    "multipass_version": "1.16.3+mac",
+    "driver": "qemu",
+    "bridge": "bridge100",
+    "bridge_ipv4": "192.168.252.1/24",
+    "route_to_guest_present": true,
+    "guest_neighbor_entry_present": true,
+    "active_network_extension_present": true,
+    "network_or_firewall_control_changed": false
+  },
+  "staging_started": false,
+  "check_mode_started": false,
+  "state_changing_playbook_started": false,
+  "reason": "A third fresh Ubuntu 24.04 disposable guest received an address but the required Multipass transport probe returned No route to host. Reconfiguring the active host network control requires separate human security authorization; no route, firewall, network extension, credential, frozen input, or retained validator state was changed."
 }

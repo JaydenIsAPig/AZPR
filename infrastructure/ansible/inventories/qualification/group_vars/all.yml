@@ -15,12 +15,13 @@
   "azpr_runtime_root": "/srv/azpr-validator/runtime",
   "azpr_workspace_root": "/srv/azpr-validator/work",
   "azpr_evidence_root": "/srv/azpr-validator/evidence",
-  "azpr_candidate_archive": "/srv/azpr-approved-inputs/AZPR-autonomous-execution-primed-draft-v10.1.zip",
+  "azpr_approved_inputs_root": "/srv/azpr-approved-inputs",
+  "azpr_candidate_archive": "{{ azpr_approved_inputs_root }}/AZPR-autonomous-execution-primed-draft-v10.1.zip",
   "azpr_candidate_archive_sha256": "618449d73fd921e0fb366c0aed8c9a666b2ead3847e529a6ced9692fe41e2b24",
-  "azpr_candidate_tree": "/srv/azpr-approved-inputs/source-tree",
-  "azpr_prompt_archive": "/srv/azpr-approved-inputs/markdown-prompts-autonomous-priming-draft-v10.1.zip",
+  "azpr_candidate_tree": "{{ azpr_approved_inputs_root }}/source-tree",
+  "azpr_prompt_archive": "{{ azpr_approved_inputs_root }}/markdown-prompts-autonomous-priming-draft-v10.1.zip",
   "azpr_prompt_archive_sha256": "3b235cb7e33ca409241ff26523f60f8fee89cec524b3f09e91a69927a0aa4880",
-  "azpr_validation_wheelhouse": "/srv/azpr-approved-inputs/validation-wheelhouse",
+  "azpr_validation_wheelhouse": "{{ azpr_approved_inputs_root }}/validation-wheelhouse",
   "azpr_validation_requirements_lock_source": "{{ playbook_dir }}/../../../docs/delivery-provenance/v10.1/validation/requirements-validation.lock",
   "azpr_validation_wheelhouse_manifest_source": "{{ playbook_dir }}/../../../docs/delivery-provenance/v10.1/validation/wheelhouse-manifest.json",
   "azpr_network_policy": "NETWORK_DISABLED_DURING_VERIFIER_WINDOW",
@@ -37,4 +38,3 @@
     "ANTHROPIC_API_KEY"
   ]
 }
-

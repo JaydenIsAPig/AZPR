@@ -23,10 +23,14 @@ State: staged-hybrid transition selected for integration review.
 - The bounded H0 Ansible qualification-infrastructure layer now exists under
   `infrastructure/ansible/`. Its qualification-only inventory, machine
   contract, pinned `ansible-core 2.21.2` runtime, four roles, four playbooks,
-  failure-path tests, inventory validation, and syntax checks pass. Live
-  check/diff and two-apply idempotence remain blocked because both disposable
-  Multipass guests were unreachable over the existing host transport boundary;
-  no firewall, route, credential, or preserved validator state was weakened to
+  focused failure-path tests, inventory validation, and syntax checks pass.
+  The idempotence evidence boolean and reviewer-HOME safeguards are corrected
+  and regression-tested. Live check/diff and two-apply idempotence remain
+  blocked because a third explicitly disposable Multipass guest also returned
+  `No route to host` over the existing host transport boundary before staging.
+  The host bridge and route were observed, but changing the active host network
+  control requires separate human security authorization; no firewall, route,
+  network extension, credential, or preserved validator state was weakened to
   force a pass. Ansible may establish requested machine state but may not
   approve or qualify it. Formal Linux-environment approval,
   two independently evidenced 120/120 verifier runs, proof of run

@@ -23,16 +23,29 @@
     "reviewer_gid_from_retained_prequalification_manifest": 1000,
     "python_from_retained_prequalification_manifest": "3.12.3"
   },
+  "disposable_engineering_target": {
+    "name": "azpr-h0-ansible-validation-20260807",
+    "state": "Stopped",
+    "release": "Ubuntu 24.04.4 LTS",
+    "image_hash_prefix": "aa6da05756e8",
+    "architecture": "aarch64",
+    "vcpu": 4,
+    "memory_gib_reported": 7.7,
+    "disk_gib_reported": 29.0,
+    "mounts": [],
+    "disposition": "DISPOSABLE_TEST_BLOCKED_BEFORE_STAGING"
+  },
   "control_path": {
     "model_selected": "OPERATOR_MEDIATED_LOCAL_CONNECTION_INSIDE_GUEST",
     "current_multipass_exec_status": "BLOCKED_NO_ROUTE_TO_HOST_AFTER_NETWORK_DISABLE",
+    "disposable_guest_exec_status": "BLOCKED_NO_ROUTE_TO_HOST",
     "ssh_credentials_created": false
   },
   "qualification_effect": false,
   "limitations": [
     "Only the image-hash prefix exposed by Multipass is available.",
     "Guest reinspection was unavailable because the retained VM network remained disabled.",
+    "The fresh disposable guest also became unreachable over Multipass transport before staging; no host network control was changed.",
     "These observations do not approve the environment or replace independent qualification."
   ]
 }
-

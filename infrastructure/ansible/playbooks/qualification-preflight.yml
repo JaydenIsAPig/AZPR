@@ -46,7 +46,8 @@
           - getent_passwd[azpr_reviewer_name][1] | int == azpr_reviewer_uid
           - getent_passwd[azpr_reviewer_name][2] | int == azpr_reviewer_gid
           - azpr_reviewer_uid | int != 0
-        fail_msg: "WRONG_REVIEWER_UID or WRONG_REVIEWER_GID: expected a non-root UID/GID 1000 reviewer"
+          - getent_passwd[azpr_reviewer_name][4] is match('^/[^/]+(?:/[^/]+)*$')
+        fail_msg: "WRONG_REVIEWER_UID, WRONG_REVIEWER_GID, or WRONG_REVIEWER_HOME: expected a non-root reviewer with an absolute passwd home"
 
     - name: Inspect the candidate archive
       ansible.builtin.stat:
@@ -98,4 +99,3 @@
     - name: Record the non-authoritative preflight boundary
       ansible.builtin.debug:
         msg: "Preflight verified requested inputs only; it did not approve or qualify this host."
-

@@ -6,6 +6,22 @@
   any_errors_fatal: true
 
   tasks:
+    - name: Read the reviewer account for seal enforcement
+      ansible.builtin.getent:
+        database: passwd
+        key: "{{ azpr_reviewer_name }}"
+        fail_key: false
+
+    - name: Require the exact reviewer identity and passwd home
+      ansible.builtin.assert:
+        that:
+          - azpr_reviewer_name in getent_passwd
+          - getent_passwd[azpr_reviewer_name][1] | int == azpr_reviewer_uid
+          - getent_passwd[azpr_reviewer_name][2] | int == azpr_reviewer_gid
+          - azpr_reviewer_uid | int != 0
+          - getent_passwd[azpr_reviewer_name][4] is match('^/[^/]+(?:/[^/]+)*$')
+        fail_msg: "WRONG_REVIEWER_UID, WRONG_REVIEWER_GID, or WRONG_REVIEWER_HOME"
+
     - name: Reject inherited credential environment
       ansible.builtin.assert:
         that:
@@ -30,6 +46,17 @@
         - {path: "{{ azpr_validation_root }}/configuration/validation-environment", mode: "0444"}
         - {path: "{{ azpr_evidence_root }}", mode: "0750"}
       register: azpr_seal_stats
+
+    - name: Read the generated verifier environment
+      ansible.builtin.slurp:
+        src: "{{ azpr_validation_root }}/configuration/validation-environment"
+      register: azpr_validation_environment
+
+    - name: Require generated HOME to match the passwd home
+      ansible.builtin.assert:
+        that:
+          - (azpr_validation_environment.content | b64decode).splitlines()[0] == 'HOME=' + getent_passwd[azpr_reviewer_name][4]
+        fail_msg: "WRONG_REVIEWER_HOME: generated verifier HOME must match the configured reviewer passwd home"
 
     - name: Reject unexpected ownership or mode
       ansible.builtin.assert:
@@ -59,4 +86,3 @@
     - name: Stop at the independent qualification boundary
       ansible.builtin.debug:
         msg: "Seal checks are provisioning observations only. Execute and adjudicate the AZPR verifier outside Ansible."
-

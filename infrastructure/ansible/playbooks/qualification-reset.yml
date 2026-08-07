@@ -11,8 +11,12 @@
         that:
           - azpr_validation_root == '/srv/azpr-validator'
           - azpr_validation_root is match('^/srv/azpr-validator$')
+          - azpr_approved_inputs_root == '/srv/azpr-approved-inputs'
+          - azpr_approved_inputs_root is not match('^' + azpr_validation_root + '(/|$)')
           - azpr_candidate_archive is not match('^' + azpr_validation_root + '/')
           - azpr_candidate_tree is not match('^' + azpr_validation_root + '/')
+          - azpr_prompt_archive is not match('^' + azpr_validation_root + '/')
+          - azpr_validation_wheelhouse is not match('^' + azpr_validation_root + '/')
         fail_msg: "RESET_OUTSIDE_BOUNDED_ROOT: reset may never target candidate evidence or a broader path"
 
     - name: Reset only the bounded validation root
@@ -28,4 +32,3 @@
     - name: State the reset boundary
       ansible.builtin.debug:
         msg: "Removed disposable provisioning state only; approved inputs and repository evidence were preserved."
-

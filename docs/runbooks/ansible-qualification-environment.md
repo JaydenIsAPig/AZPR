@@ -86,23 +86,24 @@ The H0 control checkout and frozen candidate tree are different inputs. The
 control checkout needs limited write access for `.integration-temp`; the
 candidate tree must not be writable by the reviewer.
 
-## Mandatory stop-before-execution corrections
+## Completed stop-before-execution safeguards
 
-Do not run a state-changing playbook until both corrections below have code
-and regression-test coverage:
+The integration manager must verify that both safeguards below remain present
+and regression-tested before running a state-changing playbook:
 
-1. In `infrastructure/ansible/tests/run_idempotence.py`, change the Python
-   result value `qualification_effect: false` to the Python boolean `False`.
-   The current spelling raises `NameError` after Ansible execution when the
-   evidence object is constructed.
+1. `infrastructure/ansible/tests/run_idempotence.py` uses the Python boolean
+   `False`, requires explicit successful recaps for preflight and both applies,
+   and fails closed on missing, nonzero, failed, unreachable, or non-idempotent
+   results.
 2. In
    `infrastructure/ansible/roles/azpr_validator_isolation/tasks/main.yml`,
-   replace the hard-coded `HOME=/home/oai` with the actual configured reviewer
-   home, preferably derived from `getent_passwd`. The current inventory uses
-   reviewer `ubuntu`, UID/GID 1000.
+   generated `HOME` is derived from the configured reviewer's `getent_passwd`
+   home. Preflight, baseline, seal, and focused tests require the configured
+   `ubuntu` reviewer, UID/GID 1000, passwd home, and generated `HOME` to agree.
 
 After either safeguard changes, rerun all checks in **Repository gates** and
-regenerate the mapping and readiness assessment before approval.
+regenerate the mapping and readiness assessment before approval. Any regression
+is a stop condition.
 
 ## Preconditions and immutable inputs
 

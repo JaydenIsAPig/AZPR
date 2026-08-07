@@ -21,7 +21,7 @@
     group: "{{ azpr_reviewer_name }}"
     mode: "0444"
     content: |
-      HOME=/home/oai
+      HOME={{ getent_passwd[azpr_reviewer_name][4] }}
       LANG=C.UTF-8
       LC_ALL=C.UTF-8
       PATH={{ azpr_runtime_root }}/venv/bin:/usr/bin:/bin
@@ -43,4 +43,3 @@
       credential_policy=NO_INHERITED_CREDENTIALS
       candidate_policy=READ_ONLY
       verifier_owner=AZPR_INDEPENDENT_QUALIFICATION_CHAIN
-

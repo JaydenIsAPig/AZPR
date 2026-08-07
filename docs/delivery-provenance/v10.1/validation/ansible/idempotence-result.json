@@ -4,8 +4,11 @@
   "status": "BLOCKED_HOST_TRANSPORT",
   "environment_scope": "DISPOSABLE_TEST",
   "qualification_effect": false,
+  "target": "azpr-h0-ansible-validation-20260807",
+  "preflight": {},
+  "first_apply": {},
   "second_apply": {
     "recap": null
   },
-  "reason": "Two-apply execution was not started because neither disposable guest was reachable; idempotence is not inferred from syntax or check-mode results."
+  "reason": "Two-apply execution was not started because the newly created disposable guest failed the mandatory Multipass transport probe with No route to host. Idempotence is not inferred from repository, syntax, or check-mode evidence."
 }
