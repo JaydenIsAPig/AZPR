@@ -1,2 +1,7 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Preserve byte-exact delivery-provenance CSV evidence without EOL conversion
+# or textual diff processing; review these immutable files by recorded hash.
+docs/delivery-provenance/v10.1/integration/AZPR-v10.1-integration-path-mapping.staging-original.csv -text -diff
+docs/delivery-provenance/v10.1/integration/historical-prequalification/AZPR-v10.1-integration-path-mapping.prequalification-527.csv -text -diff
