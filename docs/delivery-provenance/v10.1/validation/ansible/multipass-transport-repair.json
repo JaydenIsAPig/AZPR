@@ -1,0 +1,132 @@
+{
+  "format_version": "1.0",
+  "classification": "NON_AUTHORITATIVE_ENGINEERING_EVIDENCE",
+  "status": "PASS_REPEATED_FRESH_CONNECTIONS",
+  "qualification_effect": false,
+  "h0_completion_effect": false,
+  "observed_on": "2026-08-07",
+  "scope": {
+    "retained_guest": "azpr-validator",
+    "disposable_guest": "azpr-h0-ansible-validation-20260807",
+    "multipass_version": "1.16.3+mac",
+    "multipassd_version": "1.16.3+mac",
+    "driver": "qemu",
+    "bridge": "bridge100",
+    "subnet": "192.168.252.0/24"
+  },
+  "baseline": {
+    "retained_guest": {
+      "state": "Running",
+      "ipv4": [
+        "192.168.252.2"
+      ],
+      "cpus": 4,
+      "memory": "8.0GiB",
+      "disk": "30.0GiB",
+      "mounts": {},
+      "image_release": "24.04 LTS",
+      "image_hash": "aa6da05756e85ea6dde4836b841fecb10cfd1ba3bcea320189d9af945db70476",
+      "snapshot_count": 0
+    },
+    "disposable_guest": {
+      "state": "Stopped",
+      "ipv4": [],
+      "cpus": 4,
+      "memory": "8.0GiB",
+      "disk": "30.0GiB",
+      "mounts": {},
+      "image_release": "24.04 LTS",
+      "image_hash": "aa6da05756e85ea6dde4836b841fecb10cfd1ba3bcea320189d9af945db70476",
+      "snapshot_count": 0
+    }
+  },
+  "actions": {
+    "retained_guest_stop": {
+      "performed": true,
+      "authorization": "EXPLICIT_HUMAN_CONFIRMATION",
+      "exec_or_mount_performed": false
+    },
+    "disposable_guest_stopped_before_daemon_restart": true,
+    "multipass_daemon_restart_completed_with_both_guests_stopped": true,
+    "only_disposable_guest_started_after_daemon_restart": true,
+    "disposable_guest_stop_start_survival_cycle_completed": true,
+    "guest_deleted_or_reconfigured": false,
+    "ssh_credentials_regenerated": false,
+    "security_control_changes": []
+  },
+  "transport_diagnostics": {
+    "packet_capture": {
+      "capture_filter": "arp or tcp port 22",
+      "capture_interface": "bridge100",
+      "raw_capture_committed": false,
+      "sha256": "1f562e7ec099ec0deaf87319162abc661394826b98c3c50572bb34b65ef5c3a2",
+      "observation": "Host SYN, guest SYN-ACK, bidirectional SSH handshake and command-channel traffic, and clean FIN exchange were observed for 192.168.252.1 to 192.168.252.5 TCP/22."
+    },
+    "codex_process_context": {
+      "result": "NECP_REJECTED_BEFORE_SYN",
+      "kernel_reason": "NECP",
+      "interpretation": "The Codex-launched CLI process was locally rejected before packet transmission; this was not evidence of a guest NIC, route, firewall, or SSH failure."
+    },
+    "operator_terminal_context": {
+      "result": "SSH_CONNECTIONS_SUCCEEDED",
+      "active_network_extension_observed": "com.eventur.Hide.me.systemextension",
+      "vpn_connection_state_observed": "Disconnected",
+      "network_extension_or_vpn_setting_changed": false
+    }
+  },
+  "fresh_connection_tests": {
+    "before_disposable_restart": {
+      "observed_at_utc": "2026-08-07T22:58:44Z",
+      "evidence_sha256": "e53bf57a02021413c10c67f9de3e8b3303bca53c5ffbfafc2ecdeaf16f21f7fd",
+      "commands": {
+        "true": 0,
+        "id": 0,
+        "hostname": 0
+      },
+      "observed_identity": "uid=1000(ubuntu) gid=1000(ubuntu)",
+      "observed_hostname": "azpr-h0-ansible-validation-20260807"
+    },
+    "after_disposable_restart": {
+      "observed_at_utc": "2026-08-07T23:02:04Z",
+      "evidence_sha256": "cdcd1c18f4f3ffe0a2b4a3312b55d5e29f43b66aa148290e9c39ec9aa42636f3",
+      "commands": {
+        "true": 0,
+        "id": 0,
+        "hostname": 0
+      },
+      "observed_identity": "uid=1000(ubuntu) gid=1000(ubuntu)",
+      "observed_hostname": "azpr-h0-ansible-validation-20260807"
+    }
+  },
+  "configuration_identity_fingerprints": {
+    "method": "SHA-256 of canonical JSON containing name, configured CPU, memory, disk, image identity, mounts, network mode, and snapshot count; mutable power state, IP, load, usage, and runtime counters are excluded.",
+    "retained_guest": {
+      "baseline_sha256": "45b862991dfbf9a36395b9bd9fcf999610ce8278d9162fe7cc3c08bf6a33f6ff",
+      "final_sha256": "45b862991dfbf9a36395b9bd9fcf999610ce8278d9162fe7cc3c08bf6a33f6ff",
+      "unchanged": true
+    },
+    "disposable_guest": {
+      "baseline_sha256": "b0b4f7420a92b2376322390f1b2e84fae7b2cda2abcf944aa07b2d24394d0cbf",
+      "final_sha256": "b0b4f7420a92b2376322390f1b2e84fae7b2cda2abcf944aa07b2d24394d0cbf",
+      "unchanged": true
+    }
+  },
+  "final_state": {
+    "retained_guest": {
+      "state": "Stopped",
+      "ipv4": [],
+      "mounts": {},
+      "identity_and_configuration_unchanged": true
+    },
+    "disposable_guest": {
+      "state": "Running",
+      "ipv4": [
+        "192.168.252.5"
+      ],
+      "mounts": {},
+      "identity_and_configuration_unchanged": true,
+      "transport_acceptable_for_disposable_validation": true
+    }
+  },
+  "disposition": "This repair unblocks disposable-guest validation only. It is not Ansible convergence or idempotence evidence, does not complete H0, does not qualify a Linux environment, and does not advance INT-00."
+}

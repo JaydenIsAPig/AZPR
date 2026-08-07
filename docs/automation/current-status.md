@@ -25,14 +25,17 @@ State: staged-hybrid transition selected for integration review.
   contract, pinned `ansible-core 2.21.2` runtime, four roles, four playbooks,
   focused failure-path tests, inventory validation, and syntax checks pass.
   The idempotence evidence boolean and reviewer-HOME safeguards are corrected
-  and regression-tested. Live check/diff and two-apply idempotence remain
-  blocked because a third explicitly disposable Multipass guest also returned
-  `No route to host` over the existing host transport boundary before staging.
-  The host bridge and route were observed, but changing the active host network
-  control requires separate human security authorization; no firewall, route,
-  network extension, credential, or preserved validator state was weakened to
-  force a pass. Ansible may establish requested machine state but may not
-  approve or qualify it. Formal Linux-environment approval,
+  and regression-tested. The Multipass host-transport blocker was repaired
+  without guest deletion, guest reconfiguration, credential regeneration, or
+  a firewall, VPN, kill-switch, route, or network-extension change. Three fresh
+  operator-terminal connections passed before and after a disposable-guest
+  restart; packet and kernel diagnostics distinguish successful guest SSH from
+  a Codex-process-context NECP rejection. The retained `azpr-validator` identity
+  and configuration remained unchanged and that guest is stopped. This
+  non-authoritative engineering evidence only unblocks live check/diff and
+  two-apply idempotence work; neither has been run or inferred from the repair.
+  Ansible may establish requested machine state but may not approve or qualify
+  it. Formal Linux-environment approval,
   two independently evidenced 120/120 verifier runs, proof of run
   independence, the actual audit-governance owner name/role, regeneration and
   human approval of the final exact mapping, and the `INT-00` preflight all

@@ -17,8 +17,10 @@ non-authoritative provisioning evidence. It does not deploy the AZPR product or
 receive approval, qualification, controller, prompt, policy, roadmap, provider,
 materialization, or production authority.
 
-**Partially implemented:** live check-mode and two-apply idempotence validation
-remain blocked by the current host's unreachable Multipass guest control path.
+**Partially implemented:** the prior Multipass guest-control transport blocker
+has been repaired and repeated fresh connections pass before and after a
+disposable-guest restart. Live check-mode and two-apply idempotence validation
+remain pending and are not inferred from transport evidence.
 Formal Linux environment approval, two independent verifier runs, audit-owner
 identity, and final mapping approval remain unimplemented human/evidence gates.
 Authorization remains enforced only in the in-process application boundary and
@@ -91,4 +93,3 @@ physical inventory separation, security review, and a new/updated ADR.
 - [ADR-0010](../adr/0010-ansible-qualification-infrastructure.md)
 - [H0 qualification runbook](../runbooks/ansible-qualification-environment.md)
 - [Project structure log](../logs/project-structure-log-v1.13.md)
-

@@ -59,8 +59,10 @@ remains lineage, not the active transition base. The next lifecycle step is
 completion of live check-mode and idempotence validation for the implemented
 H0 Ansible qualification-infrastructure layer. The implementation, static
 contract, inventory, and syntax checks exist under `infrastructure/ansible/`,
-but the current host transport could not reach either disposable Multipass
-guest and no host security control was weakened. `INT-00` remains blocked
+and the prior Multipass transport blocker has been repaired with repeated fresh
+connections surviving a disposable-guest restart. No host security control was
+weakened. The repair only unblocks live validation; check-mode and two-apply
+idempotence remain pending. `INT-00` remains blocked
 until formal environment approval, two independently evidenced 120/120 Linux
 runs, independence proof, audit-governance owner resolution, and final approval
 of the regenerated exact mapping are complete. Until the first

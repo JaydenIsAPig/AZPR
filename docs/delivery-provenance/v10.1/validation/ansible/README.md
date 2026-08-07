@@ -16,7 +16,10 @@ the adjudicating PASS.
   preflight.
 - `idempotence-result.json` records the two-apply provisioning check.
 - `h0-repository-validation.json` records repository-side checker results.
+- `multipass-transport-repair.json` records hash-bound, non-authoritative
+  engineering evidence that repeated fresh operator-terminal connections pass
+  before and after a disposable-guest restart. It unblocks validation only and
+  is not convergence, idempotence, qualification, approval, or H0 completion.
 
 Raw output is retained only when needed and must be checked for secrets before
 commit. Hash-only summaries are preferred.
-

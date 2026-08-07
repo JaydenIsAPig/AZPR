@@ -13,5 +13,7 @@ approved_on: 2026-08-07
   transport, explicit privilege allowlist, bounded reset, and future
   staging/production authorization boundary.
 - Kept live convergence/idempotence and all human H0 gates explicitly
-  incomplete while the Multipass guest transport remains unreachable.
-
+  incomplete. A later non-authoritative transport repair restored repeated
+  fresh disposable-guest connections before and after a restart without
+  changing either guest's identity/configuration or weakening host controls;
+  it unblocks but does not supply convergence or idempotence evidence.
