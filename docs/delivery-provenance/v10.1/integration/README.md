@@ -20,6 +20,10 @@ explicitly non-current. Commit
 transition base; `d60e5d9...` is its recorded source-tree parent. This base
 approval is not final mapping approval.
 
+`H0-baseline-reconciliation.md` records the transition from those preserved
+527-row bytes to the regenerated current pre-Ansible baseline without changing
+the historical evidence.
+
 Do not edit the historical reports to make their old conclusions look current.
 Regenerate the executable assessment after any current mapping or safeguard
 change.
