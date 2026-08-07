@@ -41,7 +41,7 @@ The frontend framework, rendering approach, personas/roles, route inventory, acc
 
 ## Related current documents
 
-- [Project structure v1.12](project-structure-v1.12.md)
+- [Project structure v1.13](project-structure-v1.13.md)
 - [Backend structure v1.12](backend-structure-v1.12.md)
 - [Business logic v1.12](business-logic-v1.12.md)
 - [Business data v1.7](business-data-v1.7.json)

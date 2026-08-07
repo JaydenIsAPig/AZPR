@@ -1,0 +1,11 @@
+{
+  "format_version": "1.0",
+  "classification": "NON_AUTHORITATIVE_PROVISIONING_EVIDENCE",
+  "status": "BLOCKED_HOST_TRANSPORT",
+  "environment_scope": "DISPOSABLE_TEST",
+  "qualification_effect": false,
+  "second_apply": {
+    "recap": null
+  },
+  "reason": "Two-apply execution was not started because neither disposable guest was reachable; idempotence is not inferred from syntax or check-mode results."
+}

@@ -1,0 +1,62 @@
+---
+- name: Read-only seal check before the independent verifier window
+  hosts: qualification
+  gather_facts: true
+  become: false
+  any_errors_fatal: true
+
+  tasks:
+    - name: Reject inherited credential environment
+      ansible.builtin.assert:
+        that:
+          - item not in ansible_env
+        fail_msg: "UNEXPECTED_CREDENTIAL_ENVIRONMENT: remove {{ item }} before sealing"
+      loop: "{{ azpr_forbidden_environment_keys }}"
+
+    - name: Require operator-confirmed network isolation
+      ansible.builtin.assert:
+        that:
+          - azpr_network_policy == 'NETWORK_DISABLED_DURING_VERIFIER_WINDOW'
+          - azpr_network_seal_confirmation == 'NETWORK_DISABLED_BY_OPERATOR'
+          - ansible_default_ipv4.gateway is not defined
+        fail_msg: "UNEXPECTED_NETWORK_STATE: an independent operator must disable and later measure networking"
+
+    - name: Inspect the prepared runtime
+      ansible.builtin.stat:
+        path: "{{ item.path }}"
+      loop:
+        - {path: "{{ azpr_runtime_root }}/venv/bin/python", mode: "0755"}
+        - {path: "{{ azpr_runtime_root }}/requirements-validation.lock", mode: "0444"}
+        - {path: "{{ azpr_validation_root }}/configuration/validation-environment", mode: "0444"}
+        - {path: "{{ azpr_evidence_root }}", mode: "0750"}
+      register: azpr_seal_stats
+
+    - name: Reject unexpected ownership or mode
+      ansible.builtin.assert:
+        that:
+          - item.stat.exists
+          - item.stat.pw_name == azpr_reviewer_name
+          - item.stat.gr_name == azpr_reviewer_name
+          - item.stat.mode == item.item.mode
+        fail_msg: "UNEXPECTED_FILE_OWNERSHIP_OR_MODE: {{ item.item.path }}"
+      loop: "{{ azpr_seal_stats.results }}"
+      loop_control:
+        label: "{{ item.item.path }}"
+
+    - name: Inspect the read-only candidate tree
+      ansible.builtin.stat:
+        path: "{{ azpr_candidate_tree }}"
+      register: azpr_candidate_tree_stat
+
+    - name: Reject a candidate writable by the reviewer
+      ansible.builtin.assert:
+        that:
+          - azpr_candidate_tree_stat.stat.exists
+          - azpr_candidate_tree_stat.stat.isdir
+          - not azpr_candidate_tree_stat.stat.writeable
+        fail_msg: "WRITABLE_CANDIDATE_TREE: the independent verifier must receive read-only source evidence"
+
+    - name: Stop at the independent qualification boundary
+      ansible.builtin.debug:
+        msg: "Seal checks are provisioning observations only. Execute and adjudicate the AZPR verifier outside Ansible."
+

@@ -1,0 +1,27 @@
+---
+- name: Inspect the candidate tree boundary
+  ansible.builtin.stat:
+    path: "{{ azpr_candidate_tree }}"
+  register: azpr_candidate_tree_prepare_stat
+
+- name: Require the candidate tree to be read-only for the reviewer
+  ansible.builtin.assert:
+    that:
+      - azpr_candidate_tree_prepare_stat.stat.exists
+      - azpr_candidate_tree_prepare_stat.stat.isdir
+      - not azpr_candidate_tree_prepare_stat.stat.writeable
+    fail_msg: "WRITABLE_CANDIDATE_TREE: provisioning must not rewrite frozen source evidence"
+
+- name: Create reviewer-owned disposable work and evidence directories
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: directory
+    owner: "{{ azpr_reviewer_name }}"
+    group: "{{ azpr_reviewer_name }}"
+    mode: "{{ item.mode }}"
+  loop:
+    - {path: "{{ azpr_workspace_root }}", mode: "0750"}
+    - {path: "{{ azpr_workspace_root }}/source-run", mode: "0750"}
+    - {path: "{{ azpr_workspace_root }}/fresh-extraction", mode: "0750"}
+    - {path: "{{ azpr_evidence_root }}", mode: "0750"}
+

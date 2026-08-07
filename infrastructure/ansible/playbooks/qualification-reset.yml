@@ -1,0 +1,31 @@
+---
+- name: Reset only disposable H0 qualification state
+  hosts: qualification
+  gather_facts: false
+  become: false
+  any_errors_fatal: true
+
+  tasks:
+    - name: Refuse a reset outside the bounded validation root
+      ansible.builtin.assert:
+        that:
+          - azpr_validation_root == '/srv/azpr-validator'
+          - azpr_validation_root is match('^/srv/azpr-validator$')
+          - azpr_candidate_archive is not match('^' + azpr_validation_root + '/')
+          - azpr_candidate_tree is not match('^' + azpr_validation_root + '/')
+        fail_msg: "RESET_OUTSIDE_BOUNDED_ROOT: reset may never target candidate evidence or a broader path"
+
+    - name: Reset only the bounded validation root
+      ansible.builtin.file:
+        path: "/srv/azpr-validator"
+        state: absent
+      become: true
+      become_user: root
+      tags:
+        - azpr_privileged
+        - azpr_reset
+
+    - name: State the reset boundary
+      ansible.builtin.debug:
+        msg: "Removed disposable provisioning state only; approved inputs and repository evidence were preserved."
+

@@ -33,7 +33,7 @@ Current locks and deep copies provide only process-local isolation. A production
 
 ## Related current documents
 
-- [Project structure v1.12](project-structure-v1.12.md)
+- [Project structure v1.13](project-structure-v1.13.md)
 - [Business logic v1.12](business-logic-v1.12.md)
 - [Business data v1.7](business-data-v1.7.json)
 - [Frontend design v1.1](frontend-design-v1.1.md)

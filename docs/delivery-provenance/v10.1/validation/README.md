@@ -34,9 +34,18 @@ a reviewer that remained privilege-capable inside the guest, it is
 independent Linux runs. It does not authorize mapping approval,
 materialization, controller qualification, or activation.
 
+The new `ansible/` subdirectory contains non-authoritative H0 provisioning
+evidence only. The qualification-only inventory and all playbooks pass the
+repository contract, inventory parser, and syntax checks with the pinned
+project-local `ansible-core 2.21.2` runtime. Live check-mode and two-apply
+idempotence are `BLOCKED_HOST_TRANSPORT`: two disposable Ubuntu guests received
+addresses but were unreachable, and host firewall/network isolation was not
+changed. These are not formal Run A or Run B results. The adjacent Linux
+environment approval file is a null human-input template, not an approval.
+
 Commit `ce80d335aef52c8900bd363bbcfacc1e497c0404` is the approved pre-Ansible
-transition base. The next governed work is the H0 Ansible
-qualification-infrastructure layer, followed by formal Linux-environment
+transition base. The next governed work is H0 Ansible live validation,
+followed by formal Linux-environment
 approval, two independently evidenced 120/120 runs, proof of independence,
 audit-governance owner resolution, final exact mapping regeneration and human
 approval, and only then `INT-00`.

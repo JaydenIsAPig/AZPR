@@ -1,0 +1,49 @@
+---
+- name: Reject unsupported baseline facts
+  ansible.builtin.assert:
+    that:
+      - ansible_distribution == azpr_supported_distribution
+      - ansible_distribution_major_version == azpr_supported_distribution_major
+      - ansible_architecture in azpr_supported_architectures
+      - ansible_python.version.full == azpr_expected_python_version
+    fail_msg: "UNSUPPORTED_OS, UNSUPPORTED_ARCHITECTURE, or WRONG_PYTHON_VERSION"
+
+- name: Read the reviewer account for baseline enforcement
+  ansible.builtin.getent:
+    database: passwd
+    key: "{{ azpr_reviewer_name }}"
+    fail_key: false
+
+- name: Require the exact non-root reviewer
+  ansible.builtin.assert:
+    that:
+      - azpr_reviewer_name in getent_passwd
+      - getent_passwd[azpr_reviewer_name][1] | int == azpr_reviewer_uid
+      - getent_passwd[azpr_reviewer_name][2] | int == azpr_reviewer_gid
+      - azpr_reviewer_uid | int != 0
+    fail_msg: "WRONG_REVIEWER_UID or WRONG_REVIEWER_GID"
+
+- name: Install the approved validation-only OS packages
+  ansible.builtin.apt:
+    name: "{{ azpr_approved_os_packages }}"
+    state: present
+    update_cache: false
+  become: true
+  become_user: root
+  tags:
+    - azpr_privileged
+    - azpr_packages
+
+- name: Create the validation root
+  ansible.builtin.file:
+    path: "/srv/azpr-validator"
+    state: directory
+    owner: "{{ azpr_reviewer_name }}"
+    group: "{{ azpr_reviewer_name }}"
+    mode: "0750"
+  become: true
+  become_user: root
+  tags:
+    - azpr_privileged
+    - azpr_filesystem
+

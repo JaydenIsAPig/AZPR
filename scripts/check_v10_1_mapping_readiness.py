@@ -163,6 +163,54 @@ REQUIRED_GENERATED_PATHS = {
     "tests/test_v10_1_prompt_stage_pack.py",
     "tests/test_v10_1_mapping_readiness.py",
 }
+REQUIRED_H0_ANSIBLE_GENERATED_PATHS = {
+    "README.md",
+    "docs/adr/0001-modular-monolith.md",
+    "docs/adr/0003-documentation-versioning.md",
+    "docs/adr/0004-python-domain-kernel.md",
+    "docs/adr/0005-authoritative-classification-result.md",
+    "docs/adr/0006-versioned-opportunity-projections.md",
+    "docs/adr/0007-in-memory-processing-unit-of-work.md",
+    "docs/adr/0008-customer-scoped-access-context.md",
+    "docs/adr/0010-ansible-qualification-infrastructure.md",
+    "docs/current/backend-structure-v1.12.md",
+    "docs/current/business-data-v1.7.json",
+    "docs/current/business-logic-v1.12.md",
+    "docs/current/frontend-design-v1.1.md",
+    "docs/current/project-structure-v1.13.md",
+    "docs/delivery-provenance/v10.1/validation/ansible/README.md",
+    "docs/delivery-provenance/v10.1/validation/ansible/ansible-runtime-manifest.json",
+    "docs/delivery-provenance/v10.1/validation/ansible/environment-manifest.json",
+    "docs/delivery-provenance/v10.1/validation/ansible/h0-repository-validation.json",
+    "docs/delivery-provenance/v10.1/validation/ansible/idempotence-result.json",
+    "docs/delivery-provenance/v10.1/validation/ansible/qualification-preflight.json",
+    "docs/delivery-provenance/v10.1/validation/linux-validation-environment-approval.template.json",
+    "docs/logs/project-structure-log-v1.13.md",
+    "docs/runbooks/README.md",
+    "docs/runbooks/ansible-qualification-environment.md",
+    "infrastructure/ansible/README.md",
+    "infrastructure/ansible/ansible.cfg",
+    "infrastructure/ansible/h0-qualification-contract.json",
+    "infrastructure/ansible/inventories/qualification/README.md",
+    "infrastructure/ansible/inventories/qualification/group_vars/all.yml",
+    "infrastructure/ansible/inventories/qualification/hosts.example.yml",
+    "infrastructure/ansible/playbooks/qualification-preflight.yml",
+    "infrastructure/ansible/playbooks/qualification-prepare.yml",
+    "infrastructure/ansible/playbooks/qualification-reset.yml",
+    "infrastructure/ansible/playbooks/qualification-seal.yml",
+    "infrastructure/ansible/requirements/requirements-ansible.in",
+    "infrastructure/ansible/requirements/requirements-ansible.lock",
+    "infrastructure/ansible/requirements/wheelhouse-manifest.json",
+    "infrastructure/ansible/roles/azpr_validator_baseline/tasks/main.yml",
+    "infrastructure/ansible/roles/azpr_validator_filesystem/tasks/main.yml",
+    "infrastructure/ansible/roles/azpr_validator_isolation/tasks/main.yml",
+    "infrastructure/ansible/roles/azpr_validator_runtime/tasks/main.yml",
+    "infrastructure/ansible/tests/README.md",
+    "infrastructure/ansible/tests/run_idempotence.py",
+    "scripts/check_h0_ansible.py",
+    "tests/test_h0_ansible_contract.py",
+}
+REQUIRED_GENERATED_PATHS.update(REQUIRED_H0_ANSIBLE_GENERATED_PATHS)
 REQUIRED_PHASE_GATES = {
     ("H0_PREPARATION", "exit_gates"): {
         "ANSIBLE_QUALIFICATION_INFRASTRUCTURE_COMPLETE",
@@ -285,6 +333,23 @@ def prompt_stage_pack_errors(root: Path) -> list[str]:
     except Exception as exc:
         return [f"prompt-stage pack validator failed: {exc}"]
     return list(result) if isinstance(result, list) else ["prompt-stage pack validator returned invalid result"]
+
+
+def h0_ansible_status(root: Path) -> tuple[bool, bool, list[str]]:
+    script = root / "scripts" / "check_h0_ansible.py"
+    spec = importlib.util.spec_from_file_location("azpr_h0_ansible", script)
+    if spec is None or spec.loader is None:
+        return False, False, ["cannot load H0 Ansible validator"]
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+        result = module.validate(root)
+    except Exception as exc:
+        return False, False, [f"H0 Ansible validator failed: {exc}"]
+    if not isinstance(result, dict):
+        return False, False, ["H0 Ansible validator returned invalid result"]
+    issues = result.get("errors", [])
+    return bool(result.get("valid")), bool(result.get("preparation_complete")), list(issues)
 
 
 def approval_binding_status(
@@ -603,8 +668,11 @@ def assess(
 
     if contract.get("decision_id") != "AZPR-V10.1-STAGED-HYBRID-CONTROLLER":
         errors.append("transition contract decision identity mismatch")
-    if contract.get("decision_status") != "SELECTED_FOR_PRE_ANSIBLE_H0_PREPARATION":
-        errors.append("transition contract is not at pre-Ansible H0 preparation")
+    if contract.get("decision_status") not in {
+        "H0_ANSIBLE_IMPLEMENTED_PENDING_LIVE_VALIDATION",
+        "H0_ANSIBLE_PREPARATION_COMPLETE_WAITING_FOR_HUMAN_GATES",
+    }:
+        errors.append("transition contract is not at the governed H0 Ansible lifecycle state")
     if contract.get("strategy") != "STAGED_HYBRID":
         errors.append("transition strategy is not STAGED_HYBRID")
     if contract.get("provenance_root") != "docs/delivery-provenance/v10.1":
@@ -642,6 +710,22 @@ def assess(
         errors.append("final mapping approval must remain deferred during pre-Ansible preparation")
     if pre_int00.get("int_00_status") != "BLOCKED":
         errors.append("INT-00 must remain blocked during pre-Ansible preparation")
+    ansible_preparation_status = pre_int00.get("ansible_preparation_status")
+    if ansible_preparation_status not in {
+        "IMPLEMENTED_PENDING_LIVE_VALIDATION",
+        "COMPLETE_EVIDENCE_BOUND",
+    }:
+        errors.append("H0 Ansible preparation status is invalid")
+    if ansible_preparation_status == "IMPLEMENTED_PENDING_LIVE_VALIDATION":
+        expected_ansible_substatus = {
+            "ansible_repository_validation_status": "PASS",
+            "ansible_syntax_and_inventory_status": "PASS",
+            "ansible_check_mode_status": "BLOCKED_HOST_TRANSPORT",
+            "ansible_idempotence_status": "BLOCKED_HOST_TRANSPORT",
+        }
+        for key, expected in expected_ansible_substatus.items():
+            if pre_int00.get(key) != expected:
+                errors.append(f"pending H0 Ansible substatus drifted: {key}")
 
     prompt_set = contract.get("prompt_set", {})
     if prompt_set.get("status") != "SELECTED_NOT_ACTIVE":
@@ -682,6 +766,8 @@ def assess(
     pack_errors = prompt_stage_pack_errors(root)
     prompt_stage_pack_valid = not pack_errors
     errors.extend(f"prompt-stage pack: {issue}" for issue in pack_errors)
+    h0_ansible_contract_valid, h0_ansible_evidence_complete, ansible_errors = h0_ansible_status(root)
+    errors.extend(f"H0 Ansible: {issue}" for issue in ansible_errors)
 
     expected_audit_authority = {
         "interim_source": "docs/audits/README.md",
@@ -1123,6 +1209,14 @@ def assess(
         for row in mapping
         if row["source_archive"] == "INTEGRATION_GENERATED"
     }
+    h0_document_retirements = [
+        row
+        for row in mapping
+        if row["decision_id"] == "MAP-H0-ANSIBLE-DOCUMENTATION"
+        and row["transition_phase"] == "H0_PREPARATION"
+    ]
+    bound_paths.update(row["source_path"] for row in h0_document_retirements)
+    bound_paths.update(row["proposed_destination"] for row in h0_document_retirements)
     bound_paths.update(row["proposed_destination"] for row in reports_rows)
     bound_paths.update(
         {
@@ -1151,6 +1245,8 @@ def assess(
     mapping_structurally_ready = not errors
     h0_ansible_preparation_complete = (
         pre_int00.get("ansible_preparation_status") == "COMPLETE_EVIDENCE_BOUND"
+        and h0_ansible_contract_valid
+        and h0_ansible_evidence_complete
     )
     linux_environment_approved = (
         pre_int00.get("linux_environment_approval_status")
@@ -1220,6 +1316,8 @@ def assess(
             "transition_base_human_approved": transition_base_approved,
             "head_descends_from_approved_base": head_descends_from_approved_base,
             "h0_ansible_preparation_complete": h0_ansible_preparation_complete,
+            "h0_ansible_contract_valid": h0_ansible_contract_valid,
+            "h0_ansible_status": ansible_preparation_status,
             "linux_environment_human_approved": linux_environment_approved,
             "formal_linux_run_a_accepted": formal_linux_run_a_accepted,
             "formal_linux_run_b_accepted": formal_linux_run_b_accepted,
@@ -1242,7 +1340,9 @@ def assess(
         "next_required_action": (
             "CORRECT_MAPPING_OR_TRANSITION_CONTRACT"
             if not mapping_structurally_ready
-            else "IMPLEMENT_H0_ANSIBLE_QUALIFICATION_INFRASTRUCTURE"
+            else "COMPLETE_H0_ANSIBLE_LIVE_CHECK_AND_IDEMPOTENCE_VALIDATION"
+            if ansible_preparation_status == "IMPLEMENTED_PENDING_LIVE_VALIDATION"
+            else "CORRECT_H0_ANSIBLE_EVIDENCE_BINDING"
             if not h0_ansible_preparation_complete
             else "OBTAIN_FORMAL_LINUX_ENVIRONMENT_APPROVAL"
             if not linux_environment_approved

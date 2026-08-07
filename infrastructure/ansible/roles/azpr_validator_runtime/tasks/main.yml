@@ -1,0 +1,51 @@
+---
+- name: Load the approved validation wheel manifest
+  ansible.builtin.set_fact:
+    azpr_validation_wheel_manifest: "{{ lookup('ansible.builtin.file', azpr_validation_wheelhouse_manifest_source) | from_json }}"
+
+- name: Inspect every offline validation wheel
+  ansible.builtin.stat:
+    path: "{{ azpr_validation_wheelhouse }}/{{ item.filename }}"
+    checksum_algorithm: sha256
+  loop: "{{ azpr_validation_wheel_manifest.wheels }}"
+  register: azpr_validation_wheel_stats
+
+- name: Reject a missing or changed offline validation wheel
+  ansible.builtin.assert:
+    that:
+      - item.stat.exists
+      - item.stat.isreg
+      - item.stat.checksum == item.item.sha256
+    fail_msg: "MISSING_OFFLINE_DEPENDENCY or WRONG_DEPENDENCY_HASH: {{ item.item.filename }}"
+  loop: "{{ azpr_validation_wheel_stats.results }}"
+  loop_control:
+    label: "{{ item.item.filename }}"
+
+- name: Create the reviewer-owned runtime directory
+  ansible.builtin.file:
+    path: "{{ azpr_runtime_root }}"
+    state: directory
+    owner: "{{ azpr_reviewer_name }}"
+    group: "{{ azpr_reviewer_name }}"
+    mode: "0750"
+
+- name: Copy the exact validation lock into the runtime
+  ansible.builtin.copy:
+    src: "{{ azpr_validation_requirements_lock_source }}"
+    dest: "{{ azpr_runtime_root }}/requirements-validation.lock"
+    owner: "{{ azpr_reviewer_name }}"
+    group: "{{ azpr_reviewer_name }}"
+    mode: "0444"
+
+- name: Install the offline validation runtime from pinned wheels
+  ansible.builtin.pip:
+    requirements: "{{ azpr_runtime_root }}/requirements-validation.lock"
+    virtualenv: "{{ azpr_runtime_root }}/venv"
+    virtualenv_command: "/usr/bin/python3 -m venv"
+    extra_args: "--no-index --no-cache-dir --find-links {{ azpr_validation_wheelhouse }}"
+  environment:
+    PIP_NO_INDEX: "1"
+    PIP_DISABLE_PIP_VERSION_CHECK: "1"
+    PYTHONDONTWRITEBYTECODE: "1"
+  when: not ansible_check_mode
+

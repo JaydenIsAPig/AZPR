@@ -16,5 +16,6 @@ ADRs capture consequential, durable decisions. Accepted ADRs are normative withi
 | [0007](0007-in-memory-processing-unit-of-work.md) | Accepted | Authoritative Batch ownership and process-local processing unit of work |
 | [0008](0008-customer-scoped-access-context.md) | Accepted | Customer-scoped access context, anti-enumeration, and separate internal path |
 | [0009](0009-staged-hybrid-controller-transition.md) | Accepted | Staged repository-to-external controller transition with single-writer cutover |
+| [0010](0010-ansible-qualification-infrastructure.md) | Accepted | H0 Ansible host provisioning remains separate from independent Linux qualification |
 
 Use the next available four-digit number. ADRs are immutable after acceptance except for typo/link corrections; changed decisions receive a new ADR that supersedes the old one.

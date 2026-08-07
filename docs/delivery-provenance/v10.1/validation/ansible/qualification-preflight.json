@@ -1,0 +1,12 @@
+{
+  "format_version": "1.0",
+  "classification": "NON_AUTHORITATIVE_PROVISIONING_EVIDENCE",
+  "status": "BLOCKED_HOST_TRANSPORT",
+  "target_scope": "DISPOSABLE_TEST",
+  "qualification_effect": false,
+  "attempted_targets": [
+    "azpr-h0-ansible-test",
+    "azpr-h0-ansible-test-bridged"
+  ],
+  "reason": "Both fresh Ubuntu 24.04 guests received addresses but Multipass SSH returned No route to host; no host isolation, firewall, route, credential, or preserved validator state was changed."
+}

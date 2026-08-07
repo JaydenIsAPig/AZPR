@@ -1,0 +1,4 @@
+# Direct H0 infrastructure runtime dependencies.
+ansible-core==2.21.2
+cryptography==46.0.4
+

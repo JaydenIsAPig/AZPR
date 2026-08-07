@@ -74,13 +74,18 @@ class V101MappingReadinessTests(unittest.TestCase):
         self.assertEqual(result["base_commit"], APPROVED_BASE)
         self.assertEqual(result["head_commit"], APPROVED_BASE)
         self.assertFalse(result["checks"]["h0_ansible_preparation_complete"])
+        self.assertTrue(result["checks"]["h0_ansible_contract_valid"])
+        self.assertEqual(
+            result["checks"]["h0_ansible_status"],
+            "IMPLEMENTED_PENDING_LIVE_VALIDATION",
+        )
         self.assertTrue(result["pre_ansible_transition_base_ready"])
         self.assertFalse(result["ready_for_materialization"])
         self.assertFalse(result["ready_for_activation"])
         self.assertFalse(result["safe_for_unattended_execution_now"])
         self.assertEqual(
             result["next_required_action"],
-            "IMPLEMENT_H0_ANSIBLE_QUALIFICATION_INFRASTRUCTURE",
+            "COMPLETE_H0_ANSIBLE_LIVE_CHECK_AND_IDEMPOTENCE_VALIDATION",
         )
 
     def test_prequalification_pass_cannot_impersonate_formal_int_01(self) -> None:

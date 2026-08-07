@@ -1,0 +1,19 @@
+{
+  "format_version": "1.0",
+  "classification": "NON_AUTHORITATIVE_PROVISIONING_EVIDENCE",
+  "status": "PASS",
+  "python": "3.12.13",
+  "ansible_core": "2.21.2",
+  "installation_scope": ".integration-temp/ansible/venv (ignored project-local runtime)",
+  "requirements_input": "infrastructure/ansible/requirements/requirements-ansible.in",
+  "requirements_lock": "infrastructure/ansible/requirements/requirements-ansible.lock",
+  "requirements_lock_sha256": "c77e585bc4ff4278863e08c3ca069c2a502a0beeecfbc8db48ddb463672391fc",
+  "wheelhouse_manifest": "infrastructure/ansible/requirements/wheelhouse-manifest.json",
+  "wheelhouse_manifest_sha256": "f7dd142e810a7a43702207aacef4c1c805257ff00ebddabe15cd6fc347527330",
+  "installed_from_local_wheels": true,
+  "hash_pinned_reproduction_install": "PASS",
+  "third_party_collections": [],
+  "inventory_parse": "PASS",
+  "playbook_syntax": "PASS_4_OF_4",
+  "qualification_effect": false
+}

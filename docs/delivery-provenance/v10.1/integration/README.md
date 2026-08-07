@@ -36,3 +36,8 @@ structurally ready for review. The pack remains draft and grants no runtime or
 materialization authority. Final mapping approval is deferred until the H0
 Ansible, Linux environment, two-run independence, and governance-owner gates
 are complete and the current mapping has been regenerated again.
+
+The Ansible repository contract, inventory, and syntax gates are now
+implemented. Live check-mode and idempotence remain blocked by the current host
+transport, so the mapping remains a review artifact and is not eligible for
+final human approval.

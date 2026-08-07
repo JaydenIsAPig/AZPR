@@ -56,7 +56,11 @@ approval:
 The approved pre-Ansible transition base is
 `ce80d335aef52c8900bd363bbcfacc1e497c0404`; its direct parent `d60e5d9...`
 remains lineage, not the active transition base. The next lifecycle step is
-H0 Ansible qualification-infrastructure preparation. `INT-00` remains blocked
+completion of live check-mode and idempotence validation for the implemented
+H0 Ansible qualification-infrastructure layer. The implementation, static
+contract, inventory, and syntax checks exist under `infrastructure/ansible/`,
+but the current host transport could not reach either disposable Multipass
+guest and no host security control was weakened. `INT-00` remains blocked
 until formal environment approval, two independently evidenced 120/120 Linux
 runs, independence proof, audit-governance owner resolution, and final approval
 of the regenerated exact mapping are complete. Until the first

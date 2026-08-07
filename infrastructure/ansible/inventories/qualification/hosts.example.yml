@@ -1,0 +1,15 @@
+{
+  "all": {
+    "children": {
+      "qualification": {
+        "hosts": {
+          "azpr-validator": {
+            "ansible_connection": "local",
+            "ansible_python_interpreter": "/usr/bin/python3"
+          }
+        }
+      }
+    }
+  }
+}
+

@@ -7,7 +7,7 @@
   "approved_on": "2026-07-20",
   "description": "Governed registries plus processing consistency, projection, freshness, and explainable matching policies. Authorization remains deterministic code, not editable business data. Empty arrays mean no additional registry entries have been approved.",
   "related_documents": [
-    "project-structure-v1.12.md",
+    "project-structure-v1.13.md",
     "backend-structure-v1.12.md",
     "business-logic-v1.12.md",
     "frontend-design-v1.1.md"

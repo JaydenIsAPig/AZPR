@@ -179,6 +179,54 @@ GENERATED_PATHS = {
     "tests/test_v10_1_mapping_readiness.py",
     "tests/test_v10_1_prompt_stage_pack.py",
 }
+H0_ANSIBLE_GENERATED_PATHS = {
+    "README.md",
+    "docs/adr/0001-modular-monolith.md",
+    "docs/adr/0003-documentation-versioning.md",
+    "docs/adr/0004-python-domain-kernel.md",
+    "docs/adr/0005-authoritative-classification-result.md",
+    "docs/adr/0006-versioned-opportunity-projections.md",
+    "docs/adr/0007-in-memory-processing-unit-of-work.md",
+    "docs/adr/0008-customer-scoped-access-context.md",
+    "docs/adr/0010-ansible-qualification-infrastructure.md",
+    "docs/current/backend-structure-v1.12.md",
+    "docs/current/business-data-v1.7.json",
+    "docs/current/business-logic-v1.12.md",
+    "docs/current/frontend-design-v1.1.md",
+    "docs/current/project-structure-v1.13.md",
+    "docs/delivery-provenance/v10.1/validation/ansible/README.md",
+    "docs/delivery-provenance/v10.1/validation/ansible/ansible-runtime-manifest.json",
+    "docs/delivery-provenance/v10.1/validation/ansible/environment-manifest.json",
+    "docs/delivery-provenance/v10.1/validation/ansible/h0-repository-validation.json",
+    "docs/delivery-provenance/v10.1/validation/ansible/idempotence-result.json",
+    "docs/delivery-provenance/v10.1/validation/ansible/qualification-preflight.json",
+    "docs/delivery-provenance/v10.1/validation/linux-validation-environment-approval.template.json",
+    "docs/logs/project-structure-log-v1.13.md",
+    "docs/runbooks/README.md",
+    "docs/runbooks/ansible-qualification-environment.md",
+    "infrastructure/ansible/README.md",
+    "infrastructure/ansible/ansible.cfg",
+    "infrastructure/ansible/h0-qualification-contract.json",
+    "infrastructure/ansible/inventories/qualification/README.md",
+    "infrastructure/ansible/inventories/qualification/group_vars/all.yml",
+    "infrastructure/ansible/inventories/qualification/hosts.example.yml",
+    "infrastructure/ansible/playbooks/qualification-preflight.yml",
+    "infrastructure/ansible/playbooks/qualification-prepare.yml",
+    "infrastructure/ansible/playbooks/qualification-reset.yml",
+    "infrastructure/ansible/playbooks/qualification-seal.yml",
+    "infrastructure/ansible/requirements/requirements-ansible.in",
+    "infrastructure/ansible/requirements/requirements-ansible.lock",
+    "infrastructure/ansible/requirements/wheelhouse-manifest.json",
+    "infrastructure/ansible/roles/azpr_validator_baseline/tasks/main.yml",
+    "infrastructure/ansible/roles/azpr_validator_filesystem/tasks/main.yml",
+    "infrastructure/ansible/roles/azpr_validator_isolation/tasks/main.yml",
+    "infrastructure/ansible/roles/azpr_validator_runtime/tasks/main.yml",
+    "infrastructure/ansible/tests/README.md",
+    "infrastructure/ansible/tests/run_idempotence.py",
+    "scripts/check_h0_ansible.py",
+    "tests/test_h0_ansible_contract.py",
+}
+GENERATED_PATHS.update(H0_ANSIBLE_GENERATED_PATHS)
 MERGED_GENERATED_PATHS = {
     ".gitignore",
     "AGENTS.md",
@@ -187,6 +235,30 @@ MERGED_GENERATED_PATHS = {
     "docs/automation/README.md",
     "docs/automation/current-status.md",
     "docs/audits/README.md",
+}
+MERGED_GENERATED_PATHS.update(
+    {
+        "README.md",
+        "docs/adr/0001-modular-monolith.md",
+        "docs/adr/0003-documentation-versioning.md",
+        "docs/adr/0004-python-domain-kernel.md",
+        "docs/adr/0005-authoritative-classification-result.md",
+        "docs/adr/0006-versioned-opportunity-projections.md",
+        "docs/adr/0007-in-memory-processing-unit-of-work.md",
+        "docs/adr/0008-customer-scoped-access-context.md",
+        "docs/current/backend-structure-v1.12.md",
+        "docs/current/business-data-v1.7.json",
+        "docs/current/business-logic-v1.12.md",
+        "docs/current/frontend-design-v1.1.md",
+        "docs/runbooks/README.md",
+    }
+)
+
+H0_CURRENT_RETIREMENTS = {
+    "docs/current/project-structure-v1.12.md": {
+        "sha256": "53a52142c52643ee512e2f4190e1f2eb3156d327f28590fc5a5e19d66c115ed5",
+        "destination": "docs/legacy/project-structure/project-structure-v1.12.md",
+    }
 }
 
 
@@ -456,6 +528,8 @@ def generated_row(path: str) -> dict[str, str]:
         classification = "REPOSITORY_DOCUMENTATION"
     elif path.startswith("tests/"):
         classification = "REPOSITORY_TEST"
+    elif path.startswith("infrastructure/"):
+        classification = "REPOSITORY_INFRASTRUCTURE"
     elif path.startswith("scripts/") or path.startswith("automation/"):
         classification = "REPOSITORY_AUTOMATION"
     else:
@@ -484,6 +558,27 @@ def generated_row(path: str) -> dict[str, str]:
     }
 
 
+def h0_current_retirement_row(path: str, value: dict[str, str]) -> dict[str, str]:
+    return {
+        "source_archive": CURRENT,
+        "source_path": path,
+        "source_sha256": value["sha256"],
+        "classification": "REPOSITORY_DOCUMENTATION",
+        "current_repository_equivalent": path,
+        "proposed_destination": value["destination"],
+        "action": "MOVE",
+        "conflict_status": "NONE",
+        "reason": "Archive the superseded project-structure snapshot with document_status updated before publishing v1.13 for the H0 Ansible boundary.",
+        "dependencies": "ADR-0003; ADR-0010; project-structure v1.13",
+        "validation": "documentation current-family uniqueness; local links; archived status",
+        "rollback": "Restore project-structure v1.12 as the sole current snapshot and remove v1.13 plus its log.",
+        "approval_needed": "NO",
+        "decision_id": "MAP-H0-ANSIBLE-DOCUMENTATION",
+        "resolution_status": "READY_FOR_APPROVAL",
+        "transition_phase": "H0_PREPARATION",
+    }
+
+
 def build_rows(source: Path) -> list[dict[str, str]]:
     if not source.is_file() or sha256(source) != EXPECTED_SOURCE_SHA256:
         raise ValueError("immutable staging mapping SHA-256 mismatch")
@@ -504,6 +599,11 @@ def build_rows(source: Path) -> list[dict[str, str]]:
                     decision_id="MAP-STALE-ROADMAP-EVIDENCE",
                 )
             )
+            keys.add(key)
+    for path, value in sorted(H0_CURRENT_RETIREMENTS.items()):
+        key = (CURRENT, path)
+        if key not in keys:
+            rows.append(h0_current_retirement_row(path, value))
             keys.add(key)
     for path in sorted(GENERATED_PATHS):
         if (ROOT / path).is_file() and ("INTEGRATION_GENERATED", path) not in keys:

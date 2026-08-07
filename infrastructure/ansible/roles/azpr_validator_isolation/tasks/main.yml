@@ -1,0 +1,46 @@
+---
+- name: Reject inherited credential environment during preparation
+  ansible.builtin.assert:
+    that:
+      - item not in ansible_env
+    fail_msg: "UNEXPECTED_CREDENTIAL_ENVIRONMENT: remove {{ item }} from the qualification session"
+  loop: "{{ azpr_forbidden_environment_keys }}"
+
+- name: Create the validation configuration directory
+  ansible.builtin.file:
+    path: "{{ azpr_validation_root }}/configuration"
+    state: directory
+    owner: "{{ azpr_reviewer_name }}"
+    group: "{{ azpr_reviewer_name }}"
+    mode: "0750"
+
+- name: Write the non-secret verifier environment allowlist
+  ansible.builtin.copy:
+    dest: "{{ azpr_validation_root }}/configuration/validation-environment"
+    owner: "{{ azpr_reviewer_name }}"
+    group: "{{ azpr_reviewer_name }}"
+    mode: "0444"
+    content: |
+      HOME=/home/oai
+      LANG=C.UTF-8
+      LC_ALL=C.UTF-8
+      PATH={{ azpr_runtime_root }}/venv/bin:/usr/bin:/bin
+      PIP_DISABLE_PIP_VERSION_CHECK=1
+      PIP_NO_INDEX=1
+      PYTHONDONTWRITEBYTECODE=1
+      PYTHONNOUSERSITE=1
+      PYTEST_DISABLE_PLUGIN_AUTOLOAD=1
+
+- name: Record the required isolation policy without claiming enforcement
+  ansible.builtin.copy:
+    dest: "{{ azpr_validation_root }}/configuration/isolation-policy"
+    owner: "{{ azpr_reviewer_name }}"
+    group: "{{ azpr_reviewer_name }}"
+    mode: "0444"
+    content: |
+      classification=REQUESTED_MACHINE_STATE_NOT_QUALIFICATION
+      network_policy={{ azpr_network_policy }}
+      credential_policy=NO_INHERITED_CREDENTIALS
+      candidate_policy=READ_ONLY
+      verifier_owner=AZPR_INDEPENDENT_QUALIFICATION_CHAIN
+

@@ -11,6 +11,9 @@ Before treating the v10.1 mapping as structurally ready for review, run:
   scripts/check_v10_1_prompt_stage_pack.py
 .integration-temp/offline-validation/venv/bin/python \
   scripts/check_v10_1_mapping_readiness.py
+.integration-temp/offline-validation/venv/bin/python \
+  scripts/check_h0_ansible.py \
+  --ansible-bin-dir .integration-temp/ansible/venv/bin
 ```
 
 The checkers are read-only and never create an approval. Structural readiness
@@ -22,6 +25,13 @@ only: its presence does not execute a stage, activate the selected
 implementation prompts, or authorize either controller. The transition
 contract and delivery evidence are indexed under
 `automation/integration/v10.1/` and `docs/delivery-provenance/v10.1/`.
+
+The H0 Ansible checker validates qualification-only infrastructure under
+`infrastructure/ansible/`; it does not run a controller or verifier. Its
+repository, inventory, and syntax checks pass in the current branch. Live
+check/diff and two-apply idempotence remain blocked by the host's unreachable
+Multipass guest transport and must remain open until evidence-bound on a
+disposable or approved qualification target.
 
 > **Current transition lock:** The setup and run commands below are retained as repository-controller reference material. Do not execute them during H0, H1, or H2. Use `current-status.md` and the transition contract for the active boundary.
 

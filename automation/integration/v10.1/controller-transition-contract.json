@@ -1,7 +1,7 @@
 {
   "format_version": "1.0",
   "decision_id": "AZPR-V10.1-STAGED-HYBRID-CONTROLLER",
-  "decision_status": "SELECTED_FOR_PRE_ANSIBLE_H0_PREPARATION",
+  "decision_status": "H0_ANSIBLE_IMPLEMENTED_PENDING_LIVE_VALIDATION",
   "strategy": "STAGED_HYBRID",
   "base_commit": "ce80d335aef52c8900bd363bbcfacc1e497c0404",
   "transition_base": {
@@ -22,7 +22,11 @@
       "FINAL_EXACT_MAPPING_REGENERATION_AND_HUMAN_APPROVAL",
       "INT_00"
     ],
-    "ansible_preparation_status": "NOT_STARTED",
+    "ansible_preparation_status": "IMPLEMENTED_PENDING_LIVE_VALIDATION",
+    "ansible_repository_validation_status": "PASS",
+    "ansible_syntax_and_inventory_status": "PASS",
+    "ansible_check_mode_status": "BLOCKED_HOST_TRANSPORT",
+    "ansible_idempotence_status": "BLOCKED_HOST_TRANSPORT",
     "linux_environment_approval_status": "PENDING_HUMAN_APPROVAL",
     "formal_linux_run_a_status": "NOT_RUN",
     "formal_linux_run_b_status": "NOT_RUN",

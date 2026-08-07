@@ -13,16 +13,22 @@ State: staged-hybrid transition selected for integration review.
   pre-Ansible H0 transition base. Its direct parent
   `d60e5d9b5fe3b39fa07a1b2e6bfa2719425eb6e5` remains recorded as source-tree
   lineage; neither commit is final mapping approval.
-- The current mapping is a regenerable pre-Ansible review artifact. Final
+- The current mapping is a regenerable H0 review artifact. Final
   mapping approval is deferred until the Ansible work and the remaining H0
   human/evidence gates are complete.
 - A local Ubuntu 24.04 ARM64 Multipass pre-qualification reproduced both exact
   delivery verifier modes at 120/120 offline with no source mutation. The
   result is preparation evidence only, not a formal `INT-01` result or external
   controller qualification.
-- The next work is the bounded H0 Ansible qualification-infrastructure layer
-  under `infrastructure/ansible/`. Ansible may establish requested machine
-  state but may not approve or qualify it. Formal Linux-environment approval,
+- The bounded H0 Ansible qualification-infrastructure layer now exists under
+  `infrastructure/ansible/`. Its qualification-only inventory, machine
+  contract, pinned `ansible-core 2.21.2` runtime, four roles, four playbooks,
+  failure-path tests, inventory validation, and syntax checks pass. Live
+  check/diff and two-apply idempotence remain blocked because both disposable
+  Multipass guests were unreachable over the existing host transport boundary;
+  no firewall, route, credential, or preserved validator state was weakened to
+  force a pass. Ansible may establish requested machine state but may not
+  approve or qualify it. Formal Linux-environment approval,
   two independently evidenced 120/120 verifier runs, proof of run
   independence, the actual audit-governance owner name/role, regeneration and
   human approval of the final exact mapping, and the `INT-00` preflight all

@@ -1,0 +1,26 @@
+---
+- name: Apply the narrow H0 qualification configuration
+  hosts: qualification
+  gather_facts: true
+  become: false
+  any_errors_fatal: true
+
+  pre_tasks:
+    - name: Require the preparation marker after an operator-reviewed preflight
+      ansible.builtin.assert:
+        that:
+          - azpr_environment_purpose == 'AZPR_V10_1_LINUX_QUALIFICATION'
+          - azpr_validation_root == '/srv/azpr-validator'
+        fail_msg: "INTERRUPTED_PREPARATION: exact H0 purpose and bounded root are required"
+
+  roles:
+    - role: azpr_validator_baseline
+    - role: azpr_validator_runtime
+    - role: azpr_validator_filesystem
+    - role: azpr_validator_isolation
+
+  post_tasks:
+    - name: State the provisioning-only result
+      ansible.builtin.debug:
+        msg: "Requested machine state applied. STOP: run independent observation and the AZPR verifier; Ansible recap is not qualification."
+

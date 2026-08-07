@@ -1,0 +1,83 @@
+{
+  "format_version": "1.0",
+  "contract_id": "AZPR_H0_ANSIBLE_QUALIFICATION_INFRASTRUCTURE",
+  "lifecycle_phase": "H0_PREPARATION",
+  "status": "IMPLEMENTED_PENDING_LIVE_VALIDATION",
+  "purpose": "Reproducibly prepare a Linux host for independent AZPR v10.1 qualification.",
+  "authority_effect": {
+    "approves_environment": false,
+    "qualifies_environment": false,
+    "executes_azpr_verifier": false,
+    "activates_policy": false,
+    "activates_roadmap": false,
+    "activates_controller": false,
+    "authorizes_materialization": false,
+    "authorizes_production": false
+  },
+  "control_transport": {
+    "model": "OPERATOR_MEDIATED_LOCAL_CONNECTION_INSIDE_GUEST",
+    "multipass_specific": false,
+    "creates_credentials": false,
+    "requires_unmanaged_ssh_key": false
+  },
+  "runtime": {
+    "python": "3.12",
+    "ansible_core": "2.21.2",
+    "third_party_collections": []
+  },
+  "inventory_roots": [
+    "infrastructure/ansible/inventories/qualification"
+  ],
+  "forbidden_inventory_names": [
+    "staging",
+    "production"
+  ],
+  "roles": [
+    "azpr_validator_baseline",
+    "azpr_validator_runtime",
+    "azpr_validator_filesystem",
+    "azpr_validator_isolation"
+  ],
+  "playbooks": [
+    "qualification-preflight.yml",
+    "qualification-prepare.yml",
+    "qualification-seal.yml",
+    "qualification-reset.yml"
+  ],
+  "privileged_tasks": [
+    "Install the approved validation-only OS packages",
+    "Create the validation root",
+    "Reset only the bounded validation root"
+  ],
+  "forbidden_modules": [
+    "ansible.builtin.shell",
+    "ansible.builtin.command",
+    "ansible.builtin.raw",
+    "ansible.builtin.script",
+    "ansible.builtin.get_url",
+    "ansible.builtin.uri"
+  ],
+  "required_failure_gates": [
+    "UNSUPPORTED_OS",
+    "UNSUPPORTED_ARCHITECTURE",
+    "WRONG_REVIEWER_UID",
+    "WRONG_REVIEWER_GID",
+    "WRONG_PYTHON_VERSION",
+    "MISSING_OFFLINE_DEPENDENCY",
+    "WRONG_DEPENDENCY_HASH",
+    "WRITABLE_CANDIDATE_TREE",
+    "UNEXPECTED_CREDENTIAL_ENVIRONMENT",
+    "UNEXPECTED_NETWORK_STATE",
+    "UNEXPECTED_FILE_OWNERSHIP_OR_MODE",
+    "INTERRUPTED_PREPARATION",
+    "RESET_OUTSIDE_BOUNDED_ROOT"
+  ],
+  "evidence": {
+    "classification": "NON_AUTHORITATIVE_PROVISIONING_EVIDENCE",
+    "root": "docs/delivery-provenance/v10.1/validation/ansible",
+    "formal_linux_runs_root": "docs/delivery-provenance/v10.1/validation/linux-run-{a,b}",
+    "ansible_recap_is_qualification": false
+  },
+  "approval_template": "docs/delivery-provenance/v10.1/validation/linux-validation-environment-approval.template.json",
+  "checker": "scripts/check_h0_ansible.py"
+}

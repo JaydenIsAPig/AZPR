@@ -1,0 +1,101 @@
+---
+- name: Read-only H0 qualification preflight
+  hosts: qualification
+  gather_facts: true
+  become: false
+  any_errors_fatal: true
+
+  tasks:
+    - name: Require the exact H0 purpose and inert approval state
+      ansible.builtin.assert:
+        that:
+          - azpr_environment_purpose == 'AZPR_V10_1_LINUX_QUALIFICATION'
+          - azpr_environment_approval_state == 'PENDING_HUMAN_APPROVAL'
+          - azpr_environment_id == 'UNAPPROVED_H0_TEMPLATE'
+        fail_msg: "H0_AUTHORITY_BOUNDARY: inventory may prepare only an unapproved qualification environment"
+
+    - name: Reject an unsupported operating system
+      ansible.builtin.assert:
+        that:
+          - ansible_distribution == azpr_supported_distribution
+          - ansible_distribution_major_version == azpr_supported_distribution_major
+        fail_msg: "UNSUPPORTED_OS: expected the pinned Ubuntu qualification family"
+
+    - name: Reject an unsupported architecture
+      ansible.builtin.assert:
+        that:
+          - ansible_architecture in azpr_supported_architectures
+        fail_msg: "UNSUPPORTED_ARCHITECTURE: target architecture is outside the approved H0 contract"
+
+    - name: Reject the wrong Ansible runtime
+      ansible.builtin.assert:
+        that:
+          - ansible_version.full == azpr_expected_ansible_version
+        fail_msg: "WRONG_ANSIBLE_VERSION: use the hash-pinned H0 project-local runtime"
+
+    - name: Read the expected reviewer account
+      ansible.builtin.getent:
+        database: passwd
+        key: "{{ azpr_reviewer_name }}"
+        fail_key: false
+
+    - name: Reject a missing or wrong reviewer identity
+      ansible.builtin.assert:
+        that:
+          - azpr_reviewer_name in getent_passwd
+          - getent_passwd[azpr_reviewer_name][1] | int == azpr_reviewer_uid
+          - getent_passwd[azpr_reviewer_name][2] | int == azpr_reviewer_gid
+          - azpr_reviewer_uid | int != 0
+        fail_msg: "WRONG_REVIEWER_UID or WRONG_REVIEWER_GID: expected a non-root UID/GID 1000 reviewer"
+
+    - name: Inspect the candidate archive
+      ansible.builtin.stat:
+        path: "{{ azpr_candidate_archive }}"
+        checksum_algorithm: sha256
+      register: azpr_candidate_archive_stat
+
+    - name: Bind the exact candidate archive
+      ansible.builtin.assert:
+        that:
+          - azpr_candidate_archive_stat.stat.exists
+          - azpr_candidate_archive_stat.stat.isreg
+          - azpr_candidate_archive_stat.stat.checksum == azpr_candidate_archive_sha256
+        fail_msg: "CANDIDATE_HASH_MISMATCH: missing or non-identical frozen v10.1 candidate"
+
+    - name: Inspect the prompt archive
+      ansible.builtin.stat:
+        path: "{{ azpr_prompt_archive }}"
+        checksum_algorithm: sha256
+      register: azpr_prompt_archive_stat
+
+    - name: Bind the exact prompt archive
+      ansible.builtin.assert:
+        that:
+          - azpr_prompt_archive_stat.stat.exists
+          - azpr_prompt_archive_stat.stat.isreg
+          - azpr_prompt_archive_stat.stat.checksum == azpr_prompt_archive_sha256
+        fail_msg: "PROMPT_HASH_MISMATCH: selected prompt archive is absent or changed"
+
+    - name: Inspect offline validation inputs
+      ansible.builtin.stat:
+        path: "{{ item }}"
+      loop:
+        - "{{ azpr_validation_wheelhouse }}"
+        - "{{ azpr_validation_requirements_lock_source }}"
+        - "{{ azpr_validation_wheelhouse_manifest_source }}"
+        - "{{ azpr_candidate_tree }}"
+      register: azpr_input_stats
+
+    - name: Reject missing offline validation inputs
+      ansible.builtin.assert:
+        that:
+          - item.stat.exists
+        fail_msg: "MISSING_OFFLINE_DEPENDENCY: {{ item.item }} is required before preparation"
+      loop: "{{ azpr_input_stats.results }}"
+      loop_control:
+        label: "{{ item.item }}"
+
+    - name: Record the non-authoritative preflight boundary
+      ansible.builtin.debug:
+        msg: "Preflight verified requested inputs only; it did not approve or qualify this host."
+

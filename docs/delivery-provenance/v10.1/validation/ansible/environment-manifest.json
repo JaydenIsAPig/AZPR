@@ -1,0 +1,38 @@
+{
+  "format_version": "1.0",
+  "classification": "NON_AUTHORITATIVE_MACHINE_OBSERVATION",
+  "status": "OBSERVED_PREPARATION_ONLY",
+  "observed_on": "2026-08-07",
+  "host_laboratory": {
+    "host_os": "macOS 26.5.2",
+    "host_architecture": "arm64",
+    "multipass_version": "1.16.3+mac"
+  },
+  "validator": {
+    "name": "azpr-validator",
+    "state": "Running",
+    "release": "Ubuntu 24.04.4 LTS",
+    "image_hash_prefix": "aa6da05756e8",
+    "architecture": "aarch64",
+    "kernel_from_retained_prequalification_manifest": "6.8.0-136-generic",
+    "vcpu": 4,
+    "memory_gib_reported": 7.7,
+    "disk_gib_reported": 29.0,
+    "mounts": [],
+    "reviewer_uid_from_retained_prequalification_manifest": 1000,
+    "reviewer_gid_from_retained_prequalification_manifest": 1000,
+    "python_from_retained_prequalification_manifest": "3.12.3"
+  },
+  "control_path": {
+    "model_selected": "OPERATOR_MEDIATED_LOCAL_CONNECTION_INSIDE_GUEST",
+    "current_multipass_exec_status": "BLOCKED_NO_ROUTE_TO_HOST_AFTER_NETWORK_DISABLE",
+    "ssh_credentials_created": false
+  },
+  "qualification_effect": false,
+  "limitations": [
+    "Only the image-hash prefix exposed by Multipass is available.",
+    "Guest reinspection was unavailable because the retained VM network remained disabled.",
+    "These observations do not approve the environment or replace independent qualification."
+  ]
+}
+
