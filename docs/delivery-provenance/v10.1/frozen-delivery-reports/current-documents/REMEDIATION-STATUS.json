@@ -1,0 +1,36 @@
+{
+  "decision": {
+    "full_autonomous_pathway_viable": true,
+    "organization_release_signature_status": "NOT_PROVIDED_UNSIGNED_DEVELOPMENT_CANDIDATE",
+    "permitted_next_event": "INDEPENDENT_V10_1_SOURCE_REASSESSMENT_ONLY",
+    "pre_autonomous_staging": "FAIL",
+    "ready_for_codex_seating_and_application": false,
+    "ready_for_final_integration_prompt_authoring": false,
+    "safe_for_unattended_execution_now": false,
+    "semi_autonomous_codex_staging_ready": false,
+    "trusted_pre_autonomous_installation_ready": false
+  },
+  "format_version": "1.1",
+  "generated_at": "2026-08-04T20:20:00Z",
+  "source_level_summary": {
+    "active_canonical_policy_present": false,
+    "complete_collected_suite_required": true,
+    "frozen_v10_baseline_sha256": "3e748b2e8e61033c741f138dae4357d60f020c7db15489333be73bed329741af",
+    "independent_reassessment_required": true,
+    "independent_v10_findings_addressed": [
+      "AZPR-V10-IND-F01",
+      "AZPR-V10-IND-F02",
+      "AZPR-V10-IND-F03",
+      "AZPR-V10-IND-F04",
+      "AZPR-V10-IND-F05",
+      "AZPR-V10-IND-F06"
+    ],
+    "independent_v10_operational_gate": "AZPR-V10-IND-F07_OPEN_BY_DESIGN",
+    "promoted_roadmap_present": false,
+    "prompt_archive_changed": false,
+    "qualification_artifact_count": 57,
+    "qualification_artifact_set_version": "2.1",
+    "release_blocking_tests_cataloged": 120
+  },
+  "status": "READY_FOR_INDEPENDENT_V10_1_SOURCE_REASSESSMENT"
+}

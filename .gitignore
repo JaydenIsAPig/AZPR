@@ -42,3 +42,8 @@ Thumbs.db
 
 # Local Codex autonomous-loop runtime
 .codex-loop/
+
+# Local integration staging and dependency material
+.integration-temp/
+.integration-reports/
+.integration-worktree/

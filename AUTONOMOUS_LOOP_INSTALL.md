@@ -1,5 +1,7 @@
 # Install the Autonomous Codex Loop in AZPR
 
+> **Repository-controller reference only.** Do not execute this installation guide during staged-hybrid phases H0, H1, or H2. It does not install or activate the v10.1 external trusted controller. ADR-0009 requires both controllers to remain inert through repository integration, followed by read-only qualification, a single-writer fence, signed state snapshot, independent cutover audit, and separate human approval before external control.
+
 ## 1. Copy the bundle into the repository root
 
 The `AZPR/` folder in this bundle is a merge overlay. Copy its contents into the real `AZPR/` Git repository. Do not create `AZPR/AZPR/`.

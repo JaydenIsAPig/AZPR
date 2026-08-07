@@ -1,0 +1,198 @@
+{
+  "format_version": "1.0",
+  "decision_id": "AZPR-V10.1-STAGED-HYBRID-CONTROLLER",
+  "decision_status": "SELECTED_FOR_MAPPING_APPROVAL",
+  "strategy": "STAGED_HYBRID",
+  "base_commit": "dac0e0bf1695d44f4b6c0e0e7673559f5d87ec02",
+  "provenance_root": "docs/delivery-provenance/v10.1",
+  "prompt_set": {
+    "status": "SELECTED_NOT_ACTIVE",
+    "archive_sha256": "3b235cb7e33ca409241ff26523f60f8fee89cec524b3f09e91a69927a0aa4880",
+    "numbered_prompts": 38,
+    "appendices": 3,
+    "canonical_numbered_destination": "automation/numbered",
+    "canonical_appendices_destination": "automation/appendices",
+    "duplicate_active_sets_allowed": false
+  },
+  "orchestration_prompt_pack": {
+    "pack_id": "AZPR_V10_1_STAGED_HYBRID_INTEGRATION",
+    "status": "DRAFT_NOT_ACTIVE",
+    "manifest": "automation/integration/v10.1/prompt-stages/stage-manifest.json",
+    "hash_manifest": "automation/integration/v10.1/prompt-stages/SHA256SUMS.json",
+    "hash_manifest_sha256": "e21d1b9c4515431b92fef41b3001e95a2eb1409f9b3d9854c995caf9df9abd1e",
+    "validator": "scripts/check_v10_1_prompt_stage_pack.py",
+    "stage_count": 10,
+    "one_stage_per_invocation": true,
+    "automatic_stage_advancement": false,
+    "authority_effect": false
+  },
+  "controller_states": {
+    "repository_controller": {
+      "path": "automation/controller.py",
+      "sha256": "6d5d26fa9f29700e6f1ebc3b89069b0f6e6ad417412f913b7dfded4ba216a2d5",
+      "status": "DEVELOPMENT_ONLY",
+      "activation_allowed": false,
+      "execution_allowed_during_integration": false,
+      "may_consume_production_credentials": false,
+      "may_apply_external_changes": false
+    },
+    "external_controller": {
+      "source_prefix": "trusted-controller/",
+      "candidate_controller_sha256": "5f65a20153f30a08b64ef8e5b56a1dd0d9c885dc40c5249fe103485931d9d1d3",
+      "status": "DEFERRED_UNQUALIFIED",
+      "repository_destination": null,
+      "activation_allowed": false,
+      "may_consume_production_credentials": false,
+      "may_apply_external_changes": false
+    }
+  },
+  "authority_state": {
+    "active_policy": null,
+    "active_roadmap": null,
+    "single_controller_writer_required": true,
+    "live_runtime_state_transfer_allowed": false
+  },
+  "audit_authority": {
+    "interim_source": "docs/audits/README.md",
+    "index_path": "docs/audits/index.json",
+    "index_status": "ABSENT_UNTIL_FIRST_CONTROLLER_FORMAL_AUDIT",
+    "bootstrap_stage": "INT-04",
+    "schema_implementation": "automation/controller.py:write_audit_artifacts",
+    "result_schema": "automation/result.schema.json",
+    "governance_owner_required": true,
+    "delivery_audit_authoritative": false
+  },
+  "mapping_decisions": [
+    {
+      "decision_id": "MAP-PROMPTS-V10.1",
+      "scope": "repository-overlay/automation/{numbered,appendices} and embedded prompt archive",
+      "disposition": "REPLACE_CURRENT_CANONICAL_SET_AFTER_APPROVAL",
+      "phase": "H1_REPOSITORY_INTEGRATION"
+    },
+    {
+      "decision_id": "MAP-REPOSITORY-CONTROLLER",
+      "scope": "automation/controller.py and repository-local controller configuration",
+      "disposition": "KEEP_CURRENT_DEVELOPMENT_ONLY",
+      "phase": "H0_PREPARATION"
+    },
+    {
+      "decision_id": "MAP-EXTERNAL-CONTROLLER",
+      "scope": "trusted-controller, trusted-installation, external-capability-runner and operator tools",
+      "disposition": "DEFER_OUTSIDE_REPOSITORY_UNTIL_SEPARATE_APPROVAL",
+      "phase": "H2_EXTERNAL_QUALIFICATION"
+    },
+    {
+      "decision_id": "MAP-PROVENANCE",
+      "scope": "integration reports and transition evidence",
+      "disposition": "ADD_UNDER_DOCS_DELIVERY_PROVENANCE_V10.1",
+      "phase": "H0_PREPARATION"
+    },
+    {
+      "decision_id": "MAP-AUTHORITY",
+      "scope": "policy, roadmap and runtime state",
+      "disposition": "KEEP_INACTIVE_AND_NEVER_COPY_LIVE_STATE",
+      "phase": "ALL"
+    }
+  ],
+  "phases": [
+    {
+      "phase_id": "H0_PREPARATION",
+      "controller_writer": "NONE",
+      "purpose": "Inventory, mapping, provenance, dependency preparation and read-only validation.",
+      "exit_gates": [
+        "MAPPING_ASSESSMENT_READY",
+        "STAGED_PROMPT_PACK_VALID",
+        "HUMAN_MAPPING_APPROVAL",
+        "SOURCE_AND_FRESH_VERIFIER_EVIDENCE"
+      ]
+    },
+    {
+      "phase_id": "H1_REPOSITORY_INTEGRATION",
+      "controller_writer": "NONE",
+      "purpose": "Materialize the approved prompt/schema/configuration mapping in one isolated branch while both controllers remain inert and all external capability stays disabled.",
+      "entry_gates": [
+        "HUMAN_MAPPING_APPROVAL",
+        "APPROVED_BASE_COMMIT",
+        "CLEAN_OR_PRESERVED_WORKTREE"
+      ],
+      "exit_gates": [
+        "ONE_CANONICAL_PROMPT_SET",
+        "PROMPT_MANIFEST_REBUILT",
+        "REPOSITORY_VALIDATION_PASS",
+        "ROLLBACK_SNAPSHOT_RECORDED"
+      ]
+    },
+    {
+      "phase_id": "H2_EXTERNAL_QUALIFICATION",
+      "controller_writer": "NONE",
+      "purpose": "Qualify the external controller outside the repository in read-only shadow mode.",
+      "entry_gates": [
+        "H1_COMMITTED_AND_AUDITED",
+        "APPROVED_HOST_TRUST_BOUNDARY",
+        "SIGNED_INSTALLATION_AUTHORIZATION",
+        "HASH_LOCKED_LINUX_VALIDATION_RUNTIME"
+      ],
+      "exit_gates": [
+        "EXTERNAL_CONTROLLER_READ_ONLY",
+        "DUAL_RUN_EQUIVALENCE_PASS",
+        "STATE_IMPORT_DRY_RUN_PASS",
+        "INDEPENDENT_CUTOVER_AUDIT_PASS"
+      ]
+    },
+    {
+      "phase_id": "H3_CONTROLLED_CUTOVER",
+      "controller_writer": "EXTERNAL_CONTROLLER",
+      "purpose": "Perform an atomic single-writer handoff using a signed, expiring cutover authorization.",
+      "entry_gates": [
+        "H2_QUALIFICATION_PASS",
+        "REPOSITORY_CONTROLLER_QUIESCED",
+        "SIGNED_STATE_SNAPSHOT",
+        "TWO_PERSON_CUTOVER_APPROVAL",
+        "ROLLBACK_TEST_PASS"
+      ],
+      "exit_gates": [
+        "EXTERNAL_CONTROLLER_PRIMARY",
+        "REPOSITORY_CONTROLLER_DISABLED_FOR_WRITES",
+        "POST_CUTOVER_RECONCILIATION_PASS"
+      ]
+    }
+  ],
+  "cutover_safeguards": [
+    "Never permit both controllers to write stage state or Git history concurrently.",
+    "Bind every transition artifact to the exact source commit, tree, prompt archive hash and policy identity.",
+    "Run the external controller read-only against an immutable snapshot before any state handoff.",
+    "Compare repository and external controller decisions on the same fixtures and require zero unexplained differences.",
+    "Transfer only schema-validated committed evidence; never copy .codex-loop live state, secrets, keys, receipts or mutable ledgers.",
+    "Require a signed state snapshot, consumed nonce, short expiry and explicit rollback point for cutover.",
+    "Keep provider, installer and production apply capabilities unavailable until separately approved.",
+    "Execute one transition prompt stage per invocation and never advance stages automatically.",
+    "Fail closed if any mapped path, reference, audit authority, runtime dependency or host ownership decision remains unresolved."
+  ],
+  "rollback": {
+    "pre_cutover": "Discard the isolated integration branch/worktree and preserve provenance reports.",
+    "cutover": "Stop the external controller, restore the signed pre-cutover state snapshot, re-enable the pinned repository controller only after reconciliation, and invalidate the cutover nonce.",
+    "forbidden": [
+      "rewriting source evidence",
+      "copying live external state into the repository",
+      "running both controller writers",
+      "advancing a roadmap during rollback"
+    ]
+  },
+  "approval": {
+    "status": "PENDING_HUMAN_APPROVAL",
+    "approval_file": "automation/approvals/v10.1-integration-path-mapping-approved.json",
+    "format_version": "1.0",
+    "approval_kind": "AZPR_V10_1_INTEGRATION_MAPPING_APPROVAL",
+    "required_bindings": [
+      "base_commit",
+      "mapping_sha256",
+      "transition_contract_sha256",
+      "prompt_archive_sha256",
+      "prompt_stage_hash_manifest_sha256",
+      "verifier_evidence_sha256",
+      "approved_by",
+      "approved_at"
+    ],
+    "codex_may_create_approval": false
+  }
+}

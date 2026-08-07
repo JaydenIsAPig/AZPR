@@ -16,7 +16,12 @@ Before acting, inspect:
 4. `docs/governance/domain-glossary.md`
 5. Relevant ADRs under `docs/adr/`
 6. Relevant runbooks under `docs/runbooks/`
-7. `docs/audits/index.json` and the latest applicable formal audit
+7. `docs/audits/index.json` and the latest applicable formal audit. Before the
+   first controller-managed formal audit, when the index does not yet exist,
+   use `docs/audits/README.md` only as the explicitly approved interim audit
+   authority; do not infer a `PASS` or promote delivery evidence to a formal
+   audit. The first formal audit must create the index atomically with its
+   immutable, commit-bound report.
 8. `docs/automation/current-status.md`
 9. Existing implementation, tests, schemas, migrations, and configuration
 10. The active prompt supplied by the autonomous controller

@@ -1,0 +1,155 @@
+{
+  "format_version": "1.0",
+  "pack_id": "AZPR_V10_1_STAGED_HYBRID_INTEGRATION",
+  "status": "DRAFT_NOT_ACTIVE",
+  "governing_contract": "automation/integration/v10.1/controller-transition-contract.json",
+  "master_prompt": "automation/integration/v10.1/prompt-stages/MASTER-ORCHESTRATION-PROMPT.md",
+  "operator_input_template": "automation/integration/v10.1/prompt-stages/operator-input.template.json",
+  "result_schema": "automation/integration/v10.1/prompt-stages/stage-result.schema.json",
+  "result_example": "automation/integration/v10.1/prompt-stages/stage-result.example.json",
+  "hash_manifest": "automation/integration/v10.1/prompt-stages/SHA256SUMS.json",
+  "selected_prompt_payload": {
+    "status": "SELECTED_NOT_ACTIVE",
+    "sha256": "3b235cb7e33ca409241ff26523f60f8fee89cec524b3f09e91a69927a0aa4880",
+    "numbered_prompts": 38,
+    "appendices": 3
+  },
+  "execution_policy": {
+    "one_stage_per_invocation": true,
+    "automatic_stage_advancement": false,
+    "human_approval_may_be_created_by_agent": false,
+    "live_runtime_state_transfer_allowed": false,
+    "concurrent_controller_writers_allowed": false
+  },
+  "authority_effect": {
+    "activates_policy": false,
+    "activates_roadmap": false,
+    "activates_repository_controller": false,
+    "activates_external_controller": false,
+    "authorizes_installer": false,
+    "authorizes_provider": false,
+    "authorizes_production": false
+  },
+  "stages": [
+    {
+      "sequence": 0,
+      "stage_id": "INT-00",
+      "phase": "H0_PREPARATION",
+      "file": "automation/integration/v10.1/prompt-stages/00-preflight-authority-and-inputs.md",
+      "predecessor": null,
+      "execution_mode": "READ_ONLY",
+      "controller_writer": "NONE",
+      "materializes_repository": false,
+      "external_write": false,
+      "requires_human_authorization": false
+    },
+    {
+      "sequence": 1,
+      "stage_id": "INT-01",
+      "phase": "H0_PREPARATION",
+      "file": "automation/integration/v10.1/prompt-stages/01-linux-delivery-reverification.md",
+      "predecessor": "INT-00",
+      "execution_mode": "EXTERNAL_READ_ONLY_VALIDATION",
+      "controller_writer": "NONE",
+      "materializes_repository": false,
+      "external_write": false,
+      "requires_human_authorization": true
+    },
+    {
+      "sequence": 2,
+      "stage_id": "INT-02",
+      "phase": "H0_PREPARATION",
+      "file": "automation/integration/v10.1/prompt-stages/02-freeze-mapping-and-human-approval-handoff.md",
+      "predecessor": "INT-01",
+      "execution_mode": "REPOSITORY_PREPARATION",
+      "controller_writer": "NONE",
+      "materializes_repository": false,
+      "external_write": false,
+      "requires_human_authorization": false
+    },
+    {
+      "sequence": 3,
+      "stage_id": "INT-03",
+      "phase": "H1_REPOSITORY_INTEGRATION",
+      "file": "automation/integration/v10.1/prompt-stages/03-h1-materialize-approved-repository-mapping.md",
+      "predecessor": "INT-02",
+      "execution_mode": "ISOLATED_REPOSITORY_MATERIALIZATION",
+      "controller_writer": "NONE",
+      "materializes_repository": true,
+      "external_write": false,
+      "requires_human_authorization": true
+    },
+    {
+      "sequence": 4,
+      "stage_id": "INT-04",
+      "phase": "H1_REPOSITORY_INTEGRATION",
+      "file": "automation/integration/v10.1/prompt-stages/04-h1-repository-integration-audit.md",
+      "predecessor": "INT-03",
+      "execution_mode": "READ_ONLY_AUDIT",
+      "controller_writer": "NONE",
+      "materializes_repository": false,
+      "external_write": false,
+      "requires_human_authorization": false
+    },
+    {
+      "sequence": 5,
+      "stage_id": "INT-05",
+      "phase": "H2_EXTERNAL_QUALIFICATION",
+      "file": "automation/integration/v10.1/prompt-stages/05-h2-read-only-external-controller-qualification.md",
+      "predecessor": "INT-04",
+      "execution_mode": "EXTERNAL_READ_ONLY_SHADOW",
+      "controller_writer": "NONE",
+      "materializes_repository": false,
+      "external_write": false,
+      "requires_human_authorization": true
+    },
+    {
+      "sequence": 6,
+      "stage_id": "INT-06",
+      "phase": "H2_EXTERNAL_QUALIFICATION",
+      "file": "automation/integration/v10.1/prompt-stages/06-h2-cutover-readiness-audit.md",
+      "predecessor": "INT-05",
+      "execution_mode": "READ_ONLY_AUDIT",
+      "controller_writer": "NONE",
+      "materializes_repository": false,
+      "external_write": false,
+      "requires_human_authorization": false
+    },
+    {
+      "sequence": 7,
+      "stage_id": "INT-07",
+      "phase": "H3_CONTROLLED_CUTOVER",
+      "file": "automation/integration/v10.1/prompt-stages/07-h3-cutover-plan-and-authorization-package.md",
+      "predecessor": "INT-06",
+      "execution_mode": "CUTOVER_PLANNING_ONLY",
+      "controller_writer": "NONE",
+      "materializes_repository": false,
+      "external_write": false,
+      "requires_human_authorization": true
+    },
+    {
+      "sequence": 8,
+      "stage_id": "INT-08",
+      "phase": "H3_CONTROLLED_CUTOVER",
+      "file": "automation/integration/v10.1/prompt-stages/08-h3-controlled-single-writer-cutover.md",
+      "predecessor": "INT-07",
+      "execution_mode": "ATOMIC_CUTOVER",
+      "controller_writer": "EXTERNAL_CONTROLLER",
+      "materializes_repository": false,
+      "external_write": true,
+      "requires_human_authorization": true
+    },
+    {
+      "sequence": 9,
+      "stage_id": "INT-09",
+      "phase": "H3_CONTROLLED_CUTOVER",
+      "file": "automation/integration/v10.1/prompt-stages/09-post-cutover-reconciliation-audit.md",
+      "predecessor": "INT-08",
+      "execution_mode": "POST_CUTOVER_READ_ONLY_AUDIT",
+      "controller_writer": "EXTERNAL_CONTROLLER",
+      "materializes_repository": false,
+      "external_write": false,
+      "requires_human_authorization": false
+    }
+  ]
+}

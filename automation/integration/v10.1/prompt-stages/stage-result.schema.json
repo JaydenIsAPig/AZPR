@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://az-permit-radar.local/schemas/v10.1-integration-stage-result.schema.json",
+  "title": "AZPR v10.1 staged-hybrid integration stage result",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "stage_id": {
+      "enum": ["INT-00", "INT-01", "INT-02", "INT-03", "INT-04", "INT-05", "INT-06", "INT-07", "INT-08", "INT-09"]
+    },
+    "phase": {
+      "enum": ["H0_PREPARATION", "H1_REPOSITORY_INTEGRATION", "H2_EXTERNAL_QUALIFICATION", "H3_CONTROLLED_CUTOVER"]
+    },
+    "outcome": {
+      "enum": ["COMPLETED", "PASS", "PASS_WITH_REQUIRED_CORRECTIONS", "BLOCKED", "APPROVAL_REQUIRED", "FAILED"]
+    },
+    "summary": {"type": "string", "minLength": 1},
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "head_commit": {"type": ["string", "null"]},
+        "mapping_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "transition_contract_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "prompt_archive_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "governing_audit": {"type": ["string", "null"]},
+        "human_approval_files": {"type": "array", "items": {"type": "string"}}
+      },
+      "required": ["head_commit", "mapping_sha256", "transition_contract_sha256", "prompt_archive_sha256", "governing_audit", "human_approval_files"]
+    },
+    "preconditions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "passed": {"type": "array", "items": {"type": "string"}},
+        "failed": {"type": "array", "items": {"type": "string"}}
+      },
+      "required": ["passed", "failed"]
+    },
+    "changes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "files_added": {"type": "array", "items": {"type": "string"}},
+        "files_modified": {"type": "array", "items": {"type": "string"}},
+        "files_moved": {"type": "array", "items": {"type": "string"}},
+        "external_state_changes": {"type": "array", "items": {"type": "string"}}
+      },
+      "required": ["files_added", "files_modified", "files_moved", "external_state_changes"]
+    },
+    "validations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "command_or_check": {"type": "string", "minLength": 1},
+          "result": {"enum": ["PASS", "FAIL", "NOT_RUN", "NOT_APPLICABLE"]},
+          "evidence": {"type": "string"}
+        },
+        "required": ["command_or_check", "result", "evidence"]
+      }
+    },
+    "artifacts": {"type": "array", "items": {"type": "string"}},
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "required": {"type": "boolean"},
+        "approval_kind": {"type": ["string", "null"]},
+        "required_files": {"type": "array", "items": {"type": "string"}},
+        "question": {"type": ["string", "null"]}
+      },
+      "required": ["required", "approval_kind", "required_files", "question"]
+    },
+    "rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "available": {"type": "boolean"},
+        "tested": {"type": "boolean"},
+        "reference": {"type": ["string", "null"]}
+      },
+      "required": ["available", "tested", "reference"]
+    },
+    "remaining_risks": {"type": "array", "items": {"type": "string"}},
+    "next_stage": {"type": ["string", "null"], "enum": [null, "INT-00", "INT-01", "INT-02", "INT-03", "INT-04", "INT-05", "INT-06", "INT-07", "INT-08", "INT-09"]},
+    "next_action": {"type": "string", "minLength": 1}
+  },
+  "required": ["stage_id", "phase", "outcome", "summary", "authority", "preconditions", "changes", "validations", "artifacts", "approval", "rollback", "remaining_risks", "next_stage", "next_action"]
+}

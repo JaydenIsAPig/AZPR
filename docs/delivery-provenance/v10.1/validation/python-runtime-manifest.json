@@ -1,0 +1,58 @@
+{
+  "format_version": "1.0",
+  "purpose": "AZPR v10.1 Linux delivery-verifier pre-qualification",
+  "status": "PREQUALIFICATION_PASS_NOT_FORMAL_INT_01",
+  "host": {
+    "kind": "local Multipass VM",
+    "name": "azpr-validator",
+    "release": "Ubuntu 24.04.4 LTS",
+    "image_hash_prefix": "aa6da05756e8",
+    "architecture": "aarch64",
+    "kernel": "6.8.0-136-generic",
+    "hypervisor": "qemu",
+    "cpu_count": 4,
+    "memory_gib": 8,
+    "disk_gib": 30
+  },
+  "reviewer": {
+    "account": "ubuntu",
+    "uid": 1000,
+    "gid": 1000,
+    "account_home": "/home/ubuntu",
+    "verification_home_environment": "/home/oai",
+    "effective_uid_verified": 1000,
+    "proc_available": true,
+    "privilege_capable_groups_present": true
+  },
+  "python": {
+    "version": "3.12.3",
+    "implementation": "CPython",
+    "executable": "/srv/azpr-validator/work/venv/bin/python",
+    "executable_sha256": "a7d56a8a764faf7bbf5c164055a48fd072be52287bdeb523a9e07b2042f4e7e1"
+  },
+  "dependencies": {
+    "requirements_input": "docs/delivery-provenance/v10.1/validation/requirements-validation.in",
+    "requirements_input_sha256": "3b2ef897e0d3ab52184d55a112a603be0d34b3b99285d189ddfaab7313cc4d3f",
+    "requirements_lock": "docs/delivery-provenance/v10.1/validation/requirements-validation.lock",
+    "requirements_lock_sha256": "2d96bd0da4b7b5f0414ce5510d1ae45f2a1c5437d72a83b24b1bfa87b32127d7",
+    "wheelhouse_manifest": "docs/delivery-provenance/v10.1/validation/wheelhouse-manifest.json",
+    "wheel_count": 14,
+    "pip_check": "PASS",
+    "network_used_to_construct_wheelhouse": true,
+    "installed_from_wheelhouse_with_no_index": true
+  },
+  "verification_boundary": {
+    "network_interface_disabled": true,
+    "network_probe_exit_code": 1,
+    "network_probe_result": "NETWORK_UNREACHABLE",
+    "credential_environment_inherited": false,
+    "candidate_trees_read_only": true,
+    "source_mutation_detected": false
+  },
+  "limitations": [
+    "This local result is preparation evidence only and does not claim a formal INT-01 stage result.",
+    "Only the Multipass image-hash prefix exposed by the local CLI was retained; no signed full image identity was available.",
+    "The reviewer was non-root at execution but remained a member of privilege-capable guest groups, so this run is not an independent host-trust qualification.",
+    "No controller installation, provider capability, state transfer, materialization, activation, or production authority is granted."
+  ]
+}

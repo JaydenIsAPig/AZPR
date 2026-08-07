@@ -1,0 +1,24 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_ FinalAssessmentControlTests.test_external_runner_rolled_back_is_non_success_terminal _
+
+self = <test_final_assessment_controls.FinalAssessmentControlTests testMethod=test_external_runner_rolled_back_is_non_success_terminal>
+
+    def test_external_runner_rolled_back_is_non_success_terminal(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td); fixture=write_external_fixture(sr,PACK,root,apply_status='ROLLED_BACK')
+            evidence_dir=root/'evidence'; evidence_dir.mkdir()
+            command=[sys.executable,str(fixture['runner']),'--installation-manifest',str(fixture['installation_path']),'--development-mode',
+              '--plan',str(root/'plan.json'),'--manifest',str(root/'manifest.json'),'--target-attestation',str(root/'attestation.json'),
+              '--operation-ticket',str(root/'ticket.json'),'--evidence-dir',str(evidence_dir),'--confirm','APPLY SIGNED AZPR CAPABILITY']
+            completed=subprocess.run(command,capture_output=True,text=True,env={**os.environ,'AZPR_EXPLICIT_TEST_MODE':'1','AZPR_PRODUCTION_MODE':'0'})
+            self.assertNotEqual(completed.returncode,0,completed.stderr+completed.stdout)
+>           files=list(evidence_dir.glob('*.json')); self.assertEqual(len(files),1)
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError: 0 != 1
+
+tests/test_final_assessment_controls.py:257: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_final_assessment_controls.py::FinalAssessmentControlTests::test_external_runner_rolled_back_is_non_success_terminal
+1 failed in 2.26s
+

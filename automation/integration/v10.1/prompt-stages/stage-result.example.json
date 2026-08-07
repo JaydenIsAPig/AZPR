@@ -1,0 +1,46 @@
+{
+  "stage_id": "INT-00",
+  "phase": "H0_PREPARATION",
+  "outcome": "APPROVAL_REQUIRED",
+  "summary": "Preflight completed; operator-supplied Linux runtime approval is absent.",
+  "authority": {
+    "head_commit": "dac0e0bf1695d44f4b6c0e0e7673559f5d87ec02",
+    "mapping_sha256": null,
+    "transition_contract_sha256": null,
+    "prompt_archive_sha256": "3b235cb7e33ca409241ff26523f60f8fee89cec524b3f09e91a69927a0aa4880",
+    "governing_audit": null,
+    "human_approval_files": []
+  },
+  "preconditions": {
+    "passed": ["Repository authority chain inspected"],
+    "failed": ["Approved hash-locked Linux validation runtime not supplied"]
+  },
+  "changes": {
+    "files_added": [],
+    "files_modified": [],
+    "files_moved": [],
+    "external_state_changes": []
+  },
+  "validations": [
+    {
+      "command_or_check": "Read-only authority and worktree preflight",
+      "result": "PASS",
+      "evidence": "No runtime or repository mutation occurred"
+    }
+  ],
+  "artifacts": [],
+  "approval": {
+    "required": true,
+    "approval_kind": "LINUX_VALIDATION_RUNTIME_AUTHORIZATION",
+    "required_files": [],
+    "question": "Approve and identify the isolated Linux validation runtime."
+  },
+  "rollback": {
+    "available": true,
+    "tested": false,
+    "reference": "No mutation occurred"
+  },
+  "remaining_risks": ["Linux-specific verifier behavior remains unqualified"],
+  "next_stage": "INT-01",
+  "next_action": "Provide approved Linux runtime identity and access metadata without secrets."
+}

@@ -1,0 +1,75 @@
+{
+  "format_version": "1.0",
+  "identity": "AZPR_V10.1_STAGED_HYBRID_DELIVERY_PROVENANCE",
+  "classification": "NON_AUTHORITATIVE_FROZEN_EVIDENCE",
+  "recorded_at": "2026-08-06",
+  "repository_base_commit": "dac0e0bf1695d44f4b6c0e0e7673559f5d87ec02",
+  "governing_transition_contract": "automation/integration/v10.1/controller-transition-contract.json",
+  "authority_effect": {
+    "activates_policy": false,
+    "activates_roadmap": false,
+    "activates_repository_controller": false,
+    "activates_external_controller": false,
+    "authorizes_materialization": false,
+    "authorizes_production": false
+  },
+  "received_inputs": [
+    {
+      "role": "outer_delivery_container",
+      "path": "../AZPR-v10.1-final-deliverables.zip",
+      "sha256": "9194931033552ebde75cad5a9edf53348466d1af786b0a0aa0bdafc93b9a0558"
+    },
+    {
+      "role": "implementation_candidate",
+      "path_in_outer_delivery": "AZPR-autonomous-execution-primed-draft-v10.1.zip",
+      "sha256": "618449d73fd921e0fb366c0aed8c9a666b2ead3847e529a6ced9692fe41e2b24"
+    },
+    {
+      "role": "reports_archive",
+      "path_in_outer_delivery": "AZPR-autonomous-execution-primed-draft-v10.1-reports.zip",
+      "sha256": "f6c26f3dc745bd9ddba6e47039433bbf0b6687cda64a9b134ce775c4a659c228"
+    },
+    {
+      "role": "selected_prompt_set",
+      "path": "../markdown-prompts-autonomous-priming-draft-v10.1.zip",
+      "sha256": "3b235cb7e33ca409241ff26523f60f8fee89cec524b3f09e91a69927a0aa4880",
+      "numbered_prompts": 38,
+      "appendices": 3,
+      "status": "SELECTED_NOT_ACTIVE"
+    },
+    {
+      "role": "integration_staging_specification",
+      "path": "../AZPR-v10.1-system-integration-staging.codex.yaml",
+      "sha256": "51e53269a13e1f86198230d2d592a7e4be26edabf5efb7f519e747497450711c"
+    },
+    {
+      "role": "master_operating_prompt_context",
+      "path": "../Legacy/AZ Permit Radar Master Operating Prompt.docx",
+      "sha256": "37800ebde204070d1ac20c2cfff5c809ee4f318cfcc44312514c393077334ae6"
+    },
+    {
+      "role": "product_charter_context",
+      "path": "../Legacy/Product-Charter-AZPR.docx",
+      "sha256": "0da9f1c1e08065f51d4f55e426f4da29cd9a718a4b46f42eb6f35f463134261b"
+    }
+  ],
+  "delivery_manifests": {
+    "outer_manifest_sha256": "2a73fb38db3aa2e05244ea502a0703d14ed205b4b0c157a64d0a939e7b31d635",
+    "frozen_reports_manifest": "docs/delivery-provenance/v10.1/frozen-delivery-reports/SHA256SUMS.json",
+    "frozen_reports_manifest_sha256": "6cefa4d10fb2c8cfed01bfd40067bab8201434f8ebc5fa2677ecd454e4d3de6a",
+    "frozen_reports_files_including_manifest": 39
+  },
+  "mapping_lineage": {
+    "immutable_staging_mapping": "docs/delivery-provenance/v10.1/integration/AZPR-v10.1-integration-path-mapping.staging-original.csv",
+    "immutable_staging_mapping_sha256": "007786c1c1748f8264cee452df815b47e41e15deb8b532b31f426cd18b4f2525",
+    "approval_candidate_mapping": "docs/delivery-provenance/v10.1/integration/AZPR-v10.1-integration-path-mapping.csv",
+    "approval_status": "PENDING_HUMAN_APPROVAL"
+  },
+  "controller_identity": {
+    "repository_controller_path": "automation/controller.py",
+    "repository_controller_sha256": "6d5d26fa9f29700e6f1ebc3b89069b0f6e6ad417412f913b7dfded4ba216a2d5",
+    "repository_controller_status": "DEVELOPMENT_ONLY_INERT_DURING_INTEGRATION",
+    "external_candidate_sha256": "5f65a20153f30a08b64ef8e5b56a1dd0d9c885dc40c5249fe103485931d9d1d3",
+    "external_candidate_status": "DEFERRED_UNQUALIFIED_NO_REPOSITORY_DESTINATION"
+  }
+}

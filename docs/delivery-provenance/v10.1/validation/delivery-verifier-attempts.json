@@ -1,0 +1,84 @@
+{
+  "format_version": "1.0",
+  "assessment": "AZPR_V10_1_LINUX_DELIVERY_VERIFIER_PREQUALIFICATION",
+  "exported_at_utc": "2026-08-06T23:19:45Z",
+  "status": "PASS_PREQUALIFICATION_ONLY",
+  "formal_stage_id": null,
+  "formal_stage_result": null,
+  "candidate": {
+    "implementation_archive_sha256": "618449d73fd921e0fb366c0aed8c9a666b2ead3847e529a6ced9692fe41e2b24",
+    "verifier_sha256": "e0058361f6e01f3ca44931d42ae3ef1aad811150c0e39c27c8fcf93cb8a4cb84",
+    "source_and_fresh_trees_byte_identical_after_attempts": true,
+    "inventory_comparison": {
+      "path": "docs/delivery-provenance/v10.1/validation/inventory-comparison.json",
+      "sha256": "e9898a4716763e4995db3f0f29017cae2716b8d4bb4849ad2bebbd92878e5d90"
+    },
+    "prompt_archive_sha256": "3b235cb7e33ca409241ff26523f60f8fee89cec524b3f09e91a69927a0aa4880"
+  },
+  "runtime": {
+    "platform": "Linux-aarch64",
+    "release": "Ubuntu 24.04.4 LTS",
+    "kernel": "6.8.0-136-generic",
+    "reviewer_uid": 1000,
+    "reviewer_home": "/home/oai",
+    "python": "CPython 3.12.3",
+    "dependency_source": "hash-locked Linux ARM64 wheelhouse",
+    "runtime_manifest_sha256": "93de5336fb3fa26506f53961de2509461893b155008123c00cd3e4951a69895d",
+    "network_used_during_verification": false,
+    "network_evidence": {
+      "before": {"path": "docs/delivery-provenance/v10.1/validation/raw/network-before.txt", "sha256": "c8b856587af2bebcded5c892609c20079aad9da7726644db21a465f88ccc6c4b"},
+      "disabled": {"path": "docs/delivery-provenance/v10.1/validation/raw/network-disabled.txt", "sha256": "80636af7a83499f0e6f192f19d41fdcd8ec8e40a4579c1cc91f908350bbe6bbd"},
+      "probe_stderr": {"path": "docs/delivery-provenance/v10.1/validation/raw/network-probe.stderr.txt", "sha256": "bfeda12f777b6c53ddd9443d5913a369ec5a0f22f7816321f2e1dd50d816efbc"}
+    },
+    "qualification_effect": "PREQUALIFICATION_ONLY"
+  },
+  "source_tree": {
+    "invocation": "VERIFY-V10-CANDIDATE.py",
+    "fresh_extraction_flag": false,
+    "exit_code": 0,
+    "duration_seconds": 40,
+    "status": "PASS_PREQUALIFICATION_ONLY",
+    "tests_expected": 120,
+    "tests_passed": 120,
+    "raw_stdout": {
+      "path": "docs/delivery-provenance/v10.1/validation/raw/source-tree-verifier.stdout.txt",
+      "sha256": "056d91b6b4ca47ca1de9871eaaaee84e6405df8eda902db463b6e80749473afe"
+    },
+    "raw_stderr": {
+      "path": "docs/delivery-provenance/v10.1/validation/raw/source-tree-verifier.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "fresh_extraction": {
+    "invocation": "VERIFY-V10-CANDIDATE.py --fresh-extraction",
+    "fresh_extraction_flag": true,
+    "exit_code": 0,
+    "duration_seconds": 40,
+    "status": "PASS_PREQUALIFICATION_ONLY",
+    "tests_expected": 120,
+    "tests_passed": 120,
+    "raw_stdout": {
+      "path": "docs/delivery-provenance/v10.1/validation/raw/fresh-extraction-verifier.stdout.txt",
+      "sha256": "3184352adeff8de2a61cc987fd66c02df524cfc75bf15b288e3ba04466601fae"
+    },
+    "raw_stderr": {
+      "path": "docs/delivery-provenance/v10.1/validation/raw/fresh-extraction-verifier.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "disposition": {
+    "dependencies_available": true,
+    "both_exact_verifier_modes_reproduced": true,
+    "mapping_approval_may_be_reviewed": false,
+    "materialization_allowed": false,
+    "external_controller_qualified": false,
+    "activation_allowed": false,
+    "next_validation_gate": "Execute INT-00 with complete operator identity and exact host approval, then rerun INT-01 as a formal stage on an independently approved hash-locked reviewer boundary."
+  },
+  "limitations": [
+    "This run occurred before a valid INT-00 result and is not a formal INT-01 stage result.",
+    "The local reviewer account was non-root but privilege-capable inside the guest.",
+    "The Multipass CLI exposed only an image-hash prefix rather than a signed full image identity.",
+    "No controller, provider, installer, state-transfer, materialization, activation, or production authority is granted."
+  ]
+}

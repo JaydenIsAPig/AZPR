@@ -1,0 +1,35 @@
+{
+  "format_version": "1.0",
+  "status": "LOCAL_OFFLINE_VALIDATION_BUNDLE_AVAILABLE",
+  "bundle_path": ".integration-temp/offline-validation/AZPR-v10.1-macos-arm64-cp312-offline-validation-wheelhouse.zip",
+  "bundle_sha256": "59a904d6530d44b03e56f34ecd532d2d3acc5ae0b2ea8c2be73f0c73b5236358",
+  "bundle_size_bytes": 9692616,
+  "platform": "macosx-11.0-arm64",
+  "python_abi": "cp312",
+  "wheel_count": 14,
+  "contents": [
+    "bundle/requirements-validation.in",
+    "bundle/requirements-validation.lock",
+    "bundle/wheelhouse-manifest.json",
+    "bundle/python-runtime-manifest.json",
+    "bundle/wheelhouse/*.whl"
+  ],
+  "install_policy": {
+    "network_index_allowed": false,
+    "binary_wheels_only": true,
+    "requirements_hashes_required": true
+  },
+  "reproduction_check": {
+    "clean_environment": ".integration-temp/offline-validation/reproduction-venv",
+    "offline_install": "PASS",
+    "pip_check": "PASS",
+    "required_imports": "PASS",
+    "zip_integrity": "PASS"
+  },
+  "authority_effect": {
+    "external_controller_qualified": false,
+    "installer_authorized": false,
+    "production_authorized": false
+  },
+  "limitation": "This bundle is local macOS arm64 dependency evidence. H2 still requires a separately approved hash-locked Linux runtime."
+}

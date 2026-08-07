@@ -1,5 +1,26 @@
 # AZ Permit Radar Autonomous Agent Loop
 
+## Controller boundary
+
+This guide covers the repository controller only. Under [ADR-0009](../adr/0009-staged-hybrid-controller-transition.md), it is development-only; H0, H1, and H2 permit no controller writer, and a separately approved H3 cutover may make the external controller the sole writer. The delivered external-controller candidate must stay inert and outside the repository; prompt integration does not authorize external installation, state transfer, provider access, or production apply.
+
+Before requesting v10.1 mapping approval, run:
+
+```bash
+.integration-temp/offline-validation/venv/bin/python \
+  scripts/check_v10_1_prompt_stage_pack.py
+.integration-temp/offline-validation/venv/bin/python \
+  scripts/check_v10_1_mapping_readiness.py
+```
+
+The checkers are read-only and never create an approval. The prompt pack is a
+routing and transition-preparation layer only: its presence does not execute a
+stage, activate the selected implementation prompts, or authorize either
+controller. The transition contract and delivery evidence are indexed under
+`automation/integration/v10.1/` and `docs/delivery-provenance/v10.1/`.
+
+> **Current transition lock:** The setup and run commands below are retained as repository-controller reference material. Do not execute them during H0, H1, or H2. Use `current-status.md` and the transition contract for the active boundary.
+
 ## Quick start
 
 Run all commands from the actual Git repository root, `AZPR/`.

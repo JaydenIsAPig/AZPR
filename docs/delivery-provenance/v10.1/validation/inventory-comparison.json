@@ -1,0 +1,13 @@
+{
+  "format_version": "1.0",
+  "status": "PASS",
+  "canonical_inventory": "docs/delivery-provenance/v10.1/validation/candidate-file-inventory.sha256",
+  "canonical_inventory_sha256": "df404f1766797cdcf915280605e5d267732d092fa8b5fe09be35bda0d168325c",
+  "source_before_sha256": "df404f1766797cdcf915280605e5d267732d092fa8b5fe09be35bda0d168325c",
+  "source_after_sha256": "df404f1766797cdcf915280605e5d267732d092fa8b5fe09be35bda0d168325c",
+  "fresh_before_sha256": "df404f1766797cdcf915280605e5d267732d092fa8b5fe09be35bda0d168325c",
+  "fresh_after_sha256": "df404f1766797cdcf915280605e5d267732d092fa8b5fe09be35bda0d168325c",
+  "source_unchanged": true,
+  "fresh_unchanged": true,
+  "trees_byte_identical_after_attempts": true
+}

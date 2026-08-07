@@ -1,0 +1,2047 @@
+{
+  "allowed_parent_root": "/Users/jayden/Desktop/Business/AZ-Permit-Radar",
+  "appendix_paths": [
+    "automation/appendices/appendix-a-audit-correction-prompt.md",
+    "automation/appendices/appendix-b-optional-controlled-sms-canary-enablement-prompt.md",
+    "automation/appendices/appendix-c-optional-controlled-sms-canary-activation-audit.md"
+  ],
+  "audit_state": {
+    "controller_latest_formal_audit": null,
+    "index_path": "docs/audits/index.json",
+    "index_present": false,
+    "latest_applicable_report": "docs/audits/post-prompt-10-reconciliation-audit.md",
+    "latest_report_result": "CORRECTIONS STILL REQUIRED"
+  },
+  "automation_paths": [
+    "automation/appendices/appendix-a-audit-correction-prompt.md",
+    "automation/appendices/appendix-b-optional-controlled-sms-canary-enablement-prompt.md",
+    "automation/appendices/appendix-c-optional-controlled-sms-canary-activation-audit.md",
+    "automation/approvals/README.md",
+    "automation/approvals/templates/generic-approval.template.json",
+    "automation/approvals/templates/post-mvp-project-review-approved.template.json",
+    "automation/approvals/templates/sms-canary-approved.template.json",
+    "automation/approvals/templates/sms-canary-audit-approved.template.json",
+    "automation/controller.config.json",
+    "automation/controller.py",
+    "automation/numbered/001-close-the-post-core-traceability-release-gate.md",
+    "automation/numbered/002-post-core-traceability-corrective-audit.md",
+    "automation/numbered/003-define-and-govern-the-narrow-pilot-scope.md",
+    "automation/numbered/004-select-and-govern-the-production-application-stack.md",
+    "automation/numbered/005-bootstrap-the-production-application-shell-and-engineering-baseline.md",
+    "automation/numbered/006-mvp-scope-and-architecture-decision-audit.md",
+    "automation/numbered/007-design-and-implement-the-durable-database-schema-and-migrations.md",
+    "automation/numbered/008-implement-durable-repositories-and-transaction-boundaries.md",
+    "automation/numbered/009-implement-immutable-artifact-storage-outbox-workers-and-crash-recovery.md",
+    "automation/numbered/010-durable-platform-and-persistence-audit.md",
+    "automation/numbered/011-implement-authentication-session-security-and-accesscontext-construction.md",
+    "automation/numbered/012-implement-customer-account-lifecycle-versioned-configuration-and-onboarding-api.md",
+    "automation/numbered/013-identity-authorization-and-customer-isolation-audit.md",
+    "automation/numbered/014-select-and-approve-the-first-tucson-or-pima-county-production-source.md",
+    "automation/numbered/015-implement-durable-scheduled-acquisition-and-the-approved-live-connector.md",
+    "automation/numbered/016-implement-the-production-source-parser-replay-and-backfill-contract.md",
+    "automation/numbered/017-implement-required-production-geography-and-address-resolution.md",
+    "automation/numbered/018-pilot-source-ingestion-normalization-and-geography-audit.md",
+    "automation/numbered/019-implement-the-authorized-customer-api-and-query-projections.md",
+    "automation/numbered/020-build-the-authenticated-frontend-foundation-and-onboarding-experience.md",
+    "automation/numbered/021-build-the-explainable-opportunity-dashboard-and-lead-workflow.md",
+    "automation/numbered/022-customer-api-frontend-and-data-exposure-audit.md",
+    "automation/numbered/023-implement-email-notification-orchestration-and-delivery.md",
+    "automation/numbered/024-email-delivery-audit.md",
+    "automation/numbered/025-implement-controlled-sms-infrastructure-behind-a-disabled-feature-flag.md",
+    "automation/numbered/026-build-internal-review-and-source-operations-tooling.md",
+    "automation/numbered/027-notification-sms-and-operations-audit.md",
+    "automation/numbered/028-implement-the-privacy-conscious-analytics-event-model.md",
+    "automation/numbered/029-implement-observability-health-alerting-and-operational-runbooks.md",
+    "automation/numbered/030-implement-backup-restore-reconciliation-and-rollback-procedures.md",
+    "automation/numbered/031-perform-security-privacy-performance-and-recovery-hardening.md",
+    "automation/numbered/032-formal-pilot-release-test-matrix-and-release-gate-audit.md",
+    "automation/numbered/033-prepare-and-execute-the-controlled-staging-deployment.md",
+    "automation/numbered/034-final-staging-and-pilot-readiness-audit.md",
+    "automation/numbered/035-deploy-the-controlled-production-pilot.md",
+    "automation/numbered/036-production-pilot-launch-verification-audit.md",
+    "automation/numbered/037-implement-pilot-feedback-and-business-validation-workflow.md",
+    "automation/numbered/038-pilot-feedback-and-business-validation-audit.md",
+    "automation/numbered/markdown-prompts.zip",
+    "automation/prompt-manifest.json",
+    "automation/reports/roadmap-generation-report.md",
+    "automation/result.schema.json",
+    "automation/roadmap-generator-prompt.md",
+    "automation/roadmap.example.json",
+    "automation/roadmap.json",
+    "automation/roadmap.proposed.json",
+    "automation/roadmap.schema.json",
+    "automation/smoke_test.py"
+  ],
+  "controller_paths": [
+    "automation/controller.config.json",
+    "automation/controller.py"
+  ],
+  "current_branch": "main",
+  "current_head_sha": "dac0e0bf1695d44f4b6c0e0e7673559f5d87ec02",
+  "documentation_paths": [
+    "AGENTS.md",
+    "AUTONOMOUS_LOOP_INSTALL.md",
+    "AZ Permit Radar Master Operating Prompt.docx",
+    "AZPR-roadmap-security-consultation.md",
+    "CONTRIBUTING.md",
+    "README.md",
+    "automation/appendices/appendix-a-audit-correction-prompt.md",
+    "automation/appendices/appendix-b-optional-controlled-sms-canary-enablement-prompt.md",
+    "automation/appendices/appendix-c-optional-controlled-sms-canary-activation-audit.md",
+    "automation/approvals/README.md",
+    "automation/numbered/001-close-the-post-core-traceability-release-gate.md",
+    "automation/numbered/002-post-core-traceability-corrective-audit.md",
+    "automation/numbered/003-define-and-govern-the-narrow-pilot-scope.md",
+    "automation/numbered/004-select-and-govern-the-production-application-stack.md",
+    "automation/numbered/005-bootstrap-the-production-application-shell-and-engineering-baseline.md",
+    "automation/numbered/006-mvp-scope-and-architecture-decision-audit.md",
+    "automation/numbered/007-design-and-implement-the-durable-database-schema-and-migrations.md",
+    "automation/numbered/008-implement-durable-repositories-and-transaction-boundaries.md",
+    "automation/numbered/009-implement-immutable-artifact-storage-outbox-workers-and-crash-recovery.md",
+    "automation/numbered/010-durable-platform-and-persistence-audit.md",
+    "automation/numbered/011-implement-authentication-session-security-and-accesscontext-construction.md",
+    "automation/numbered/012-implement-customer-account-lifecycle-versioned-configuration-and-onboarding-api.md",
+    "automation/numbered/013-identity-authorization-and-customer-isolation-audit.md",
+    "automation/numbered/014-select-and-approve-the-first-tucson-or-pima-county-production-source.md",
+    "automation/numbered/015-implement-durable-scheduled-acquisition-and-the-approved-live-connector.md",
+    "automation/numbered/016-implement-the-production-source-parser-replay-and-backfill-contract.md",
+    "automation/numbered/017-implement-required-production-geography-and-address-resolution.md",
+    "automation/numbered/018-pilot-source-ingestion-normalization-and-geography-audit.md",
+    "automation/numbered/019-implement-the-authorized-customer-api-and-query-projections.md",
+    "automation/numbered/020-build-the-authenticated-frontend-foundation-and-onboarding-experience.md",
+    "automation/numbered/021-build-the-explainable-opportunity-dashboard-and-lead-workflow.md",
+    "automation/numbered/022-customer-api-frontend-and-data-exposure-audit.md",
+    "automation/numbered/023-implement-email-notification-orchestration-and-delivery.md",
+    "automation/numbered/024-email-delivery-audit.md",
+    "automation/numbered/025-implement-controlled-sms-infrastructure-behind-a-disabled-feature-flag.md",
+    "automation/numbered/026-build-internal-review-and-source-operations-tooling.md",
+    "automation/numbered/027-notification-sms-and-operations-audit.md",
+    "automation/numbered/028-implement-the-privacy-conscious-analytics-event-model.md",
+    "automation/numbered/029-implement-observability-health-alerting-and-operational-runbooks.md",
+    "automation/numbered/030-implement-backup-restore-reconciliation-and-rollback-procedures.md",
+    "automation/numbered/031-perform-security-privacy-performance-and-recovery-hardening.md",
+    "automation/numbered/032-formal-pilot-release-test-matrix-and-release-gate-audit.md",
+    "automation/numbered/033-prepare-and-execute-the-controlled-staging-deployment.md",
+    "automation/numbered/034-final-staging-and-pilot-readiness-audit.md",
+    "automation/numbered/035-deploy-the-controlled-production-pilot.md",
+    "automation/numbered/036-production-pilot-launch-verification-audit.md",
+    "automation/numbered/037-implement-pilot-feedback-and-business-validation-workflow.md",
+    "automation/numbered/038-pilot-feedback-and-business-validation-audit.md",
+    "automation/reports/roadmap-generation-report.md",
+    "automation/roadmap-generator-prompt.md",
+    "docs/adr/0000-template.md",
+    "docs/adr/0001-modular-monolith.md",
+    "docs/adr/0002-deterministic-first-ai.md",
+    "docs/adr/0003-documentation-versioning.md",
+    "docs/adr/0004-python-domain-kernel.md",
+    "docs/adr/0005-authoritative-classification-result.md",
+    "docs/adr/0006-versioned-opportunity-projections.md",
+    "docs/adr/0007-in-memory-processing-unit-of-work.md",
+    "docs/adr/0008-customer-scoped-access-context.md",
+    "docs/adr/README.md",
+    "docs/audits/README.md",
+    "docs/audits/documentation-version-audit.md",
+    "docs/audits/domain-language-audit.md",
+    "docs/audits/post-prompt-10-reconciliation-audit.md",
+    "docs/audits/repository-audit.md",
+    "docs/audits/technical-debt-register.md",
+    "docs/automation/AZPR-Autonomous-Agent-Loop-Implementation-Guide.docx",
+    "docs/automation/README.md",
+    "docs/automation/autonomous-execution-policy.md",
+    "docs/automation/current-status.md",
+    "docs/automation/run-history/README.md",
+    "docs/current/backend-structure-v1.12.md",
+    "docs/current/business-data-v1.7.json",
+    "docs/current/business-logic-v1.12.md",
+    "docs/current/frontend-design-v1.1.md",
+    "docs/current/project-structure-v1.12.md",
+    "docs/governance/contributor-rules.md",
+    "docs/governance/definition-of-done.md",
+    "docs/governance/documentation-update-checklist.md",
+    "docs/governance/domain-glossary.md",
+    "docs/governance/source-onboarding-checklist.md",
+    "docs/legacy/README.md",
+    "docs/legacy/backend-structure/backend-structure-v1.0.md",
+    "docs/legacy/backend-structure/backend-structure-v1.1.md",
+    "docs/legacy/backend-structure/backend-structure-v1.10.md",
+    "docs/legacy/backend-structure/backend-structure-v1.11.md",
+    "docs/legacy/backend-structure/backend-structure-v1.2.md",
+    "docs/legacy/backend-structure/backend-structure-v1.3.md",
+    "docs/legacy/backend-structure/backend-structure-v1.4.md",
+    "docs/legacy/backend-structure/backend-structure-v1.5.md",
+    "docs/legacy/backend-structure/backend-structure-v1.6.md",
+    "docs/legacy/backend-structure/backend-structure-v1.7.md",
+    "docs/legacy/backend-structure/backend-structure-v1.8.md",
+    "docs/legacy/backend-structure/backend-structure-v1.9.md",
+    "docs/legacy/business-data/business-data-v1.0.json",
+    "docs/legacy/business-data/business-data-v1.1.json",
+    "docs/legacy/business-data/business-data-v1.2.json",
+    "docs/legacy/business-data/business-data-v1.3.json",
+    "docs/legacy/business-data/business-data-v1.4.json",
+    "docs/legacy/business-data/business-data-v1.5.json",
+    "docs/legacy/business-data/business-data-v1.6.json",
+    "docs/legacy/business-logic/business-logic-v1.0.md",
+    "docs/legacy/business-logic/business-logic-v1.1.md",
+    "docs/legacy/business-logic/business-logic-v1.10.md",
+    "docs/legacy/business-logic/business-logic-v1.11.md",
+    "docs/legacy/business-logic/business-logic-v1.2.md",
+    "docs/legacy/business-logic/business-logic-v1.3.md",
+    "docs/legacy/business-logic/business-logic-v1.4.md",
+    "docs/legacy/business-logic/business-logic-v1.5.md",
+    "docs/legacy/business-logic/business-logic-v1.6.md",
+    "docs/legacy/business-logic/business-logic-v1.7.md",
+    "docs/legacy/business-logic/business-logic-v1.8.md",
+    "docs/legacy/business-logic/business-logic-v1.9.md",
+    "docs/legacy/frontend-design/frontend-design-v1.0.md",
+    "docs/legacy/project-structure/project-structure-v1.0.md",
+    "docs/legacy/project-structure/project-structure-v1.1.md",
+    "docs/legacy/project-structure/project-structure-v1.10.md",
+    "docs/legacy/project-structure/project-structure-v1.11.md",
+    "docs/legacy/project-structure/project-structure-v1.2.md",
+    "docs/legacy/project-structure/project-structure-v1.3.md",
+    "docs/legacy/project-structure/project-structure-v1.4.md",
+    "docs/legacy/project-structure/project-structure-v1.5.md",
+    "docs/legacy/project-structure/project-structure-v1.6.md",
+    "docs/legacy/project-structure/project-structure-v1.7.md",
+    "docs/legacy/project-structure/project-structure-v1.8.md",
+    "docs/legacy/project-structure/project-structure-v1.9.md",
+    "docs/logs/backend-structure-log-v1.0.md",
+    "docs/logs/backend-structure-log-v1.1.md",
+    "docs/logs/backend-structure-log-v1.10.md",
+    "docs/logs/backend-structure-log-v1.11.md",
+    "docs/logs/backend-structure-log-v1.12.md",
+    "docs/logs/backend-structure-log-v1.2.md",
+    "docs/logs/backend-structure-log-v1.3.md",
+    "docs/logs/backend-structure-log-v1.4.md",
+    "docs/logs/backend-structure-log-v1.5.md",
+    "docs/logs/backend-structure-log-v1.6.md",
+    "docs/logs/backend-structure-log-v1.7.md",
+    "docs/logs/backend-structure-log-v1.8.md",
+    "docs/logs/backend-structure-log-v1.9.md",
+    "docs/logs/business-data-log-v1.0.md",
+    "docs/logs/business-data-log-v1.1.md",
+    "docs/logs/business-data-log-v1.2.md",
+    "docs/logs/business-data-log-v1.3.md",
+    "docs/logs/business-data-log-v1.4.md",
+    "docs/logs/business-data-log-v1.5.md",
+    "docs/logs/business-data-log-v1.6.md",
+    "docs/logs/business-data-log-v1.7.md",
+    "docs/logs/business-logic-log-v1.0.md",
+    "docs/logs/business-logic-log-v1.1.md",
+    "docs/logs/business-logic-log-v1.10.md",
+    "docs/logs/business-logic-log-v1.11.md",
+    "docs/logs/business-logic-log-v1.12.md",
+    "docs/logs/business-logic-log-v1.2.md",
+    "docs/logs/business-logic-log-v1.3.md",
+    "docs/logs/business-logic-log-v1.4.md",
+    "docs/logs/business-logic-log-v1.5.md",
+    "docs/logs/business-logic-log-v1.6.md",
+    "docs/logs/business-logic-log-v1.7.md",
+    "docs/logs/business-logic-log-v1.8.md",
+    "docs/logs/business-logic-log-v1.9.md",
+    "docs/logs/frontend-design-log-v1.0.md",
+    "docs/logs/frontend-design-log-v1.1.md",
+    "docs/logs/project-structure-log-v1.0.md",
+    "docs/logs/project-structure-log-v1.1.md",
+    "docs/logs/project-structure-log-v1.10.md",
+    "docs/logs/project-structure-log-v1.11.md",
+    "docs/logs/project-structure-log-v1.12.md",
+    "docs/logs/project-structure-log-v1.2.md",
+    "docs/logs/project-structure-log-v1.3.md",
+    "docs/logs/project-structure-log-v1.4.md",
+    "docs/logs/project-structure-log-v1.5.md",
+    "docs/logs/project-structure-log-v1.6.md",
+    "docs/logs/project-structure-log-v1.7.md",
+    "docs/logs/project-structure-log-v1.8.md",
+    "docs/logs/project-structure-log-v1.9.md",
+    "docs/runbooks/README.md",
+    "docs/runbooks/permit-normalization.md",
+    "docs/runbooks/source-acquisition.md",
+    "docs/runbooks/source-parsing.md",
+    "docs/schema/business-data.schema.json"
+  ],
+  "existing_worktrees": [
+    {
+      "branch": "refs/heads/main",
+      "head": "dac0e0bf1695d44f4b6c0e0e7673559f5d87ec02",
+      "path": "/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR"
+    }
+  ],
+  "generated_at": "2026-08-06T23:11:48+00:00",
+  "git_status": "CLEAN_AT_PHASE_1_FREEZE",
+  "ignored_file_count": 69,
+  "ignored_files": [
+    ".DS_Store",
+    ".codex-loop/.DS_Store",
+    ".codex-loop/generated-roadmap.json",
+    ".codex-loop/logs/roadmap-generation.log",
+    ".codex-loop/state.json",
+    "automation/.DS_Store",
+    "automation/appendices/.DS_Store",
+    "automation/numbered/.DS_Store",
+    "docs/.DS_Store",
+    "docs/audits/.DS_Store",
+    "docs/current/.DS_Store",
+    "src/.DS_Store",
+    "src/az_permit_radar/.DS_Store",
+    "src/az_permit_radar/__pycache__/__init__.cpython-312.pyc",
+    "src/az_permit_radar/application/__pycache__/__init__.cpython-312.pyc",
+    "src/az_permit_radar/application/__pycache__/acquisition.cpython-312.pyc",
+    "src/az_permit_radar/application/__pycache__/classification.cpython-312.pyc",
+    "src/az_permit_radar/application/__pycache__/commands.cpython-312.pyc",
+    "src/az_permit_radar/application/__pycache__/geography.cpython-312.pyc",
+    "src/az_permit_radar/application/__pycache__/normalization.cpython-312.pyc",
+    "src/az_permit_radar/application/__pycache__/opportunity_matching.cpython-312.pyc",
+    "src/az_permit_radar/application/__pycache__/parsing.cpython-312.pyc",
+    "src/az_permit_radar/application/__pycache__/processing.cpython-312.pyc",
+    "src/az_permit_radar/application/__pycache__/queries.cpython-312.pyc",
+    "src/az_permit_radar/application/__pycache__/repositories.cpython-312.pyc",
+    "src/az_permit_radar/domain/__pycache__/__init__.cpython-312.pyc",
+    "src/az_permit_radar/domain/__pycache__/access.cpython-312.pyc",
+    "src/az_permit_radar/domain/__pycache__/acquisition.cpython-312.pyc",
+    "src/az_permit_radar/domain/__pycache__/classification.cpython-312.pyc",
+    "src/az_permit_radar/domain/__pycache__/customer.cpython-312.pyc",
+    "src/az_permit_radar/domain/__pycache__/deduplication.cpython-312.pyc",
+    "src/az_permit_radar/domain/__pycache__/eligibility.cpython-312.pyc",
+    "src/az_permit_radar/domain/__pycache__/errors.cpython-312.pyc",
+    "src/az_permit_radar/domain/__pycache__/events.cpython-312.pyc",
+    "src/az_permit_radar/domain/__pycache__/ingestion.cpython-312.pyc",
+    "src/az_permit_radar/domain/__pycache__/matching.cpython-312.pyc",
+    "src/az_permit_radar/domain/__pycache__/notification.cpython-312.pyc",
+    "src/az_permit_radar/domain/__pycache__/opportunity.cpython-312.pyc",
+    "src/az_permit_radar/domain/__pycache__/parsing.cpython-312.pyc",
+    "src/az_permit_radar/domain/__pycache__/permit.cpython-312.pyc",
+    "src/az_permit_radar/domain/__pycache__/review.cpython-312.pyc",
+    "src/az_permit_radar/domain/__pycache__/source_registry.cpython-312.pyc",
+    "src/az_permit_radar/domain/__pycache__/value_objects.cpython-312.pyc",
+    "src/az_permit_radar/infrastructure/__pycache__/__init__.cpython-312.pyc",
+    "src/az_permit_radar/infrastructure/__pycache__/customer_access.cpython-312.pyc",
+    "src/az_permit_radar/infrastructure/__pycache__/geography.cpython-312.pyc",
+    "src/az_permit_radar/infrastructure/__pycache__/opportunity_matching.cpython-312.pyc",
+    "src/az_permit_radar/infrastructure/__pycache__/permit_classification.cpython-312.pyc",
+    "src/az_permit_radar/infrastructure/__pycache__/permit_normalization.cpython-312.pyc",
+    "src/az_permit_radar/infrastructure/__pycache__/processing.cpython-312.pyc",
+    "src/az_permit_radar/infrastructure/__pycache__/source_acquisition.cpython-312.pyc",
+    "src/az_permit_radar/infrastructure/__pycache__/source_parsing.cpython-312.pyc",
+    "tests/.DS_Store",
+    "tests/__pycache__/__init__.cpython-312.pyc",
+    "tests/__pycache__/support.cpython-312.pyc",
+    "tests/__pycache__/test_acquisition_workflow.cpython-312.pyc",
+    "tests/__pycache__/test_architecture_contracts.cpython-312.pyc",
+    "tests/__pycache__/test_classification_subsystem.cpython-312.pyc",
+    "tests/__pycache__/test_customer_access_authorization.cpython-312.pyc",
+    "tests/__pycache__/test_customer_matching_notification_review.cpython-312.pyc",
+    "tests/__pycache__/test_end_to_end_processing.cpython-312.pyc",
+    "tests/__pycache__/test_geography_service_territories.cpython-312.pyc",
+    "tests/__pycache__/test_opportunity_generation_matching.cpython-312.pyc",
+    "tests/__pycache__/test_permit_classification_opportunity.cpython-312.pyc",
+    "tests/__pycache__/test_permit_normalization.cpython-312.pyc",
+    "tests/__pycache__/test_source_acquisition.cpython-312.pyc",
+    "tests/__pycache__/test_source_and_ingestion.cpython-312.pyc",
+    "tests/__pycache__/test_source_parsing.cpython-312.pyc",
+    "tests/__pycache__/test_value_objects.cpython-312.pyc"
+  ],
+  "installation_tool_paths": [
+    "AUTONOMOUS_LOOP_INSTALL.md",
+    "docs/automation/AZPR-Autonomous-Agent-Loop-Implementation-Guide.docx"
+  ],
+  "master_operating_prompt": {
+    "repository_path": "AZ Permit Radar Master Operating Prompt.docx",
+    "sha256": "37800ebde204070d1ac20c2cfff5c809ee4f318cfcc44312514c393077334ae6",
+    "supplied_legacy_copy_byte_identical": true
+  },
+  "numbered_prompt_paths": [
+    "automation/numbered/001-close-the-post-core-traceability-release-gate.md",
+    "automation/numbered/002-post-core-traceability-corrective-audit.md",
+    "automation/numbered/003-define-and-govern-the-narrow-pilot-scope.md",
+    "automation/numbered/004-select-and-govern-the-production-application-stack.md",
+    "automation/numbered/005-bootstrap-the-production-application-shell-and-engineering-baseline.md",
+    "automation/numbered/006-mvp-scope-and-architecture-decision-audit.md",
+    "automation/numbered/007-design-and-implement-the-durable-database-schema-and-migrations.md",
+    "automation/numbered/008-implement-durable-repositories-and-transaction-boundaries.md",
+    "automation/numbered/009-implement-immutable-artifact-storage-outbox-workers-and-crash-recovery.md",
+    "automation/numbered/010-durable-platform-and-persistence-audit.md",
+    "automation/numbered/011-implement-authentication-session-security-and-accesscontext-construction.md",
+    "automation/numbered/012-implement-customer-account-lifecycle-versioned-configuration-and-onboarding-api.md",
+    "automation/numbered/013-identity-authorization-and-customer-isolation-audit.md",
+    "automation/numbered/014-select-and-approve-the-first-tucson-or-pima-county-production-source.md",
+    "automation/numbered/015-implement-durable-scheduled-acquisition-and-the-approved-live-connector.md",
+    "automation/numbered/016-implement-the-production-source-parser-replay-and-backfill-contract.md",
+    "automation/numbered/017-implement-required-production-geography-and-address-resolution.md",
+    "automation/numbered/018-pilot-source-ingestion-normalization-and-geography-audit.md",
+    "automation/numbered/019-implement-the-authorized-customer-api-and-query-projections.md",
+    "automation/numbered/020-build-the-authenticated-frontend-foundation-and-onboarding-experience.md",
+    "automation/numbered/021-build-the-explainable-opportunity-dashboard-and-lead-workflow.md",
+    "automation/numbered/022-customer-api-frontend-and-data-exposure-audit.md",
+    "automation/numbered/023-implement-email-notification-orchestration-and-delivery.md",
+    "automation/numbered/024-email-delivery-audit.md",
+    "automation/numbered/025-implement-controlled-sms-infrastructure-behind-a-disabled-feature-flag.md",
+    "automation/numbered/026-build-internal-review-and-source-operations-tooling.md",
+    "automation/numbered/027-notification-sms-and-operations-audit.md",
+    "automation/numbered/028-implement-the-privacy-conscious-analytics-event-model.md",
+    "automation/numbered/029-implement-observability-health-alerting-and-operational-runbooks.md",
+    "automation/numbered/030-implement-backup-restore-reconciliation-and-rollback-procedures.md",
+    "automation/numbered/031-perform-security-privacy-performance-and-recovery-hardening.md",
+    "automation/numbered/032-formal-pilot-release-test-matrix-and-release-gate-audit.md",
+    "automation/numbered/033-prepare-and-execute-the-controlled-staging-deployment.md",
+    "automation/numbered/034-final-staging-and-pilot-readiness-audit.md",
+    "automation/numbered/035-deploy-the-controlled-production-pilot.md",
+    "automation/numbered/036-production-pilot-launch-verification-audit.md",
+    "automation/numbered/037-implement-pilot-feedback-and-business-validation-workflow.md",
+    "automation/numbered/038-pilot-feedback-and-business-validation-audit.md"
+  ],
+  "operator_tool_paths": [
+    "automation/controller.py",
+    "automation/smoke_test.py",
+    "scripts/check_docs.py"
+  ],
+  "policy_paths": [
+    "AGENTS.md",
+    "docs/automation/autonomous-execution-policy.md"
+  ],
+  "related_branches": [],
+  "report_paths": [
+    "automation/reports/roadmap-generation-report.md",
+    "docs/audits/README.md",
+    "docs/audits/documentation-version-audit.md",
+    "docs/audits/domain-language-audit.md",
+    "docs/audits/post-prompt-10-reconciliation-audit.md",
+    "docs/audits/repository-audit.md",
+    "docs/audits/technical-debt-register.md"
+  ],
+  "repository_basename": "AZPR",
+  "repository_root": "/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR",
+  "roadmap_paths": [
+    "AZPR-roadmap-security-consultation.md",
+    "AZPR-roadmap-security-scorecard.json",
+    "automation/reports/roadmap-generation-report.md",
+    "automation/roadmap-generator-prompt.md",
+    "automation/roadmap.example.json",
+    "automation/roadmap.json",
+    "automation/roadmap.proposed.json",
+    "automation/roadmap.schema.json",
+    ".codex-loop/generated-roadmap.json",
+    ".codex-loop/logs/roadmap-generation.log"
+  ],
+  "roadmap_state": {
+    "canonical_roadmap_path": "automation/roadmap.json",
+    "canonical_roadmap_size_bytes": 0,
+    "current_controller_interpretation": "INACTIVE_UNPROMOTED",
+    "delivery_controller_interpretation": "PATH_EXISTENCE_FORBIDDEN_ACTIVE_AUTHORITY",
+    "local_state_roadmap_version": null,
+    "proposal_path": "automation/roadmap.proposed.json"
+  },
+  "runtime_paths": [
+    ".codex-loop/.DS_Store",
+    ".codex-loop/generated-roadmap.json",
+    ".codex-loop/logs/roadmap-generation.log",
+    ".codex-loop/state.json"
+  ],
+  "schema_paths": [
+    "automation/result.schema.json",
+    "automation/roadmap.schema.json",
+    "docs/schema/business-data.schema.json"
+  ],
+  "snapshot_kind": "PHASE_1_PRE_WRITE_FREEZE",
+  "test_paths": [
+    "automation/smoke_test.py",
+    "tests/__init__.py",
+    "tests/fixtures/classification/evaluation-v1.json",
+    "tests/fixtures/manual/tucson-permits.csv",
+    "tests/fixtures/parser/tucson-permits-changed-columns.csv",
+    "tests/fixtures/parser/tucson-permits-normalization-v1.1.csv",
+    "tests/fixtures/parser/tucson-permits-unusable.csv",
+    "tests/fixtures/parser/tucson-permits-v1.csv",
+    "tests/support.py",
+    "tests/test_acquisition_workflow.py",
+    "tests/test_architecture_contracts.py",
+    "tests/test_classification_subsystem.py",
+    "tests/test_customer_access_authorization.py",
+    "tests/test_customer_matching_notification_review.py",
+    "tests/test_end_to_end_processing.py",
+    "tests/test_geography_service_territories.py",
+    "tests/test_opportunity_generation_matching.py",
+    "tests/test_permit_classification_opportunity.py",
+    "tests/test_permit_normalization.py",
+    "tests/test_source_acquisition.py",
+    "tests/test_source_and_ingestion.py",
+    "tests/test_source_parsing.py",
+    "tests/test_value_objects.py"
+  ],
+  "tracked_file_count": 261,
+  "tracked_files": [
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": ".gitattributes",
+      "sha256": "1a1dbe176bc233b499d35a57db7513f2941c99ab9759f177830c9149be99005b",
+      "size_bytes": 66
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": ".gitignore",
+      "sha256": "7f7fb8fa97612ee05953c4ae6fef6c489813f86e2d7096e76ac9bcce7244152f",
+      "size_bytes": 480
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "AGENTS.md",
+      "sha256": "26d2e9ce4a122cb8df2e037e1c19e1c1920a9c87206dee46d48a5fab99f649cc",
+      "size_bytes": 6607
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "AUTONOMOUS_LOOP_INSTALL.md",
+      "sha256": "f57eb53cada17102eb2bfe2b89f55619c6f9d894e4978145721fe449bc766e49",
+      "size_bytes": 3304
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "AZ Permit Radar Master Operating Prompt.docx",
+      "sha256": "37800ebde204070d1ac20c2cfff5c809ee4f318cfcc44312514c393077334ae6",
+      "size_bytes": 8409
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "AZPR-roadmap-security-consultation.md",
+      "sha256": "560985a96ebe55435306bd2240674a3ffd25959ff5ad9c0bfff9342a04e6b13e",
+      "size_bytes": 24710
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "AZPR-roadmap-security-scorecard.json",
+      "sha256": "770a3e5fcb4c4a2fcd94bb52ba9bc337677bc73a4c5dee78f4088d500002173a",
+      "size_bytes": 50994
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "BUNDLE_MANIFEST.txt",
+      "sha256": "e7c7e1dc527bf97f3ef4ea195c6123fa618156f485736d9c5335e43cdd399b8d",
+      "size_bytes": 8687
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "CONTRIBUTING.md",
+      "sha256": "b208612662f09273fc53dcdf761e92791ebb82b0ba52c567af1aebd2187d36a4",
+      "size_bytes": 2823
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "README.md",
+      "sha256": "5057d5517bf8f1e54ec86923d529e8426714856cd3d1ea86b7cc666807c67953",
+      "size_bytes": 1763
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/appendices/appendix-a-audit-correction-prompt.md",
+      "sha256": "7dc164d3a2a1f2c96dd59ff230cf6cc603327b51fdffaf86ecc132278234c365",
+      "size_bytes": 2464
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/appendices/appendix-b-optional-controlled-sms-canary-enablement-prompt.md",
+      "sha256": "f3857f940b4eec4e8c85486d9aadfef4bb09a7ea4175181ec992f35fd44a7993",
+      "size_bytes": 3310
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/appendices/appendix-c-optional-controlled-sms-canary-activation-audit.md",
+      "sha256": "384c81e9110dd44f283af31d4c3f0476410776af866ceb90d3202bba34ca75d2",
+      "size_bytes": 2349
+    },
+    {
+      "classification": "REPOSITORY_AUTOMATION",
+      "path": "automation/approvals/README.md",
+      "sha256": "7261bc4474c26698d7f4a2fe9b3ac947563d1493335581e5903ab4fd0e9de7e8",
+      "size_bytes": 674
+    },
+    {
+      "classification": "REPOSITORY_AUTOMATION",
+      "path": "automation/approvals/templates/generic-approval.template.json",
+      "sha256": "d6c75d6295c0373a8a2ec3fbff6764d3693f2cd4a3c5db89f6e9129e70b7d332",
+      "size_bytes": 409
+    },
+    {
+      "classification": "REPOSITORY_AUTOMATION",
+      "path": "automation/approvals/templates/post-mvp-project-review-approved.template.json",
+      "sha256": "4deb6273d9d54f62c8fec83fb9084a5b41575ceb64e4cc64319171b65bab0881",
+      "size_bytes": 706
+    },
+    {
+      "classification": "REPOSITORY_AUTOMATION",
+      "path": "automation/approvals/templates/sms-canary-approved.template.json",
+      "sha256": "ea21bff21795fc923fc4c80289a01242f1b0eba11292a2544ca47aa385610e05",
+      "size_bytes": 791
+    },
+    {
+      "classification": "REPOSITORY_AUTOMATION",
+      "path": "automation/approvals/templates/sms-canary-audit-approved.template.json",
+      "sha256": "201ded4d96516182e8861e3904e5c7c8260a2df9f398be4ce36c3a8b466b9ce7",
+      "size_bytes": 442
+    },
+    {
+      "classification": "REPOSITORY_AUTOMATION",
+      "path": "automation/controller.config.json",
+      "sha256": "8f98415e2b6a7cc4400d853a9628b615decef25b369bf82b301d3764bb5c97b2",
+      "size_bytes": 1333
+    },
+    {
+      "classification": "REPOSITORY_CONTROLLER",
+      "path": "automation/controller.py",
+      "sha256": "6d5d26fa9f29700e6f1ebc3b89069b0f6e6ad417412f913b7dfded4ba216a2d5",
+      "size_bytes": 72380
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/001-close-the-post-core-traceability-release-gate.md",
+      "sha256": "04e1015510be38d50af878ae14d03bb11bacb76642b54254001a5536fb22c1a1",
+      "size_bytes": 9159
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/002-post-core-traceability-corrective-audit.md",
+      "sha256": "ed483516aae77854b22390132b1426ab22a51b0134b6924d1b18e4a2c54a13ee",
+      "size_bytes": 4874
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/003-define-and-govern-the-narrow-pilot-scope.md",
+      "sha256": "648154133265bd0e5269d2697eec633a5342828bac275db44bc5c6ca110c191d",
+      "size_bytes": 9304
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/004-select-and-govern-the-production-application-stack.md",
+      "sha256": "7590f1b571bb873c95ef6864f04b5ae148a190885495176e4ffd4c0c84c98f5b",
+      "size_bytes": 9349
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/005-bootstrap-the-production-application-shell-and-engineering-baseline.md",
+      "sha256": "734d3007a87d10b541eb6df21615e297e3635cb53c175b778e3b60bc459763f1",
+      "size_bytes": 7773
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/006-mvp-scope-and-architecture-decision-audit.md",
+      "sha256": "f8707af42ac588df372856451a4c199a0d1ac3183d023851496905c9372587e3",
+      "size_bytes": 4966
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/007-design-and-implement-the-durable-database-schema-and-migrations.md",
+      "sha256": "dde7172876875a853dd746a00ffb9917e2182436608a57ec8c5c9afb7b195f14",
+      "size_bytes": 8388
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/008-implement-durable-repositories-and-transaction-boundaries.md",
+      "sha256": "d637b565c3757664d7e4dbb7a9b7661654602bc5df137369210adddc94faabb8",
+      "size_bytes": 7847
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/009-implement-immutable-artifact-storage-outbox-workers-and-crash-recovery.md",
+      "sha256": "93e6d203c64d440b9f5aa51c8c52b6f1cf17acbdc33eec8765cfac293ac7e0b4",
+      "size_bytes": 7834
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/010-durable-platform-and-persistence-audit.md",
+      "sha256": "b7bcb7529885ff26ce6661705d07d9efc3e34648e95283872b2d29237ea39faa",
+      "size_bytes": 4886
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/011-implement-authentication-session-security-and-accesscontext-construction.md",
+      "sha256": "cd859237f57cc5563882d76697e8f837f08e4c8639f5b1233064115eda50ae14",
+      "size_bytes": 7895
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/012-implement-customer-account-lifecycle-versioned-configuration-and-onboarding-api.md",
+      "sha256": "f0783c1470cf99640e000adb2598573618894a7972653cc0cef8e208665449ad",
+      "size_bytes": 8007
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/013-identity-authorization-and-customer-isolation-audit.md",
+      "sha256": "8402f6c192b786a2015a2e40ace2c70cc9a4f7f1fbfe36cd545798d038575f15",
+      "size_bytes": 4762
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/014-select-and-approve-the-first-tucson-or-pima-county-production-source.md",
+      "sha256": "10b049b2ee87be725f26d920a19662aa153c8580120fcaec104593e1fcbe577a",
+      "size_bytes": 7932
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/015-implement-durable-scheduled-acquisition-and-the-approved-live-connector.md",
+      "sha256": "8c43003f91ea3c6128693422d6c09fa55e3b2ec1fb218af971dceb32883e54a2",
+      "size_bytes": 7725
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/016-implement-the-production-source-parser-replay-and-backfill-contract.md",
+      "sha256": "58d9063bcae2016cdc9e8e948513e938b1b7a2aeb3491b479e470b8d947fd6b1",
+      "size_bytes": 7675
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/017-implement-required-production-geography-and-address-resolution.md",
+      "sha256": "16b9769b7a141a4b110fbe09d04d48df7c81709da99524718f8afd7cda00e108",
+      "size_bytes": 8188
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/018-pilot-source-ingestion-normalization-and-geography-audit.md",
+      "sha256": "d2d362064071ab97c1e37aaaa5e9f084577e853096e6cec3204dbeecd6c39f3a",
+      "size_bytes": 4991
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/019-implement-the-authorized-customer-api-and-query-projections.md",
+      "sha256": "b6b50a2e0ff79bd5e2b6d8fb3102df94268f36a0ac7be70de4e64a1e7f4dfb3e",
+      "size_bytes": 8040
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/020-build-the-authenticated-frontend-foundation-and-onboarding-experience.md",
+      "sha256": "9c737597d68820cc9e807ad36969af440ad0e610b339859a88539da4858a9a4a",
+      "size_bytes": 7836
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/021-build-the-explainable-opportunity-dashboard-and-lead-workflow.md",
+      "sha256": "0630b48a643b51836fcff530c656ef6cc4767030e005252bb10240764682aa8d",
+      "size_bytes": 7874
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/022-customer-api-frontend-and-data-exposure-audit.md",
+      "sha256": "e856477be476a8e30eed400902cb8ddd0839fa65a9aca6d85ce5cc69b9313495",
+      "size_bytes": 4911
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/023-implement-email-notification-orchestration-and-delivery.md",
+      "sha256": "fd492354e1e903e38bd036e956dbb09d422beab6f16dfaa2faa9fd986a77e2f7",
+      "size_bytes": 8374
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/024-email-delivery-audit.md",
+      "sha256": "0685d9a1a2814d16ed1b5fd3d20312bc5c20d1efc10c231415c2449c2b09b6fe",
+      "size_bytes": 5183
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/025-implement-controlled-sms-infrastructure-behind-a-disabled-feature-flag.md",
+      "sha256": "788b409ede2366c5907966e1c84929d01cf8adfc6046014a2db898302d351873",
+      "size_bytes": 8086
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/026-build-internal-review-and-source-operations-tooling.md",
+      "sha256": "a57911b79dc60a150fa3c950f295e5a1c87675bfdcfd317ff3d126f12d4b7eea",
+      "size_bytes": 7935
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/027-notification-sms-and-operations-audit.md",
+      "sha256": "a5704946d9a2d4e40ad84b755ff1154d1e24f057ac18ae7f916c196b563a421d",
+      "size_bytes": 4950
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/028-implement-the-privacy-conscious-analytics-event-model.md",
+      "sha256": "e5ca6a0ba0c0758e5bdc3e706a66cd27c815db0dc3310e22154dfd58b81a2d0b",
+      "size_bytes": 7932
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/029-implement-observability-health-alerting-and-operational-runbooks.md",
+      "sha256": "1ee2a6c35a618af1a581af5b3ab0f55dbfa98ec989d742e0ba12660df1ffb62b",
+      "size_bytes": 7510
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/030-implement-backup-restore-reconciliation-and-rollback-procedures.md",
+      "sha256": "a5e630bdcba239666ca45d01aa380f29ab2af39f2d628bebb4d6d9e38e4f99ea",
+      "size_bytes": 7578
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/031-perform-security-privacy-performance-and-recovery-hardening.md",
+      "sha256": "b605c04cfa99081ea8f53fe0814fd3a02542b4f3a34e41ed9b196f9e35635914",
+      "size_bytes": 7905
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/032-formal-pilot-release-test-matrix-and-release-gate-audit.md",
+      "sha256": "5b7201cb3bafa7f6d51cd65e5f4e50d8714a8fdf14d7fed049ea188139eebd20",
+      "size_bytes": 5397
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/033-prepare-and-execute-the-controlled-staging-deployment.md",
+      "sha256": "34ec997ef77764969c45fceaf95a2941edb3c63aec1016818a0b7a2751ba8e89",
+      "size_bytes": 7752
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/034-final-staging-and-pilot-readiness-audit.md",
+      "sha256": "d657196c0e16e440a384e2ddccf3a06937bb55b0b37ff5c68f856061125748e5",
+      "size_bytes": 5009
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/035-deploy-the-controlled-production-pilot.md",
+      "sha256": "b064d57f204280a64b56f1338a561fc345e0ed7b320e3253b5e5ca8249fd9210",
+      "size_bytes": 8290
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/036-production-pilot-launch-verification-audit.md",
+      "sha256": "03a42c89f8dd1f1d1f089b0942503e8fe19ec9f1877f6a13ef2f3dff3b122085",
+      "size_bytes": 5238
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/037-implement-pilot-feedback-and-business-validation-workflow.md",
+      "sha256": "7089128dd54138e2fc7873ce0ffbae1e2db5b9b8bd460c967010b328663bcbb0",
+      "size_bytes": 7922
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/038-pilot-feedback-and-business-validation-audit.md",
+      "sha256": "f822b87487640f516ab5270c59f3329e32c2739f4f2c91fa1ffc4491ab3778be",
+      "size_bytes": 6703
+    },
+    {
+      "classification": "REPOSITORY_PROMPT",
+      "path": "automation/numbered/markdown-prompts.zip",
+      "sha256": "67fe18e625209d860eedcfdde40f0161b1a57efa1f060381105a30e4edb0cb15",
+      "size_bytes": 148391
+    },
+    {
+      "classification": "REPOSITORY_AUTOMATION",
+      "path": "automation/prompt-manifest.json",
+      "sha256": "8a3545260e50a1153266bc0f066845ea820527857e6ba153f38f0e387d9b4efd",
+      "size_bytes": 7808
+    },
+    {
+      "classification": "REPOSITORY_AUTOMATION",
+      "path": "automation/reports/roadmap-generation-report.md",
+      "sha256": "817460116d94da133d6127b07f7d6a7fd2d0896a8cf4295abd56ce68f5decb32",
+      "size_bytes": 648
+    },
+    {
+      "classification": "REPOSITORY_SCHEMA",
+      "path": "automation/result.schema.json",
+      "sha256": "c1eebe6ec9c42848e6dec0a9d11a0017d6b0a4fddb33da6dd34165127098a976",
+      "size_bytes": 4794
+    },
+    {
+      "classification": "REPOSITORY_AUTOMATION",
+      "path": "automation/roadmap-generator-prompt.md",
+      "sha256": "a2bcb705b6db7d622a17f503c25d365babc0484fbcc87be2dba516e50b0b512f",
+      "size_bytes": 6617
+    },
+    {
+      "classification": "REPOSITORY_AUTOMATION",
+      "path": "automation/roadmap.example.json",
+      "sha256": "99e0fe49a2d258ce22e7bad094ffd4d9655bb62517a4d5a061e098d5beebe1d2",
+      "size_bytes": 83026
+    },
+    {
+      "classification": "REPOSITORY_AUTOMATION",
+      "path": "automation/roadmap.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "classification": "REPOSITORY_AUTOMATION",
+      "path": "automation/roadmap.proposed.json",
+      "sha256": "30c858b8ec02a2e6dae94a991395e1c0baabbf4b65bcf07e25d8dc30334f18c7",
+      "size_bytes": 106137
+    },
+    {
+      "classification": "REPOSITORY_SCHEMA",
+      "path": "automation/roadmap.schema.json",
+      "sha256": "572a5d6cc87ca5bce46b7e517c9cd709ea4584a333ada028d3f64c2ebf19ce7f",
+      "size_bytes": 11992
+    },
+    {
+      "classification": "REPOSITORY_AUTOMATION",
+      "path": "automation/smoke_test.py",
+      "sha256": "1feb29feea21417d2e284fc474dcb3ec457c663f0ae8be36fa515e6bbe6cd0e0",
+      "size_bytes": 3159
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/adr/0000-template.md",
+      "sha256": "3b82d0091ef93612970a71ec15ca41fbcd8bacb75bca87e44226452c6c69a01e",
+      "size_bytes": 834
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/adr/0001-modular-monolith.md",
+      "sha256": "96cf3ac8d9ab28ebbef5855bd83f3176d732403b6f2146a77e9d37eeb9d03bd1",
+      "size_bytes": 3306
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/adr/0002-deterministic-first-ai.md",
+      "sha256": "444a791fce2737a9780ee018a9ad99ca1e61aa30cbb5ae8244086c8aa98f9013",
+      "size_bytes": 3161
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/adr/0003-documentation-versioning.md",
+      "sha256": "8085b495d9caab0d7c28a36a3c88578ad657f2b8a69c3c8d4a37f8e92364608b",
+      "size_bytes": 3386
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/adr/0004-python-domain-kernel.md",
+      "sha256": "f1293ac85958da91fa560a2f03cc593c325bd08d9847aec26b619d5ecd31553d",
+      "size_bytes": 4115
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/adr/0005-authoritative-classification-result.md",
+      "sha256": "2ba1539bce45faa7ea338144b76bac00bbe268a3ad876cfce27a74055e79e3c3",
+      "size_bytes": 2787
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/adr/0006-versioned-opportunity-projections.md",
+      "sha256": "4069adda2853a1229a3bbd4a6d587ebeea3fd7060e454eb56f6d2ffaaa0cb7a5",
+      "size_bytes": 2203
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/adr/0007-in-memory-processing-unit-of-work.md",
+      "sha256": "ee16be4b566ecdcdf69729b0906111f140c93811093ce775f3a59c99ef934622",
+      "size_bytes": 2228
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/adr/0008-customer-scoped-access-context.md",
+      "sha256": "86c85ad0a55728cc0d4a0b0b6df2ff46c837bcd0e05ed0ccdaf7bc51e1ae8626",
+      "size_bytes": 2482
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/adr/README.md",
+      "sha256": "956fcdd4b09ec863e80de9dfc4428c9febb3808eeff6e5343b025beda3f79f68",
+      "size_bytes": 1478
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/audits/README.md",
+      "sha256": "8ee1fbaef2c4397a999a9d5dcdb7f8fde09920b406745f7ed1c21b8b6ac5a892",
+      "size_bytes": 247
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/audits/documentation-version-audit.md",
+      "sha256": "ae74d008e94d9562a9759af15f6d31fdf4c2908a923775f0232c94842dbc98ba",
+      "size_bytes": 9015
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/audits/domain-language-audit.md",
+      "sha256": "4083dfebcebe0d89e96d370e2b880ba2ea8284791b7d7f0bab43a0bcd990898d",
+      "size_bytes": 10458
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/audits/post-prompt-10-reconciliation-audit.md",
+      "sha256": "e11c4cd0ef00c702569a47bdfbcae390783c1d0d3df5127a76ca8f236bc25dee",
+      "size_bytes": 41390
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/audits/repository-audit.md",
+      "sha256": "8574878e83711280402e9ce1924510b616ba428ae3e6ed24d23adf7a1330c114",
+      "size_bytes": 14913
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/audits/technical-debt-register.md",
+      "sha256": "f5addb4f69097dc096aa362a142fcf3bad065a03d58c492bec2db7fbf81a67e9",
+      "size_bytes": 11679
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/automation/AZPR-Autonomous-Agent-Loop-Implementation-Guide.docx",
+      "sha256": "5666e29e842fc172f173533b44a8d321eff5158c7d33233c008e362678cb7da1",
+      "size_bytes": 46859
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/automation/README.md",
+      "sha256": "1d798cbeb1dd471c4ae44961ad258ab510fcc673183c04a2224cb6611f1ca76e",
+      "size_bytes": 2164
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/automation/autonomous-execution-policy.md",
+      "sha256": "654e984ec43384175e64bd2c9db5da32bf4b56d128dfe8aff4424aaeb03783df",
+      "size_bytes": 3184
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/automation/current-status.md",
+      "sha256": "494a4094331cf3de3711cd4d44aa6ad9c8f243b2c3948dfb398e25266dc7586d",
+      "size_bytes": 250
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/automation/run-history/README.md",
+      "sha256": "4ecf7ee1ae69f5dd8b8cdac037bf3fdd554615f6a245da8fa9994199f5d4407e",
+      "size_bytes": 221
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/current/backend-structure-v1.12.md",
+      "sha256": "b19976d70f9c86026c9840daa8cd9a09ae8ae377d7097dbcad60a66d972bee66",
+      "size_bytes": 3320
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/current/business-data-v1.7.json",
+      "sha256": "8b170106dfad4dbb33999584d78e0e806d29929e001b1f9b941bf9c62db5123d",
+      "size_bytes": 3724
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/current/business-logic-v1.12.md",
+      "sha256": "97ebe1bef54ccd06207f468e3f9665c2bd4b13a10f70c7b95fd5a06adccc7d88",
+      "size_bytes": 2670
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/current/frontend-design-v1.1.md",
+      "sha256": "fd42bb696badaacd23862e49e4ed617a45678caab2f12a6fb9fbb7e7568e7c33",
+      "size_bytes": 2558
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/current/project-structure-v1.12.md",
+      "sha256": "53a52142c52643ee512e2f4190e1f2eb3156d327f28590fc5a5e19d66c115ed5",
+      "size_bytes": 3058
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/governance/contributor-rules.md",
+      "sha256": "098d38d97e4b285775a0ba7b45e2b2d161372b86b791625a6978bbee0113df30",
+      "size_bytes": 448
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/governance/definition-of-done.md",
+      "sha256": "3a43ceb9e1c3b36c41c3ed6bf2aa50618f3631b31bd68f7d58aca64a8630f93f",
+      "size_bytes": 2081
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/governance/documentation-update-checklist.md",
+      "sha256": "a6114310a5d740c03910d12f93717264e531dc2d08b1ec34c617e93f20fb774a",
+      "size_bytes": 2233
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/governance/domain-glossary.md",
+      "sha256": "9d674d3e6e1dbc25446540071ff6b21e86af3c65c1033966d156eff8a19db8f6",
+      "size_bytes": 5992
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/governance/source-onboarding-checklist.md",
+      "sha256": "cc0ea8b5d4144b9e11d8c50cf1c98e73b0f84b22d1ddde3ee7231c0f4fb6174a",
+      "size_bytes": 5471
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/README.md",
+      "sha256": "56a026c0ed03d91e9d3c781680da8d8449a903ca218826008bd2c73c5c873b4a",
+      "size_bytes": 508
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/backend-structure/backend-structure-v1.0.md",
+      "sha256": "1562d848af5355ab0e389b06b9c2d66dfe73590ae8af7bd414f99efda86371bb",
+      "size_bytes": 4725
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/backend-structure/backend-structure-v1.1.md",
+      "sha256": "cf7cd90084ac5bfede1568ab85c3057222f81241d79197aa239ab3325ecca854",
+      "size_bytes": 7183
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/backend-structure/backend-structure-v1.10.md",
+      "sha256": "8fb4c0559e716be707af8401d9e56708b53e149a4450a39a885657e75639b5f4",
+      "size_bytes": 2404
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/backend-structure/backend-structure-v1.11.md",
+      "sha256": "678378f2775bef3e50d918616097deefcb3303a9831d866b2c408a125981f866",
+      "size_bytes": 2904
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/backend-structure/backend-structure-v1.2.md",
+      "sha256": "2907cdf689c5daddefa104d2be868fa5c7122f9cb6661ad12123ecf1bec16b6f",
+      "size_bytes": 5507
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/backend-structure/backend-structure-v1.3.md",
+      "sha256": "4198421d7aa1c1e407c5fdb81571de6bc6c1fdc1ad33097a39c6c585c325a033",
+      "size_bytes": 3498
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/backend-structure/backend-structure-v1.4.md",
+      "sha256": "f96e3fecf39865c9d41133a687ca7d9b48eac40cf4abbe7b61a82de38c364b23",
+      "size_bytes": 4664
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/backend-structure/backend-structure-v1.5.md",
+      "sha256": "6b26ee2ceac9c6e3bf9e1ee1d2673ab6ad08b460384aed42a2d427a78474e778",
+      "size_bytes": 4537
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/backend-structure/backend-structure-v1.6.md",
+      "sha256": "711e204c11974e3a50bf66eb63e9bff09ad5b4405012193b7d894c899df32d91",
+      "size_bytes": 1676
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/backend-structure/backend-structure-v1.7.md",
+      "sha256": "c9144c89b60154a8b057a0acec9a1e0712977cde42975dd3777d0600f448e0e6",
+      "size_bytes": 1488
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/backend-structure/backend-structure-v1.8.md",
+      "sha256": "2a424dd2ab75233a6d138bc663d07595eef2e08014c5a440f9bd45ccc246b31e",
+      "size_bytes": 1861
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/backend-structure/backend-structure-v1.9.md",
+      "sha256": "7e772f135bb38f8d68028a6082fcd10f719e255240bd01422f76869b8ebd6d97",
+      "size_bytes": 389
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/business-data/business-data-v1.0.json",
+      "sha256": "51be3b9f6a07bd6a9c8e73cea330b661dd89637226175d27107bb084b99eda04",
+      "size_bytes": 721
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/business-data/business-data-v1.1.json",
+      "sha256": "40ef362b968cdac15a7b93bb4c4a28590b32e08714a6b9eabf77c89e47d24718",
+      "size_bytes": 720
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/business-data/business-data-v1.2.json",
+      "sha256": "a5790ebb5f5988548975e6ee9d7799bb5af57cbe90bbc61452e450f9e56459b8",
+      "size_bytes": 946
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/business-data/business-data-v1.3.json",
+      "sha256": "df9d3d42d919394f4d2057f26938ed801f7dae64a6c7d50f04d0838a79555b70",
+      "size_bytes": 1437
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/business-data/business-data-v1.4.json",
+      "sha256": "043eee6dcf681b4ca260c7891639cbfd91ff0ddcab4849739a187742bfd61236",
+      "size_bytes": 1421
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/business-data/business-data-v1.5.json",
+      "sha256": "0d4094d2bdd581ce70b2df63952e6daabb31119ba4d2d6deb70eec646b6ef2c9",
+      "size_bytes": 2328
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/business-data/business-data-v1.6.json",
+      "sha256": "78bf911148fe970332b14c551046b7b3a3ffd75a5f16ac4431e15a04a53b7b0c",
+      "size_bytes": 3657
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/business-logic/business-logic-v1.0.md",
+      "sha256": "fa4d7a5e6a211f0ab46383d2a2d23e3cfe911441387d332bc95a88ce5382a544",
+      "size_bytes": 4795
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/business-logic/business-logic-v1.1.md",
+      "sha256": "93b059006d557a2bdcc38715e57eeba629021c9a0ba710155e5b404da0090c84",
+      "size_bytes": 6558
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/business-logic/business-logic-v1.10.md",
+      "sha256": "44e3e41072f3a7090c362d057cb01073085bdbade4e70fdfbac98e200e7ec8c4",
+      "size_bytes": 2591
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/business-logic/business-logic-v1.11.md",
+      "sha256": "f97c5119559286675def46c1c83377b9a6237220d886ea047996781c0c9e9d57",
+      "size_bytes": 2573
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/business-logic/business-logic-v1.2.md",
+      "sha256": "788b4bc2fd68eb467a1b50883a71fa73ac6368a357bbdaa6958267af183d2e99",
+      "size_bytes": 3998
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/business-logic/business-logic-v1.3.md",
+      "sha256": "fbb5974c83445a6c233cd614ec0ce1be0227bae11d204967810766dccd869e75",
+      "size_bytes": 2189
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/business-logic/business-logic-v1.4.md",
+      "sha256": "541d8059413f773b15ea6069cba8f71d4485fab04f095d9c9689849890cfd4f1",
+      "size_bytes": 4763
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/business-logic/business-logic-v1.5.md",
+      "sha256": "60bb63fb023fa5c97e99c7069d6d5ca62e9d418162c89fc91b28ebbf45afcc66",
+      "size_bytes": 4583
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/business-logic/business-logic-v1.6.md",
+      "sha256": "23629ee5029854fc1099c287286971dae77617eaf95fab4ca203bfa97521d787",
+      "size_bytes": 1793
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/business-logic/business-logic-v1.7.md",
+      "sha256": "cbdcc721a8a413f85ce8d0e88df57437c09e2b0d840e10af8d3638cdae5ca02d",
+      "size_bytes": 1601
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/business-logic/business-logic-v1.8.md",
+      "sha256": "46d6947c68a153a8362263dd75c2ea65b9de8c63809e8910ce9f6b7f343a8a89",
+      "size_bytes": 1881
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/business-logic/business-logic-v1.9.md",
+      "sha256": "2a8a29c3e2b6275ecc2bf0a51292dbdf5bc2b8b7005a5e8da3b4cde957f02723",
+      "size_bytes": 415
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/frontend-design/frontend-design-v1.0.md",
+      "sha256": "3369f97f82607118dbf2933f688f4fcc785e59ea246651057ea6d9c03b52d775",
+      "size_bytes": 3340
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/project-structure/project-structure-v1.0.md",
+      "sha256": "b8735a89bd55c22dc84a51735f9be059627e3d879fa5875cd3461aee880c3565",
+      "size_bytes": 3643
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/project-structure/project-structure-v1.1.md",
+      "sha256": "6b34965992295c2e82fc29cf0dbcf027b4ba9ade896c4ca08a9fa219041c573a",
+      "size_bytes": 5052
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/project-structure/project-structure-v1.10.md",
+      "sha256": "4aa030497c2f271a3c7ce51895f2c496de0959bc16bd6184fd8a04115fb38964",
+      "size_bytes": 2538
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/project-structure/project-structure-v1.11.md",
+      "sha256": "7ed3d67903a0d010e553319147aba64e1a60157e7beed9d589d8ba0cddad0165",
+      "size_bytes": 3397
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/project-structure/project-structure-v1.2.md",
+      "sha256": "0fa8c3a74552a349acec3e669941dc4bd49e6d368e001b1553bfecf4fa9db39a",
+      "size_bytes": 3718
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/project-structure/project-structure-v1.3.md",
+      "sha256": "806f3baeb7006c4aaf795a2688bcc58f029daa5aaedec0b9d6bcb22bbc2c038a",
+      "size_bytes": 3658
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/project-structure/project-structure-v1.4.md",
+      "sha256": "9b2d8fb6fa9abacdeb88d94439811027600ed1c614391b1f441c8d4ea70f8d73",
+      "size_bytes": 3629
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/project-structure/project-structure-v1.5.md",
+      "sha256": "483ae48d4eb392c08584e46b979f38694b695e875caed2b6e3bc2ccc8c4ad8ba",
+      "size_bytes": 3836
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/project-structure/project-structure-v1.6.md",
+      "sha256": "fd669347640284e1c8a66fdbc56f3435caf324bdd4a04aaeb966432dfd0087f9",
+      "size_bytes": 1949
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/project-structure/project-structure-v1.7.md",
+      "sha256": "b4518723adfe6608a3c071272233de77a242416be58d57a1cc7291ae128864ce",
+      "size_bytes": 1458
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/project-structure/project-structure-v1.8.md",
+      "sha256": "67d2677be9bd3b2b9004c5281a2522049c320eda75cce85818cfc2a2305f7410",
+      "size_bytes": 1622
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/legacy/project-structure/project-structure-v1.9.md",
+      "sha256": "bd9d28da2e70a7eab5a79a7926323e479ac07d5e4162f824dc05cae4932a1734",
+      "size_bytes": 443
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/backend-structure-log-v1.0.md",
+      "sha256": "133c815d9ea67db772542b571cfacc50fcd6bdc6d16b155cee3aec8a34235d9d",
+      "size_bytes": 652
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/backend-structure-log-v1.1.md",
+      "sha256": "5a76935ab13e459d6de485fc6958056e7bd3e31146164201c8d49d5c190bf097",
+      "size_bytes": 740
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/backend-structure-log-v1.10.md",
+      "sha256": "e96becbcba037abd8e78a9cdfb7b9b7d9552840d83f9dd5fd93fa87a0966c464",
+      "size_bytes": 322
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/backend-structure-log-v1.11.md",
+      "sha256": "ce62d01a2a6ce9e07250fc957d06f842989ab06907efd6187382ec825918dc92",
+      "size_bytes": 389
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/backend-structure-log-v1.12.md",
+      "sha256": "24f256cc5656a75b3850f3dc555c3c656ef6257cb2bd88e30e3a70abf86117a8",
+      "size_bytes": 438
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/backend-structure-log-v1.2.md",
+      "sha256": "9c5b12b5e66a56ba5d1b3e29b831d00149030b6ebda02d70bdfca9f0ed89142e",
+      "size_bytes": 805
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/backend-structure-log-v1.3.md",
+      "sha256": "c642dc2f62380294fde79f62e0e81fb40ffc65b9feefaba4e0a1fea847a62813",
+      "size_bytes": 770
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/backend-structure-log-v1.4.md",
+      "sha256": "aeb3a1315aed470c6b0337e53cdecf0b3afeff362208e00fb00915043e5a1a76",
+      "size_bytes": 582
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/backend-structure-log-v1.5.md",
+      "sha256": "8ef4ed63bfac57841ae17da4face545777357c8370c0cad7bb6df1132f73c96f",
+      "size_bytes": 659
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/backend-structure-log-v1.6.md",
+      "sha256": "1b6da981c3e4898ecee771295b3c9eb91a48957f1b9fb95a102b50ca39a14319",
+      "size_bytes": 292
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/backend-structure-log-v1.7.md",
+      "sha256": "683d636b1082a5ffdddaf62b581242616a152b5067a3ed2a7ad1125dfb6d1bb3",
+      "size_bytes": 296
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/backend-structure-log-v1.8.md",
+      "sha256": "e4600bc731c26bc72ac98f2a7e72ae2e8757ab8bd46c14a5524c0fd5d5c7c629",
+      "size_bytes": 287
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/backend-structure-log-v1.9.md",
+      "sha256": "d1956b318115b106bd79d886b07b2c514693df4921d74fa4eb15bda79e098f25",
+      "size_bytes": 453
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/business-data-log-v1.0.md",
+      "sha256": "769a2ff025d7f09c7feaaf685d44c999ae8801035a5e88894ed2bc061e3ac5a5",
+      "size_bytes": 1448
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/business-data-log-v1.1.md",
+      "sha256": "f66998cf164afa49e576504c18e81bfe94bc31c723573d621d632513a78f6471",
+      "size_bytes": 338
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/business-data-log-v1.2.md",
+      "sha256": "c3902420f4418916599c311871bbeccfc55fb9a7fc53591e75457c8f58eadac2",
+      "size_bytes": 316
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/business-data-log-v1.3.md",
+      "sha256": "9e2036203225f3f90069cc0aef2bbb5768aa0fe207cac1f34887227ac84fbfe5",
+      "size_bytes": 260
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/business-data-log-v1.4.md",
+      "sha256": "d21a48dc9c9d7cc1e9c21651e42420ca082d0572345a294abd71cdbc775df2d7",
+      "size_bytes": 305
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/business-data-log-v1.5.md",
+      "sha256": "10dc0c00ebe8ff585e976c88feb632966740deccac92118e70d315649515eb07",
+      "size_bytes": 455
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/business-data-log-v1.6.md",
+      "sha256": "16e8e3d0f183050e437267fff5e4920f2ff35cfe22a9e576fa03d3cf7870362e",
+      "size_bytes": 288
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/business-data-log-v1.7.md",
+      "sha256": "1c2438972ace326fa96f0f45525e19d68c0774bab3038beef932271eb2c6d762",
+      "size_bytes": 391
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/business-logic-log-v1.0.md",
+      "sha256": "d9e13fb323344347ed6f3a1d69b56506a700d8ee81361be63f36c4bb02c46498",
+      "size_bytes": 620
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/business-logic-log-v1.1.md",
+      "sha256": "4dff101e42738aafbef1a6952bee629562621f53e84e735ea1570a8c2f7ece85",
+      "size_bytes": 748
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/business-logic-log-v1.10.md",
+      "sha256": "ff7c0264639cc4582db491e7b394e3f25110e4608de466a29e6339409dd32829",
+      "size_bytes": 406
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/business-logic-log-v1.11.md",
+      "sha256": "15c4b098db59997a1dfe771d36b74d6e4c63e303ebfd05b4cc4ef3890c03cb6b",
+      "size_bytes": 343
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/business-logic-log-v1.12.md",
+      "sha256": "b7c9fb2d4320ae164045c2c8fe589d12ca557d55b271174f310810d51e328474",
+      "size_bytes": 412
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/business-logic-log-v1.2.md",
+      "sha256": "82c36a583e8d71ea132f8dddaa31955bc490a1bd79bb2207223b2d6abf8c87ad",
+      "size_bytes": 717
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/business-logic-log-v1.3.md",
+      "sha256": "7ab4a1c4cd7f213a8663a7b769fe23c98632ebb65439258e26c0ab87bb4f8296",
+      "size_bytes": 724
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/business-logic-log-v1.4.md",
+      "sha256": "ed6232e17662820b0eb0385862044d9ddfdf483592431d5abb0843881ea4b7ac",
+      "size_bytes": 494
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/business-logic-log-v1.5.md",
+      "sha256": "1d052df6e7db78bcf42a74fc6c0bce8c20a23ec3c00a7032956b4045fd77a8dc",
+      "size_bytes": 528
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/business-logic-log-v1.6.md",
+      "sha256": "5a6ede47de03dfe8a12da7c4d2e7d18689e8b078f5ee3f65f0ed7cc2bbf37a3f",
+      "size_bytes": 278
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/business-logic-log-v1.7.md",
+      "sha256": "4bd10ae34065f2a191a2c136e71044bcf03717dbff9f383eb3ebe53bd8fbd7e5",
+      "size_bytes": 272
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/business-logic-log-v1.8.md",
+      "sha256": "222556439b5ce5089f3bf4aa6665fa08036425726bed5fc67c2240bda4ddfa2b",
+      "size_bytes": 278
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/business-logic-log-v1.9.md",
+      "sha256": "48dfb2b31317041fd6399468bdd9412772faa24ef8fa7f388fffe0ac10455a6b",
+      "size_bytes": 411
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/frontend-design-log-v1.0.md",
+      "sha256": "02709b9f6485b3d86034138fc254e765f34027183c5ae4273ba2653bf5cc6fda",
+      "size_bytes": 1102
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/frontend-design-log-v1.1.md",
+      "sha256": "22c41dd93966ce1520cc457af12169ec616c972151df22a20cc6bcd965aed768",
+      "size_bytes": 458
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/project-structure-log-v1.0.md",
+      "sha256": "ab4ebc85001193b532096afb3158ec8699eefd6625c1eff010536f7c9d5c6efa",
+      "size_bytes": 567
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/project-structure-log-v1.1.md",
+      "sha256": "d8521fcd84c667db5b3be832e90f2dfb75a5c5dd0e59bbf66fa1397c4c9b8395",
+      "size_bytes": 663
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/project-structure-log-v1.10.md",
+      "sha256": "923fc416c824704e49b1d5d6ce76c5b69bd35bc31622b2a6ec15d6c1542886b8",
+      "size_bytes": 339
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/project-structure-log-v1.11.md",
+      "sha256": "09fc8d2db366a65969db606c3f9bcaf379f42f755a30afc941efe9875fadbab2",
+      "size_bytes": 334
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/project-structure-log-v1.12.md",
+      "sha256": "51bc313278695692be23c85c20e779898e1a2ae826bce3cdd55c3fa5c9452bcf",
+      "size_bytes": 379
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/project-structure-log-v1.2.md",
+      "sha256": "304fdc2677c0556c8beed097e6a14fb250709263e22c6775059691e14fe4058c",
+      "size_bytes": 690
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/project-structure-log-v1.3.md",
+      "sha256": "3e88ab4e5d5d2a97e6ad62a0619ed603daef233fb3e78b38759a5bb14faace15",
+      "size_bytes": 662
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/project-structure-log-v1.4.md",
+      "sha256": "f530a86ad2ce72fa36b8a2ce6f74b366226df580a12e89864f3b762320c74884",
+      "size_bytes": 467
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/project-structure-log-v1.5.md",
+      "sha256": "7be23ad4e6db396432790c07ea8efe467b494d8a7f26ca5861ed7d8ca2fb2466",
+      "size_bytes": 446
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/project-structure-log-v1.6.md",
+      "sha256": "f65a0c841d7a97191a6d2150c7427d751a4a0474924beb716804489382ecc166",
+      "size_bytes": 274
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/project-structure-log-v1.7.md",
+      "sha256": "46e62f3e98f3149dce1d20621696048363eb58429fe69ed0b215860f1a9399cd",
+      "size_bytes": 273
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/project-structure-log-v1.8.md",
+      "sha256": "df93b1ca4b8fdced29e642347a6e21d3d80dada5bc687cded3e8b037a1afcb08",
+      "size_bytes": 272
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/logs/project-structure-log-v1.9.md",
+      "sha256": "c05a9afe55f49d480281bb4588277abe5ef7fa293b3108111e3381799e51e1c4",
+      "size_bytes": 405
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/runbooks/README.md",
+      "sha256": "8cc33f2f10f155e969ff5e9c67c8aa4a987d0f7c5dc32a531582fba277c328b1",
+      "size_bytes": 759
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/runbooks/permit-normalization.md",
+      "sha256": "4add0436652af172ab177db535af5b4609c6b994a6ba7f52f5bf27c0b7dc98f9",
+      "size_bytes": 3445
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/runbooks/source-acquisition.md",
+      "sha256": "47e620bd741ae2d12af6a216c456434df0acab7195d120e1f120b4866b600842",
+      "size_bytes": 6893
+    },
+    {
+      "classification": "REPOSITORY_DOCUMENTATION",
+      "path": "docs/runbooks/source-parsing.md",
+      "sha256": "2ddad4f2dd6a585712c8472bcf2f23317d9aada99014f9287d20edc38478385b",
+      "size_bytes": 2920
+    },
+    {
+      "classification": "REPOSITORY_SCHEMA",
+      "path": "docs/schema/business-data.schema.json",
+      "sha256": "2d87fc76044b0053efee2c0bf1aca409e72caaa00cd88ab2989314f6e2c647cf",
+      "size_bytes": 9896
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "pyproject.toml",
+      "sha256": "1be4d4e83eac6f5397877dcf6d966c8b244eea10bed83a83db559b0a71a1a14b",
+      "size_bytes": 166
+    },
+    {
+      "classification": "OPERATOR_TOOL",
+      "path": "scripts/check_docs.py",
+      "sha256": "2df7b04861c798cf4be10e65062244878f4b52ca967052b39d69ea5f18b23811",
+      "size_bytes": 10272
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/__init__.py",
+      "sha256": "c3a3097f87a615950d3427e88f708a5c65ebb13a5a5b567f4f8d05b6fa3bfd85",
+      "size_bytes": 49
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/application/__init__.py",
+      "sha256": "61624851bb6624fe8499c14e89e6321df8bcac0532ee26eeec466332440b4f59",
+      "size_bytes": 77
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/application/acquisition.py",
+      "sha256": "58a59606eabf728e287a2912f33dde60c9c7852f2c7c367847482457873fc3da",
+      "size_bytes": 42784
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/application/classification.py",
+      "sha256": "20b7392189db2f4ca8c608a1977f260fb202151b0a4b1e6a9823310fe6a95a5b",
+      "size_bytes": 13181
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/application/commands.py",
+      "sha256": "d4415a567c6c2a2cd9352a51069c390b9d93c6a5894bf0b4837c5ee1c7a36549",
+      "size_bytes": 14877
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/application/geography.py",
+      "sha256": "93573d6a996dc69a619cb362a80ab76906d55e365d40f8c8223b1586e0577dea",
+      "size_bytes": 7490
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/application/normalization.py",
+      "sha256": "0c2de86a0a9983217ba5d0110bb024d64f083ee0d6d45df4a7fe4bf4c841c4cf",
+      "size_bytes": 20865
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/application/opportunity_matching.py",
+      "sha256": "13d177e5f1e9688b1b986ac8445eceed5c970aa2bac6c16238cccdd9db950aae",
+      "size_bytes": 35830
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/application/parsing.py",
+      "sha256": "83731a382eeead3e5abe70b48ddd4252a848101113f57c3f828677345fd6ff18",
+      "size_bytes": 19679
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/application/processing.py",
+      "sha256": "82f5967ea2c0c1872b28374ec5a58c57c6ab4ae29987c1bd82c5b6249e29ff5f",
+      "size_bytes": 32562
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/application/queries.py",
+      "sha256": "21c1c8870a97d22f11a984c94379f10c6d5326c923cab9ab16db00ce80a1039c",
+      "size_bytes": 9630
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/application/repositories.py",
+      "sha256": "c637adbe4388e34485c2cf6c61fa138d1b6bc1cc2a03de3d9ee56387b712e0c0",
+      "size_bytes": 5563
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/domain/__init__.py",
+      "sha256": "18ff5036a723ad561a111bb894b4e5fc65eb39188d223abf7084d0426cf0695d",
+      "size_bytes": 2981
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/domain/access.py",
+      "sha256": "6fefa55549f346511c7201ea155036bd6d8ae341742cf244f7489ab8b1e1a944",
+      "size_bytes": 4180
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/domain/acquisition.py",
+      "sha256": "a4fc9463cd79c569f1d8fab4ecb724cf2999c866fa593ae6205b8c135fac256b",
+      "size_bytes": 6694
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/domain/classification.py",
+      "sha256": "7842638fe47c2865d5dde928336c7e2248209469e49e2462372e8147b9806b34",
+      "size_bytes": 9897
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/domain/customer.py",
+      "sha256": "1f6046f0683c8fd8f5edb774927870f69bef44fc7e6be9d258294c11ef976f4b",
+      "size_bytes": 8910
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/domain/deduplication.py",
+      "sha256": "8583ef49c3921ebf39cd065d6cb7e3f101256b7fa902f478f44bccec823bf67c",
+      "size_bytes": 3209
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/domain/eligibility.py",
+      "sha256": "bbae3ec3dee4e4b065b04ec8b702049b390fa6e80f31f64baef20a93ee5be167",
+      "size_bytes": 5384
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/domain/errors.py",
+      "sha256": "55d8f4bb9a3b95964f6751c34135379d0ef7add059a52b68821183b2f410968b",
+      "size_bytes": 1472
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/domain/events.py",
+      "sha256": "30435a2e16fccbbdf798713f891c382926cf236d5aa8181f38a1b0419ce58bd0",
+      "size_bytes": 2214
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/domain/ingestion.py",
+      "sha256": "e0661c12e1baa63e43010a20315b4241d900901736b5430bdd49b0ee4251a597",
+      "size_bytes": 12645
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/domain/matching.py",
+      "sha256": "99d320d6b8c37a1d21f78bd9892f1ed9c9fc1c3a67e85bc882264d175f6a46b2",
+      "size_bytes": 13719
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/domain/notification.py",
+      "sha256": "d14cda078d1f1d7c3a04aa8c63b87daa27c719245565138126b16b38258b053b",
+      "size_bytes": 3629
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/domain/opportunity.py",
+      "sha256": "7a61d55ccd96c9bb5a59927b9f7b7bd130a63c831518bf89a68d767a142ad299",
+      "size_bytes": 9840
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/domain/parsing.py",
+      "sha256": "b0e98ad884c1889140bd3021489acf8cc63b8f68a87d22eaadd56566839c5790",
+      "size_bytes": 4538
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/domain/permit.py",
+      "sha256": "0a48c8419976125f9941dd566f78f0c5bcbdfc495786ec65ec1242241d28ba52",
+      "size_bytes": 20150
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/domain/review.py",
+      "sha256": "4691afe8351de25d570f95864266a25783f85741f7883c77b8c049d06c5d9a9e",
+      "size_bytes": 4032
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/domain/source_registry.py",
+      "sha256": "f20eb0b7bd09620a8aa888a0507e085b7e61c45f823b472e6f8b7471e5598897",
+      "size_bytes": 10313
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/domain/value_objects.py",
+      "sha256": "28de18eb9bb8dc08cf2d55519d8c5eb677331952c6e09bf27f27896b368196fd",
+      "size_bytes": 7742
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/infrastructure/__init__.py",
+      "sha256": "b15215e2b21747b3e9eedbff52eb8e17b63d2d95b20fc60b207c9043acc49667",
+      "size_bytes": 626
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/infrastructure/customer_access.py",
+      "sha256": "8815edde6bfdf7b9241bb7306043132213255769879a2853fc24bffe144d99dd",
+      "size_bytes": 2135
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/infrastructure/geography.py",
+      "sha256": "4d890900905a8618a439061e6bc8bbb99c9830a815dcd579d1fe5a278f21a930",
+      "size_bytes": 637
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/infrastructure/opportunity_matching.py",
+      "sha256": "1332566fe36bad458edb5fd9d522f539f85d71182fe1f6d8b1366beb9aa2fb10",
+      "size_bytes": 6570
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/infrastructure/permit_classification.py",
+      "sha256": "7db6a144519836de5e1c7cd7414713c955b5fd35eb501780bc0004d695df8a62",
+      "size_bytes": 12380
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/infrastructure/permit_normalization.py",
+      "sha256": "194fcd71d733f5580cd9b1a6a11cb32ee4499a9854bb23b92d86e2f4202293f2",
+      "size_bytes": 23748
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/infrastructure/processing.py",
+      "sha256": "530c84e1b5f41c10b80fc7099290bacc41c557391cb531e8f992b400c0ad50ee",
+      "size_bytes": 2488
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/infrastructure/source_acquisition.py",
+      "sha256": "ddadae41aff55a7d03aedc229f54b737987966a24dbc507e0f948a1ccf962ebc",
+      "size_bytes": 24962
+    },
+    {
+      "classification": "REPOSITORY_APPLICATION_CODE",
+      "path": "src/az_permit_radar/infrastructure/source_parsing.py",
+      "sha256": "d17e11af64a6a8ec1147073abbb6224fff35c5fb22190885ade6a3b72c2927b7",
+      "size_bytes": 23606
+    },
+    {
+      "classification": "REPOSITORY_TEST",
+      "path": "tests/__init__.py",
+      "sha256": "6166a95aa35f7813bd7a5142000888b86b39d75215d52dbd95f1882fc9e1a68a",
+      "size_bytes": 41
+    },
+    {
+      "classification": "REPOSITORY_TEST",
+      "path": "tests/fixtures/classification/evaluation-v1.json",
+      "sha256": "9b55d0ff0181b9d56518e32e6c3a4aa3d49ad2062f2f7e7f33fb3c2ec7687e0e",
+      "size_bytes": 785
+    },
+    {
+      "classification": "REPOSITORY_TEST",
+      "path": "tests/fixtures/manual/tucson-permits.csv",
+      "sha256": "3314359c1ec49797abc8d5c6572bf87570fcdc652c4124b63db342925a9839d6",
+      "size_bytes": 72
+    },
+    {
+      "classification": "REPOSITORY_TEST",
+      "path": "tests/fixtures/parser/tucson-permits-changed-columns.csv",
+      "sha256": "e1a7a6f89f233a7fb6efd3719b644311175fc048941c4a20c7b93dfee10282ad",
+      "size_bytes": 334
+    },
+    {
+      "classification": "REPOSITORY_TEST",
+      "path": "tests/fixtures/parser/tucson-permits-normalization-v1.1.csv",
+      "sha256": "2fd12f442825b677c7d8a6505943dc878cc24cd4bb32b6d4c72085ef185dd163",
+      "size_bytes": 430
+    },
+    {
+      "classification": "REPOSITORY_TEST",
+      "path": "tests/fixtures/parser/tucson-permits-unusable.csv",
+      "sha256": "ddf42d6c4026d6e950fd0b054e8f4b2e7a03ac8a0285270aa481ad07a7acb6f3",
+      "size_bytes": 67
+    },
+    {
+      "classification": "REPOSITORY_TEST",
+      "path": "tests/fixtures/parser/tucson-permits-v1.csv",
+      "sha256": "0e9e5530c0d6c47efb0cfa51f5e9c04bf180e358c3ff5653cc514d33d4769862",
+      "size_bytes": 431
+    },
+    {
+      "classification": "REPOSITORY_TEST",
+      "path": "tests/support.py",
+      "sha256": "4ffb9a0d6caebe1d8d1900507c6b5d565af921a157da521baf439f06be8d74d4",
+      "size_bytes": 1318
+    },
+    {
+      "classification": "REPOSITORY_TEST",
+      "path": "tests/test_acquisition_workflow.py",
+      "sha256": "5d52b829095a1c808662cd6585f877895114bcd3a2090fc52082febd0ad01c14",
+      "size_bytes": 21643
+    },
+    {
+      "classification": "REPOSITORY_TEST",
+      "path": "tests/test_architecture_contracts.py",
+      "sha256": "b4e2412a8753cf2c2aec718aacc202699e22e4be450e9511b037cedf0ee8c75f",
+      "size_bytes": 4493
+    },
+    {
+      "classification": "REPOSITORY_TEST",
+      "path": "tests/test_classification_subsystem.py",
+      "sha256": "decfa89982c482d8b60416bdf4fbc179620e896b1e4227f516c15ad7c69212df",
+      "size_bytes": 11101
+    },
+    {
+      "classification": "REPOSITORY_TEST",
+      "path": "tests/test_customer_access_authorization.py",
+      "sha256": "7b04cd9164f33e4fc0654f134c153a52bb342a8563fa083e55562691386113be",
+      "size_bytes": 14099
+    },
+    {
+      "classification": "REPOSITORY_TEST",
+      "path": "tests/test_customer_matching_notification_review.py",
+      "sha256": "436abb1464681ef4dffb52a82f796b5d03df8dd23702c0c34b4e4a6b94bb5f8c",
+      "size_bytes": 7403
+    },
+    {
+      "classification": "REPOSITORY_TEST",
+      "path": "tests/test_end_to_end_processing.py",
+      "sha256": "d078879b62de41a598d5adac6d8a7dbf4db26c843e53aa8a29078dd0410a123e",
+      "size_bytes": 25308
+    },
+    {
+      "classification": "REPOSITORY_TEST",
+      "path": "tests/test_geography_service_territories.py",
+      "sha256": "92156b68620cda7a7a476f62e62e145ce9e32a35901cffca19c69939d25717dc",
+      "size_bytes": 7924
+    },
+    {
+      "classification": "REPOSITORY_TEST",
+      "path": "tests/test_opportunity_generation_matching.py",
+      "sha256": "65a19c212ab223ec9153943871576e4a3a4b1d86a9c8066f570c0c20dbf34da0",
+      "size_bytes": 34017
+    },
+    {
+      "classification": "REPOSITORY_TEST",
+      "path": "tests/test_permit_classification_opportunity.py",
+      "sha256": "8a02c744759df3ec23993f713c4d6a870ccbcdfd9b37989d2990940520395ed6",
+      "size_bytes": 6435
+    },
+    {
+      "classification": "REPOSITORY_TEST",
+      "path": "tests/test_permit_normalization.py",
+      "sha256": "3d8e13556242956bc8812424eb24e46a0dea89f270ad7bb9da4bbc613184665f",
+      "size_bytes": 18011
+    },
+    {
+      "classification": "REPOSITORY_TEST",
+      "path": "tests/test_source_acquisition.py",
+      "sha256": "4e2e75a0fb88589c6cddefe21b742e754a09f2726f5e63ddc55c458a9036c17f",
+      "size_bytes": 14392
+    },
+    {
+      "classification": "REPOSITORY_TEST",
+      "path": "tests/test_source_and_ingestion.py",
+      "sha256": "ba17d84a195612e9378c69cc9e46ec1c0560b7e5f6e69f2891a19eae5917053e",
+      "size_bytes": 4285
+    },
+    {
+      "classification": "REPOSITORY_TEST",
+      "path": "tests/test_source_parsing.py",
+      "sha256": "3af83c79c91d760115708f62d00e39450f97ac6d06666f79f630d1eacc5a0e53",
+      "size_bytes": 14730
+    },
+    {
+      "classification": "REPOSITORY_TEST",
+      "path": "tests/test_value_objects.py",
+      "sha256": "1ebac2c728fe1bb1469cfa9dbf769b4423754a87edef796db327765a6a532b75",
+      "size_bytes": 3334
+    }
+  ],
+  "untracked_file_count": 0,
+  "untracked_files": [],
+  "upstream": "origin/main",
+  "upstream_divergence": {
+    "ahead": 0,
+    "behind": 0
+  }
+}

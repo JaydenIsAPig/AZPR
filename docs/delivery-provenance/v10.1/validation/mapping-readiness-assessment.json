@@ -1,0 +1,64 @@
+{
+  "approval_errors": [],
+  "assessment": "AZPR_V10_1_MAPPING_READINESS",
+  "base_commit": "dac0e0bf1695d44f4b6c0e0e7673559f5d87ec02",
+  "checks": {
+    "both_delivery_verifiers_pass": true,
+    "current_prompt_retirement_actions": {
+      "ADD": 0,
+      "DEFER": 0,
+      "KEEP_CURRENT": 0,
+      "MERGE": 0,
+      "MOVE": 3,
+      "QUARANTINE": 0,
+      "REPLACE": 38
+    },
+    "deterministic_mapping_matches": true,
+    "external_candidates_deferred": true,
+    "formal_int_01_verification_present": false,
+    "frozen_delivery_report_rows": 39,
+    "human_approval_present": false,
+    "human_approval_valid": false,
+    "interim_audit_authority_valid": true,
+    "mapping_structurally_complete": true,
+    "policy_and_roadmap_inactive": true,
+    "prompt_stage_pack_valid": true,
+    "selected_prompt_actions": {
+      "ADD": 3,
+      "DEFER": 0,
+      "KEEP_CURRENT": 0,
+      "MERGE": 0,
+      "MOVE": 0,
+      "QUARANTINE": 0,
+      "REPLACE": 38
+    },
+    "single_writer_transition": true,
+    "unbound_worktree_changes": [],
+    "verifier_counts": {
+      "expected": 120,
+      "fresh_extraction_status": "PASS_PREQUALIFICATION_ONLY",
+      "fresh_extraction_tests_passed": 120,
+      "source_status": "PASS_PREQUALIFICATION_ONLY",
+      "source_tests_passed": 120
+    },
+    "verifier_evidence_valid": true,
+    "worktree_clean_or_mapping_preserved": true
+  },
+  "errors": [],
+  "mapping": "docs/delivery-provenance/v10.1/integration/AZPR-v10.1-integration-path-mapping.csv",
+  "mapping_ready_for_human_approval": true,
+  "mapping_sha256": "60a34ed2e69c4d0ecef14f4a6d6e8c600112728c6dc290e5c705b16eb4a687b9",
+  "next_required_action": "EXECUTE_INT_00_THEN_FORMAL_INT_01",
+  "prequalification_patch_ready": true,
+  "prompt_stage_hash_manifest_sha256": "e21d1b9c4515431b92fef41b3001e95a2eb1409f9b3d9854c995caf9df9abd1e",
+  "ready_for_activation": false,
+  "ready_for_materialization": false,
+  "row_count": 543,
+  "safe_for_unattended_execution_now": false,
+  "transition_contract_sha256": "bd73a6a462084d4ee3ac355981d1fe5b424542835217b534e3f199f08dc7ef9f",
+  "verifier_evidence_issues": [],
+  "warnings": [
+    "both verifier modes passed as pre-qualification evidence, but a valid INT-00 and formal INT-01 result are still required",
+    "human mapping approval file is intentionally absent"
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "format_version": "1.0",
+  "assessment": "AZPR_V10_1_LOCAL_DELIVERY_VERIFIER_ATTEMPTS",
+  "executed_at_utc": "2026-08-07T00:58:50Z",
+  "status": "BLOCKED_PENDING_HASH_LOCKED_LINUX_QUALIFICATION",
+  "candidate": {
+    "implementation_archive_sha256": "618449d73fd921e0fb366c0aed8c9a666b2ead3847e529a6ced9692fe41e2b24",
+    "verifier_sha256": "e0058361f6e01f3ca44931d42ae3ef1aad811150c0e39c27c8fcf93cb8a4cb84",
+    "source_and_fresh_trees_byte_identical_after_attempts": true,
+    "prompt_archive_sha256": "3b235cb7e33ca409241ff26523f60f8fee89cec524b3f09e91a69927a0aa4880"
+  },
+  "runtime": {
+    "platform": "Darwin-arm64",
+    "python": "CPython 3.12.13",
+    "dependency_source": "offline hash-locked local wheelhouse",
+    "runtime_manifest_sha256": "cca03233ef4fec34058a3086b7876e136c82d9163c34716d71fc25514692c0de",
+    "network_used_during_verification": false,
+    "qualification_effect": "LOCAL_ASSESSMENT_ONLY"
+  },
+  "source_tree": {
+    "invocation": "VERIFY-V10-CANDIDATE.py",
+    "fresh_extraction_flag": false,
+    "exit_code": 1,
+    "status": "FAIL",
+    "tests_expected": 120,
+    "tests_passed": 16,
+    "first_failed_catalog_position": 17,
+    "first_failed_test_id": "V10.1-REL-017-TEST-EXTERNAL-RUNNER-ROLLED-BACK-IS-NON-SUCCESS-TERMINAL",
+    "first_failure": "The synthetic rolled-back external runner returned nonzero but produced no signed evidence JSON.",
+    "raw_stdout": {
+      "path": "docs/delivery-provenance/v10.1/validation/historical-macos/raw/source-tree-verifier.stdout.txt",
+      "sha256": "526bc2e1417c7401fc5094861587220ba581f5726ffa0ec659fe24469d333111"
+    },
+    "raw_stderr": {
+      "path": "docs/delivery-provenance/v10.1/validation/historical-macos/raw/source-tree-verifier.stderr.txt",
+      "sha256": "4aa5795d211bba0f5ef749581e192a81e9fe9724de29051874d618949ec087f2"
+    },
+    "complete_suite_diagnostic": {
+      "tests_passed": 116,
+      "tests_failed": 4,
+      "subtests_passed": 23,
+      "exit_code": 1,
+      "raw_stdout": {
+        "path": "docs/delivery-provenance/v10.1/validation/historical-macos/raw/source-tree-full-suite.stdout.txt",
+        "sha256": "db67307d71c24e6366239f6bf2171d6bd192c9a54b112270a9997af8668c6254"
+      },
+      "raw_stderr": {
+        "path": "docs/delivery-provenance/v10.1/validation/historical-macos/raw/source-tree-full-suite.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "fresh_extraction": {
+    "invocation": "VERIFY-V10-CANDIDATE.py --fresh-extraction",
+    "fresh_extraction_flag": true,
+    "exit_code": 1,
+    "status": "FAIL",
+    "tests_expected": 120,
+    "tests_passed": 16,
+    "first_failed_catalog_position": 17,
+    "first_failed_test_id": "V10.1-REL-017-TEST-EXTERNAL-RUNNER-ROLLED-BACK-IS-NON-SUCCESS-TERMINAL",
+    "first_failure": "The synthetic rolled-back external runner returned nonzero but produced no signed evidence JSON.",
+    "raw_stdout": {
+      "path": "docs/delivery-provenance/v10.1/validation/historical-macos/raw/fresh-extraction-verifier.stdout.txt",
+      "sha256": "526bc2e1417c7401fc5094861587220ba581f5726ffa0ec659fe24469d333111"
+    },
+    "raw_stderr": {
+      "path": "docs/delivery-provenance/v10.1/validation/historical-macos/raw/fresh-extraction-verifier.stderr.txt",
+      "sha256": "4aa5795d211bba0f5ef749581e192a81e9fe9724de29051874d618949ec087f2"
+    },
+    "complete_suite_diagnostic": {
+      "tests_passed": 116,
+      "tests_failed": 4,
+      "subtests_passed": 23,
+      "exit_code": 1,
+      "raw_stdout": {
+        "path": "docs/delivery-provenance/v10.1/validation/historical-macos/raw/fresh-extraction-full-suite.stdout.txt",
+        "sha256": "67a1728c516de1db7c6efa889fd8de949b9c9c0540216c5eacc7541dfa8fb939"
+      },
+      "raw_stderr": {
+        "path": "docs/delivery-provenance/v10.1/validation/historical-macos/raw/fresh-extraction-full-suite.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "complete_suite_failures": [
+    {
+      "node": "tests/test_final_assessment_controls.py::FinalAssessmentControlTests::test_external_runner_rolled_back_is_non_success_terminal",
+      "host_dependency": "External adapter subprocess setup does not complete on this macOS host, so the expected signed rollback evidence is absent."
+    },
+    {
+      "node": "tests/test_refined_security.py::ExternalRunnerDryRunTests::test_signed_plan_attestation_and_live_probe_dry_run",
+      "host_dependency": "The external runner fails in subprocess preexec_fn on this macOS host."
+    },
+    {
+      "node": "tests/test_v8_corrective_controls.py::V8CorrectiveControlTests::test_v8_blackbox_release_blocking_harness",
+      "host_dependency": "Three process-tree controls require the Linux /proc filesystem, which is absent on macOS."
+    },
+    {
+      "node": "tests/test_v9_security_closures.py::test_f01_external_signing_protocol_has_no_receipt_private_key_in_verifier",
+      "host_dependency": "The fixture selects the Linux-specific /home/oai reviewer trust path, which is absent on this host."
+    }
+  ],
+  "disposition": {
+    "dependencies_available": true,
+    "mapping_approval_may_be_reviewed": true,
+    "materialization_allowed": false,
+    "external_controller_qualified": false,
+    "activation_allowed": false,
+    "next_validation_gate": "Run both exact 120-test verifier modes as a dedicated non-root reviewer in the separately approved hash-locked Linux H2 runtime."
+  }
+}

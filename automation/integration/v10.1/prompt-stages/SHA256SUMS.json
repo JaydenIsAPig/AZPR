@@ -1,0 +1,22 @@
+{
+  "algorithm": "sha256",
+  "files": {
+    "00-preflight-authority-and-inputs.md": "c2b4650bcac0ce167d8168828d01b1d1deca53dbbc4bb59510e18fca03b6e991",
+    "01-linux-delivery-reverification.md": "9f52aec8f7b38a0478ca61db54b1a1135cd397e7be74d97ce7bcac9913eec31c",
+    "02-freeze-mapping-and-human-approval-handoff.md": "f42f769405d392a4681b3416d23ed7bc47cfead2c89b83a91eccbe1da4fee13e",
+    "03-h1-materialize-approved-repository-mapping.md": "1a312f3eebe2aea3d9e711a30e0a503a2dcb1e93c101fee09164ae32b11bf10e",
+    "04-h1-repository-integration-audit.md": "7e32e43d71565d898f535db32549ad867b287ae063f8b2fc037a4a259d63e703",
+    "05-h2-read-only-external-controller-qualification.md": "8ed28a5a77a0ddda7f91d48b35e8357bef2f3d8b77bb6664e0d2140cc5d1af87",
+    "06-h2-cutover-readiness-audit.md": "816ae585fcef17d6e998fb694665c5dca5d62e90d1e00025f749a9676a21fc29",
+    "07-h3-cutover-plan-and-authorization-package.md": "93275366a067f58396213cd44832f684da84eb93761acf13416650916019a25a",
+    "08-h3-controlled-single-writer-cutover.md": "0fa680c462e0edc01a3c7809c2960c2cd921f9cc49c0f02c3998d662e2f4b387",
+    "09-post-cutover-reconciliation-audit.md": "ac64ba38f8bcf2dd2efb8c0c03157c5aaeea712c4eb20c8f44f0cddc3db78dbb",
+    "MASTER-ORCHESTRATION-PROMPT.md": "5077f040098c97336bbef40b5ed9fccae396ae459554648804cebf428dcf4dec",
+    "README.md": "7ede783b15a21446700a837b88cc51821782179250fccf3ad5481f6cff57a05b",
+    "operator-input.template.json": "54deeff1524e7a51a62a3ebcebd89a94ae1da6a3426c96530a1f2e008ff667eb",
+    "stage-manifest.json": "ed5ce8802665d862d15ad0892892ae1f2f9bc0691dd088f4ea161d9dd693dfa6",
+    "stage-result.example.json": "f55807d084a8e7abba7250b78c6fff4113c7e08880d094b1f7a447d76a135e7b",
+    "stage-result.schema.json": "ce5d11edd1021ddf150b1f558090e020f87664b41ad516f2543c0d2ab6d29bc3"
+  },
+  "format_version": "1.0"
+}

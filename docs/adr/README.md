@@ -15,5 +15,6 @@ ADRs capture consequential, durable decisions. Accepted ADRs are normative withi
 | [0006](0006-versioned-opportunity-projections.md) | Accepted | Versioned Opportunity projections and complete Match evaluation snapshots |
 | [0007](0007-in-memory-processing-unit-of-work.md) | Accepted | Authoritative Batch ownership and process-local processing unit of work |
 | [0008](0008-customer-scoped-access-context.md) | Accepted | Customer-scoped access context, anti-enumeration, and separate internal path |
+| [0009](0009-staged-hybrid-controller-transition.md) | Accepted | Staged repository-to-external controller transition with single-writer cutover |
 
 Use the next available four-digit number. ADRs are immutable after acceptance except for typo/link corrections; changed decisions receive a new ADR that supersedes the old one.

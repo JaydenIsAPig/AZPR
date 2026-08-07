@@ -1,0 +1,55 @@
+{
+  "format_version": "1.0",
+  "document_kind": "AZPR_V10_1_OPERATOR_INPUT_TEMPLATE",
+  "status": "TEMPLATE_NOT_APPROVAL",
+  "repository": {
+    "expected_path": "/AZPR",
+    "approved_base_commit": "dac0e0bf1695d44f4b6c0e0e7673559f5d87ec02",
+    "expected_mapping_sha256": null,
+    "expected_transition_contract_sha256": null
+  },
+  "human_roles": {
+    "mapping_reviewer": null,
+    "h1_auditor": null,
+    "h2_auditor": null,
+    "cutover_approver_one": null,
+    "cutover_approver_two": null
+  },
+  "governance": {
+    "audit_index_owner": null,
+    "audit_index_schema_reference": null,
+    "audit_index_restoration_authorized": false
+  },
+  "linux_delivery_validation": {
+    "approved": false,
+    "access_method": null,
+    "ssh_config_alias": null,
+    "image_identity": null,
+    "architecture": null,
+    "reviewer_uid": 1000,
+    "reviewer_home": "/home/oai",
+    "python_version": null,
+    "python_executable_sha256": null,
+    "dependency_lock_sha256": null,
+    "network_disabled_during_verification": true,
+    "production_credentials_present": false
+  },
+  "external_controller_host": {
+    "approved": false,
+    "host_trust_boundary_decision": null,
+    "host_identity": null,
+    "installation_authorization_reference": null,
+    "read_only_shadow_only": true,
+    "provider_apply_capability_available": false,
+    "production_credentials_present": false
+  },
+  "cutover": {
+    "approved": false,
+    "authorization_reference": null,
+    "expires_at": null,
+    "nonce": null,
+    "signed_snapshot_sha256": null,
+    "rollback_point": null
+  },
+  "operator_notes": []
+}
