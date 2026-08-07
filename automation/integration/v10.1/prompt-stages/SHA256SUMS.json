@@ -13,9 +13,9 @@
     "09-post-cutover-reconciliation-audit.md": "ac64ba38f8bcf2dd2efb8c0c03157c5aaeea712c4eb20c8f44f0cddc3db78dbb",
     "MASTER-ORCHESTRATION-PROMPT.md": "5077f040098c97336bbef40b5ed9fccae396ae459554648804cebf428dcf4dec",
     "README.md": "7ede783b15a21446700a837b88cc51821782179250fccf3ad5481f6cff57a05b",
-    "operator-input.template.json": "54deeff1524e7a51a62a3ebcebd89a94ae1da6a3426c96530a1f2e008ff667eb",
+    "operator-input.template.json": "d9aad8789d96e9b10cbeb11a97e580fded0af041dd5d6335bf8107581a21c9c3",
     "stage-manifest.json": "ed5ce8802665d862d15ad0892892ae1f2f9bc0691dd088f4ea161d9dd693dfa6",
-    "stage-result.example.json": "f55807d084a8e7abba7250b78c6fff4113c7e08880d094b1f7a447d76a135e7b",
+    "stage-result.example.json": "240034062f7635e649943f50ad43f9e1c3631ef056cdc6e5210dc4afdccd00cc",
     "stage-result.schema.json": "ce5d11edd1021ddf150b1f558090e020f87664b41ad516f2543c0d2ab6d29bc3"
   },
   "format_version": "1.0"

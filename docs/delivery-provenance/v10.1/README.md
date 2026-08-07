@@ -19,8 +19,10 @@ here.
 The transition is governed by ADR-0009 and
 `automation/integration/v10.1/controller-transition-contract.json`:
 
-1. **H0 — preparation:** inventory, map, preserve provenance, construct the
-   local validation runtime, and run read-only checks. No controller writer.
+1. **H0 — preparation:** inventory, map, preserve provenance, prepare the
+   infrastructure-bound Ansible qualification environment, obtain independent
+   Linux qualification evidence, and run read-only checks. No controller
+   writer, and Ansible has no approval or qualification authority.
 2. **H1 — repository integration:** after exact-hash human approval, apply the
    approved repository mapping on an isolated branch while both controllers
    remain inert. No controller writer.
@@ -51,10 +53,16 @@ approval:
   scripts/check_v10_1_prompt_stage_pack.py
 ```
 
-The first eligible stage is `INT-00`, a read-only authority and input
-preflight. Until the first controller-managed formal audit, the project owner
-approved `docs/audits/README.md` as interim audit authority. `INT-04` must cause
-the invoking controller to create the first immutable, commit-bound report and
+The approved pre-Ansible transition base is
+`ce80d335aef52c8900bd363bbcfacc1e497c0404`; its direct parent `d60e5d9...`
+remains lineage, not the active transition base. The next lifecycle step is
+H0 Ansible qualification-infrastructure preparation. `INT-00` remains blocked
+until formal environment approval, two independently evidenced 120/120 Linux
+runs, independence proof, audit-governance owner resolution, and final approval
+of the regenerated exact mapping are complete. Until the first
+controller-managed formal audit, the project owner approved
+`docs/audits/README.md` as interim audit authority. `INT-04` must cause the
+invoking controller to create the first immutable, commit-bound report and
 controller-owned `docs/audits/index.json` together. The attached final-delivery
 audit remains provenance only. The governance owner's actual name and role
 must still be supplied; `[name/role]` is not a valid identity.
@@ -68,7 +76,7 @@ it as `integration/AZPR-v10.1-integration-path-mapping.staging-original.csv`:
 ./scripts/prepare_v10_1_mapping.py
 ```
 
-Run the elementary approval-readiness assessment:
+Run the elementary structural-readiness assessment:
 
 ```bash
 ./scripts/check_v10_1_mapping_readiness.py
@@ -81,11 +89,14 @@ To retain a review copy of the result:
   --output docs/delivery-provenance/v10.1/validation/mapping-readiness-assessment.json
 ```
 
-Exit code zero means only that the mapping is structurally ready for human
-review. It does not approve or materialize the mapping and never means that an
-external controller is qualified or activatable. A human approval must bind
-the exact mapping SHA-256 and approved base commit in the approval location
-named by the transition contract. Codex does not create that approval.
+Exit code zero means only that the mapping is structurally ready for review.
+It does not mean the mapping is eligible for final approval, approve or
+materialize the mapping, or mean that an external controller is qualified or
+activatable. Final approval is deferred until the pre-`INT-00` H0 prerequisites
+in the transition contract are independently evidenced. At that point, a human
+approval must bind the exact post-Ansible mapping SHA-256 and approved base
+commit in the approval location named by the transition contract. Codex does
+not create that approval.
 
 The human-created JSON at
 `automation/approvals/v10.1-integration-path-mapping-approved.json` must set
@@ -97,9 +108,11 @@ SHA-256 of `automation/integration/v10.1/prompt-stages/SHA256SUMS.json`, the
 SHA-256 of `validation/delivery-verifier-attempts.json`, a non-empty
 `approved_by`, and a UTC `approved_at` timestamp. The checker parses and
 compares every binding; file existence alone never satisfies the gate.
-Replacing verifier evidence, changing the prompt pack, or regenerating the
-mapping invalidates an earlier approval and requires a new human review of the
-resulting hashes.
+Replacing verifier evidence, changing the prompt pack, adding the Ansible
+workstream, or regenerating the mapping invalidates an earlier approval target
+and requires a new human review of the resulting hashes. The preserved
+527-row `c84d45f...` mapping is historical prequalification evidence and must
+not be approved as the current mapping.
 
 ## Validation runtime
 
@@ -119,8 +132,9 @@ The superseded macOS arm64 environment remains under
 files now describe a local Ubuntu 24.04 ARM64 Multipass pre-qualification run:
 both exact verifier modes passed 120/120 offline with unchanged, byte-identical
 candidate trees. This closes the local reproducibility question only. It is not
-a formal `INT-01` result because `INT-00` did not precede it and the local VM
-does not establish the independently approved full host/image trust boundary.
+one of the two formally accepted independent Linux runs because the environment
+was not first approved and the local VM does not establish the independently
+approved full host/image trust boundary.
 
 ## Contents
 
@@ -129,8 +143,9 @@ does not establish the independently approved full host/image trust boundary.
 - `automation/integration/v10.1/prompt-stages/` contains the inert transition
   router, ten bounded stage prompts, operator-input template, result schema,
   and byte-hash manifest.
-- `integration/` contains the original inventory and reports plus the resolved
-  approval-candidate mapping.
+- `integration/` contains the original inventory and reports, immutable
+  historical prequalification mapping evidence, and the regenerable current
+  structural-review mapping.
 - `validation/` contains validation evidence and the reproducible dependency
   specification.
 - `frozen-delivery-reports/` is one non-authoritative, byte-exact copy of the

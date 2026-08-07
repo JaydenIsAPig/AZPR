@@ -4,7 +4,7 @@
   "status": "TEMPLATE_NOT_APPROVAL",
   "repository": {
     "expected_path": "/AZPR",
-    "approved_base_commit": "dac0e0bf1695d44f4b6c0e0e7673559f5d87ec02",
+    "approved_base_commit": "ce80d335aef52c8900bd363bbcfacc1e497c0404",
     "expected_mapping_sha256": null,
     "expected_transition_contract_sha256": null
   },

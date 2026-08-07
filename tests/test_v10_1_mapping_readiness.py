@@ -8,6 +8,7 @@ from unittest import mock
 
 
 ROOT = Path(__file__).parents[1]
+APPROVED_BASE = "ce80d335aef52c8900bd363bbcfacc1e497c0404"
 SCRIPT = ROOT / "scripts" / "check_v10_1_mapping_readiness.py"
 SPEC = importlib.util.spec_from_file_location("mapping_readiness", SCRIPT)
 assert SPEC and SPEC.loader
@@ -54,22 +55,29 @@ class V101MappingReadinessTests(unittest.TestCase):
             self.validation,
             attempts or self.attempts,
             root=ROOT,
-            head="dac0e0bf1695d44f4b6c0e0e7673559f5d87ec02",
+            head=APPROVED_BASE,
         )
 
-    def test_current_mapping_is_ready_for_human_approval_only(self) -> None:
+    def test_current_mapping_is_structurally_ready_but_final_approval_is_deferred(self) -> None:
         result = self.assess()
         self.assertEqual(result["errors"], [])
-        self.assertTrue(result["mapping_ready_for_human_approval"])
+        self.assertTrue(result["mapping_structurally_ready_for_review"])
+        self.assertFalse(result["mapping_ready_for_human_approval"])
+        self.assertFalse(result["final_mapping_approval_eligible"])
         self.assertTrue(result["checks"]["deterministic_mapping_matches"])
         self.assertTrue(result["checks"]["verifier_evidence_valid"])
         self.assertTrue(result["checks"]["both_delivery_verifiers_pass"])
         self.assertFalse(result["checks"]["formal_int_01_verification_present"])
-        self.assertTrue(result["prequalification_patch_ready"])
+        self.assertTrue(result["checks"]["transition_base_human_approved"])
+        self.assertFalse(result["checks"]["h0_ansible_preparation_complete"])
+        self.assertTrue(result["pre_ansible_transition_base_ready"])
         self.assertFalse(result["ready_for_materialization"])
         self.assertFalse(result["ready_for_activation"])
         self.assertFalse(result["safe_for_unattended_execution_now"])
-        self.assertEqual(result["next_required_action"], "EXECUTE_INT_00_THEN_FORMAL_INT_01")
+        self.assertEqual(
+            result["next_required_action"],
+            "IMPLEMENT_H0_ANSIBLE_QUALIFICATION_INFRASTRUCTURE",
+        )
 
     def test_prequalification_pass_cannot_impersonate_formal_int_01(self) -> None:
         value = json.loads(self.attempts.read_text(encoding="utf-8"))
@@ -87,7 +95,7 @@ class V101MappingReadinessTests(unittest.TestCase):
             value["controller_states"]["external_controller"]["activation_allowed"] = True
             altered.write_text(json.dumps(value), encoding="utf-8")
             result = self.assess(contract=altered)
-        self.assertFalse(result["mapping_ready_for_human_approval"])
+        self.assertFalse(result["mapping_structurally_ready_for_review"])
         self.assertTrue(any("external controller" in error for error in result["errors"]))
 
     def test_unknown_intent_fails_closed(self) -> None:
@@ -104,7 +112,7 @@ class V101MappingReadinessTests(unittest.TestCase):
                 writer.writeheader()
                 writer.writerows(rows)
             result = self.assess(mapping=altered)
-        self.assertFalse(result["mapping_ready_for_human_approval"])
+        self.assertFalse(result["mapping_structurally_ready_for_review"])
         self.assertTrue(any("unresolved conflict" in error for error in result["errors"]))
 
     def test_omitted_passive_overlay_row_fails_closed(self) -> None:
@@ -121,7 +129,7 @@ class V101MappingReadinessTests(unittest.TestCase):
                 writer.writeheader()
                 writer.writerows(rows)
             result = self.assess(mapping=altered)
-        self.assertFalse(result["mapping_ready_for_human_approval"])
+        self.assertFalse(result["mapping_structurally_ready_for_review"])
         self.assertTrue(any("omits deterministic dispositions" in error for error in result["errors"]))
 
     def test_unsafe_destination_fails_closed(self) -> None:
@@ -139,7 +147,7 @@ class V101MappingReadinessTests(unittest.TestCase):
                 writer.writeheader()
                 writer.writerows(rows)
             result = self.assess(mapping=altered)
-        self.assertFalse(result["mapping_ready_for_human_approval"])
+        self.assertFalse(result["mapping_structurally_ready_for_review"])
         self.assertTrue(any("unsafe proposed_destination" in error for error in result["errors"]))
 
     def test_verifier_expected_count_cannot_be_lowered(self) -> None:
@@ -179,7 +187,7 @@ class V101MappingReadinessTests(unittest.TestCase):
                 mapping_path=self.mapping,
                 contract_path=self.contract,
                 verifier_attempts_path=self.attempts,
-                base_commit="dac0e0bf1695d44f4b6c0e0e7673559f5d87ec02",
+                base_commit=APPROVED_BASE,
                 prompt_sha256="3b235cb7e33ca409241ff26523f60f8fee89cec524b3f09e91a69927a0aa4880",
             )
         self.assertFalse(valid)
@@ -192,7 +200,7 @@ class V101MappingReadinessTests(unittest.TestCase):
                 "format_version": "1.0",
                 "approval_kind": "AZPR_V10_1_INTEGRATION_MAPPING_APPROVAL",
                 "approved": True,
-                "base_commit": "dac0e0bf1695d44f4b6c0e0e7673559f5d87ec02",
+                "base_commit": APPROVED_BASE,
                 "mapping_sha256": mapping_readiness.sha256(self.mapping),
                 "transition_contract_sha256": mapping_readiness.sha256(self.contract),
                 "prompt_archive_sha256": "3b235cb7e33ca409241ff26523f60f8fee89cec524b3f09e91a69927a0aa4880",
@@ -227,10 +235,30 @@ class V101MappingReadinessTests(unittest.TestCase):
             value["orchestration_prompt_pack"]["automatic_stage_advancement"] = True
             altered.write_text(json.dumps(value), encoding="utf-8")
             result = self.assess(contract=altered)
-        self.assertFalse(result["mapping_ready_for_human_approval"])
+        self.assertFalse(result["mapping_structurally_ready_for_review"])
         self.assertTrue(
             any("automatic stage advancement" in error for error in result["errors"])
         )
+
+    def test_transition_base_must_bind_the_human_approved_commit(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            altered = Path(directory) / "contract.json"
+            value = json.loads(self.contract.read_text(encoding="utf-8"))
+            value["transition_base"]["commit"] = value["transition_base"]["parent_commit"]
+            altered.write_text(json.dumps(value), encoding="utf-8")
+            result = self.assess(contract=altered)
+        self.assertFalse(result["mapping_structurally_ready_for_review"])
+        self.assertTrue(any("transition-base" in error for error in result["errors"]))
+
+    def test_int_00_cannot_be_unblocked_during_pre_ansible_preparation(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            altered = Path(directory) / "contract.json"
+            value = json.loads(self.contract.read_text(encoding="utf-8"))
+            value["pre_int00_lifecycle"]["int_00_status"] = "ELIGIBLE"
+            altered.write_text(json.dumps(value), encoding="utf-8")
+            result = self.assess(contract=altered)
+        self.assertFalse(result["mapping_structurally_ready_for_review"])
+        self.assertTrue(any("INT-00" in error for error in result["errors"]))
 
     def test_delivery_audit_cannot_be_promoted_to_formal_authority(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -239,7 +267,7 @@ class V101MappingReadinessTests(unittest.TestCase):
             value["audit_authority"]["delivery_audit_authoritative"] = True
             altered.write_text(json.dumps(value), encoding="utf-8")
             result = self.assess(contract=altered)
-        self.assertFalse(result["mapping_ready_for_human_approval"])
+        self.assertFalse(result["mapping_structurally_ready_for_review"])
         self.assertTrue(any("audit-authority" in error for error in result["errors"]))
 
     def test_generated_byte_binding_drift_fails_closed(self) -> None:
@@ -261,7 +289,7 @@ class V101MappingReadinessTests(unittest.TestCase):
                 writer.writeheader()
                 writer.writerows(rows)
             result = self.assess(mapping=altered)
-        self.assertFalse(result["mapping_ready_for_human_approval"])
+        self.assertFalse(result["mapping_structurally_ready_for_review"])
         self.assertTrue(any("generated preparation bytes drifted" in error for error in result["errors"]))
 
     def test_unmapped_current_file_drift_is_not_preserved(self) -> None:

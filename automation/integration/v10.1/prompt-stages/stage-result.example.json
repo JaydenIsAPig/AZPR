@@ -4,7 +4,7 @@
   "outcome": "APPROVAL_REQUIRED",
   "summary": "Preflight completed; operator-supplied Linux runtime approval is absent.",
   "authority": {
-    "head_commit": "dac0e0bf1695d44f4b6c0e0e7673559f5d87ec02",
+    "head_commit": "ce80d335aef52c8900bd363bbcfacc1e497c0404",
     "mapping_sha256": null,
     "transition_contract_sha256": null,
     "prompt_archive_sha256": "3b235cb7e33ca409241ff26523f60f8fee89cec524b3f09e91a69927a0aa4880",

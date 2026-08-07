@@ -9,18 +9,28 @@ State: staged-hybrid transition selected for integration review.
   `DRAFT_NOT_ACTIVE`; it permits one stage per invocation and no automatic
   advancement.
 - The external trusted-controller candidate is deferred, unqualified, and forbidden from writes or external capability.
-- The integration mapping and transition contract are awaiting the governed
-  preflight and later human approval.
+- Commit `ce80d335aef52c8900bd363bbcfacc1e497c0404` is the human-approved
+  pre-Ansible H0 transition base. Its direct parent
+  `d60e5d9b5fe3b39fa07a1b2e6bfa2719425eb6e5` remains recorded as source-tree
+  lineage; neither commit is final mapping approval.
+- The current mapping is a regenerable pre-Ansible review artifact. Final
+  mapping approval is deferred until the Ansible work and the remaining H0
+  human/evidence gates are complete.
 - A local Ubuntu 24.04 ARM64 Multipass pre-qualification reproduced both exact
   delivery verifier modes at 120/120 offline with no source mutation. The
   result is preparation evidence only, not a formal `INT-01` result or external
   controller qualification.
-- `INT-00` is the next review stage. `docs/audits/README.md` is the approved
-  interim audit authority until `INT-04`, when the invoking controller must
-  create the first immutable report and index atomically. The governance
-  owner's actual name/role, exact host/image approval, and an independently
-  bounded reviewer identity remain required; none may be invented or silently
-  bypassed. After the pre-qualification patch is committed cleanly, execute
-  `INT-00`, then rerun `INT-01` formally against that approved boundary.
+- The next work is the bounded H0 Ansible qualification-infrastructure layer
+  under `infrastructure/ansible/`. Ansible may establish requested machine
+  state but may not approve or qualify it. Formal Linux-environment approval,
+  two independently evidenced 120/120 verifier runs, proof of run
+  independence, the actual audit-governance owner name/role, regeneration and
+  human approval of the final exact mapping, and the `INT-00` preflight all
+  remain unresolved. `INT-00` is blocked until those preconditions are
+  satisfied in the order recorded by the transition contract.
+- `docs/audits/README.md` remains the approved interim audit authority until
+  `INT-04`, when the invoking controller must create the first immutable report
+  and index atomically. No unresolved human identity or approval may be
+  invented or silently bypassed.
 
 Use `.codex-loop/state.json` for local machine state after setup. This committed file is a human-readable handoff only. The controlling transition gates are documented in [ADR-0009](../adr/0009-staged-hybrid-controller-transition.md), the machine contract is `automation/integration/v10.1/controller-transition-contract.json`, and review evidence is under [delivery provenance](../delivery-provenance/v10.1/README.md).

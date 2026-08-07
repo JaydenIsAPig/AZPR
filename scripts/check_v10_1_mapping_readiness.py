@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Assess whether the AZPR v10.1 mapping is ready for human approval.
+"""Assess the AZPR v10.1 mapping and its final-approval prerequisites.
 
 The default assessment is read-only, emits JSON, and never creates or modifies
-an approval. Mapping approval readiness is intentionally distinct from
-materialization or external-controller activation readiness.
+an approval. Structural mapping readiness is intentionally distinct from final
+mapping approval, materialization, or external-controller activation readiness.
 """
 
 from __future__ import annotations
@@ -121,6 +121,8 @@ REQUIRED_GENERATED_PATHS = {
     "docs/delivery-provenance/v10.1/integration/AZPR-v10.1-integration-rollback-plan.md",
     "docs/delivery-provenance/v10.1/integration/AZPR-v10.1-staging-diff-report.md",
     "docs/delivery-provenance/v10.1/integration/README.md",
+    "docs/delivery-provenance/v10.1/integration/historical-prequalification/AZPR-v10.1-integration-path-mapping.prequalification-527.csv",
+    "docs/delivery-provenance/v10.1/integration/historical-prequalification/README.md",
     "docs/delivery-provenance/v10.1/validation/AZPR-v10.1-staging-validation.json",
     "docs/delivery-provenance/v10.1/validation/AZPR-v10.1-system-integration-handoff-summary.md",
     "docs/delivery-provenance/v10.1/validation/README.md",
@@ -162,10 +164,14 @@ REQUIRED_GENERATED_PATHS = {
 }
 REQUIRED_PHASE_GATES = {
     ("H0_PREPARATION", "exit_gates"): {
+        "ANSIBLE_QUALIFICATION_INFRASTRUCTURE_COMPLETE",
+        "FORMAL_LINUX_ENVIRONMENT_APPROVED",
+        "TWO_INDEPENDENT_LINUX_VERIFIER_RUNS_ACCEPTED",
+        "AUDIT_GOVERNANCE_OWNER_RESOLVED",
         "MAPPING_ASSESSMENT_READY",
         "STAGED_PROMPT_PACK_VALID",
         "HUMAN_MAPPING_APPROVAL",
-        "SOURCE_AND_FRESH_VERIFIER_EVIDENCE",
+        "INT_00_PREFLIGHT_COMPLETE",
     },
     ("H1_REPOSITORY_INTEGRATION", "entry_gates"): {
         "HUMAN_MAPPING_APPROVAL",
@@ -583,12 +589,45 @@ def assess(
 
     if contract.get("decision_id") != "AZPR-V10.1-STAGED-HYBRID-CONTROLLER":
         errors.append("transition contract decision identity mismatch")
-    if contract.get("decision_status") != "SELECTED_FOR_MAPPING_APPROVAL":
-        errors.append("transition contract is not preparation-only")
+    if contract.get("decision_status") != "SELECTED_FOR_PRE_ANSIBLE_H0_PREPARATION":
+        errors.append("transition contract is not at pre-Ansible H0 preparation")
     if contract.get("strategy") != "STAGED_HYBRID":
         errors.append("transition strategy is not STAGED_HYBRID")
     if contract.get("provenance_root") != "docs/delivery-provenance/v10.1":
         errors.append("delivery provenance destination mismatch")
+
+    transition_base = contract.get("transition_base", {})
+    transition_base_approved = (
+        transition_base.get("status") == "HUMAN_APPROVED"
+        and transition_base.get("purpose") == "PRE_ANSIBLE_H0_TRANSITION_BASE"
+        and transition_base.get("commit") == contract.get("base_commit")
+        and transition_base.get("parent_commit")
+        == "d60e5d9b5fe3b39fa07a1b2e6bfa2719425eb6e5"
+        and transition_base.get("is_final_mapping_approval") is False
+    )
+    if not transition_base_approved:
+        errors.append("approved pre-Ansible transition-base contract drifted")
+
+    pre_int00 = contract.get("pre_int00_lifecycle", {})
+    required_pre_int00_sequence = [
+        "TRANSITION_BASE_HUMAN_APPROVAL",
+        "H0_ANSIBLE_QUALIFICATION_INFRASTRUCTURE_PREPARATION",
+        "FORMAL_LINUX_ENVIRONMENT_APPROVAL",
+        "TWO_INDEPENDENT_120_OF_120_LINUX_VERIFIER_RUNS",
+        "AUDIT_GOVERNANCE_OWNER_RESOLUTION",
+        "FINAL_EXACT_MAPPING_REGENERATION_AND_HUMAN_APPROVAL",
+        "INT_00",
+    ]
+    if pre_int00.get("required_sequence") != required_pre_int00_sequence:
+        errors.append("pre-INT-00 lifecycle order drifted")
+    if pre_int00.get("ansible_authority_effect") is not False:
+        errors.append("Ansible must not receive authority effect")
+    if pre_int00.get("current_step") != "H0_ANSIBLE_QUALIFICATION_INFRASTRUCTURE_PREPARATION":
+        errors.append("pre-INT-00 lifecycle is not at H0 Ansible preparation")
+    if pre_int00.get("final_mapping_approval_status") != "DEFERRED_PENDING_H0_PREREQUISITES":
+        errors.append("final mapping approval must remain deferred during pre-Ansible preparation")
+    if pre_int00.get("int_00_status") != "BLOCKED":
+        errors.append("INT-00 must remain blocked during pre-Ansible preparation")
 
     prompt_set = contract.get("prompt_set", {})
     if prompt_set.get("status") != "SELECTED_NOT_ACTIVE":
@@ -713,8 +752,8 @@ def assess(
     approval = contract.get("approval", {})
     if approval.get("codex_may_create_approval") is not False:
         errors.append("contract must forbid Codex-created approvals")
-    if approval.get("status") != "PENDING_HUMAN_APPROVAL":
-        errors.append("mapping approval status must remain pending during preparation")
+    if approval.get("status") != "DEFERRED_PENDING_H0_PREREQUISITES":
+        errors.append("mapping approval status must remain deferred during pre-Ansible preparation")
     if approval.get("format_version") != "1.0" or approval.get("approval_kind") != "AZPR_V10_1_INTEGRATION_MAPPING_APPROVAL":
         errors.append("mapping approval contract shape drifted")
     required_approval_bindings = {
@@ -1039,7 +1078,7 @@ def assess(
             )
     if verifier_pass and not formal_delivery_verification:
         warnings.append(
-            "both verifier modes passed as pre-qualification evidence, but a valid INT-00 and formal INT-01 result are still required"
+            "both verifier modes passed as preliminary evidence, but they do not satisfy formal environment approval, two-run independence, or final mapping approval"
         )
     warnings.extend(verifier_evidence_issues)
 
@@ -1087,9 +1126,39 @@ def assess(
         and authority.get("live_runtime_state_transfer_allowed") is False
         and not missing_safeguards
     )
-    mapping_ready = not errors
+    mapping_structurally_ready = not errors
+    h0_ansible_preparation_complete = (
+        pre_int00.get("ansible_preparation_status") == "COMPLETE_EVIDENCE_BOUND"
+    )
+    linux_environment_approved = (
+        pre_int00.get("linux_environment_approval_status")
+        == "HUMAN_APPROVED_EVIDENCE_BOUND"
+    )
+    formal_linux_run_a_accepted = (
+        pre_int00.get("formal_linux_run_a_status") == "PASS_120_OF_120_EVIDENCE_BOUND"
+    )
+    formal_linux_run_b_accepted = (
+        pre_int00.get("formal_linux_run_b_status") == "PASS_120_OF_120_EVIDENCE_BOUND"
+    )
+    run_independence_proven = (
+        pre_int00.get("run_independence_status") == "PROVEN_EVIDENCE_BOUND"
+    )
+    audit_governance_owner_resolved = (
+        pre_int00.get("audit_governance_owner_status") == "HUMAN_IDENTIFIED_EVIDENCE_BOUND"
+    )
+    final_mapping_approval_eligible = all(
+        (
+            mapping_structurally_ready,
+            h0_ansible_preparation_complete,
+            linux_environment_approved,
+            formal_linux_run_a_accepted,
+            formal_linux_run_b_accepted,
+            run_independence_proven,
+            audit_governance_owner_resolved,
+        )
+    )
     materialization_ready = (
-        mapping_ready
+        final_mapping_approval_eligible
         and verifier_pass
         and formal_delivery_verification
         and approval_valid
@@ -1106,7 +1175,7 @@ def assess(
         "base_commit": current_head,
         "row_count": len(mapping),
         "checks": {
-            "mapping_structurally_complete": mapping_ready,
+            "mapping_structurally_complete": mapping_structurally_ready,
             "deterministic_mapping_matches": deterministic_mapping_matches,
             "prompt_stage_pack_valid": prompt_stage_pack_valid,
             "interim_audit_authority_valid": interim_audit_authority_valid,
@@ -1125,10 +1194,19 @@ def assess(
             "verifier_evidence_valid": verifier_evidence_valid,
             "both_delivery_verifiers_pass": verifier_pass,
             "formal_int_01_verification_present": formal_delivery_verification,
+            "transition_base_human_approved": transition_base_approved,
+            "h0_ansible_preparation_complete": h0_ansible_preparation_complete,
+            "linux_environment_human_approved": linux_environment_approved,
+            "formal_linux_run_a_accepted": formal_linux_run_a_accepted,
+            "formal_linux_run_b_accepted": formal_linux_run_b_accepted,
+            "run_independence_proven": run_independence_proven,
+            "audit_governance_owner_resolved": audit_governance_owner_resolved,
         },
-        "mapping_ready_for_human_approval": mapping_ready,
-        "prequalification_patch_ready": (
-            mapping_ready and verifier_pass and not formal_delivery_verification
+        "mapping_structurally_ready_for_review": mapping_structurally_ready,
+        "mapping_ready_for_human_approval": final_mapping_approval_eligible,
+        "final_mapping_approval_eligible": final_mapping_approval_eligible,
+        "pre_ansible_transition_base_ready": (
+            mapping_structurally_ready and transition_base_approved
         ),
         "ready_for_materialization": materialization_ready,
         "ready_for_activation": False,
@@ -1139,14 +1217,22 @@ def assess(
         "warnings": warnings,
         "next_required_action": (
             "CORRECT_MAPPING_OR_TRANSITION_CONTRACT"
-            if not mapping_ready
-            else "COMPLETE_HASH_LOCKED_LINUX_DELIVERY_VERIFICATION"
-            if not verifier_pass
-            else "EXECUTE_INT_00_THEN_FORMAL_INT_01"
-            if not formal_delivery_verification
+            if not mapping_structurally_ready
+            else "IMPLEMENT_H0_ANSIBLE_QUALIFICATION_INFRASTRUCTURE"
+            if not h0_ansible_preparation_complete
+            else "OBTAIN_FORMAL_LINUX_ENVIRONMENT_APPROVAL"
+            if not linux_environment_approved
+            else "COMPLETE_FORMAL_LINUX_RUN_A"
+            if not formal_linux_run_a_accepted
+            else "COMPLETE_FORMAL_LINUX_RUN_B"
+            if not formal_linux_run_b_accepted
+            else "PROVE_LINUX_RUN_INDEPENDENCE"
+            if not run_independence_proven
+            else "RESOLVE_AUDIT_GOVERNANCE_OWNER"
+            if not audit_governance_owner_resolved
             else "HUMAN_REVIEW_AND_APPROVAL_OF_EXACT_MAPPING_HASH"
             if not approval_valid
-            else "MATERIALIZATION_PREREQUISITES_SATISFIED"
+            else "EXECUTE_INT_00"
         ),
     }
 
@@ -1184,9 +1270,11 @@ def main() -> int:
     if args.output:
         atomic_json(args.output, result)
     print(json.dumps(result, indent=2, sort_keys=True))
-    ready = result["ready_for_materialization"] if args.require_materialization_ready else result[
-        "mapping_ready_for_human_approval"
-    ]
+    ready = (
+        result["ready_for_materialization"]
+        if args.require_materialization_ready
+        else result["mapping_structurally_ready_for_review"]
+    )
     return 0 if ready else 1
 
 

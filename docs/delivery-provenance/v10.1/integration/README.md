@@ -13,6 +13,13 @@ project-owner decisions are expressed only by the regenerated
 `AZPR-v10.1-integration-path-mapping.csv`, the transition contract, ADR-0009,
 and `../validation/mapping-readiness-assessment.json`.
 
+The exact 527-row, `c84d45f...` approval-candidate bytes that preceded the H0
+Ansible workstream are preserved under `historical-prequalification/` and are
+explicitly non-current. Commit
+`ce80d335aef52c8900bd363bbcfacc1e497c0404` is the human-approved pre-Ansible
+transition base; `d60e5d9...` is its recorded source-tree parent. This base
+approval is not final mapping approval.
+
 Do not edit the historical reports to make their old conclusions look current.
 Regenerate the executable assessment after any current mapping or safeguard
 change.
@@ -21,5 +28,7 @@ The current transition prompt pack is under
 `automation/integration/v10.1/prompt-stages/`. Its manifest and SHA-256 file are
 part of the deterministic mapping, and
 `scripts/check_v10_1_prompt_stage_pack.py` must pass before the mapping is
-eligible for human review. The pack remains draft and grants no runtime or
-materialization authority.
+structurally ready for review. The pack remains draft and grants no runtime or
+materialization authority. Final mapping approval is deferred until the H0
+Ansible, Linux environment, two-run independence, and governance-owner gates
+are complete and the current mapping has been regenerated again.

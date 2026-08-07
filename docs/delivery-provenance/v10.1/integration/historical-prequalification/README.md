@@ -22,11 +22,12 @@ diff processing for this file; review its identity by hash.
 
 ## Forward baseline
 
-The repository remains on forward source-tree baseline
-`d60e5d9b5fe3b39fa07a1b2e6bfa2719425eb6e5`. This historical copy does not
-reset, replace, or supersede that baseline. The checked-out current mapping and
-transition-contract base still require separate reconciliation before mapping
-regeneration or approval.
+The historical forward source-tree baseline is
+`d60e5d9b5fe3b39fa07a1b2e6bfa2719425eb6e5`. Its direct child
+`ce80d335aef52c8900bd363bbcfacc1e497c0404` is the human-approved pre-Ansible
+transition base. This historical copy does not reset, replace, or supersede
+either commit, and transition-base approval does not make these 527-row bytes
+the current mapping or grant final mapping approval.
 
 Do not edit this CSV to make it appear current. If its bytes differ from the
 identity above, treat the evidence as invalid and restore it only from the

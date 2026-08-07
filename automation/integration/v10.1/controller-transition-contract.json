@@ -1,9 +1,37 @@
 {
   "format_version": "1.0",
   "decision_id": "AZPR-V10.1-STAGED-HYBRID-CONTROLLER",
-  "decision_status": "SELECTED_FOR_MAPPING_APPROVAL",
+  "decision_status": "SELECTED_FOR_PRE_ANSIBLE_H0_PREPARATION",
   "strategy": "STAGED_HYBRID",
-  "base_commit": "dac0e0bf1695d44f4b6c0e0e7673559f5d87ec02",
+  "base_commit": "ce80d335aef52c8900bd363bbcfacc1e497c0404",
+  "transition_base": {
+    "status": "HUMAN_APPROVED",
+    "purpose": "PRE_ANSIBLE_H0_TRANSITION_BASE",
+    "commit": "ce80d335aef52c8900bd363bbcfacc1e497c0404",
+    "parent_commit": "d60e5d9b5fe3b39fa07a1b2e6bfa2719425eb6e5",
+    "is_final_mapping_approval": false
+  },
+  "pre_int00_lifecycle": {
+    "current_step": "H0_ANSIBLE_QUALIFICATION_INFRASTRUCTURE_PREPARATION",
+    "required_sequence": [
+      "TRANSITION_BASE_HUMAN_APPROVAL",
+      "H0_ANSIBLE_QUALIFICATION_INFRASTRUCTURE_PREPARATION",
+      "FORMAL_LINUX_ENVIRONMENT_APPROVAL",
+      "TWO_INDEPENDENT_120_OF_120_LINUX_VERIFIER_RUNS",
+      "AUDIT_GOVERNANCE_OWNER_RESOLUTION",
+      "FINAL_EXACT_MAPPING_REGENERATION_AND_HUMAN_APPROVAL",
+      "INT_00"
+    ],
+    "ansible_preparation_status": "NOT_STARTED",
+    "linux_environment_approval_status": "PENDING_HUMAN_APPROVAL",
+    "formal_linux_run_a_status": "NOT_RUN",
+    "formal_linux_run_b_status": "NOT_RUN",
+    "run_independence_status": "NOT_PROVEN",
+    "audit_governance_owner_status": "UNRESOLVED",
+    "final_mapping_approval_status": "DEFERRED_PENDING_H0_PREREQUISITES",
+    "int_00_status": "BLOCKED",
+    "ansible_authority_effect": false
+  },
   "provenance_root": "docs/delivery-provenance/v10.1",
   "prompt_set": {
     "status": "SELECTED_NOT_ACTIVE",
@@ -19,7 +47,7 @@
     "status": "DRAFT_NOT_ACTIVE",
     "manifest": "automation/integration/v10.1/prompt-stages/stage-manifest.json",
     "hash_manifest": "automation/integration/v10.1/prompt-stages/SHA256SUMS.json",
-    "hash_manifest_sha256": "e21d1b9c4515431b92fef41b3001e95a2eb1409f9b3d9854c995caf9df9abd1e",
+    "hash_manifest_sha256": "876401076900b2d8e8dd2400c2cb60965c8000779f5286478c8eb5813371e817",
     "validator": "scripts/check_v10_1_prompt_stage_pack.py",
     "stage_count": 10,
     "one_stage_per_invocation": true,
@@ -100,10 +128,14 @@
       "controller_writer": "NONE",
       "purpose": "Inventory, mapping, provenance, dependency preparation and read-only validation.",
       "exit_gates": [
+        "ANSIBLE_QUALIFICATION_INFRASTRUCTURE_COMPLETE",
+        "FORMAL_LINUX_ENVIRONMENT_APPROVED",
+        "TWO_INDEPENDENT_LINUX_VERIFIER_RUNS_ACCEPTED",
+        "AUDIT_GOVERNANCE_OWNER_RESOLVED",
         "MAPPING_ASSESSMENT_READY",
         "STAGED_PROMPT_PACK_VALID",
         "HUMAN_MAPPING_APPROVAL",
-        "SOURCE_AND_FRESH_VERIFIER_EVIDENCE"
+        "INT_00_PREFLIGHT_COMPLETE"
       ]
     },
     {
@@ -179,7 +211,7 @@
     ]
   },
   "approval": {
-    "status": "PENDING_HUMAN_APPROVAL",
+    "status": "DEFERRED_PENDING_H0_PREREQUISITES",
     "approval_file": "automation/approvals/v10.1-integration-path-mapping-approved.json",
     "format_version": "1.0",
     "approval_kind": "AZPR_V10_1_INTEGRATION_MAPPING_APPROVAL",

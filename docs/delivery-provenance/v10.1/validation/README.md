@@ -28,9 +28,15 @@ they are no longer the active readiness input.
 The local Linux VM reproduced both exact verifier modes at 120/120 with the
 network interface disabled, empty verifier stderr, UID 1000, no inherited
 credentials, and no source mutation. Because this run preceded a valid
-`INT-00`, retained only the Multipass image-hash prefix, and used a reviewer
-that remained privilege-capable inside the guest, it is
-`PASS_PREQUALIFICATION_ONLY`, not a formal `INT-01` result. It does not
-authorize mapping approval, materialization, controller qualification, or
-activation. The next governed move is `INT-00`, followed by a formal `INT-01`
-rerun on the exact approved reviewer boundary.
+environment approval, retained only the Multipass image-hash prefix, and used
+a reviewer that remained privilege-capable inside the guest, it is
+`PASS_PREQUALIFICATION_ONLY`, not either of the two formally accepted
+independent Linux runs. It does not authorize mapping approval,
+materialization, controller qualification, or activation.
+
+Commit `ce80d335aef52c8900bd363bbcfacc1e497c0404` is the approved pre-Ansible
+transition base. The next governed work is the H0 Ansible
+qualification-infrastructure layer, followed by formal Linux-environment
+approval, two independently evidenced 120/120 runs, proof of independence,
+audit-governance owner resolution, final exact mapping regeneration and human
+approval, and only then `INT-00`.

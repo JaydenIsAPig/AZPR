@@ -137,6 +137,8 @@ GENERATED_PATHS = {
     "docs/delivery-provenance/v10.1/integration/AZPR-v10.1-integration-rollback-plan.md",
     "docs/delivery-provenance/v10.1/integration/AZPR-v10.1-staging-diff-report.md",
     "docs/delivery-provenance/v10.1/integration/README.md",
+    "docs/delivery-provenance/v10.1/integration/historical-prequalification/AZPR-v10.1-integration-path-mapping.prequalification-527.csv",
+    "docs/delivery-provenance/v10.1/integration/historical-prequalification/README.md",
     "docs/delivery-provenance/v10.1/validation/AZPR-v10.1-staging-validation.json",
     "docs/delivery-provenance/v10.1/validation/AZPR-v10.1-system-integration-handoff-summary.md",
     "docs/delivery-provenance/v10.1/validation/README.md",
