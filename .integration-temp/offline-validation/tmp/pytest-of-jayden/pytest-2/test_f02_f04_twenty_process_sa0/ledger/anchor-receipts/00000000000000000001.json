@@ -1,0 +1,7 @@
+{
+  "accepted": true,
+  "journal_id": "journal-concurrency",
+  "ledger_sequence": 1,
+  "new_head_sha256": "40b7df2b67078bf384b29ccf72a8e250f7946656456239cd690d9739a49f0577",
+  "previous_head_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+}

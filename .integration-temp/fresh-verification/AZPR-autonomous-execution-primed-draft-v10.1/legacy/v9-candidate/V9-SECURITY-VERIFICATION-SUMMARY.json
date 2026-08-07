@@ -1,0 +1,23 @@
+{
+  "baseline": {
+    "delivery_manifest_sha256": "7f20dd0ac7b29580b21287ae946c6230a67c08d830ae691de48bdd1687007609",
+    "implementation_zip_sha256": "dc2299845e044861a6c66dc941a78dbddec4c1d3895d96ce09328687f0cc3d9f",
+    "prompt_zip_sha256": "3b235cb7e33ca409241ff26523f60f8fee89cec524b3f09e91a69927a0aa4880",
+    "reports_zip_sha256": "bd81a12f0beef3d5bd6fd7d6b127e3851e24341eb9fd191e8abfe9b8a75fcfa2"
+  },
+  "candidate": "AZPR-autonomous-execution-primed-draft-v9",
+  "format_version": "1.0",
+  "fresh_extraction_verification_status": "PENDING_FINAL_FREEZE",
+  "independent_reassessment_required": true,
+  "safe_for_unattended_execution_now": false,
+  "source_verification_status": "PENDING_FINAL_FREEZE",
+  "submitted_test_catalog": {
+    "artifact_substitutions": 39,
+    "blackbox_cases": 6,
+    "concurrent_processes": 20,
+    "probe_roles": 9,
+    "pytest_test_ids": 96,
+    "v9_release_blocking_test_ids": 12
+  },
+  "trusted_pre_autonomous_installation_ready": false
+}

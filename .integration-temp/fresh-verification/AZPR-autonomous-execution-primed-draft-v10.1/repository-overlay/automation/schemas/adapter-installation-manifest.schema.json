@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://azpr.local/schemas/adapter-installation-manifest.schema.json",
+  "title": "AZPR Manifest-Pinned External Adapter Installation Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format_version", "adapter_name", "executable_component", "executable_sha256",
+    "allowed_operations", "execution_mode", "idempotency_key_required",
+    "max_request_bytes", "max_response_bytes", "rollback_semantics"
+  ],
+  "properties": {
+    "format_version": {"const": "1.0"},
+    "adapter_name": {"type": "string", "minLength": 1, "maxLength": 200},
+    "executable_component": {"type": "string", "minLength": 1, "maxLength": 200},
+    "executable_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$", "maxLength": 64},
+    "allowed_operations": {"type": "array", "minItems": 1, "maxItems": 100, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 200}},
+    "execution_mode": {"enum": ["DRY_RUN_ONLY", "ISOLATED_TEST_TARGET_ONLY", "LIVE_REQUIRES_SEPARATE_SIGNED_TARGET_ATTESTATION"]},
+    "idempotency_key_required": {"const": true},
+    "max_request_bytes": {"type": "integer", "minimum": 1024, "maximum": 16777216},
+    "max_response_bytes": {"type": "integer", "minimum": 1024, "maximum": 16777216},
+    "rollback_semantics": {"enum": ["NO_SIDE_EFFECT_NOOP", "IDEMPOTENT_COMPENSATING_ACTION", "PROVIDER_TRANSACTIONAL_ROLLBACK"]}
+  }
+}

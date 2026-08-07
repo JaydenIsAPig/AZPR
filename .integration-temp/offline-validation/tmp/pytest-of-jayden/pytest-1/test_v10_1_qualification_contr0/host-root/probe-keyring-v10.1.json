@@ -1,0 +1,19 @@
+{
+  "format_version": "1.0",
+  "keyring_id": "probe-keyring-v10-1-0001",
+  "keyring_kind": "AZPR_V10_1_APPROVED_PROBE_KEYRING",
+  "keys": [
+    {
+      "key_id": "probe-key-v10-1-0001",
+      "not_after": "2026-08-14T00:32:30.209427+00:00",
+      "not_before": "2026-08-06T00:32:30.209427+00:00",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAyg8Ga7V1aHjB3vOD3jWFo6VGbo+JNS1otJuTQqUE5WY=\n-----END PUBLIC KEY-----\n",
+      "roles": [
+        "qualification-probe-service"
+      ],
+      "signer_id": "probe-service-v10-1-0001"
+    }
+  ],
+  "sequence": 5,
+  "service_id": "probe-service-v10-1-0001"
+}

@@ -1,0 +1,8 @@
+# Candidate-reproduction validation dependencies for macOS ARM64 / CPython 3.12.
+# This is not an external-controller production runtime or supply-chain approval.
+pytest==9.1.1
+cryptography==46.0.4
+jsonschema==4.26.0
+referencing==0.36.2
+rpds-py==0.30.0
+attrs==25.4.0

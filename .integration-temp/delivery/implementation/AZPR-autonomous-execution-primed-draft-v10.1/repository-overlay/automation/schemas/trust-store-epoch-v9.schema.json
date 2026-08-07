@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "epoch_id": {
+      "pattern": "^[A-Za-z0-9._:-]{8,160}$",
+      "type": "string"
+    },
+    "epoch_kind": {
+      "const": "AZPR_V9_ATOMIC_TRUST_STORE_EPOCH"
+    },
+    "epoch_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "format_version": {
+      "const": "1.0"
+    },
+    "previous_epoch_id": {
+      "oneOf": [
+        {
+          "maxLength": 160,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "sequence": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "stores": {
+      "maxProperties": 10,
+      "minProperties": 10,
+      "type": "object"
+    },
+    "transition_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "format_version",
+    "epoch_kind",
+    "epoch_id",
+    "sequence",
+    "previous_epoch_id",
+    "transition_sha256",
+    "stores",
+    "epoch_sha256"
+  ],
+  "title": "AZPR v9 Atomic Trust Store Epoch",
+  "type": "object"
+}

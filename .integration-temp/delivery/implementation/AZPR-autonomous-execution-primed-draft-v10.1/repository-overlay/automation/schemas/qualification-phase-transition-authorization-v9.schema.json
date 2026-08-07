@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://azpr.local/schemas/qualification-phase-transition-authorization-v9.schema.json",
+  "type": "object", "additionalProperties": false,
+  "required": ["format_version", "authorization_kind", "transition_id", "sequence", "nonce", "issued_at", "expires_at", "host_id", "prior_installation_id", "prior_manifest_sha256", "prior_lock_sha256", "prior_installation_receipt_sha256", "qualification_launcher_status", "qualification_launcher_evidence_sha256", "fault_matrix_status", "fault_matrix_evidence_sha256", "canonical_policy_record_sha256", "signatures"],
+  "properties": {
+    "format_version": {"const": "1.0"}, "authorization_kind": {"const": "AZPR_V9_QUALIFICATION_TO_POLICY_PHASE_TRANSITION"},
+    "transition_id": {"type": "string", "pattern": "^phase-transition-[A-Za-z0-9._:-]{8,140}$", "maxLength": 160},
+    "sequence": {"type": "integer", "minimum": 1}, "nonce": {"type": "string", "minLength": 8, "maxLength": 160},
+    "issued_at": {"type": "string", "format": "date-time", "maxLength": 64}, "expires_at": {"type": "string", "format": "date-time", "maxLength": 64},
+    "host_id": {"type": "string", "minLength": 8, "maxLength": 160}, "prior_installation_id": {"type": "string", "minLength": 8, "maxLength": 160},
+    "prior_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "prior_lock_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "prior_installation_receipt_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "qualification_launcher_status": {"const": "PASS"}, "qualification_launcher_evidence_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "fault_matrix_status": {"const": "PASS"}, "fault_matrix_evidence_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "canonical_policy_record_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "signatures": {"type": "array", "minItems": 2, "maxItems": 8, "items": {"$ref": "approval.schema.json#/$defs/signature"}}
+  }
+}

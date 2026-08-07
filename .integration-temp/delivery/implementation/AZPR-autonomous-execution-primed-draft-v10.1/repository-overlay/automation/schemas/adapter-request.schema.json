@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://azpr.local/schemas/adapter-request.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "target",
+    "operation",
+    "parameters"
+  ],
+  "properties": {
+    "target": {
+      "$ref": "capability-manifest.schema.json#/properties/target"
+    },
+    "operation": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "parameters": {
+      "type": "object",
+      "maxProperties": 100
+    },
+    "constraints": {
+      "$ref": "approval.schema.json#/$defs/decision"
+    },
+    "preflight": {
+      "type": "object",
+      "maxProperties": 100
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "$id": "https://azpr.local/schemas/probe-service-identity-v10.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "deployment_identity": {
+      "maxLength": 256,
+      "minLength": 8,
+      "type": "string"
+    },
+    "format_version": {
+      "const": "1.1"
+    },
+    "identity_kind": {
+      "const": "AZPR_V10_1_PROBE_SERVICE_IDENTITY"
+    },
+    "launcher_identity_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "runtime_configuration_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "service_binary_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "service_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "format_version",
+    "identity_kind",
+    "service_id",
+    "service_binary_sha256",
+    "deployment_identity",
+    "launcher_identity_sha256",
+    "runtime_configuration_sha256"
+  ],
+  "type": "object"
+}

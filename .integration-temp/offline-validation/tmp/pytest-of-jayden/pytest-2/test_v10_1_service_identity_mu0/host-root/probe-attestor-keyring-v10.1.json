@@ -1,0 +1,19 @@
+{
+  "format_version": "1.0",
+  "keyring_id": "attestor-keyring-v10-1-0001",
+  "keyring_kind": "AZPR_V10_1_PROBE_ATTESTOR_KEYRING",
+  "keys": [
+    {
+      "key_id": "attestor-key-v10-1-0001",
+      "not_after": "2026-08-14T00:53:29.996079+00:00",
+      "not_before": "2026-08-06T00:53:29.996079+00:00",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAb9bCU9mm09XeEWNffJyUksFlZLyw6zv1fo9AIqKynyU=\n-----END PUBLIC KEY-----\n",
+      "roles": [
+        "probe-service-attestor"
+      ],
+      "signer_id": "probe-attestor-v10-1-0001"
+    }
+  ],
+  "sequence": 7,
+  "service_id": "probe-attestor-v10-1-0001"
+}

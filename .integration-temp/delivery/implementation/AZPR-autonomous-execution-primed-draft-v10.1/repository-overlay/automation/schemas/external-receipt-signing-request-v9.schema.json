@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "format_version": {
+      "const": "1.0"
+    },
+    "request_kind": {
+      "const": "AZPR_V9_EXTERNAL_RECEIPT_SIGNING_REQUEST"
+    },
+    "request_nonce": {
+      "pattern": "^[A-Za-z0-9._:-]{8,160}$",
+      "type": "string"
+    },
+    "signer_identity_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "unsigned_receipt": {
+      "maxProperties": 64,
+      "type": "object"
+    },
+    "unsigned_receipt_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "format_version",
+    "request_kind",
+    "request_nonce",
+    "signer_identity_sha256",
+    "unsigned_receipt_sha256",
+    "unsigned_receipt"
+  ],
+  "title": "AZPR v9 External Receipt Signing Request",
+  "type": "object"
+}

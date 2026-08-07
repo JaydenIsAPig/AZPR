@@ -1,0 +1,20 @@
+{
+  "bootstrap_kind": "AZPR_V10_HOST_BOOTSTRAP_ROOTS",
+  "expires_at": "2026-08-10T00:53:33.953888+00:00",
+  "format_version": "1.0",
+  "issued_at": "2026-08-07T00:53:33.953888+00:00",
+  "manifest_id": "bootstrap-v10-1-0001",
+  "roots": {
+    "authorization_anchor_identity_sha256": "f2359023b96838c8f8c7fc1780fdccf70f08c88bc8f3ed1c921cac0002ff87fe",
+    "host_qualification_roots_authority_public_key_sha256": "b24e92adc62fc1e2a39eee570499ce013e9c28f339b3964dfeae409fa7aa4f59",
+    "host_qualification_roots_manifest_sha256": "49592889b9aa28799be15800cb77eb40786f09d09b0c53a04061257c5afbaddd",
+    "phase_transition_keyring_sha256": "73c79b91e87062fbec29594b5018ddb52ff0899ac8d7de7585a5e4f0121cc3dc",
+    "qualification_authorization_keyring_sha256": "86c91f7fcd5834f901e4178f6d196ff8170ffcf6043afb8e4aa9838767d87fff",
+    "qualification_receipt_signing_public_key_sha256": "ddf7daefb1ce3714e5990b5ca6b7871d40f650f6fcb98c372996941c67d679c7",
+    "qualification_trust_authority_public_key_sha256": "02eaffd8322a9e872c4b0d859124d5b8fbd1b546b6612728ab47d92b647d7aa2",
+    "qualification_trust_manifest_sha256": "993171acf18db043d52804a35f127e29d67ca25e5c047e9c9125ad200ac441a1"
+  },
+  "sequence": 6,
+  "signature": "ESoYMb2VAxvWOdIhGRkM0T/9w1z1ladUsYiIzMcrQ6mDG4TbrhdR3aPWgsMgwG/xaimoZkSziufdqofVMfvuDw==",
+  "signer_key_id": "bootstrap-authority-v10-1"
+}

@@ -1,0 +1,760 @@
+{
+  "$id": "https://azpr.local/schemas/cleanroom-qualification-receipt-v10.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "agent_execution_profile_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "agent_gid": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "agent_uid": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "artifact_bindings": {
+      "additionalProperties": false,
+      "maxProperties": 57,
+      "minProperties": 57,
+      "properties": {
+        "agent_execution_profile": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "anchor_helper": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "approval_keyring": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "build_provenance": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "bundle_attestation": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "bundle_signing_public_key": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "bundle_zip": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "codex_binary": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "codex_isolation_qualification_report": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "container_engine": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "dedicated_host_policy": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "dependency_lock": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "dependency_mirror_attestation": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "dependency_mirror_inventory": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "dependency_mirror_public_key": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "evidence_keyring": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "evidence_private_key": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "evidence_public_key": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "external_signer_client": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "external_signer_identity": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "git_binary": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "governing_policy_source": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "handoff_quota_profile": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "host_qualification_roots_authority_public_key": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "host_qualification_roots_manifest": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "host_root_anchor_client": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "host_root_anchor_identity": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "installation_signing_private_key": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "installation_signing_public_key": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "installer_fault_matrix_report": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "key_custody_qualification_report": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "key_lifecycle_state": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "phase_transition_keyring": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "probe_attestor_keyring": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "probe_attestor_revocation_state": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "probe_keyring": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "probe_policy": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "probe_revocation_state": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "probe_service_attestation": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "probe_service_executable": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "probe_service_identity": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "python_binary": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "qualification_authorization_keyring": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "qualification_probe_envelopes_manifest": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "qualification_receipt_signing_public_key": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "qualification_revocation_list": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "qualification_trust_authority_public_key": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "qualification_trust_manifest": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "remote_anchor_qualification_report": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "requirements_input": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "runtime_private_key": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "runtime_public_key": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "sbom": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "supply_chain_rebuild_report": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "validation_dockerfile": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "validation_image_attestation": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "validation_registry_proof": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "agent_execution_profile",
+        "anchor_helper",
+        "approval_keyring",
+        "build_provenance",
+        "bundle_attestation",
+        "bundle_signing_public_key",
+        "bundle_zip",
+        "codex_binary",
+        "codex_isolation_qualification_report",
+        "container_engine",
+        "dedicated_host_policy",
+        "dependency_lock",
+        "dependency_mirror_attestation",
+        "dependency_mirror_inventory",
+        "dependency_mirror_public_key",
+        "evidence_keyring",
+        "evidence_private_key",
+        "evidence_public_key",
+        "external_signer_client",
+        "external_signer_identity",
+        "git_binary",
+        "governing_policy_source",
+        "handoff_quota_profile",
+        "host_qualification_roots_authority_public_key",
+        "host_qualification_roots_manifest",
+        "host_root_anchor_client",
+        "host_root_anchor_identity",
+        "installation_signing_private_key",
+        "installation_signing_public_key",
+        "installer_fault_matrix_report",
+        "key_custody_qualification_report",
+        "key_lifecycle_state",
+        "phase_transition_keyring",
+        "probe_attestor_keyring",
+        "probe_attestor_revocation_state",
+        "probe_keyring",
+        "probe_policy",
+        "probe_revocation_state",
+        "probe_service_attestation",
+        "probe_service_executable",
+        "probe_service_identity",
+        "python_binary",
+        "qualification_authorization_keyring",
+        "qualification_probe_envelopes_manifest",
+        "qualification_receipt_signing_public_key",
+        "qualification_revocation_list",
+        "qualification_trust_authority_public_key",
+        "qualification_trust_manifest",
+        "remote_anchor_qualification_report",
+        "requirements_input",
+        "runtime_private_key",
+        "runtime_public_key",
+        "sbom",
+        "supply_chain_rebuild_report",
+        "validation_dockerfile",
+        "validation_image_attestation",
+        "validation_registry_proof"
+      ],
+      "type": "object"
+    },
+    "artifact_bindings_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "bundle_manifest_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "candidate_archive_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "challenge_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "external_signer_identity_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "format_version": {
+      "const": "4.1"
+    },
+    "full_autonomous_pathway_viable": {
+      "const": true
+    },
+    "handoff_quota_profile_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "host_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "pre_autonomous_staging": {
+      "const": "FAIL"
+    },
+    "probe_envelope_hashes": {
+      "additionalProperties": false,
+      "properties": {
+        "anchor_helper": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "cleanroom_adapter": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "codex_binary": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "container_engine": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "git_binary": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "mount_binary": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "python_binary": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "qualification_verifier": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "umount_binary": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "git_binary",
+        "python_binary",
+        "codex_binary",
+        "container_engine",
+        "anchor_helper",
+        "mount_binary",
+        "umount_binary",
+        "cleanroom_adapter",
+        "qualification_verifier"
+      ],
+      "type": "object"
+    },
+    "probe_envelope_hashes_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "probe_envelopes_manifest_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "qualification_artifact_set_version": {
+      "const": "2.1",
+      "type": "string"
+    },
+    "qualification_report_hashes": {
+      "additionalProperties": false,
+      "properties": {
+        "codex_isolation_qualification_report": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "dedicated_host_policy": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "installer_fault_matrix_report": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "key_custody_qualification_report": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "remote_anchor_qualification_report": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "supply_chain_rebuild_report": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "codex_isolation_qualification_report",
+        "remote_anchor_qualification_report",
+        "key_custody_qualification_report",
+        "installer_fault_matrix_report",
+        "supply_chain_rebuild_report",
+        "dedicated_host_policy"
+      ],
+      "type": "object"
+    },
+    "qualification_trust_binding": {
+      "additionalProperties": false,
+      "properties": {
+        "binding_version": {
+          "const": "1.1"
+        },
+        "candidate_archive_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "challenge_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "external_signer_id": {
+          "maxLength": 160,
+          "minLength": 4,
+          "pattern": "^[A-Za-z0-9._:-]+$",
+          "type": "string"
+        },
+        "external_signer_identity_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "host_id": {
+          "maxLength": 160,
+          "minLength": 4,
+          "pattern": "^[A-Za-z0-9._:-]+$",
+          "type": "string"
+        },
+        "host_qualification_roots_authority_public_key_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "host_qualification_roots_manifest_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "host_root_anchor_client_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "host_root_anchor_head_sequence": {
+          "maximum": 9223372036854775807,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "host_root_anchor_id": {
+          "maxLength": 160,
+          "minLength": 4,
+          "pattern": "^[A-Za-z0-9._:-]+$",
+          "type": "string"
+        },
+        "host_root_anchor_identity_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "not_after": {
+          "format": "date-time",
+          "maxLength": 64,
+          "type": "string"
+        },
+        "not_before": {
+          "format": "date-time",
+          "maxLength": 64,
+          "type": "string"
+        },
+        "probe_attestor_id": {
+          "maxLength": 160,
+          "minLength": 4,
+          "pattern": "^[A-Za-z0-9._:-]+$",
+          "type": "string"
+        },
+        "probe_attestor_keyring_sequence": {
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "probe_attestor_keyring_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "probe_attestor_revocation_sequence": {
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "probe_attestor_revocation_state_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "probe_keyring_sequence": {
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "probe_keyring_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "probe_policy_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "probe_policy_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+        },
+        "probe_revocation_sequence": {
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "probe_revocation_state_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "probe_service_attestation_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "probe_service_executable_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "probe_service_id": {
+          "maxLength": 160,
+          "minLength": 4,
+          "pattern": "^[A-Za-z0-9._:-]+$",
+          "type": "string"
+        },
+        "probe_service_identity_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "qualification_receipt_signing_public_key_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "qualification_trust_authority_public_key_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "qualification_trust_manifest_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "trust_manifest_id": {
+          "maxLength": 160,
+          "minLength": 4,
+          "pattern": "^[A-Za-z0-9._:-]+$",
+          "type": "string"
+        },
+        "trust_manifest_sequence": {
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "binding_version",
+        "host_qualification_roots_manifest_sha256",
+        "host_qualification_roots_authority_public_key_sha256",
+        "qualification_trust_manifest_sha256",
+        "qualification_trust_authority_public_key_sha256",
+        "probe_keyring_sha256",
+        "probe_policy_sha256",
+        "probe_service_identity_sha256",
+        "probe_service_attestation_sha256",
+        "probe_revocation_state_sha256",
+        "probe_attestor_keyring_sha256",
+        "probe_attestor_revocation_state_sha256",
+        "probe_service_executable_sha256",
+        "external_signer_identity_sha256",
+        "qualification_receipt_signing_public_key_sha256",
+        "trust_manifest_id",
+        "trust_manifest_sequence",
+        "probe_keyring_sequence",
+        "probe_revocation_sequence",
+        "probe_attestor_keyring_sequence",
+        "probe_attestor_revocation_sequence",
+        "probe_policy_version",
+        "probe_service_id",
+        "probe_attestor_id",
+        "external_signer_id",
+        "host_id",
+        "candidate_archive_sha256",
+        "challenge_sha256",
+        "not_before",
+        "not_after",
+        "host_root_anchor_id",
+        "host_root_anchor_head_sequence",
+        "host_root_anchor_identity_sha256",
+        "host_root_anchor_client_sha256"
+      ],
+      "type": "object"
+    },
+    "qualification_trust_binding_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "receipt_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "receipt_kind": {
+      "const": "AZPR_V10_1_SEMANTIC_CLEANROOM_QUALIFICATION_RECEIPT"
+    },
+    "remaining_closed_gates": {
+      "items": {
+        "maxLength": 128,
+        "minLength": 4,
+        "type": "string"
+      },
+      "maxItems": 16,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "revocation_list_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "safe_for_unattended_execution_now": {
+      "const": false
+    },
+    "semi_autonomous_codex_staging_ready": {
+      "const": false
+    },
+    "signature": {
+      "maxLength": 128,
+      "minLength": 80,
+      "pattern": "^[A-Za-z0-9+/=]+$",
+      "type": "string"
+    },
+    "signer_key_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "status": {
+      "const": "SEMANTIC_QUALIFICATION_EVIDENCE_VERIFIED_INSTALLATION_STILL_BLOCKED"
+    },
+    "trusted_pre_autonomous_installation_ready": {
+      "const": false
+    },
+    "validation_image_digest": {
+      "maxLength": 256,
+      "minLength": 8,
+      "type": "string"
+    }
+  },
+  "required": [
+    "format_version",
+    "receipt_kind",
+    "receipt_id",
+    "status",
+    "pre_autonomous_staging",
+    "semi_autonomous_codex_staging_ready",
+    "safe_for_unattended_execution_now",
+    "trusted_pre_autonomous_installation_ready",
+    "full_autonomous_pathway_viable",
+    "issued_at",
+    "expires_at",
+    "host_id",
+    "candidate_archive_sha256",
+    "bundle_manifest_sha256",
+    "challenge_sha256",
+    "agent_uid",
+    "agent_gid",
+    "validation_image_digest",
+    "qualification_artifact_set_version",
+    "artifact_bindings",
+    "artifact_bindings_sha256",
+    "qualification_report_hashes",
+    "agent_execution_profile_sha256",
+    "handoff_quota_profile_sha256",
+    "revocation_list_sha256",
+    "probe_envelopes_manifest_sha256",
+    "probe_envelope_hashes",
+    "probe_envelope_hashes_sha256",
+    "qualification_trust_binding",
+    "qualification_trust_binding_sha256",
+    "external_signer_identity_sha256",
+    "remaining_closed_gates",
+    "signer_key_id",
+    "signature"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,8 @@
+reviewer=uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu),4(adm),24(cdrom),27(sudo),30(dip),104(lxd)
+home=/home/oai
+architecture=aarch64
+kernel=6.8.0-136-generic
+os_release=Ubuntu 24.04
+python=Python 3.12.3
+python_executable_sha256=a7d56a8a764faf7bbf5c164055a48fd072be52287bdeb523a9e07b2042f4e7e1
+proc=available

@@ -1,0 +1,55 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_ V5SecurityClosureTests.test_installer_rejects_mutable_or_manifest_mismatched_bundle_source _
+
+self = <test_v5_security_closures.V5SecurityClosureTests testMethod=test_installer_rejects_mutable_or_manifest_mismatched_bundle_source>
+
+    def test_installer_rejects_mutable_or_manifest_mismatched_bundle_source(self):
+        import importlib.util, hashlib
+        from cryptography.hazmat.primitives import serialization
+        from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+        spec=importlib.util.spec_from_file_location('azpr_installer_v5',PACK/'trusted-installation/install.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+>       with tempfile.TemporaryDirectory(dir='/root') as td:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_v5_security_closures.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/tempfile.py:1077: in __init__
+    self.name = mkdtemp(suffix, prefix, dir)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+suffix = '', prefix = 'tmp', dir = '/root'
+
+    def mkdtemp(suffix=None, prefix=None, dir=None):
+        """User-callable function to create and return a unique temporary
+        directory.  The return value is the pathname of the directory.
+    
+        Arguments are as for mkstemp, except that the 'text' argument is
+        not accepted.
+    
+        The directory is readable, writable, and searchable only by the
+        creating user.
+    
+        Caller is responsible for deleting the directory when done with it.
+        """
+    
+        prefix, suffix, dir, output_type = _sanitize_params(prefix, suffix, dir)
+    
+        names = _get_candidate_names()
+        if output_type is bytes:
+            names = map(_os.fsencode, names)
+    
+        for seq in range(TMP_MAX):
+            name = next(names)
+            file = _os.path.join(dir, prefix + name + suffix)
+            _sys.audit("tempfile.mkdtemp", file)
+            try:
+>               _os.mkdir(file, 0o700)
+E               PermissionError: [Errno 13] Permission denied: '/root/tmp6ktopew0'
+
+/usr/lib/python3.13/tempfile.py:575: PermissionError
+=========================== short test summary info ============================
+FAILED tests/test_v5_security_closures.py::V5SecurityClosureTests::test_installer_rejects_mutable_or_manifest_mismatched_bundle_source
+1 failed in 0.80s
+

@@ -1,0 +1,205 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://azpr.local/schemas/evidence.schema.json",
+  "title": "AZPR Signed External Apply Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format_version",
+    "evidence_id",
+    "overall_status",
+    "plan_sha256",
+    "capability_manifest_sha256",
+    "target_attestation_sha256",
+    "started_at",
+    "completed_at",
+    "target",
+    "adapter_results",
+    "rollback_ready",
+    "output_hashes",
+    "signer_key_id",
+    "signature",
+    "operation_registration_id",
+    "stage_id",
+    "environment",
+    "repository_id",
+    "source_commit",
+    "source_tree",
+    "target_sha256",
+    "operations_sha256",
+    "capability_nonce",
+    "controller_policy_identity_sha256",
+    "evidence_for_stage_id"
+  ],
+  "properties": {
+    "format_version": {
+      "const": "1.0"
+    },
+    "evidence_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 160
+    },
+    "plan_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "maxLength": 8000
+    },
+    "capability_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "maxLength": 8000
+    },
+    "target_attestation_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "maxLength": 8000
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 8000
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 8000
+    },
+    "target": {
+      "$ref": "capability-manifest.schema.json#/properties/target"
+    },
+    "adapter_results": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "adapter",
+          "operation",
+          "status",
+          "preflight_sha256",
+          "result_sha256"
+        ],
+        "properties": {
+          "adapter": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "operation": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "status": {
+            "enum": [
+              "APPLIED",
+              "NO_CHANGE",
+              "FAILED",
+              "ROLLED_BACK"
+            ]
+          },
+          "preflight_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "maxLength": 8000
+          },
+          "result_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "maxLength": 8000
+          }
+        }
+      },
+      "maxItems": 100
+    },
+    "rollback_ready": {
+      "type": "boolean"
+    },
+    "output_hashes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$",
+        "maxLength": 8000
+      },
+      "maxProperties": 100
+    },
+    "signer_key_id": {
+      "type": "string",
+      "maxLength": 8000
+    },
+    "signature": {
+      "type": "string",
+      "maxLength": 8000
+    },
+    "overall_status": {
+      "enum": [
+        "APPLY_COMPLETE",
+        "APPLY_FAILED",
+        "PARTIAL_APPLY",
+        "APPLY_ROLLED_BACK"
+      ]
+    },
+    "error_summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4000
+    },
+    "operation_registration_id": {
+      "type": "string",
+      "minLength": 16,
+      "maxLength": 160
+    },
+    "stage_id": {
+      "type": "string",
+      "pattern": "^(?:[0-9]{3}|[ABC])$",
+      "maxLength": 3
+    },
+    "environment": {
+      "enum": [
+        "staging",
+        "production"
+      ]
+    },
+    "repository_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 160
+    },
+    "source_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$",
+      "maxLength": 40
+    },
+    "source_tree": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$",
+      "maxLength": 40
+    },
+    "target_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "maxLength": 64
+    },
+    "operations_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "maxLength": 64
+    },
+    "capability_nonce": {
+      "type": "string",
+      "minLength": 24,
+      "maxLength": 200
+    },
+    "controller_policy_identity_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "maxLength": 64
+    },
+    "evidence_for_stage_id": {
+      "type": "string",
+      "pattern": "^(?:[0-9]{3}|C)$",
+      "maxLength": 3
+    }
+  }
+}

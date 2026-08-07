@@ -1,0 +1,58 @@
+{
+  "decision": {
+    "full_autonomous_pathway_viable": true,
+    "permitted_next_event": "INDEPENDENT_V10_1_SOURCE_REASSESSMENT_ONLY",
+    "pre_autonomous_staging": "FAIL",
+    "ready_for_codex_seating_and_application": false,
+    "ready_for_final_integration_prompt_authoring": false,
+    "safe_for_unattended_execution_now": false,
+    "status": "READY_FOR_INDEPENDENT_V10_1_SOURCE_REASSESSMENT",
+    "trusted_pre_autonomous_installation_ready": false
+  },
+  "format_version": "1.0",
+  "frozen_v10_baseline": {
+    "artifact": "AZPR-autonomous-execution-primed-draft-v10.zip",
+    "sha256": "3e748b2e8e61033c741f138dae4357d60f020c7db15489333be73bed329741af"
+  },
+  "generated_at": "2026-08-04T21:17:24Z",
+  "independent_assessment_findings": {
+    "operational_gate": "AZPR-V10-IND-F07_OPEN_BY_DESIGN",
+    "source_remediable": [
+      "AZPR-V10-IND-F01",
+      "AZPR-V10-IND-F02",
+      "AZPR-V10-IND-F03",
+      "AZPR-V10-IND-F04",
+      "AZPR-V10-IND-F05",
+      "AZPR-V10-IND-F06"
+    ]
+  },
+  "isolated_test_execution": {
+    "cataloged": 120,
+    "completed": 120,
+    "development_pre_freeze_result": "120/120 passed in complete isolated development execution, including the least-privilege regressions exposed during unprivileged review; exact final source/fresh verifier records are delivery-level evidence",
+    "failed": 0,
+    "passed": 120,
+    "selection_policy": "every collected test is release-blocking and executed in its own process group",
+    "timed_out": 0
+  },
+  "prompt_archive": {
+    "appendices": 3,
+    "changed": false,
+    "numbered_prompts": 38,
+    "sha256": "3b235cb7e33ca409241ff26523f60f8fee89cec524b3f09e91a69927a0aa4880"
+  },
+  "qualification_artifact_set": {
+    "count": 57,
+    "version": "2.1"
+  },
+  "source_level_status": {
+    "AZPR-V10-IND-F01": "CLOSED_SOURCE_LEVEL_PENDING_INDEPENDENT_REASSESSMENT",
+    "AZPR-V10-IND-F02": "CLOSED_SOURCE_LEVEL_PENDING_INDEPENDENT_REASSESSMENT",
+    "AZPR-V10-IND-F03": "CLOSED_SOURCE_LEVEL_PENDING_INDEPENDENT_REASSESSMENT",
+    "AZPR-V10-IND-F04": "CLOSED_SOURCE_LEVEL_PENDING_INDEPENDENT_REASSESSMENT",
+    "AZPR-V10-IND-F05": "CLOSED_SOURCE_LEVEL_PENDING_INDEPENDENT_REASSESSMENT",
+    "AZPR-V10-IND-F06": "CLOSED_SOURCE_LEVEL_PENDING_INDEPENDENT_REASSESSMENT",
+    "AZPR-V10-IND-F07": "OPEN_BY_DESIGN"
+  },
+  "summary_kind": "AZPR_V10_1_INTERNAL_SECURITY_CORRECTIVE_VERIFICATION"
+}

@@ -1,0 +1,24 @@
+{
+  "candidate": "AZPR-autonomous-execution-primed-draft-v9",
+  "finding_statuses": {
+    "AZPR-V8-F01": "CLOSED_AND_TESTED_SOURCE_LEVEL_REAL_ISOLATION_AND_SIGNER_QUALIFICATION_PENDING",
+    "AZPR-V8-F02": "CLOSED_AND_TESTED_SOURCE_LEVEL_HOST_FILESYSTEM_AND_POWER_FAULT_QUALIFICATION_PENDING",
+    "AZPR-V8-F03": "CLOSED_AND_TESTED_SOURCE_LEVEL_INDEPENDENT_SUBSTITUTION_REASSESSMENT_PENDING",
+    "AZPR-V8-F04": "CLOSED_AND_TESTED_SOURCE_LEVEL_REAL_REMOTE_ANCHOR_QUALIFICATION_PENDING",
+    "AZPR-V8-F05": "CLOSED_AND_TESTED_SOURCE_LEVEL_REAL_HOST_PHASE_EXERCISE_PENDING",
+    "AZPR-V8-F06": "CLOSED_AND_TESTED_SOURCE_LEVEL_REAL_RAW_EVIDENCE_PENDING",
+    "AZPR-V8-F07": "PARTIALLY_CLOSED_ATOMIC_EPOCH_TOOL_NOT_YET_DEPLOYED_TO_REAL_HOST_CONSUMERS",
+    "AZPR-V8-F08": "NOT_CLOSED_REAL_INFRASTRUCTURE_AND_ORGANIZATION_EVIDENCE_ABSENT"
+  },
+  "format_version": "1.0",
+  "generated_from": "actual v8 reproductions and v9 source candidate",
+  "independent_reassessment_required": true,
+  "organization_release_signature_status": "NOT_PROVIDED_UNSIGNED_DEVELOPMENT_CANDIDATE",
+  "safe_for_unattended_execution_now": false,
+  "severity_open": {
+    "critical_source_defects": 0,
+    "high_source_defects": 0,
+    "medium_partial_or_infrastructure": 2
+  },
+  "trusted_pre_autonomous_installation_ready": false
+}

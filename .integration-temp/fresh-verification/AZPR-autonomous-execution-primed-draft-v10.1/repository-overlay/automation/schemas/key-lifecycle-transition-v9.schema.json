@@ -1,0 +1,156 @@
+{
+  "$defs": {
+    "store": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "expires_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "format_version": {
+      "const": "1.0"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "new_epoch_id": {
+      "pattern": "^[A-Za-z0-9._:-]{8,160}$",
+      "type": "string"
+    },
+    "nonce": {
+      "pattern": "^[A-Za-z0-9._:-]{8,160}$",
+      "type": "string"
+    },
+    "previous_epoch_id": {
+      "oneOf": [
+        {
+          "pattern": "^[A-Za-z0-9._:-]{8,160}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "sequence": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "signatures": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "key_id": {
+            "pattern": "^[A-Za-z0-9._:-]{8,160}$",
+            "type": "string"
+          },
+          "signature": {
+            "pattern": "^[A-Za-z0-9+/]{86}==$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key_id",
+          "signature"
+        ],
+        "type": "object"
+      },
+      "maxItems": 8,
+      "minItems": 2,
+      "type": "array"
+    },
+    "stores": {
+      "additionalProperties": false,
+      "properties": {
+        "adapter_authorization_keyring": {
+          "$ref": "#/$defs/store"
+        },
+        "approval_keyring": {
+          "$ref": "#/$defs/store"
+        },
+        "bootstrap_root_manifest": {
+          "$ref": "#/$defs/store"
+        },
+        "evidence_keyring": {
+          "$ref": "#/$defs/store"
+        },
+        "installation_verification_key": {
+          "$ref": "#/$defs/store"
+        },
+        "phase_transition_keyring": {
+          "$ref": "#/$defs/store"
+        },
+        "qualification_authorization_keyring": {
+          "$ref": "#/$defs/store"
+        },
+        "qualification_receipt_verification_key": {
+          "$ref": "#/$defs/store"
+        },
+        "release_verification_key": {
+          "$ref": "#/$defs/store"
+        },
+        "runtime_verification_key": {
+          "$ref": "#/$defs/store"
+        }
+      },
+      "required": [
+        "approval_keyring",
+        "evidence_keyring",
+        "runtime_verification_key",
+        "installation_verification_key",
+        "adapter_authorization_keyring",
+        "qualification_authorization_keyring",
+        "qualification_receipt_verification_key",
+        "release_verification_key",
+        "phase_transition_keyring",
+        "bootstrap_root_manifest"
+      ],
+      "type": "object"
+    },
+    "transition_id": {
+      "pattern": "^[A-Za-z0-9._:-]{8,160}$",
+      "type": "string"
+    },
+    "transition_kind": {
+      "const": "AZPR_V9_ATOMIC_TRUST_EPOCH_TRANSITION"
+    }
+  },
+  "required": [
+    "format_version",
+    "transition_kind",
+    "transition_id",
+    "sequence",
+    "nonce",
+    "issued_at",
+    "expires_at",
+    "previous_epoch_id",
+    "new_epoch_id",
+    "stores",
+    "signatures"
+  ],
+  "title": "AZPR v9 Atomic Trust Epoch Transition",
+  "type": "object"
+}

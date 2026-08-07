@@ -1,0 +1,63 @@
+{
+  "format_version": "2.0",
+  "resource_limits": {
+    "cpus": 2,
+    "memory_mb": 4096,
+    "pids": 256,
+    "tmpfs_mb": 1024,
+    "evidence_mb": 256,
+    "file_size_mb": 128
+  },
+  "profile_id": "backend-core",
+  "risk_categories": [
+    "format",
+    "lint",
+    "type",
+    "unit",
+    "integration",
+    "contract",
+    "security",
+    "privacy",
+    "documentation"
+  ],
+  "commands": [
+    {
+      "name": "Python compile",
+      "category": "unit",
+      "argv": [
+        "python3",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "tests"
+      ],
+      "timeout_seconds": 900,
+      "evidence_files": [
+        "backend-core/01-unit.json"
+      ]
+    },
+    {
+      "name": "Backend tests",
+      "category": "unit",
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "timeout_seconds": 1800,
+      "evidence_files": [
+        "backend-core/02-unit.json"
+      ]
+    }
+  ],
+  "evidence_outputs": [
+    "backend-core/summary.json",
+    "backend-core/stdout.log",
+    "backend-core/stderr.log"
+  ]
+}

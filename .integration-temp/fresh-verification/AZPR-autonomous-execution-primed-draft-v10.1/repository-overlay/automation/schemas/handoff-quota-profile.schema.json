@@ -1,0 +1,83 @@
+{
+  "$id": "https://azpr.local/schemas/handoff-quota-profile.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "cleanup_max_entries": {
+      "maximum": 10000000,
+      "minimum": 128,
+      "type": "integer"
+    },
+    "cleanup_timeout_seconds": {
+      "maximum": 3600,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "filesystem_type": {
+      "const": "tmpfs"
+    },
+    "format_version": {
+      "const": "1.0"
+    },
+    "max_bytes": {
+      "maximum": 1099511627776,
+      "minimum": 1048576,
+      "type": "integer"
+    },
+    "max_depth": {
+      "maximum": 256,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "max_entries": {
+      "maximum": 10000000,
+      "minimum": 128,
+      "type": "integer"
+    },
+    "max_file_bytes": {
+      "maximum": 1099511627776,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "max_inodes": {
+      "maximum": 10000000,
+      "minimum": 128,
+      "type": "integer"
+    },
+    "max_path_length": {
+      "maximum": 16384,
+      "minimum": 64,
+      "type": "integer"
+    },
+    "mount_options": {
+      "items": {
+        "maxLength": 128,
+        "type": "string"
+      },
+      "maxItems": 32,
+      "minItems": 4,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "profile_id": {
+      "maxLength": 160,
+      "pattern": "^[A-Za-z0-9._:-]{8,160}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "format_version",
+    "profile_id",
+    "filesystem_type",
+    "mount_options",
+    "max_bytes",
+    "max_inodes",
+    "max_entries",
+    "max_file_bytes",
+    "max_depth",
+    "max_path_length",
+    "cleanup_max_entries",
+    "cleanup_timeout_seconds"
+  ],
+  "type": "object"
+}

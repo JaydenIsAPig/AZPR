@@ -1,0 +1,19 @@
+{
+  "attestation_id": "probe-attestation-v10-1-0001",
+  "attestation_kind": "AZPR_V10_1_PROBE_SERVICE_ATTESTATION",
+  "attestor_id": "probe-attestor-v10-1-0001",
+  "attestor_key_id": "attestor-key-v10-1-0001",
+  "attestor_role": "probe-service-attestor",
+  "candidate_archive_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "challenge_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "expires_at": "2026-08-09T00:53:30.191793+00:00",
+  "format_version": "1.1",
+  "host_id": "host-v10-1-test-0001",
+  "issued_at": "2026-08-07T00:51:30.191793+00:00",
+  "launcher_identity_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "runtime_configuration_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "service_executable_sha256": "306c6ca7407560340797866e077e053627ad409277d1b9da58106fce4cf717cb",
+  "service_id": "probe-service-v10-1-0001",
+  "service_identity_sha256": "284e2a7e3c481d0d85233a201fe727c842a73ef906c0ef4705276dd09e32157c",
+  "signature": "+1VkA+wl93prXY5EzY5wtEow9K1qEvUUvMMpQw96ug6yHy84+sq1sCMCvJCwRba1xM0HznG28zHlhvr7kOVtBA=="
+}

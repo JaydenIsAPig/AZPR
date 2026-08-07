@@ -1,0 +1,64 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_ FinalAssessmentControlTests.test_external_anchor_detects_signed_journal_rollback _
+
+self = <test_final_assessment_controls.FinalAssessmentControlTests testMethod=test_external_anchor_detects_signed_journal_rollback>
+
+    def test_external_anchor_detects_signed_journal_rollback(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            private, public, _ = keypair(root, "anchor-journal")
+            journal_path = root / "runtime" / "journal.jsonl"
+            anchor_root = root / "anchors"
+            helper = PACK / "operator-tools" / "file_anchor_reference.py"
+            with mock.patch.dict(os.environ, {
+                "AZPR_JOURNAL_ANCHOR_COMMAND": str(helper),
+                "AZPR_REFERENCE_ANCHOR_ROOT": str(anchor_root),
+                "AZPR_REQUIRE_JOURNAL_ANCHOR": "1",
+            }, clear=False):
+                journal = sr.SignedJournal(journal_path, signing_private_key_path=private, verification_public_key_path=public, signer_key_id="anchor")
+>               journal.append("ONE", {"value": 1}, run_id="run-anchor-0001")
+
+tests/test_final_assessment_controls.py:127: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+trusted-controller/secure_runtime.py:658: in append
+    self._anchor("publish", [*records, record])
+trusted-controller/secure_runtime.py:1295: in _signed_journal_anchor
+    _invoke_anchor(operation, self._anchor_payload(records))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+operation = 'publish'
+payload = {'head_sha256': '5fb7597d84087d9ed360ce431841d0bd1bad4ce81d023c25c55f042dab905ca3', 'journal_id': '71e2d9f01c642caf8776dd8cca59dc96c4c6f5b788ec5be92237fefdd54f56d3', 'sequence': 1}
+
+    def _invoke_anchor(operation: str, payload: dict[str, Any]) -> None:
+        helper = _anchor_helper_path()
+        if helper is None:
+            if _anchor_required():
+                raise SecurityError("mandatory external journal anchor is unavailable")
+            return
+        no_symlink_ancestors(helper, allow_missing_leaf=False)
+        st = os.stat(helper)
+        if not stat.S_ISREG(st.st_mode) or st.st_mode & 0o022:
+            raise SecurityError("journal anchor helper is unsafe")
+        argv = [str(helper), operation]
+        # The bundled anchor is a clean-room Python reference. Production launchers
+        # always use the root-installed executable pinned by the installation
+        # manifest; only non-production source-tree verification may invoke a .py
+        # helper through the current trusted interpreter so ZIP extractors that do
+        # not preserve Unix execute bits cannot change test behavior.
+        if not _ti.production_mode() and helper.suffix == ".py":
+            argv = [sys.executable, str(helper), operation]
+        rc, _stdout, _stderr, _duration = run_bounded_process(
+            argv, cwd=helper.parent, input_bytes=canonical_json_bytes(payload),
+            env={"PATH":"/usr/bin:/bin","HOME":"/nonexistent","LANG":"C.UTF-8","LC_ALL":"C.UTF-8"},
+            timeout_seconds=30, stdout_limit=64*1024, stderr_limit=64*1024,
+        )
+        if rc != 0:
+>           raise SecurityError(f"external journal anchor {operation} failed")
+E           secure_runtime.SecurityError: external journal anchor publish failed
+
+trusted-controller/secure_runtime.py:1279: SecurityError
+=========================== short test summary info ============================
+FAILED tests/test_final_assessment_controls.py::FinalAssessmentControlTests::test_external_anchor_detects_signed_journal_rollback
+1 failed in 1.65s
+

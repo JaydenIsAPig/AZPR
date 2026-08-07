@@ -1,0 +1,55 @@
+{
+  "format_version": "2.0",
+  "resource_limits": {
+    "cpus": 2,
+    "memory_mb": 4096,
+    "pids": 256,
+    "tmpfs_mb": 1024,
+    "evidence_mb": 256,
+    "file_size_mb": 128
+  },
+  "profile_id": "release-evidence",
+  "risk_categories": [
+    "format",
+    "lint",
+    "type",
+    "unit",
+    "integration",
+    "contract",
+    "build",
+    "browser",
+    "accessibility",
+    "migration",
+    "concurrency",
+    "security",
+    "privacy",
+    "supply-chain",
+    "infrastructure",
+    "performance",
+    "restore",
+    "rollback",
+    "evidence",
+    "documentation"
+  ],
+  "commands": [
+    {
+      "name": "Release matrix",
+      "category": "evidence",
+      "argv": [
+        "python3",
+        "scripts/run_release_matrix.py",
+        "--fail-on-skip",
+        "--offline"
+      ],
+      "timeout_seconds": 7200,
+      "evidence_files": [
+        "release-evidence/01-evidence.json"
+      ]
+    }
+  ],
+  "evidence_outputs": [
+    "release-evidence/summary.json",
+    "release-evidence/stdout.log",
+    "release-evidence/stderr.log"
+  ]
+}

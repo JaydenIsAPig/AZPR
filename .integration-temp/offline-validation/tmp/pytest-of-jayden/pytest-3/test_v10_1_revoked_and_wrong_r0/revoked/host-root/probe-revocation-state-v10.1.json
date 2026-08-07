@@ -1,0 +1,10 @@
+{
+  "format_version": "1.0",
+  "issued_at": "2026-08-07T00:48:32.239108+00:00",
+  "revocation_kind": "AZPR_V10_1_PROBE_KEY_REVOCATIONS",
+  "revoked_key_ids": [
+    "probe-key-v10-1-0001"
+  ],
+  "sequence": 5,
+  "service_id": "probe-service-v10-1-0001"
+}

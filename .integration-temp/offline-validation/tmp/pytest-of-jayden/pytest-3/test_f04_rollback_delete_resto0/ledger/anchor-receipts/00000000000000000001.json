@@ -1,0 +1,7 @@
+{
+  "accepted": true,
+  "journal_id": "journal-replay",
+  "ledger_sequence": 1,
+  "new_head_sha256": "6c06e9d3b0f3ac2d1e4cf912a33a94362c894dc296c73a63b7de0c4277f85b66",
+  "previous_head_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+}

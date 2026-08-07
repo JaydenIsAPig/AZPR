@@ -1,0 +1,119 @@
+{
+  "$id": "https://azpr.local/schemas/installation-receipt.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "format_version": {
+            "const": "2.0"
+          }
+        },
+        "required": [
+          "format_version"
+        ]
+      },
+      "then": {
+        "required": [
+          "authorization_journal_id",
+          "authorization_reservation_head_sha256",
+          "authorization_ledger_sequence",
+          "authorization_sequence",
+          "phase_transition_reservation_head_sha256"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "authorization_journal_id": {
+      "maxLength": 200,
+      "minLength": 8,
+      "pattern": "^[A-Za-z0-9._:-]{8,200}$",
+      "type": "string"
+    },
+    "authorization_ledger_sequence": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "authorization_reservation_head_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "authorization_sequence": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "capability_runner_launcher_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "controller_launcher_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "format_version": {
+      "enum": [
+        "1.0",
+        "2.0"
+      ]
+    },
+    "installation_id": {
+      "maxLength": 160,
+      "minLength": 16,
+      "type": "string"
+    },
+    "lock_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "manifest_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "phase_transition_reservation_head_sha256": {
+      "oneOf": [
+        {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "signature": {
+      "maxLength": 120,
+      "minLength": 80,
+      "type": "string"
+    },
+    "signer_key_id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "format_version",
+    "installation_id",
+    "manifest_sha256",
+    "lock_sha256",
+    "controller_launcher_sha256",
+    "capability_runner_launcher_sha256",
+    "created_at",
+    "signer_key_id",
+    "signature"
+  ],
+  "type": "object"
+}

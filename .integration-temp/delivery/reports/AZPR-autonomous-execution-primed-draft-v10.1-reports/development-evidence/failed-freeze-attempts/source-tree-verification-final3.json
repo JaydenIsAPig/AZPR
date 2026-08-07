@@ -1,0 +1,50 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__ V6SecurityClosureTests.test_activation_recovery_finalizes_pending_receipt ___
+
+self = <test_v6_security_closures.V6SecurityClosureTests testMethod=test_activation_recovery_finalizes_pending_receipt>
+
+    def test_activation_recovery_finalizes_pending_receipt(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);etc=root/'etc';receipts=etc/'receipts';generations=root/'generations';var=root/'var';handoff_base=root/'handoff'
+            etc.mkdir();receipts.mkdir();generations.mkdir();handoff_base.mkdir();(var/'secure').mkdir(parents=True);(var/'runtime').mkdir()
+            generation=generations/'generation';generation.mkdir();handoff=(handoff_base/'generation');handoff.mkdir()
+            active=etc/'active.json';state_path=etc/'state.json';pending=receipts/'pending.json';final=receipts/'final.json'
+            lock={'installation_id':'x','manifest_sha256':'a'*64};active.write_text(json.dumps(lock,indent=2,sort_keys=True)+'\n');pending.write_text('{}\n')
+            state={'new_lock_sha256':installer.sha(active),'previous_lock_sha256':None,'pending_receipt_path':str(pending),'final_receipt_path':str(final),'generation_path':str(generation),'staging_path':str(generations/'staging'),'secure_path':str(var/'secure'/'generation'),'runtime_path':str(var/'runtime'/'generation'),'agent_handoff_path':str(handoff)}
+            state_path.write_text(json.dumps(state))
+            with mock.patch.object(installer,'ETC',etc),mock.patch.object(installer,'ACTIVE_LOCK',active),mock.patch.object(installer,'ACTIVATION_STATE',state_path),mock.patch.object(installer,'RECEIPTS',receipts),mock.patch.object(installer,'GENERATIONS',generations),mock.patch.object(installer,'VAR',var),mock.patch.object(installer,'AGENT_HANDOFF_BASE',handoff_base):
+>               self.assertEqual(installer.recover_activation_state(),'COMPLETED_ACTIVE_GENERATION')
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_v6_security_closures.py:174: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def recover_activation_state():
+     if not ACTIVATION_STATE.exists():return None
+     state=load_json_path(ACTIVATION_STATE,'activation state')
+     new_hash=state.get('new_lock_sha256');previous_hash=state.get('previous_lock_sha256')
+     pending=_state_descendant(state.get('pending_receipt_path'),RECEIPTS,'pending receipt',file_path=True)
+     final_receipt=_state_descendant(state.get('final_receipt_path'),RECEIPTS,'final receipt',file_path=True)
+     generation=_state_descendant(state.get('generation_path'),GENERATIONS,'generation')
+     staging=_state_descendant(state.get('staging_path'),GENERATIONS,'staging generation')
+     secure=_state_descendant(state.get('secure_path'),VAR/'secure','secure generation')
+     runtime=_state_descendant(state.get('runtime_path'),VAR/'runtime','runtime generation')
+     handoff=_state_descendant(state.get('agent_handoff_path'),AGENT_HANDOFF_BASE,'agent handoff generation')
+     cgroup=_state_descendant(state.get('agent_cgroup_path'),AGENT_CGROUP_BASE,'agent cgroup generation') if state.get('agent_cgroup_path') else None
+     active_hash=sha(ACTIVE_LOCK) if ACTIVE_LOCK.exists() else None
+     if active_hash==new_hash:
+      if not generation.exists():raise SystemExit('active installation lock points to a missing generation')
+      if not handoff.exists():raise SystemExit('active installation lock points to a missing agent handoff generation')
+      if cgroup is not None and not cgroup.exists():raise SystemExit('active installation lock points to a missing agent cgroup generation')
+      if not final_receipt.exists():
+       if not pending.exists():raise SystemExit('active generation has no recoverable installation receipt')
+>      final_receipt.parent.mkdir(parents=True,exist_ok=True);os.replace(pending,final_receipt);os.chown(final_receipt,0,0);os.chmod(final_receipt,0o444);fsync_dir(final_receipt.parent)
+                                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E      PermissionError: [Errno 1] Operation not permitted: '/mnt/data/azpr-v10_1-work/oai-tmp-source4/tmp/azpr-v10-1-reviewer-ze9pwa0w/tmp/tmpsvreksy8/etc/receipts/final.json'
+
+trusted-installation/install.py:546: PermissionError
+=========================== short test summary info ============================
+FAILED tests/test_v6_security_closures.py::V6SecurityClosureTests::test_activation_recovery_finalizes_pending_receipt
+1 failed in 0.81s
+

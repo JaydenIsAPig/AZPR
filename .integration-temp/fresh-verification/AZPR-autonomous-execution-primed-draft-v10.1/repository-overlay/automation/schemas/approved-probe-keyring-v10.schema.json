@@ -1,0 +1,97 @@
+{
+  "$id": "https://azpr.local/schemas/approved-probe-keyring-v10.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "format_version": {
+      "const": "1.0"
+    },
+    "keyring_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "keyring_kind": {
+      "const": "AZPR_V10_1_APPROVED_PROBE_KEYRING"
+    },
+    "keys": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "key_id": {
+            "maxLength": 160,
+            "minLength": 4,
+            "pattern": "^[A-Za-z0-9._:-]+$",
+            "type": "string"
+          },
+          "not_after": {
+            "format": "date-time",
+            "maxLength": 64,
+            "type": "string"
+          },
+          "not_before": {
+            "format": "date-time",
+            "maxLength": 64,
+            "type": "string"
+          },
+          "public_key_pem": {
+            "maxLength": 4096,
+            "minLength": 64,
+            "type": "string"
+          },
+          "roles": {
+            "items": {
+              "maxLength": 80,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 4,
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "signer_id": {
+            "maxLength": 160,
+            "minLength": 4,
+            "pattern": "^[A-Za-z0-9._:-]+$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key_id",
+          "signer_id",
+          "roles",
+          "public_key_pem",
+          "not_before",
+          "not_after"
+        ],
+        "type": "object"
+      },
+      "maxItems": 16,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "sequence": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "service_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "format_version",
+    "keyring_kind",
+    "keyring_id",
+    "sequence",
+    "service_id",
+    "keys"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,114 @@
+{
+  "$id": "https://azpr.local/schemas/canonical-policy-record.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "approved_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "canonical_byte_length": {
+      "maximum": 33554432,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "canonical_policy_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "canonical_render_algorithm": {
+      "const": "AZPR_DOCX_SUPPORTED_OOXML_UTF8_V3"
+    },
+    "completeness_statement": {
+      "const": "EXACT_SUPPORTED_OOXML_RENDER_VERIFIED"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "feature_inventory_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "format_version": {
+      "const": "4.0"
+    },
+    "mapped_source_unit_count": {
+      "maximum": 10000,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "record_id": {
+      "maxLength": 160,
+      "minLength": 16,
+      "type": "string"
+    },
+    "review_statement": {
+      "maxLength": 4000,
+      "minLength": 40,
+      "type": "string"
+    },
+    "section_map_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "signatures": {
+      "items": {
+        "$ref": "approval.schema.json#/$defs/signature"
+      },
+      "maxItems": 10,
+      "minItems": 2,
+      "type": "array"
+    },
+    "source_document_name": {
+      "maxLength": 255,
+      "minLength": 1,
+      "type": "string"
+    },
+    "source_document_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "source_manifest_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "source_unit_count": {
+      "maximum": 10000,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "unsupported_feature_count": {
+      "const": 0
+    }
+  },
+  "required": [
+    "format_version",
+    "record_id",
+    "source_document_name",
+    "source_document_sha256",
+    "source_manifest_sha256",
+    "canonical_policy_sha256",
+    "section_map_sha256",
+    "feature_inventory_sha256",
+    "canonical_render_algorithm",
+    "source_unit_count",
+    "mapped_source_unit_count",
+    "canonical_byte_length",
+    "completeness_statement",
+    "unsupported_feature_count",
+    "review_statement",
+    "approved_at",
+    "expires_at",
+    "signatures"
+  ],
+  "title": "AZPR Supported-OOXML Exact Canonical Governing Policy Approval Record",
+  "type": "object"
+}

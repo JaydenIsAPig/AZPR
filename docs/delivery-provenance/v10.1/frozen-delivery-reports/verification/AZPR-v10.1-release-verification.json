@@ -1,0 +1,83 @@
+{
+  "baseline": {
+    "frozen_v10_implementation_sha256": "3e748b2e8e61033c741f138dae4357d60f020c7db15489333be73bed329741af",
+    "frozen_v10_outer_sha256": "9eae1d74107abc4fe55818f7b1b7df0df28f0381dd1e4993a09df6997b87955c"
+  },
+  "candidate_version": "v10.1",
+  "decision": {
+    "full_autonomous_pathway_viable": true,
+    "organization_release_signature_status": "NOT_PROVIDED_UNSIGNED_DEVELOPMENT_CANDIDATE",
+    "permitted_next_event": "INDEPENDENT_V10_1_SOURCE_REASSESSMENT_ONLY",
+    "pre_autonomous_staging": "FAIL",
+    "ready_for_codex_seating_and_application": false,
+    "ready_for_final_integration_prompt_authoring": false,
+    "safe_for_unattended_execution_now": false,
+    "semi_autonomous_codex_staging_ready": false,
+    "trusted_pre_autonomous_installation_ready": false
+  },
+  "format_version": "1.1",
+  "generated_at": "2026-08-04T21:27:48Z",
+  "independent_reassessment_required": true,
+  "lingering_concerns": [
+    "No organization release signature or separately provisioned organization root was supplied.",
+    "No production HSM/external signer or real rollback-resistant remote anchor was deployed or qualified.",
+    "Dedicated host kernel, filesystem, cgroups, namespaces, mounts, UID/GID, LSM, quota, Codex binary, and fault matrix remain unqualified.",
+    "Supply-chain mirror, reproducible rebuild, SBOM, provenance, image, registry, and production key ceremonies remain absent.",
+    "Canonical policy approval, manual Prompt 004, roadmap generation/promotion, and final integration prompt authoring remain prohibited.",
+    "The actual AZPR application, providers, municipal sources, customer isolation, consent/suppression, migrations, backup/restore, PII, and rollback remain untested."
+  ],
+  "major_changes": [
+    "Removed caller-selected higher-level qualification roots, signer identity, receipt key, owner UID, and sequence floor from the qualification request contract.",
+    "Added fixed host-root manifest consumption and an independently signed remote-head contract binding the exact host-root hash and sequence.",
+    "Enforced exact signed probe-policy boundaries, observations, targets, UID/GID, network mode, and maximum envelope age.",
+    "Added independently signed probe-service attestation and descriptor-opened executable/launcher/runtime identity verification.",
+    "Expanded the versioned qualification artifact set from 48 to 57 named artifacts.",
+    "Bound all independently reported schema structures and made all 120 collected tests isolated and release blocking.",
+    "Adapted inherited privilege-dependent fixtures without skips or weakened production ownership/identity controls.",
+    "Preserved all 41 canonical prompt files byte-for-byte and retained all readiness gates."
+  ],
+  "source_level_findings": {
+    "AZPR-V10-IND-F01": "CLOSED_SOURCE_LEVEL_PENDING_INDEPENDENT_REASSESSMENT",
+    "AZPR-V10-IND-F02": "CLOSED_SOURCE_LEVEL_PENDING_INDEPENDENT_REASSESSMENT",
+    "AZPR-V10-IND-F03": "CLOSED_SOURCE_LEVEL_PENDING_INDEPENDENT_REASSESSMENT",
+    "AZPR-V10-IND-F04": "CLOSED_SOURCE_LEVEL_PENDING_INDEPENDENT_REASSESSMENT",
+    "AZPR-V10-IND-F05": "CLOSED_SOURCE_LEVEL_PENDING_INDEPENDENT_REASSESSMENT",
+    "AZPR-V10-IND-F06": "CLOSED_SOURCE_LEVEL_PENDING_INDEPENDENT_REASSESSMENT",
+    "AZPR-V10-IND-F07": "OPEN_BY_DESIGN_OPERATIONAL_AND_INTEGRATION_GATE"
+  },
+  "status": "READY_FOR_INDEPENDENT_V10_1_SOURCE_REASSESSMENT",
+  "verification": {
+    "fresh_extraction": {
+      "current_documents": 17,
+      "effective_uid": 1000,
+      "manifest_entries": 312,
+      "python_files": 69,
+      "schemas": 73,
+      "sha256": "f95105126defe64fbab809e9b1513af8b02b812a9c5a21fd7691a9cb9d13f60c",
+      "status": "PASS_READY_FOR_INDEPENDENT_V10_1_SOURCE_REASSESSMENT",
+      "tests_passed": 120
+    },
+    "prompt_archive": {
+      "appendices": 3,
+      "bytes_changed": false,
+      "numbered_prompts": 38,
+      "sha256": "3b235cb7e33ca409241ff26523f60f8fee89cec524b3f09e91a69927a0aa4880"
+    },
+    "qualification_artifact_set": {
+      "count": 57,
+      "version": "2.1"
+    },
+    "source_fresh_inventory_identical": true,
+    "source_fresh_test_ids_identical": true,
+    "source_tree": {
+      "current_documents": 17,
+      "effective_uid": 1000,
+      "manifest_entries": 312,
+      "python_files": 69,
+      "schemas": 73,
+      "sha256": "c4309758b92f6a62d5df04020557ff2cdf7eb12c22ae545ca9d22af12b2c912a",
+      "status": "PASS_READY_FOR_INDEPENDENT_V10_1_SOURCE_REASSESSMENT",
+      "tests_passed": 120
+    }
+  }
+}

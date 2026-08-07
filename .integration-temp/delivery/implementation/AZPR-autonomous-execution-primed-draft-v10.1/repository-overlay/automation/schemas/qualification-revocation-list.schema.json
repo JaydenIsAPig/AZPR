@@ -1,0 +1,88 @@
+{
+  "$id": "https://azpr.local/schemas/qualification-revocation-list.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "expires_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "format_version": {
+      "const": "1.0"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "list_id": {
+      "maxLength": 160,
+      "pattern": "^[A-Za-z0-9._:-]{8,160}$",
+      "type": "string"
+    },
+    "previous_list_sha256": {
+      "oneOf": [
+        {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "revoked_key_ids": {
+      "items": {
+        "maxLength": 160,
+        "pattern": "^[A-Za-z0-9._:-]{8,160}$",
+        "type": "string"
+      },
+      "maxItems": 1024,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "sequence": {
+      "maximum": 9223372036854775807,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "signatures": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "ed25519": {
+            "maxLength": 88,
+            "pattern": "^[A-Za-z0-9+/]{86}==$",
+            "type": "string"
+          },
+          "key_id": {
+            "maxLength": 160,
+            "pattern": "^[A-Za-z0-9._:-]{8,160}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key_id",
+          "ed25519"
+        ],
+        "type": "object"
+      },
+      "maxItems": 16,
+      "minItems": 2,
+      "type": "array"
+    }
+  },
+  "required": [
+    "format_version",
+    "list_id",
+    "sequence",
+    "issued_at",
+    "expires_at",
+    "revoked_key_ids",
+    "previous_list_sha256",
+    "signatures"
+  ],
+  "type": "object"
+}

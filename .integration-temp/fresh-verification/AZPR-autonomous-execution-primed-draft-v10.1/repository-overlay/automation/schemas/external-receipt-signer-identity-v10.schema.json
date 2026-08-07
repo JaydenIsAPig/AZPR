@@ -1,0 +1,59 @@
+{
+  "$id": "https://azpr.local/schemas/external-receipt-signer-identity-v10.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "candidate_archive_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "format_version": {
+      "const": "1.0"
+    },
+    "host_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "identity_kind": {
+      "const": "AZPR_V10_1_EXTERNAL_RECEIPT_SIGNER_IDENTITY"
+    },
+    "not_after": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "not_before": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "receipt_signing_public_key_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "signer_client_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "signer_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "format_version",
+    "identity_kind",
+    "signer_id",
+    "signer_client_sha256",
+    "receipt_signing_public_key_sha256",
+    "host_id",
+    "candidate_archive_sha256",
+    "not_before",
+    "not_after"
+  ],
+  "type": "object"
+}

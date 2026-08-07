@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://azpr.local/schemas/validation-image-attestation.schema.json",
+  "type": "object", "additionalProperties": false,
+  "required": ["format_version", "attestation_id", "image_reference", "image_digest", "dockerfile_sha256", "sbom_sha256", "build_provenance_sha256", "created_at", "signatures"],
+  "properties": {
+    "format_version": {"const": "1.0"},
+    "attestation_id": {"type": "string", "minLength": 16, "maxLength": 160},
+    "image_reference": {"type": "string", "minLength": 1, "maxLength": 500},
+    "image_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$", "maxLength": 71},
+    "dockerfile_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$", "maxLength": 64},
+    "sbom_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$", "maxLength": 64},
+    "build_provenance_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$", "maxLength": 64},
+    "created_at": {"type": "string", "format": "date-time", "maxLength": 64},
+    "signatures": {"type": "array", "minItems": 2, "maxItems": 10, "items": {"$ref": "approval.schema.json#/$defs/signature"}}
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "format_version": "2.0",
+  "resource_limits": {
+    "cpus": 2,
+    "memory_mb": 4096,
+    "pids": 256,
+    "tmpfs_mb": 1024,
+    "evidence_mb": 256,
+    "file_size_mb": 128
+  },
+  "profile_id": "frontend",
+  "risk_categories": [
+    "format",
+    "lint",
+    "type",
+    "unit",
+    "build",
+    "browser",
+    "accessibility",
+    "security",
+    "supply-chain"
+  ],
+  "commands": [
+    {
+      "name": "Frontend lockfile install",
+      "category": "supply-chain",
+      "argv": [
+        "npm",
+        "ci",
+        "--ignore-scripts",
+        "--offline"
+      ],
+      "timeout_seconds": 1800,
+      "evidence_files": [
+        "frontend/01-supply-chain.json"
+      ]
+    },
+    {
+      "name": "Frontend lint",
+      "category": "lint",
+      "argv": [
+        "npm",
+        "run",
+        "lint",
+        "--if-present"
+      ],
+      "timeout_seconds": 1200,
+      "evidence_files": [
+        "frontend/02-lint.json"
+      ]
+    },
+    {
+      "name": "Frontend typecheck",
+      "category": "type",
+      "argv": [
+        "npm",
+        "run",
+        "typecheck",
+        "--if-present"
+      ],
+      "timeout_seconds": 1200,
+      "evidence_files": [
+        "frontend/03-type.json"
+      ]
+    },
+    {
+      "name": "Frontend unit tests",
+      "category": "unit",
+      "argv": [
+        "npm",
+        "test",
+        "--",
+        "--runInBand"
+      ],
+      "timeout_seconds": 1800,
+      "evidence_files": [
+        "frontend/04-unit.json"
+      ]
+    },
+    {
+      "name": "Frontend build",
+      "category": "build",
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "timeout_seconds": 1800,
+      "evidence_files": [
+        "frontend/05-build.json"
+      ]
+    },
+    {
+      "name": "Browser and accessibility",
+      "category": "accessibility",
+      "argv": [
+        "npm",
+        "run",
+        "test:e2e:a11y"
+      ],
+      "timeout_seconds": 2400,
+      "evidence_files": [
+        "frontend/06-accessibility.json"
+      ]
+    }
+  ],
+  "evidence_outputs": [
+    "frontend/summary.json",
+    "frontend/stdout.log",
+    "frontend/stderr.log"
+  ]
+}

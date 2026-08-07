@@ -1,0 +1,14 @@
+#!/Users/jayden/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12
+import base64, json, sys
+from datetime import datetime, timezone
+from pathlib import Path
+from cryptography.hazmat.primitives import serialization
+PRIVATE=Path('/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR/.integration-temp/offline-validation/tmp/pytest-of-jayden/pytest-1/test_v10_1_future_trust_issued0/signer-private/host-root-anchor.private.pem'); EXPECTED_SEQUENCE=11
+def canonical(value): return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()
+if len(sys.argv)!=2 or sys.argv[1]!='verify-host-root-head': raise SystemExit('unsupported')
+r=json.load(sys.stdin)
+if r.get('format_version')!='1.0' or r.get('request_kind')!='AZPR_V10_1_VERIFY_HOST_ROOT_HEAD': raise SystemExit('request identity')
+if r.get('host_qualification_roots_manifest_sequence')!=EXPECTED_SEQUENCE: raise SystemExit('stale or forked head')
+u={'format_version':'1.0','response_kind':'AZPR_V10_1_HOST_ROOT_HEAD_RESPONSE','request_nonce':r['request_nonce'],'anchor_id':r['anchor_id'],'host_id':r['host_id'],'candidate_archive_sha256':r['candidate_archive_sha256'],'challenge_sha256':r['challenge_sha256'],'host_qualification_roots_manifest_sha256':r['host_qualification_roots_manifest_sha256'],'host_qualification_roots_manifest_sequence':r['host_qualification_roots_manifest_sequence'],'observed_at':datetime.now(timezone.utc).isoformat(),'previous_anchor_head_sha256':'e'*64}
+k=serialization.load_pem_private_key(PRIVATE.read_bytes(),password=None)
+print(json.dumps({**u,'signature':base64.b64encode(k.sign(canonical(u))).decode()},sort_keys=True))

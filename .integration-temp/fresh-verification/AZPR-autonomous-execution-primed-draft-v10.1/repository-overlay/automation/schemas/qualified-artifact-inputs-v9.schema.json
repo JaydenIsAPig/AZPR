@@ -1,0 +1,230 @@
+{
+  "$defs": {
+    "entry": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "pattern": "^/",
+          "type": "string"
+        },
+        "secret": {
+          "const": false
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "secret"
+      ],
+      "type": "object"
+    },
+    "secret_entry": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "pattern": "^/",
+          "type": "string"
+        },
+        "secret": {
+          "const": true
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "secret"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://azpr.local/schemas/qualified-artifact-inputs-v9.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifacts": {
+      "additionalProperties": false,
+      "properties": {
+        "agent_execution_profile": {
+          "$ref": "#/$defs/entry"
+        },
+        "anchor_helper": {
+          "$ref": "#/$defs/entry"
+        },
+        "approval_keyring": {
+          "$ref": "#/$defs/entry"
+        },
+        "build_provenance": {
+          "$ref": "#/$defs/entry"
+        },
+        "bundle_attestation": {
+          "$ref": "#/$defs/entry"
+        },
+        "bundle_signing_public_key": {
+          "$ref": "#/$defs/entry"
+        },
+        "bundle_zip": {
+          "$ref": "#/$defs/entry"
+        },
+        "codex_binary": {
+          "$ref": "#/$defs/entry"
+        },
+        "codex_isolation_qualification_report": {
+          "$ref": "#/$defs/entry"
+        },
+        "container_engine": {
+          "$ref": "#/$defs/entry"
+        },
+        "dedicated_host_policy": {
+          "$ref": "#/$defs/entry"
+        },
+        "dependency_lock": {
+          "$ref": "#/$defs/entry"
+        },
+        "dependency_mirror_attestation": {
+          "$ref": "#/$defs/entry"
+        },
+        "dependency_mirror_inventory": {
+          "$ref": "#/$defs/entry"
+        },
+        "dependency_mirror_public_key": {
+          "$ref": "#/$defs/entry"
+        },
+        "evidence_keyring": {
+          "$ref": "#/$defs/entry"
+        },
+        "evidence_private_key": {
+          "$ref": "#/$defs/secret_entry"
+        },
+        "evidence_public_key": {
+          "$ref": "#/$defs/entry"
+        },
+        "git_binary": {
+          "$ref": "#/$defs/entry"
+        },
+        "governing_policy_source": {
+          "$ref": "#/$defs/entry"
+        },
+        "handoff_quota_profile": {
+          "$ref": "#/$defs/entry"
+        },
+        "installation_signing_private_key": {
+          "$ref": "#/$defs/secret_entry"
+        },
+        "installation_signing_public_key": {
+          "$ref": "#/$defs/entry"
+        },
+        "installer_fault_matrix_report": {
+          "$ref": "#/$defs/entry"
+        },
+        "key_custody_qualification_report": {
+          "$ref": "#/$defs/entry"
+        },
+        "key_lifecycle_state": {
+          "$ref": "#/$defs/entry"
+        },
+        "python_binary": {
+          "$ref": "#/$defs/entry"
+        },
+        "qualification_authorization_keyring": {
+          "$ref": "#/$defs/entry"
+        },
+        "qualification_receipt_signing_public_key": {
+          "$ref": "#/$defs/entry"
+        },
+        "qualification_revocation_list": {
+          "$ref": "#/$defs/entry"
+        },
+        "remote_anchor_qualification_report": {
+          "$ref": "#/$defs/entry"
+        },
+        "requirements_input": {
+          "$ref": "#/$defs/entry"
+        },
+        "runtime_private_key": {
+          "$ref": "#/$defs/secret_entry"
+        },
+        "runtime_public_key": {
+          "$ref": "#/$defs/entry"
+        },
+        "sbom": {
+          "$ref": "#/$defs/entry"
+        },
+        "supply_chain_rebuild_report": {
+          "$ref": "#/$defs/entry"
+        },
+        "validation_dockerfile": {
+          "$ref": "#/$defs/entry"
+        },
+        "validation_image_attestation": {
+          "$ref": "#/$defs/entry"
+        },
+        "validation_registry_proof": {
+          "$ref": "#/$defs/entry"
+        }
+      },
+      "required": [
+        "agent_execution_profile",
+        "anchor_helper",
+        "approval_keyring",
+        "build_provenance",
+        "bundle_attestation",
+        "bundle_signing_public_key",
+        "bundle_zip",
+        "codex_binary",
+        "codex_isolation_qualification_report",
+        "container_engine",
+        "dedicated_host_policy",
+        "dependency_lock",
+        "dependency_mirror_attestation",
+        "dependency_mirror_inventory",
+        "dependency_mirror_public_key",
+        "evidence_keyring",
+        "evidence_private_key",
+        "evidence_public_key",
+        "git_binary",
+        "governing_policy_source",
+        "handoff_quota_profile",
+        "installation_signing_private_key",
+        "installation_signing_public_key",
+        "installer_fault_matrix_report",
+        "key_custody_qualification_report",
+        "key_lifecycle_state",
+        "python_binary",
+        "qualification_authorization_keyring",
+        "qualification_receipt_signing_public_key",
+        "qualification_revocation_list",
+        "remote_anchor_qualification_report",
+        "requirements_input",
+        "runtime_private_key",
+        "runtime_public_key",
+        "sbom",
+        "supply_chain_rebuild_report",
+        "validation_dockerfile",
+        "validation_image_attestation",
+        "validation_registry_proof"
+      ],
+      "type": "object"
+    },
+    "format_version": {
+      "const": "1.0"
+    }
+  },
+  "required": [
+    "format_version",
+    "artifacts"
+  ],
+  "title": "AZPR v9 Exact Qualified Artifact Inputs",
+  "type": "object"
+}

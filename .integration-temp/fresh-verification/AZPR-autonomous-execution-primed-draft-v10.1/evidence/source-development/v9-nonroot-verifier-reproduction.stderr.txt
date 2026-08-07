@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/tmp/azpr_v10_work/frozen/implementation/AZPR-autonomous-execution-primed-draft-v9/VERIFY-V9-CANDIDATE.py", line 191, in <module>
+    if __name__=='__main__': main()
+                             ~~~~^^
+  File "/tmp/azpr_v10_work/frozen/implementation/AZPR-autonomous-execution-primed-draft-v9/VERIFY-V9-CANDIDATE.py", line 185, in main
+    verify_safety();py=verify_python();schemas=verify_schemas();num,apps,prompt=verify_prompts();markers=verify_controls();tests,ids,executions,bb=run_tests();manifest=verify_manifest()
+                                                                                                                                                   ~~~~~~~~~^^
+  File "/tmp/azpr_v10_work/frozen/implementation/AZPR-autonomous-execution-primed-draft-v9/VERIFY-V9-CANDIDATE.py", line 157, in run_tests
+    with tempfile.TemporaryDirectory(prefix='azpr-v9-test-',dir='/root') as td:
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/tempfile.py", line 1077, in __init__
+    self.name = mkdtemp(suffix, prefix, dir)
+                ~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/tempfile.py", line 575, in mkdtemp
+    _os.mkdir(file, 0o700)
+    ~~~~~~~~~^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: '/root/azpr-v9-test-_3_pt4ff'

@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://azpr.local/schemas/appendix-a-authorization.schema.json",
+  "title": "AZPR Appendix A Human Authorization",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format_version",
+    "authorization_id",
+    "audit_stage_id",
+    "audit_report_sha256",
+    "audit_commit",
+    "audited_commit",
+    "correction_ids",
+    "allowed_change_paths",
+    "policy_hashes",
+    "issued_at",
+    "expires_at",
+    "nonce",
+    "signatures"
+  ],
+  "properties": {
+    "format_version": {
+      "const": "1.0"
+    },
+    "authorization_id": {
+      "type": "string",
+      "minLength": 12,
+      "maxLength": 120
+    },
+    "audit_stage_id": {
+      "type": "string",
+      "pattern": "^[0-9]{3}$",
+      "maxLength": 8000
+    },
+    "audit_report_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "maxLength": 8000
+    },
+    "audit_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$",
+      "maxLength": 8000
+    },
+    "audited_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$",
+      "maxLength": 8000
+    },
+    "correction_ids": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 50,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 120
+      }
+    },
+    "allowed_change_paths": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 80,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[^\\u0000-\\u001f\\u007f*?\\[\\]]+$",
+        "maxLength": 8000
+      }
+    },
+    "policy_hashes": {
+      "type": "object",
+      "minProperties": 8,
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$",
+        "maxLength": 8000
+      },
+      "maxProperties": 100
+    },
+    "issued_at": {
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 8000
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 8000
+    },
+    "nonce": {
+      "type": "string",
+      "minLength": 24,
+      "maxLength": 200
+    },
+    "signatures": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "key_id",
+          "ed25519"
+        ],
+        "properties": {
+          "key_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "ed25519": {
+            "type": "string",
+            "minLength": 80,
+            "maxLength": 120
+          }
+        }
+      }
+    }
+  }
+}

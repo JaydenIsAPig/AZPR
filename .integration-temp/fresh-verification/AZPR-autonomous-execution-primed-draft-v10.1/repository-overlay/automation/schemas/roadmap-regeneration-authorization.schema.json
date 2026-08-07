@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://azpr.local/schemas/roadmap-regeneration-authorization.schema.json",
+  "type": "object", "additionalProperties": false,
+  "required": ["format_version", "authorization_id", "repository_id", "target_commit", "target_tree", "prompt_004_status", "prompt_004_decision_path", "prompt_004_decision_sha256", "prompt_catalog_sha256", "canonical_policy_record_sha256", "installation_manifest_sha256", "security_test_report_sha256", "issued_at", "expires_at", "nonce", "signatures"],
+  "properties": {
+    "format_version": {"const": "1.0"},
+    "authorization_id": {"type": "string", "minLength": 16, "maxLength": 160},
+    "repository_id": {"type": "string", "minLength": 8, "maxLength": 160},
+    "target_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$", "maxLength": 40},
+    "target_tree": {"type": "string", "pattern": "^[0-9a-f]{40}$", "maxLength": 40},
+    "prompt_004_status": {"const": "COMPLETED_APPROVED_RECONCILED"},
+    "prompt_004_decision_path": {"type": "string", "minLength": 1, "maxLength": 1024},
+    "prompt_004_decision_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$", "maxLength": 64},
+    "prompt_catalog_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$", "maxLength": 64},
+    "canonical_policy_record_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$", "maxLength": 64},
+    "installation_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$", "maxLength": 64},
+    "security_test_report_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$", "maxLength": 64},
+    "issued_at": {"type": "string", "format": "date-time", "maxLength": 64},
+    "expires_at": {"type": "string", "format": "date-time", "maxLength": 64},
+    "nonce": {"type": "string", "minLength": 24, "maxLength": 160},
+    "signatures": {"type": "array", "minItems": 2, "maxItems": 10, "items": {"$ref": "approval.schema.json#/$defs/signature"}}
+  }
+}

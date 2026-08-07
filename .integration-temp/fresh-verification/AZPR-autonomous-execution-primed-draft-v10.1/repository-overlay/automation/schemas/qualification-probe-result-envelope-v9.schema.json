@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://azpr.local/schemas/qualification-probe-result-envelope-v9.schema.json",
+  "title": "AZPR v9 No-Secret Probe Result Envelope",
+  "type": "object", "additionalProperties": false,
+  "required": ["format_version", "envelope_kind", "probe_id", "target_role", "target_sha256",
+    "probe_policy_sha256", "boundary", "command", "started_at", "completed_at", "exit_code",
+    "stdout_sha256", "stderr_sha256", "transcript_sha256", "observations", "immutable_evidence_sha256",
+    "signer_key_id", "signer_role", "signature"],
+  "properties": {
+    "format_version": {"const": "1.0"},
+    "envelope_kind": {"const": "AZPR_V9_NO_SECRET_PROBE_RESULT"},
+    "probe_id": {"type": "string", "pattern": "^probe-[A-Za-z0-9._:-]{8,150}$", "maxLength": 160},
+    "target_role": {"enum": ["git_binary", "python_binary", "codex_binary", "container_engine", "anchor_helper", "mount_binary", "umount_binary", "adapter_binary"]},
+    "target_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "probe_policy_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "boundary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["boundary_id", "boundary_kind", "run_as_uid", "run_as_gid", "rootless",
+        "no_secrets", "host_mounts", "daemon_sockets", "network_mode", "pid_namespace",
+        "mount_namespace", "cgroup_v2", "disposable"],
+      "properties": {
+        "boundary_id": {"type": "string", "minLength": 8, "maxLength": 160},
+        "boundary_kind": {"enum": ["DISPOSABLE_VM", "ROOTLESS_CONTAINER_WITH_QUALIFIED_KERNEL_BOUNDARY"]},
+        "run_as_uid": {"type": "integer", "minimum": 1},
+        "run_as_gid": {"type": "integer", "minimum": 1},
+        "rootless": {"const": true}, "no_secrets": {"const": true},
+        "host_mounts": {"const": false}, "daemon_sockets": {"const": false},
+        "network_mode": {"enum": ["DENY_ALL", "ISOLATED_CONTROLLED_ENDPOINT_ONLY"]},
+        "pid_namespace": {"const": true}, "mount_namespace": {"const": true},
+        "cgroup_v2": {"const": true}, "disposable": {"const": true}
+      }
+    },
+    "command": {"type": "array", "minItems": 1, "maxItems": 32, "items": {"type": "string", "maxLength": 4096}},
+    "started_at": {"type": "string", "format": "date-time", "maxLength": 64},
+    "completed_at": {"type": "string", "format": "date-time", "maxLength": 64},
+    "exit_code": {"type": "integer", "minimum": 0, "maximum": 255},
+    "stdout_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "stderr_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "transcript_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "observations": {
+      "type": "object", "additionalProperties": false,
+      "required": ["host_read_denied", "signing_key_access_denied", "installer_state_access_denied",
+        "daemon_access_denied", "mount_denied", "network_denied", "fork_escape_denied",
+        "session_escape_denied", "resource_exhaustion_contained", "evidence_mutation_denied"],
+      "properties": {
+        "host_read_denied": {"const": true}, "signing_key_access_denied": {"const": true},
+        "installer_state_access_denied": {"const": true}, "daemon_access_denied": {"const": true},
+        "mount_denied": {"const": true}, "network_denied": {"const": true},
+        "fork_escape_denied": {"const": true}, "session_escape_denied": {"const": true},
+        "resource_exhaustion_contained": {"const": true}, "evidence_mutation_denied": {"const": true}
+      }
+    },
+    "immutable_evidence_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "signer_key_id": {"type": "string", "minLength": 8, "maxLength": 160},
+    "signer_role": {"const": "qualification-probe-service"},
+    "signature": {"type": "string", "pattern": "^[A-Za-z0-9+/]{86}==$", "maxLength": 88}
+  }
+}

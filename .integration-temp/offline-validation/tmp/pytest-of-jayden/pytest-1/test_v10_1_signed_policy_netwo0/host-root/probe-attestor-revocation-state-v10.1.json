@@ -1,0 +1,8 @@
+{
+  "format_version": "1.0",
+  "issued_at": "2026-08-07T00:27:30.519608+00:00",
+  "revocation_kind": "AZPR_V10_1_PROBE_ATTESTOR_REVOCATIONS",
+  "revoked_key_ids": [],
+  "sequence": 7,
+  "service_id": "probe-attestor-v10-1-0001"
+}

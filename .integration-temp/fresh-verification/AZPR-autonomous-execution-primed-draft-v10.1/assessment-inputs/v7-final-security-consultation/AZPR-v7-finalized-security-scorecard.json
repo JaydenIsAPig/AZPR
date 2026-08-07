@@ -1,0 +1,1128 @@
+{
+  "format_version": "1.0",
+  "generated_at": "2026-07-24T23:19:13.162438+00:00",
+  "promotion_decision": "NOT_READY",
+  "safe_for_unattended_execution_now": false,
+  "executive_scores": {
+    "prompt_design_security_average": 93.2,
+    "execution_confidence_average": 41.2,
+    "shared_control_plane_confidence": 24
+  },
+  "artifact_hashes": {
+    "Pasted markdown.md": "36f637230dfa6014b45186f3df1e854de4740fcb25e7a2eb226071d948282331",
+    "AZPR-finalized-security-review-handoff(1).zip": "64824e7d3954f1ae6793424f7865c52cdf30b72b91406f2d56082dea072d8083",
+    "AZPR-security-implementation-draft-v3(1).zip": "e8913ddd46470f6ae38667ee37c639d18393529cef3074b89589bc5a17bb69f2",
+    "AZPR-security-implementation-draft-v3.zip(1).sha256": "636abd9b6dcd01aaa822dc8243ee58a1952ddfb5b402e0281431393671b4c03e",
+    "markdown-prompts-final-draft(1).zip": "29e3f2be037aad718d716b32bf03d5e4d1192ab90b06e0f96421332d1b0ade6a"
+  },
+  "finding_counts_by_severity": {
+    "CRITICAL": 3,
+    "HIGH": 6,
+    "MEDIUM": 3
+  },
+  "prompt_counts_by_status": {
+    "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION": 41
+  },
+  "regression_counts_by_status": {
+    "CLOSED_AND_TESTED": 8,
+    "PARTIALLY_CLOSED": 10,
+    "NOT_CLOSED": 2
+  },
+  "findings": [
+    {
+      "id": "AZPR-FINAL-01",
+      "severity": "CRITICAL",
+      "title": "External evidence lifecycle is incomplete and not cryptographically bound to the consumed capability operation",
+      "status": "OPEN"
+    },
+    {
+      "id": "AZPR-FINAL-02",
+      "severity": "CRITICAL",
+      "title": "No finalized roadmap exists and the historical roadmap contradicts finalized prompts",
+      "status": "OPEN"
+    },
+    {
+      "id": "AZPR-FINAL-03",
+      "severity": "HIGH",
+      "title": "The runtime policy binds to a condensed derivative instead of the supplied governing Master Operating Prompt",
+      "status": "OPEN"
+    },
+    {
+      "id": "AZPR-FINAL-04",
+      "severity": "CRITICAL",
+      "title": "Trusted executables, signing material, runtime root and journal anchor remain caller-selectable through environment",
+      "status": "OPEN"
+    },
+    {
+      "id": "AZPR-FINAL-05",
+      "severity": "HIGH",
+      "title": "Nonce database and signed journal are not crash-atomic",
+      "status": "OPEN"
+    },
+    {
+      "id": "AZPR-FINAL-06",
+      "severity": "HIGH",
+      "title": "Validation snapshot has a pathname TOCTOU race that can validate wrong bytes or copy ignored secrets",
+      "status": "OPEN"
+    },
+    {
+      "id": "AZPR-FINAL-07",
+      "severity": "HIGH",
+      "title": "Controller child output and result payload resource limits/redaction are incomplete",
+      "status": "OPEN"
+    },
+    {
+      "id": "AZPR-FINAL-08",
+      "severity": "HIGH",
+      "title": "Evidence keyring and external evidence input are not fully protected by the policy/TOCTOU boundary",
+      "status": "OPEN"
+    },
+    {
+      "id": "AZPR-FINAL-09",
+      "severity": "HIGH",
+      "title": "The implementation bundle is not a deployable, self-consistent trusted installation",
+      "status": "OPEN"
+    },
+    {
+      "id": "AZPR-FINAL-10",
+      "severity": "MEDIUM",
+      "title": "Operator key generation can overwrite a symlink target and supply-chain hardening remains incomplete",
+      "status": "OPEN"
+    },
+    {
+      "id": "AZPR-FINAL-11",
+      "severity": "MEDIUM",
+      "title": "Changed-byte budget measures final file sizes rather than aggregate actual diff",
+      "status": "OPEN"
+    },
+    {
+      "id": "AZPR-FINAL-12",
+      "severity": "MEDIUM",
+      "title": "Security tests cover many controls but miss the highest-risk composed failure paths",
+      "status": "OPEN"
+    }
+  ],
+  "regression_test_status": [
+    {
+      "prior_finding": "1",
+      "description": "Approval documents previously required their own final hash.",
+      "status": "CLOSED_AND_TESTED",
+      "justification": "Approval documents are excluded from the policy set they sign; independent approval matrix passed and policy mutation failed."
+    },
+    {
+      "prior_finding": "2",
+      "description": "Nonce consumption was not atomic across concurrent runs.",
+      "status": "PARTIALLY_CLOSED",
+      "justification": "Thread/process uniqueness is closed, but crash/anchor atomicity across SQLite and journal is not."
+    },
+    {
+      "prior_finding": "3",
+      "description": "Signed state was not bound to exact repository HEAD/tree and exact roadmap/policy hashes.",
+      "status": "PARTIALLY_CLOSED",
+      "justification": "HEAD/tree, roadmap, prompt catalog and core controller hashes are bound; evidence keyring/schema/install identities and canonical governing policy are incomplete."
+    },
+    {
+      "prior_finding": "4",
+      "description": "No trusted external-evidence ingestion and immutable registration path existed.",
+      "status": "NOT_CLOSED",
+      "justification": "Registry exists but controller nonce registration is unreachable and exact operation/evidence binding is incomplete."
+    },
+    {
+      "prior_finding": "5",
+      "description": "Controller-owned writes could follow repository symlinks.",
+      "status": "CLOSED_AND_TESTED",
+      "justification": "Descriptor-relative secure writes and symlink-ancestor tests pass."
+    },
+    {
+      "prior_finding": "6",
+      "description": "Git operations could execute repository-controlled hooks, filters, signing tools, helpers, or hostile configuration.",
+      "status": "PARTIALLY_CLOSED",
+      "justification": "Repository config vectors are blocked, but caller-selected Git executable permits arbitrary host code."
+    },
+    {
+      "prior_finding": "7",
+      "description": "External-runner trust roots were caller-selectable.",
+      "status": "PARTIALLY_CLOSED",
+      "justification": "Production launcher design rejects CLI trust roots, but no installed attested launcher is supplied and controller trust roots remain environment-selected."
+    },
+    {
+      "prior_finding": "8",
+      "description": "Appendix A accepted an identifier without cryptographically verified human authorization.",
+      "status": "CLOSED_AND_TESTED",
+      "justification": "Signed, bound authorization verification exists; invented ID fails."
+    },
+    {
+      "prior_finding": "9",
+      "description": "Signed journals lacked rollback/truncation resistance.",
+      "status": "PARTIALLY_CLOSED",
+      "justification": "External anchoring detects rollback when configured, but is optional/caller-selected and crash recovery is absent."
+    },
+    {
+      "prior_finding": "10",
+      "description": "Agent-writable and controller-owned paths were not fully separated.",
+      "status": "CLOSED_AND_TESTED",
+      "justification": "Agent diff is checked before controller-owned materialization and protected writes are separate."
+    },
+    {
+      "prior_finding": "11",
+      "description": "Path budgets did not cap aggregate actual diff and untracked files.",
+      "status": "PARTIALLY_CLOSED",
+      "justification": "Path count and untracked files are covered; byte accounting is final-size, not actual patch/deletion volume."
+    },
+    {
+      "prior_finding": "12",
+      "description": "Validation snapshots could include ignored secrets and local artifacts.",
+      "status": "PARTIALLY_CLOSED",
+      "justification": "Static ignored files are excluded, but pathname TOCTOU can copy ignored secret content."
+    },
+    {
+      "prior_finding": "13",
+      "description": "Child stdout/stderr and evidence resources were insufficiently bounded.",
+      "status": "PARTIALLY_CLOSED",
+      "justification": "Validator/adapter limits improved; controller child output and result JSON remain unbounded."
+    },
+    {
+      "prior_finding": "14",
+      "description": "Signer-role separation could be satisfied without one distinct signer per required role.",
+      "status": "CLOSED_AND_TESTED",
+      "justification": "Distinct identity assignment is enforced and tested."
+    },
+    {
+      "prior_finding": "15",
+      "description": "External adapter verification had path ownership and TOCTOU weaknesses.",
+      "status": "CLOSED_AND_TESTED",
+      "justification": "Adapter fd/hash execution closes the reported replacement path in the submitted design/tests."
+    },
+    {
+      "prior_finding": "16",
+      "description": "ROLLED_BACK could be represented as an apply success.",
+      "status": "CLOSED_AND_TESTED",
+      "justification": "Rollback maps to non-success and failed evidence cannot satisfy release audit."
+    },
+    {
+      "prior_finding": "17",
+      "description": "Signed evidence files could be overwritten.",
+      "status": "CLOSED_AND_TESTED",
+      "justification": "Content-addressed create-once storage and evidence-ID uniqueness are enforced."
+    },
+    {
+      "prior_finding": "18",
+      "description": "Generated reports and result payloads lacked strict limits and centralized redaction.",
+      "status": "PARTIALLY_CLOSED",
+      "justification": "Some limits/redaction exist, but multiple arrays/objects and total JSON/controller output remain unbounded."
+    },
+    {
+      "prior_finding": "19",
+      "description": "Security tests did not cover the highest-risk trust boundaries.",
+      "status": "PARTIALLY_CLOSED",
+      "justification": "Coverage expanded to 30 tests, but independent testing found 10 omitted vulnerabilities."
+    },
+    {
+      "prior_finding": "20",
+      "description": "Supply-chain and operator-tool hardening was incomplete.",
+      "status": "NOT_CLOSED",
+      "justification": "Dependency locks lack hashes, production installation artifacts are placeholders, and keygen follows public-output symlinks."
+    }
+  ],
+  "prompts": [
+    {
+      "id": "001",
+      "title": "Close the Post-Core Traceability Release Gate",
+      "prompt_type": "Implementation",
+      "file": "automation/numbered/001-close-the-post-core-traceability-release-gate.md",
+      "security_score": 91,
+      "execution_confidence_score": 52,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "002",
+      "title": "Post-Core Traceability Corrective Audit",
+      "prompt_type": "Read-only Audit",
+      "file": "automation/numbered/002-post-core-traceability-corrective-audit.md",
+      "security_score": 95,
+      "execution_confidence_score": 46,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt is well structured as a read-only formal audit with explicit result and correction semantics. Shared controller, validation, policy and resource-bound defects prevent safe unattended execution.",
+      "finding_ids": [
+        "AZPR-FINAL-01",
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-08",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "003",
+      "title": "Define and Govern the Narrow Pilot Scope",
+      "prompt_type": "Decision and Conditional Implementation",
+      "file": "automation/numbered/003-define-and-govern-the-narrow-pilot-scope.md",
+      "security_score": 91,
+      "execution_confidence_score": 52,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "004",
+      "title": "Select and Govern the Production Application Stack",
+      "prompt_type": "Architecture Decision Gate",
+      "file": "automation/numbered/004-select-and-govern-the-production-application-stack.md",
+      "security_score": 91,
+      "execution_confidence_score": 52,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "005",
+      "title": "Bootstrap the Production Application Shell and Engineering Baseline",
+      "prompt_type": "Implementation",
+      "file": "automation/numbered/005-bootstrap-the-production-application-shell-and-engineering-baseline.md",
+      "security_score": 91,
+      "execution_confidence_score": 52,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "006",
+      "title": "MVP Scope and Architecture Decision Audit",
+      "prompt_type": "Read-only Audit",
+      "file": "automation/numbered/006-mvp-scope-and-architecture-decision-audit.md",
+      "security_score": 95,
+      "execution_confidence_score": 46,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt is well structured as a read-only formal audit with explicit result and correction semantics. Shared controller, validation, policy and resource-bound defects prevent safe unattended execution.",
+      "finding_ids": [
+        "AZPR-FINAL-01",
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-08",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "007",
+      "title": "Design and Implement the Durable Database Schema and Migrations",
+      "prompt_type": "Implementation",
+      "file": "automation/numbered/007-design-and-implement-the-durable-database-schema-and-migrations.md",
+      "security_score": 91,
+      "execution_confidence_score": 52,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "008",
+      "title": "Implement Durable Repositories and Transaction Boundaries",
+      "prompt_type": "Implementation",
+      "file": "automation/numbered/008-implement-durable-repositories-and-transaction-boundaries.md",
+      "security_score": 91,
+      "execution_confidence_score": 52,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "009",
+      "title": "Implement Immutable Artifact Storage, Outbox, Workers, and Crash Recovery",
+      "prompt_type": "Implementation",
+      "file": "automation/numbered/009-implement-immutable-artifact-storage-outbox-workers-and-crash-recovery.md",
+      "security_score": 91,
+      "execution_confidence_score": 52,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "010",
+      "title": "Durable Platform and Persistence Audit",
+      "prompt_type": "Read-only Audit",
+      "file": "automation/numbered/010-durable-platform-and-persistence-audit.md",
+      "security_score": 95,
+      "execution_confidence_score": 46,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt is well structured as a read-only formal audit with explicit result and correction semantics. Shared controller, validation, policy and resource-bound defects prevent safe unattended execution.",
+      "finding_ids": [
+        "AZPR-FINAL-01",
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-08",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "011",
+      "title": "Implement Authentication, Session Security, and AccessContext Construction",
+      "prompt_type": "Implementation",
+      "file": "automation/numbered/011-implement-authentication-session-security-and-accesscontext-construction.md",
+      "security_score": 91,
+      "execution_confidence_score": 52,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "012",
+      "title": "Implement Customer Account Lifecycle, Versioned Configuration, and Onboarding API",
+      "prompt_type": "Implementation",
+      "file": "automation/numbered/012-implement-customer-account-lifecycle-versioned-configuration-and-onboarding-api.md",
+      "security_score": 91,
+      "execution_confidence_score": 52,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "013",
+      "title": "Identity, Authorization, and Customer-Isolation Audit",
+      "prompt_type": "Read-only Audit",
+      "file": "automation/numbered/013-identity-authorization-and-customer-isolation-audit.md",
+      "security_score": 95,
+      "execution_confidence_score": 46,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt is well structured as a read-only formal audit with explicit result and correction semantics. Shared controller, validation, policy and resource-bound defects prevent safe unattended execution.",
+      "finding_ids": [
+        "AZPR-FINAL-01",
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-08",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "014",
+      "title": "Select and Approve the First Tucson or Pima County Production Source",
+      "prompt_type": "Source Access Decision Gate",
+      "file": "automation/numbered/014-select-and-approve-the-first-tucson-or-pima-county-production-source.md",
+      "security_score": 90,
+      "execution_confidence_score": 43,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "015",
+      "title": "Implement Durable Scheduled Acquisition and the Approved Live Connector",
+      "prompt_type": "Implementation",
+      "file": "automation/numbered/015-implement-durable-scheduled-acquisition-and-the-approved-live-connector.md",
+      "security_score": 90,
+      "execution_confidence_score": 43,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "016",
+      "title": "Implement the Production Source Parser, Replay, and Backfill Contract",
+      "prompt_type": "Implementation",
+      "file": "automation/numbered/016-implement-the-production-source-parser-replay-and-backfill-contract.md",
+      "security_score": 90,
+      "execution_confidence_score": 43,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "017",
+      "title": "Implement Required Production Geography and Address Resolution",
+      "prompt_type": "Conditional Provider Implementation",
+      "file": "automation/numbered/017-implement-required-production-geography-and-address-resolution.md",
+      "security_score": 90,
+      "execution_confidence_score": 43,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "018",
+      "title": "Pilot Source, Ingestion, Normalization, and Geography Audit",
+      "prompt_type": "Read-only Audit",
+      "file": "automation/numbered/018-pilot-source-ingestion-normalization-and-geography-audit.md",
+      "security_score": 90,
+      "execution_confidence_score": 43,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt is well structured as a read-only formal audit with explicit result and correction semantics. Shared controller, validation, policy and resource-bound defects prevent safe unattended execution.",
+      "finding_ids": [
+        "AZPR-FINAL-01",
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-08",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "019",
+      "title": "Implement the Authorized Customer API and Query Projections",
+      "prompt_type": "Implementation",
+      "file": "automation/numbered/019-implement-the-authorized-customer-api-and-query-projections.md",
+      "security_score": 91,
+      "execution_confidence_score": 52,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "020",
+      "title": "Build the Authenticated Frontend Foundation and Onboarding Experience",
+      "prompt_type": "Implementation",
+      "file": "automation/numbered/020-build-the-authenticated-frontend-foundation-and-onboarding-experience.md",
+      "security_score": 91,
+      "execution_confidence_score": 52,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "021",
+      "title": "Build the Explainable Opportunity Dashboard and Lead Workflow",
+      "prompt_type": "Implementation",
+      "file": "automation/numbered/021-build-the-explainable-opportunity-dashboard-and-lead-workflow.md",
+      "security_score": 91,
+      "execution_confidence_score": 52,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "022",
+      "title": "Customer API, Frontend, and Data-Exposure Audit",
+      "prompt_type": "Read-only Audit",
+      "file": "automation/numbered/022-customer-api-frontend-and-data-exposure-audit.md",
+      "security_score": 95,
+      "execution_confidence_score": 46,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt is well structured as a read-only formal audit with explicit result and correction semantics. Shared controller, validation, policy and resource-bound defects prevent safe unattended execution.",
+      "finding_ids": [
+        "AZPR-FINAL-01",
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-08",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "023",
+      "title": "Implement Email Notification Orchestration and Delivery",
+      "prompt_type": "Conditional Provider Implementation",
+      "file": "automation/numbered/023-implement-email-notification-orchestration-and-delivery.md",
+      "security_score": 92,
+      "execution_confidence_score": 39,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "024",
+      "title": "Email Delivery Audit",
+      "prompt_type": "Read-only Audit",
+      "file": "automation/numbered/024-email-delivery-audit.md",
+      "security_score": 92,
+      "execution_confidence_score": 39,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt is well structured as a read-only formal audit with explicit result and correction semantics. Shared controller, validation, policy and resource-bound defects prevent safe unattended execution.",
+      "finding_ids": [
+        "AZPR-FINAL-01",
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-08",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "025",
+      "title": "Implement Controlled SMS Infrastructure Behind a Disabled Feature Flag",
+      "prompt_type": "Conditional Provider Implementation",
+      "file": "automation/numbered/025-implement-controlled-sms-infrastructure-behind-a-disabled-feature-flag.md",
+      "security_score": 92,
+      "execution_confidence_score": 39,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "026",
+      "title": "Build Internal Review and Source Operations Tooling",
+      "prompt_type": "Implementation",
+      "file": "automation/numbered/026-build-internal-review-and-source-operations-tooling.md",
+      "security_score": 92,
+      "execution_confidence_score": 39,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "027",
+      "title": "Notification, SMS, and Operations Audit",
+      "prompt_type": "Read-only Audit",
+      "file": "automation/numbered/027-notification-sms-and-operations-audit.md",
+      "security_score": 92,
+      "execution_confidence_score": 39,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt is well structured as a read-only formal audit with explicit result and correction semantics. Shared controller, validation, policy and resource-bound defects prevent safe unattended execution.",
+      "finding_ids": [
+        "AZPR-FINAL-01",
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-08",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "028",
+      "title": "Implement the Privacy-Conscious Analytics Event Model",
+      "prompt_type": "Implementation",
+      "file": "automation/numbered/028-implement-the-privacy-conscious-analytics-event-model.md",
+      "security_score": 94,
+      "execution_confidence_score": 42,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "029",
+      "title": "Implement Observability, Health, Alerting, and Operational Runbooks",
+      "prompt_type": "Implementation",
+      "file": "automation/numbered/029-implement-observability-health-alerting-and-operational-runbooks.md",
+      "security_score": 94,
+      "execution_confidence_score": 42,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "030",
+      "title": "Implement Backup, Restore, Reconciliation, and Rollback Procedures",
+      "prompt_type": "Implementation",
+      "file": "automation/numbered/030-implement-backup-restore-reconciliation-and-rollback-procedures.md",
+      "security_score": 94,
+      "execution_confidence_score": 42,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "031",
+      "title": "Security, Privacy, Performance, and Recovery Hardening Audit",
+      "prompt_type": "Read-only Formal Hardening Audit",
+      "file": "automation/numbered/031-security-privacy-performance-and-recovery-hardening-audit.md",
+      "security_score": 94,
+      "execution_confidence_score": 24,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt is well structured as a read-only formal audit with explicit result and correction semantics. Shared controller, validation, policy and resource-bound defects prevent safe unattended execution. The only supplied historical roadmap points to a different filename/title or execution kind for this stage.",
+      "finding_ids": [
+        "AZPR-FINAL-01",
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-08",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "MISMATCH"
+    },
+    {
+      "id": "032",
+      "title": "Formal Pilot Release Test Matrix and Release Gate Audit",
+      "prompt_type": "Read-only Audit",
+      "file": "automation/numbered/032-formal-pilot-release-test-matrix-and-release-gate-audit.md",
+      "security_score": 94,
+      "execution_confidence_score": 42,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt is well structured as a read-only formal audit with explicit result and correction semantics. Shared controller, validation, policy and resource-bound defects prevent safe unattended execution.",
+      "finding_ids": [
+        "AZPR-FINAL-01",
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-08",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "033",
+      "title": "Prepare the Controlled Staging Deployment Plan",
+      "prompt_type": "Implementation and Deployment Planning",
+      "file": "automation/numbered/033-prepare-controlled-staging-deployment-plan.md",
+      "security_score": 97,
+      "execution_confidence_score": 24,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The finalized prompt correctly limits autonomous work to repository-local planning and separates external apply. Execution confidence is critically low because no finalized roadmap exists and the historical roadmap restores deployment-execution semantics. The only supplied historical roadmap points to a different filename/title or execution kind for this stage.",
+      "finding_ids": [
+        "AZPR-FINAL-01",
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "MISMATCH"
+    },
+    {
+      "id": "034",
+      "title": "Final Staging and Pilot Readiness Audit",
+      "prompt_type": "Read-only Audit",
+      "file": "automation/numbered/034-final-staging-and-pilot-readiness-audit.md",
+      "security_score": 98,
+      "execution_confidence_score": 18,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt text strongly requires read-only, controller-supplied verified evidence and blocks repository-local evidence. Execution confidence is critically low because the evidence registration/nonce/ID lifecycle is incomplete.",
+      "finding_ids": [
+        "AZPR-FINAL-01",
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-08",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "035",
+      "title": "Prepare the Controlled Production Pilot Release Plan",
+      "prompt_type": "Implementation and Production Release Planning",
+      "file": "automation/numbered/035-prepare-controlled-production-pilot-release-plan.md",
+      "security_score": 97,
+      "execution_confidence_score": 24,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The finalized prompt correctly limits autonomous work to repository-local planning and separates external apply. Execution confidence is critically low because no finalized roadmap exists and the historical roadmap restores deployment-execution semantics. The only supplied historical roadmap points to a different filename/title or execution kind for this stage.",
+      "finding_ids": [
+        "AZPR-FINAL-01",
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "MISMATCH"
+    },
+    {
+      "id": "036",
+      "title": "Production Pilot Launch Verification Audit",
+      "prompt_type": "Read-only Audit",
+      "file": "automation/numbered/036-production-pilot-launch-verification-audit.md",
+      "security_score": 98,
+      "execution_confidence_score": 18,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt text strongly requires read-only, controller-supplied verified evidence and blocks repository-local evidence. Execution confidence is critically low because the evidence registration/nonce/ID lifecycle is incomplete.",
+      "finding_ids": [
+        "AZPR-FINAL-01",
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-08",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "037",
+      "title": "Implement Pilot Feedback and Business Validation Workflow",
+      "prompt_type": "Implementation after Pilot Approval",
+      "file": "automation/numbered/037-implement-pilot-feedback-and-business-validation-workflow.md",
+      "security_score": 92,
+      "execution_confidence_score": 34,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt contains strong instruction-integrity, boundary, validation, audit-chain and controller-handoff language. Its execution depends on a shared control plane with open critical/high defects and no finalized roadmap.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "038",
+      "title": "Pilot Feedback and Business Validation Audit",
+      "prompt_type": "Read-only Audit",
+      "file": "automation/numbered/038-pilot-feedback-and-business-validation-audit.md",
+      "security_score": 96,
+      "execution_confidence_score": 28,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt is well structured as a read-only formal audit with explicit result and correction semantics. Shared controller, validation, policy and resource-bound defects prevent safe unattended execution.",
+      "finding_ids": [
+        "AZPR-FINAL-01",
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-08",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "PROMPT_ID_PRESENT_BUT_NOT_FINAL_AUTHORITY"
+    },
+    {
+      "id": "A",
+      "title": "Explicitly Authorized Audit Correction",
+      "prompt_type": "Corrective Implementation",
+      "file": "automation/appendices/appendix-a-audit-correction-prompt.md",
+      "security_score": 98,
+      "execution_confidence_score": 43,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "Appendix A is narrowly scoped, exact-path constrained and now requires a signed human authorization for sensitive corrections. Shared trust-root, validation and change-budget defects still invalidate unattended execution.",
+      "finding_ids": [
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-10",
+        "AZPR-FINAL-11",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "NOT_APPLICABLE"
+    },
+    {
+      "id": "B",
+      "title": "Prepare Optional Controlled SMS Canary Plan",
+      "prompt_type": "Plan-Only after Explicit Approval",
+      "file": "automation/appendices/appendix-b-optional-controlled-sms-canary-enablement-prompt.md",
+      "security_score": 98,
+      "execution_confidence_score": 27,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "Appendix B correctly treats SMS enablement as an optional, explicitly approved plan rather than an autonomous provider action. Missing finalized roadmap/installation/evidence binding keeps execution unacceptable.",
+      "finding_ids": [
+        "AZPR-FINAL-01",
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "NOT_APPLICABLE"
+    },
+    {
+      "id": "C",
+      "title": "Optional Controlled SMS Canary Evidence Audit",
+      "prompt_type": "Read-only Formal Audit",
+      "file": "automation/appendices/appendix-c-optional-controlled-sms-canary-activation-audit.md",
+      "security_score": 99,
+      "execution_confidence_score": 16,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "rationale": "The prompt text strongly requires read-only, controller-supplied verified evidence and blocks repository-local evidence. Execution confidence is critically low because the evidence registration/nonce/ID lifecycle is incomplete.",
+      "finding_ids": [
+        "AZPR-FINAL-01",
+        "AZPR-FINAL-02",
+        "AZPR-FINAL-03",
+        "AZPR-FINAL-04",
+        "AZPR-FINAL-05",
+        "AZPR-FINAL-06",
+        "AZPR-FINAL-07",
+        "AZPR-FINAL-08",
+        "AZPR-FINAL-09",
+        "AZPR-FINAL-12"
+      ],
+      "historical_roadmap_comparison": "NOT_APPLICABLE"
+    }
+  ],
+  "notes": [
+    "Scores were recalculated from the finalized prompt text and candidate implementation; prior scores were not copied.",
+    "All prompt statuses are unacceptable for unattended execution because shared critical control-plane defects invalidate execution even where prompt design is strong.",
+    "The supplied roadmap is historical only and cannot be treated as the finalized roadmap."
+  ]
+}

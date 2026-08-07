@@ -1,0 +1,199 @@
+{
+  "$id": "https://azpr.local/schemas/external-runner-config.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "additionalProperties": false,
+      "properties": {
+        "adapters": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "allowed_operations": {
+                "items": {
+                  "maxLength": 200,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "maxItems": 100,
+                "minItems": 1,
+                "type": "array",
+                "uniqueItems": true
+              },
+              "name": {
+                "maxLength": 200,
+                "minLength": 1,
+                "type": "string"
+              },
+              "path": {
+                "maxLength": 1024,
+                "minLength": 1,
+                "type": "string"
+              },
+              "sha256": {
+                "maxLength": 64,
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "path",
+              "sha256",
+              "allowed_operations"
+            ],
+            "type": "object"
+          },
+          "maxItems": 100,
+          "minItems": 1,
+          "type": "array"
+        },
+        "approval_keyring_path": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "type": "string"
+        },
+        "controller_runtime_key_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+        },
+        "controller_runtime_public_key_path": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "type": "string"
+        },
+        "evidence_key_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+        },
+        "evidence_private_key_path": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "type": "string"
+        },
+        "evidence_public_key_path": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "type": "string"
+        },
+        "format_version": {
+          "const": "1.0"
+        },
+        "nonce_ledger_root": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "format_version",
+        "approval_keyring_path",
+        "evidence_private_key_path",
+        "evidence_public_key_path",
+        "evidence_key_id",
+        "nonce_ledger_root",
+        "adapters",
+        "controller_runtime_public_key_path",
+        "controller_runtime_key_id"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "adapters": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "allowed_operations": {
+                "items": {
+                  "maxLength": 200,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "maxItems": 100,
+                "minItems": 1,
+                "type": "array",
+                "uniqueItems": true
+              },
+              "component": {
+                "maxLength": 200,
+                "minLength": 1,
+                "type": "string"
+              },
+              "manifest_component": {
+                "maxLength": 200,
+                "minLength": 1,
+                "type": "string"
+              },
+              "name": {
+                "maxLength": 200,
+                "minLength": 1,
+                "type": "string"
+              },
+              "sha256": {
+                "maxLength": 64,
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "component",
+              "sha256",
+              "allowed_operations",
+              "manifest_component"
+            ],
+            "type": "object"
+          },
+          "maxItems": 100,
+          "minItems": 1,
+          "type": "array"
+        },
+        "approval_keyring_component": {
+          "const": "approval_keyring"
+        },
+        "controller_runtime_key_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+        },
+        "controller_runtime_public_key_component": {
+          "const": "runtime_public_key"
+        },
+        "evidence_key_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+        },
+        "evidence_private_key_component": {
+          "const": "evidence_private_key"
+        },
+        "evidence_public_key_component": {
+          "const": "evidence_public_key"
+        },
+        "format_version": {
+          "const": "2.0"
+        },
+        "nonce_ledger_directory": {
+          "const": "external_runner_runtime"
+        }
+      },
+      "required": [
+        "format_version",
+        "approval_keyring_component",
+        "evidence_private_key_component",
+        "evidence_public_key_component",
+        "evidence_key_id",
+        "nonce_ledger_directory",
+        "adapters",
+        "controller_runtime_public_key_component",
+        "controller_runtime_key_id"
+      ],
+      "type": "object"
+    }
+  ],
+  "title": "AZPR External Capability Runner Config"
+}

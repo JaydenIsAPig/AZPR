@@ -1,0 +1,14 @@
+# AZPR v8 Security-Control Traceability
+
+| Finding / invariant | Enforcing paths and functions | Release-blocking evidence | Remaining dependency |
+|---|---|---|---|
+| F01: installer authorization precedes state | `trusted-installation/install.py`: `_qualification_preflight`, `_reserve_authorization`, authorization ledger; qualification authorization/consumption schemas | `test_installer_authorization_is_first_gate_and_policy_phase_is_explicit`; `blackbox.v8.installer_authorization_before_state` | Independent signers and exact host-bound evidence |
+| F02: semantic clean-room proof | `operator-tools/verify_v8_cleanroom_prerequisites.py`; fixture builder; evidence, revocation, receipt, keyring, image, supply-chain, quota and execution schemas | positive semantic fixture; unsigned/self-declared/substitution mutations; `blackbox.v8.fabricated_qualification_rejected` | Real immutable raw evidence and independent reproduction |
+| F03: whole execution-unit containment | both `secure_runtime.py`; both `process_gate.py`; controller seal-before-import order | detached/background/overflow cases; `blackbox.v8.complete_process_tree_terminated`; `blackbox.v8.output_overflow_teardown` | Dedicated-host cgroup v2, namespaces, LSM and exact Codex |
+| F04: nonblocking duplex I/O | `run_bounded_process` selector state machine in both secure runtimes | bidirectional saturation, early exit, broken pipe, timeout and overflow tests; `blackbox.v8.duplex_io_deadline` | Installed workload characterization |
+| F05: quota-bounded handoff and cleanup | tmpfs mount, signed quota profile, `_quota_scan`, seal/quarantine/destruction, cgroup limits | entry/depth/size/special-file tests; `blackbox.v8.production_quota_enforcement_present` | Root mount/exhaustion/interruption matrix |
+| F06: key transition continuity | key lifecycle state/transition schemas; `apply_key_lifecycle_transition.py` | rotation/replay/epoch/anchor tests | Atomic integration with installed trust stores and real anchor |
+| F07: complete delivery evidence | scoped implementation/reports manifests, sidecars, source/fresh/release verification, complete delivery manifest | reports verifier and fresh extraction | Organization release signature unavailable |
+| D01: qualification and policy activation separation | installer `installation_phase`; trusted-installation schema conditional; all production loaders | qualification-only derivative rejection and launcher fail-closed tests | Approved canonical policy remains absent |
+| D02: namespace creation, not self-attestation | `process_gate.py`: `unshare`, namespace-init fork, private mounts, group/UID/GID drop, no-new-privileges | gate marker, process-boundary tests | Kernel/LSM qualification on final host |
+| Prompt identity and authority gates | prompt ZIP/overlay byte comparison; safety-state verifier | 38 numbered prompts + Appendices A-C; fixed prompt ZIP hash | Policy approval, Prompt 004 and roadmap remain blocked |

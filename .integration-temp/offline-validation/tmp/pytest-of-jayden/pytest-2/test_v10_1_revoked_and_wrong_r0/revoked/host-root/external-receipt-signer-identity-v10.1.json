@@ -1,0 +1,11 @@
+{
+  "candidate_archive_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "format_version": "1.0",
+  "host_id": "host-v10-1-test-0001",
+  "identity_kind": "AZPR_V10_1_EXTERNAL_RECEIPT_SIGNER_IDENTITY",
+  "not_after": "2026-08-14T00:53:32.005968+00:00",
+  "not_before": "2026-08-06T00:53:32.005968+00:00",
+  "receipt_signing_public_key_sha256": "8078a19cbb82cf87743acbc63c55fb17845a9c1c706294a5f719c41a083d8961",
+  "signer_client_sha256": "e9a4a619e53ccef89c7e6141ad44657751b917070a98bb28efaaf8cba7762a2e",
+  "signer_id": "receipt-signer-v10-1-0001"
+}

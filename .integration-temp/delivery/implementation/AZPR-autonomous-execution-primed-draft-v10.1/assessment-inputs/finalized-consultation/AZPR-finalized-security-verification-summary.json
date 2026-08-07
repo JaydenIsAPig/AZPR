@@ -1,0 +1,1015 @@
+{
+  "format_version": "1.0",
+  "generated_at": "2026-07-24T23:19:13.162438+00:00",
+  "promotion_decision": "NOT_READY",
+  "safe_for_unattended_execution_now": false,
+  "inputs": [
+    {
+      "filename": "Pasted markdown.md",
+      "path": "/mnt/data/Pasted markdown.md",
+      "size_bytes": 11600,
+      "sha256": "36f637230dfa6014b45186f3df1e854de4740fcb25e7a2eb226071d948282331"
+    },
+    {
+      "filename": "AZPR-finalized-security-review-handoff(1).zip",
+      "path": "/mnt/data/AZPR-finalized-security-review-handoff(1).zip",
+      "size_bytes": 648869,
+      "sha256": "64824e7d3954f1ae6793424f7865c52cdf30b72b91406f2d56082dea072d8083"
+    },
+    {
+      "filename": "AZPR-security-implementation-draft-v3(1).zip",
+      "path": "/mnt/data/AZPR-security-implementation-draft-v3(1).zip",
+      "size_bytes": 496148,
+      "sha256": "e8913ddd46470f6ae38667ee37c639d18393529cef3074b89589bc5a17bb69f2"
+    },
+    {
+      "filename": "AZPR-security-implementation-draft-v3.zip(1).sha256",
+      "path": "/mnt/data/AZPR-security-implementation-draft-v3.zip(1).sha256",
+      "size_bytes": 108,
+      "sha256": "636abd9b6dcd01aaa822dc8243ee58a1952ddfb5b402e0281431393671b4c03e"
+    },
+    {
+      "filename": "markdown-prompts-final-draft(1).zip",
+      "path": "/mnt/data/markdown-prompts-final-draft(1).zip",
+      "size_bytes": 151816,
+      "sha256": "29e3f2be037aad718d716b32bf03d5e4d1192ab90b06e0f96421332d1b0ade6a"
+    }
+  ],
+  "archive_safety": {
+    "AZPR-finalized-security-review-handoff(1).zip": {
+      "entry_count": 17,
+      "file_count": 17,
+      "uncompressed_bytes": 940736,
+      "unsafe_entries": []
+    },
+    "AZPR-security-implementation-draft-v3(1).zip": {
+      "entry_count": 109,
+      "file_count": 109,
+      "uncompressed_bytes": 1092734,
+      "unsafe_entries": []
+    },
+    "markdown-prompts-final-draft(1).zip": {
+      "entry_count": 41,
+      "file_count": 41,
+      "uncompressed_bytes": 320340,
+      "unsafe_entries": []
+    }
+  },
+  "sidecar_verification": {
+    "content": "e8913ddd46470f6ae38667ee37c639d18393529cef3074b89589bc5a17bb69f2  AZPR-security-implementation-draft-v3.zip",
+    "candidate_zip_sha256": "e8913ddd46470f6ae38667ee37c639d18393529cef3074b89589bc5a17bb69f2",
+    "match": true
+  },
+  "manifest_verification": {
+    "candidate_manifest_entries": 108,
+    "candidate_manifest_all_match": true,
+    "handoff_hash_entries": 16,
+    "handoff_all_match": true,
+    "prompt_duplicate_verification": {
+      "standalone_sha256": "29e3f2be037aad718d716b32bf03d5e4d1192ab90b06e0f96421332d1b0ade6a",
+      "embedded_sha256": "29e3f2be037aad718d716b32bf03d5e4d1192ab90b06e0f96421332d1b0ade6a",
+      "zip_byte_identical": true,
+      "repository_overlay_all_match": true,
+      "mismatches": []
+    },
+    "changed_prompt_files_from_refined_baseline": [
+      "automation/appendices/appendix-a-audit-correction-prompt.md",
+      "automation/appendices/appendix-c-optional-controlled-sms-canary-activation-audit.md",
+      "automation/numbered/034-final-staging-and-pilot-readiness-audit.md",
+      "automation/numbered/036-production-pilot-launch-verification-audit.md"
+    ]
+  },
+  "roadmap_verification": {
+    "finalized_roadmap_present": false,
+    "historical_roadmap_sha256": "30c858b8ec02a2e6dae94a991395e1c0baabbf4b65bcf07e25d8dc30334f18c7",
+    "historical_mismatches": [
+      {
+        "stage_id": "031",
+        "historical_roadmap_file": "automation/numbered/031-perform-security-privacy-performance-and-recovery-hardening.md",
+        "actual_prompt_file": "automation/numbered/031-security-privacy-performance-and-recovery-hardening-audit.md",
+        "historical_title": "Perform Security, Privacy, Performance, and Recovery Hardening",
+        "actual_title": "Security, Privacy, Performance, and Recovery Hardening Audit",
+        "historical_kind": "implementation",
+        "actual_prompt_type": "Read-only Formal Hardening Audit"
+      },
+      {
+        "stage_id": "033",
+        "historical_roadmap_file": "automation/numbered/033-prepare-and-execute-the-controlled-staging-deployment.md",
+        "actual_prompt_file": "automation/numbered/033-prepare-controlled-staging-deployment-plan.md",
+        "historical_title": "Prepare and Execute the Controlled Staging Deployment",
+        "actual_title": "Prepare the Controlled Staging Deployment Plan",
+        "historical_kind": "implementation",
+        "actual_prompt_type": "Implementation and Deployment Planning"
+      },
+      {
+        "stage_id": "035",
+        "historical_roadmap_file": "automation/numbered/035-deploy-the-controlled-production-pilot.md",
+        "actual_prompt_file": "automation/numbered/035-prepare-controlled-production-pilot-release-plan.md",
+        "historical_title": "Deploy the Controlled Production Pilot",
+        "actual_title": "Prepare the Controlled Production Pilot Release Plan",
+        "historical_kind": "implementation",
+        "actual_prompt_type": "Implementation and Production Release Planning"
+      }
+    ]
+  },
+  "master_policy_comparison": {
+    "governing_docx_sha256": "37800ebde204070d1ac20c2cfff5c809ee4f318cfcc44312514c393077334ae6",
+    "candidate_markdown_sha256": "10aaf22124dce00936f5ac849b4d4f50226dea3afaba11bb44e0a63b7a50700f",
+    "governing_extracted_characters": 9075,
+    "candidate_characters": 6567,
+    "governing_normalized_words": 1199,
+    "candidate_normalized_words": 833,
+    "text_equivalent": false
+  },
+  "test_commands": [
+    {
+      "command": "python3 -m unittest discover -s tests -v",
+      "working_directory": "/mnt/data/azpr_review_work/candidate/AZPR-security-implementation-draft-v3",
+      "outcome": "PASS",
+      "details": "30/30 submitted tests passed in 15.617 seconds."
+    },
+    {
+      "command": "python3 VERIFY-DRAFT-PACK.py",
+      "working_directory": "/mnt/data/azpr_review_work/candidate/AZPR-security-implementation-draft-v3",
+      "outcome": "PASS_WITH_EXPLICIT_NOT_SAFE_FLAG",
+      "details": "108 manifest entries, 16 schemas, 7 profiles, 38 prompts, 3 appendices, 30 tests; safe_for_unattended_execution_now=false."
+    },
+    {
+      "command": "python3 /mnt/data/azpr_review_work/approval_matrix.py",
+      "outcome": "PASS",
+      "details": {
+        "generated_at": "2026-07-24T23:13:23.680993+00:00",
+        "cases": [
+          {
+            "case": "valid",
+            "accepted": true,
+            "error": null
+          },
+          {
+            "case": "wrong_stage",
+            "accepted": false,
+            "error": "wrong_stage.json (stage_id mismatch)"
+          },
+          {
+            "case": "wrong_commit",
+            "accepted": false,
+            "error": "wrong_commit.json (target_commit mismatch)"
+          },
+          {
+            "case": "wrong_environment",
+            "accepted": false,
+            "error": "wrong_environment.json (environment mismatch)"
+          },
+          {
+            "case": "wrong_policy_hash",
+            "accepted": false,
+            "error": "wrong_policy_hash.json (policy hash bindings mismatch)"
+          },
+          {
+            "case": "expired",
+            "accepted": false,
+            "error": "expired.json (approval is not currently valid)"
+          },
+          {
+            "case": "future_issued",
+            "accepted": false,
+            "error": "future_issued.json (approval is not currently valid)"
+          },
+          {
+            "case": "replay_nonce",
+            "accepted": false,
+            "error": "replay_nonce.json (nonce missing or already consumed)"
+          },
+          {
+            "case": "tampered_after_signing",
+            "accepted": false,
+            "error": "Missing required signing keys: ['k1']"
+          }
+        ],
+        "all_expected": true
+      }
+    },
+    {
+      "command": "python3 /mnt/data/azpr_review_work/adversarial_tests.py",
+      "outcome": "FAIL_SECURITY",
+      "details": {
+        "generated_at": "2026-07-24T23:12:50.411345+00:00",
+        "results": [
+          {
+            "test": "nonce_anchor_failure_cross_store_atomicity",
+            "outcome": "VULNERABLE",
+            "details": {
+              "consume_error": "SecurityError: External journal anchor publish failed.",
+              "database_rows": 0,
+              "journal_records": 1,
+              "subsequent_read": "SecurityError: Nonce database and signed journal disagree."
+            },
+            "command": "python adversarial_tests.py::nonce_anchor_failure_cross_store_atomicity"
+          },
+          {
+            "test": "controller_caller_selected_git_binary",
+            "outcome": "VULNERABLE",
+            "details": {
+              "marker_invocations": 2,
+              "error": null
+            },
+            "command": "AZPR_TRUSTED_GIT=<attacker executable>; secure_runtime.secure_git_run(...)"
+          },
+          {
+            "test": "validation_caller_selected_writable_git_binary",
+            "outcome": "VULNERABLE",
+            "details": {
+              "binary_mode": "0o777",
+              "marker_invocations": 1,
+              "error": null
+            },
+            "command": "AZPR_TRUSTED_GIT=<world-writable executable>; validator._git_paths(...)"
+          },
+          {
+            "test": "validation_snapshot_pathname_toctou",
+            "outcome": "VULNERABLE",
+            "details": {
+              "race_hook_fired": true,
+              "snapshot_content": "SECRET_TOKEN=leaked",
+              "error": null
+            },
+            "command": "replace tracked inode between lstat() and shutil.copyfile()"
+          },
+          {
+            "test": "evidence_nonce_not_cryptographically_bound",
+            "outcome": "VULNERABLE",
+            "details": {
+              "evidence_contains_nonce": false,
+              "accepted_envelope": {
+                "evidence_id": "evidence-unbound",
+                "content_sha256": "f06b2ca035ab10c22b01038be8e4d8b659d016e21f888bb56f078f527bc02d56",
+                "overall_status": "APPLY_COMPLETE",
+                "target": {
+                  "account_id": "a",
+                  "project_id": "p",
+                  "region": "r",
+                  "resources": [
+                    "x"
+                  ]
+                },
+                "completed_at": "2026-07-24T23:12:49.297161+00:00",
+                "adapter_statuses": [
+                  {
+                    "adapter": "mock",
+                    "operation": "noop",
+                    "status": "APPLIED"
+                  }
+                ],
+                "registry_sequence": 1
+              },
+              "error": null
+            },
+            "command": "EvidenceRegistry.ingest(expected nonce only present in generic registered set)"
+          },
+          {
+            "test": "capability_nonce_registration_path",
+            "outcome": "VULNERABLE",
+            "details": {
+              "source_occurrences": 2,
+              "lines": [
+                "\"registered_capability_nonces\": [],",
+                "registered = set(state.get(\"registered_capability_nonces\", []))"
+              ]
+            },
+            "command": "rg -n registered_capability_nonces trusted-controller/controller.py"
+          },
+          {
+            "test": "controller_child_output_limit",
+            "outcome": "VULNERABLE",
+            "details": {
+              "requested_bytes": 25165824,
+              "captured_bytes": 25165824,
+              "elapsed_seconds": 0.568,
+              "error": null
+            },
+            "command": "controller.run_process(child writes 24 MiB stdout)"
+          },
+          {
+            "test": "example_config_trusted_runner_hash",
+            "outcome": "VULNERABLE",
+            "details": {
+              "configured": "7db06187fe709326b214e0b9d9bce6449b7525b0a37a7a1ca87ed07e76fda9ad",
+              "actual": "156cebac1aab799ba964a678900b12839d62ef7de6fcca179140520c13380c69"
+            },
+            "command": "sha256sum trusted-validation-runner/trusted_validation_runner.py; inspect controller.config.refined.example.json"
+          },
+          {
+            "test": "keygen_public_output_symlink",
+            "outcome": "VULNERABLE",
+            "details": {
+              "returncode": 0,
+              "victim_overwritten": true,
+              "stderr": ""
+            },
+            "command": "generate_ed25519_keypair.py --public-key <symlink>"
+          },
+          {
+            "test": "evidence_keyring_policy_identity_binding",
+            "outcome": "VULNERABLE",
+            "details": {
+              "identity_function_excerpt": "def repository_policy_identity(root: Path, roadmap: dict[str, Any], config: dict[str, Any]) -> dict[str, str]:\n    repository_id = config.get(\"repository_id\")\n    if not isinstance(repository_id, str) or len(repository_id) < 8:\n        raise ControllerError(\"controller.config repository_id is required and must be stable.\")\n    return {\n        \"repository_id\": repository_id,\n        \"base_branch\": str(config.get(\"base_branch\", roadmap.get(\"base_branch\", \"main\"))),\n        \"roadmap_sha256\": sha256_file(paths(root)[\"roadmap\"]),\n        \"prompt_catalog_sha256\": prompt_catalog_sha256(root),\n        \"master_prompt_sha256\": sha256_file(configured_master_prompt(root, config)),\n        \"controller_sha256\": sha256_file(Path(__file__).resolve()),\n        \"secure_runtime_sha256\": sha256_file(Path(sr.__file__).resolve()),\n        \"evidence_registry_sha256\": sha256_file(Path(er.__file__).resolve()),\n    }\n"
+            },
+            "command": "inspect repository_policy_identity()"
+          }
+        ]
+      }
+    },
+    {
+      "command": "safe zipfile metadata inspection and member-by-member extraction",
+      "outcome": "PASS",
+      "details": "No absolute paths, traversal, symlinks, devices, FIFOs or sockets in top-level archives."
+    }
+  ],
+  "candidate_inventory": [
+    {
+      "path": "APPLY-DRAFT-IMPLEMENTATION-BUNDLE.md",
+      "size_bytes": 2379,
+      "sha256": "857eff52b117b3fc08936de2bc4e25c55110e83b8e0327d7bc42ecbd2c43f10b"
+    },
+    {
+      "path": "CONFIDENCE-ASSESSMENT.md",
+      "size_bytes": 1802,
+      "sha256": "7e61b269ada0bf9b4fdba5d32a852fc92cb8a8c62ef7b96bb38ec43221282117"
+    },
+    {
+      "path": "EXTERNAL-CAPABILITY-RUNNER-OPERATIONS.md",
+      "size_bytes": 1979,
+      "sha256": "ce233eca347ee2f38cb12a242eef263f70e387164aa947f194cb6fc752d3d42a"
+    },
+    {
+      "path": "FINAL-VERIFICATION.json",
+      "size_bytes": 2901,
+      "sha256": "0b6df80c83e7d0ff3ce2e206c9f497efbdc67ea51a25e97486640d75d7b22c2b"
+    },
+    {
+      "path": "IMPLEMENTATION-DRAFT-REPORT.md",
+      "size_bytes": 5104,
+      "sha256": "4869dca28214e8fad0fbea1b25889cc28f59a6f08ea245134e0e52e9a302cdac"
+    },
+    {
+      "path": "LINGERING-CONCERNS.md",
+      "size_bytes": 2709,
+      "sha256": "cc5d9a7b0aa6b6c430599daad236a851ed4e6860ada4714a8d093b6f1b38f901"
+    },
+    {
+      "path": "MAJOR-CHANGES.md",
+      "size_bytes": 2225,
+      "sha256": "1dd6589c0c4e966c809df9ddf9ea0ef7bb5cfd771b4711fa7f0a7f9ca28623b7"
+    },
+    {
+      "path": "PACK-SIGNING-INSTRUCTIONS.md",
+      "size_bytes": 677,
+      "sha256": "5a851f99acac60c4ae9de8b363118493133e76945e432f7cd3c64c718c6cd013"
+    },
+    {
+      "path": "PROMOTION-GATES.md",
+      "size_bytes": 3469,
+      "sha256": "96e167872664711c6307bdf4ef008754015590def712d691f6d982e04e2015fe"
+    },
+    {
+      "path": "PUBLIC-KEYRING.template.json",
+      "size_bytes": 720,
+      "sha256": "53fd1932e7550103fb9cd3394f051e74a9306d83cb165419175cdf6ade63b6f2"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 2123,
+      "sha256": "8890704f16e593d4e682e903a5a0a780161833e04cd50703d3dcb0ed3b1314b9"
+    },
+    {
+      "path": "REMEDIATION-STATUS.json",
+      "size_bytes": 1757,
+      "sha256": "e46a10c88e46a5ef0fb01b817299164095af6f877fc4c302bae680619e645e92"
+    },
+    {
+      "path": "ROADMAP-REGENERATION-PROMPT.md",
+      "size_bytes": 3372,
+      "sha256": "ff4b5569c688a5f3c4b379b6484b81b81cce7d9d3befc248dcf87531e243445c"
+    },
+    {
+      "path": "SECURITY-CONTROL-TRACEABILITY.md",
+      "size_bytes": 5939,
+      "sha256": "6978b169cc3f43ebf31917d442bc61801ca1ccda2bd8d11f994023d116ee6f9e"
+    },
+    {
+      "path": "SECURITY-DECISIONS.md",
+      "size_bytes": 5766,
+      "sha256": "4057fb63fb7a7f5defe943b75d584018d545cd10aae88acca9c7b20170db62dd"
+    },
+    {
+      "path": "SHA256SUMS.json",
+      "size_bytes": 15670,
+      "sha256": "bf037317bb65f62cc85093be0ff428a87501d149eb57ba8079afdfadeb819c9b"
+    },
+    {
+      "path": "TRUST-BOUNDARY.md",
+      "size_bytes": 2250,
+      "sha256": "f27d3e0d2543e463f9768c23eb3667d4d3df1eeddd0cd4f7d9015e2dcd8bff1a"
+    },
+    {
+      "path": "VERIFY-DRAFT-PACK.py",
+      "size_bytes": 3656,
+      "sha256": "6e8f82099bf8616350efd87add5f375091b077c68f5656bf11444016aa3df426"
+    },
+    {
+      "path": "assessment-inputs/final-assessment/AZPR-security-remediation-refined-final-assessment.md",
+      "size_bytes": 19936,
+      "sha256": "6be88d3db597a3f58dd280850b4154c71789d31e253dc0742e7d51059f7959be"
+    },
+    {
+      "path": "assessment-inputs/final-assessment/AZPR-security-remediation-refined-final-scorecard.json",
+      "size_bytes": 37120,
+      "sha256": "5d5e51acacc990509256de69eb69d7edc82958702f16e954f7eeffdd691b7290"
+    },
+    {
+      "path": "assessment-inputs/final-assessment/AZPR-security-remediation-refined-priority-fixes.md",
+      "size_bytes": 6731,
+      "sha256": "8533cf4d02b4687f0bc94d3eaab7b3a9753648f3b3b86f8f9793ed8af7726790"
+    },
+    {
+      "path": "assessment-inputs/final-assessment/AZPR-security-remediation-refined-verification-summary.json",
+      "size_bytes": 2136,
+      "sha256": "969b76335e69473f078c066aa465b015f019ee08b8a558d5458916be0d87f2cd"
+    },
+    {
+      "path": "assessment-inputs/priority-fix-plan.md",
+      "size_bytes": 3008,
+      "sha256": "d9a9a1d3e353ca482db43dc7171fd24b05c1baa4a2d2f78a9e0133c6f06e6a6e"
+    },
+    {
+      "path": "assessment-inputs/reassessment-scorecard.json",
+      "size_bytes": 44324,
+      "sha256": "3bf03433663b28dafc868ec0953a75b3b54b14b0dc3172247640c436257e7cb0"
+    },
+    {
+      "path": "assessment-inputs/reassessment.md",
+      "size_bytes": 30406,
+      "sha256": "b07ee2bd7f5679182348aed0400a0576caa4160746f30f16c6374d45f777992c"
+    },
+    {
+      "path": "external-capability-runner/capability_runner.py",
+      "size_bytes": 23375,
+      "sha256": "b27959ed07fcfefcf771d70569c0462ef2b05a94252fff1c2e41b3111884df32"
+    },
+    {
+      "path": "external-capability-runner/config.example.json",
+      "size_bytes": 630,
+      "sha256": "70efb017e841452a32627f908b3c95cb9bf824e04222835004f5957d793ae421"
+    },
+    {
+      "path": "external-capability-runner/installation-manifest.example.json",
+      "size_bytes": 845,
+      "sha256": "7545e1d32b3b44b3f76c60d93249ec66a085fce49106d7ec780d52140196ba9f"
+    },
+    {
+      "path": "external-capability-runner/installed_launcher.py",
+      "size_bytes": 1338,
+      "sha256": "904a29ba3417ca9d6f413aa6c130a42dba7878e111ff6683759394edbad3017d"
+    },
+    {
+      "path": "external-capability-runner/secure_runtime.py",
+      "size_bytes": 45535,
+      "sha256": "21f0871ecd52193822a5566a973990bf57855244d65a61c376c0e3a8536d4ebd"
+    },
+    {
+      "path": "markdown-prompts-final-draft.zip",
+      "size_bytes": 151816,
+      "sha256": "29e3f2be037aad718d716b32bf03d5e4d1192ab90b06e0f96421332d1b0ade6a"
+    },
+    {
+      "path": "operator-tools/file_anchor_reference.py",
+      "size_bytes": 994,
+      "sha256": "0b6825b3785ce64bc482a054c4c11b14542d3e0008fc4c2fa98e90db740c009a"
+    },
+    {
+      "path": "operator-tools/generate_ed25519_keypair.py",
+      "size_bytes": 1074,
+      "sha256": "a6caa1c1e5faf005f064659b432bdef1ad75d5887d5185d033e915cb3776f8f9"
+    },
+    {
+      "path": "operator-tools/sign_json_ed25519.py",
+      "size_bytes": 6289,
+      "sha256": "039a4cd6de6e9811ea71de31ff89921b039d70f869efda8b09003aa16cde580f"
+    },
+    {
+      "path": "repository-overlay/AGENTS.md",
+      "size_bytes": 9122,
+      "sha256": "190e26d7d20eb5cbf18cf3e862fb600c1337c236e7fbb89c53c08e1ab73886d1"
+    },
+    {
+      "path": "repository-overlay/automation/appendices/appendix-a-audit-correction-prompt.md",
+      "size_bytes": 3339,
+      "sha256": "d06425a0de4be32a5d29b1916d86f8442de636105a502c05c9c64df0906e592c"
+    },
+    {
+      "path": "repository-overlay/automation/appendices/appendix-b-optional-controlled-sms-canary-enablement-prompt.md",
+      "size_bytes": 2232,
+      "sha256": "180f2202301bff00627ee3493b411a18a2fff94884b62d814590c2e4f76f830d"
+    },
+    {
+      "path": "repository-overlay/automation/appendices/appendix-c-optional-controlled-sms-canary-activation-audit.md",
+      "size_bytes": 2732,
+      "sha256": "55f3552db5ae9105addd7149264f698d3fc5c53cb0e5428f1bedf37f5800ec92"
+    },
+    {
+      "path": "repository-overlay/automation/controller.config.refined.example.json",
+      "size_bytes": 2852,
+      "sha256": "91b0ac78e937c9c98357502bf9f73a507e3fa74bd6220bf91426bbd9247e7752"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/001-close-the-post-core-traceability-release-gate.md",
+      "size_bytes": 10389,
+      "sha256": "d8594893a0d780d1e6b7c24310da1d59ea0b28ccae126aa82bc3c122ee558bec"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/002-post-core-traceability-corrective-audit.md",
+      "size_bytes": 5911,
+      "sha256": "eca79f169f1fc2510289a95fef0ffc99fd640183c1f6397af65ecd2c16164966"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/003-define-and-govern-the-narrow-pilot-scope.md",
+      "size_bytes": 10534,
+      "sha256": "150db831ce9683c32c30febafcd3635c191dd84c222d7ca0528dc348d1a33e9d"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/004-select-and-govern-the-production-application-stack.md",
+      "size_bytes": 10579,
+      "sha256": "21ea0aa1ede17ffcaa3e25a79564fd08cd9f3d61d129f1a8c46f50ff76fbad61"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/005-bootstrap-the-production-application-shell-and-engineering-baseline.md",
+      "size_bytes": 9003,
+      "sha256": "29a60ccb3b6b8418f154a981e0ef7695cacf154147250f0883d32a2c06cc273a"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/006-mvp-scope-and-architecture-decision-audit.md",
+      "size_bytes": 6014,
+      "sha256": "b42f75dc3204bd7f514eeea59aa5b0422e52552de817b821e289510d19039e70"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/007-design-and-implement-the-durable-database-schema-and-migrations.md",
+      "size_bytes": 9618,
+      "sha256": "d0fb70cab887c986560e3ca6aedd44574eb69a0b912666b03f6262133487ac0a"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/008-implement-durable-repositories-and-transaction-boundaries.md",
+      "size_bytes": 9077,
+      "sha256": "047cb07632e03b33ec9593d8c866681590655a5dcb1d8f164fc99d161bfc3a00"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/009-implement-immutable-artifact-storage-outbox-workers-and-crash-recovery.md",
+      "size_bytes": 9064,
+      "sha256": "d0bd03555df577df1d0424db5c8ff882a6cb7b4b7ab926717dc9e64edb033275"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/010-durable-platform-and-persistence-audit.md",
+      "size_bytes": 5928,
+      "sha256": "e8e8ca59eb9abf3c1c1271ebd312d56905550630e1d5df95bf23d6eceeecad52"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/011-implement-authentication-session-security-and-accesscontext-construction.md",
+      "size_bytes": 9125,
+      "sha256": "95746a2b094178f6e17686e3c730430030ba00bcad73a8852d1bc7b46d01ec0e"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/012-implement-customer-account-lifecycle-versioned-configuration-and-onboarding-api.md",
+      "size_bytes": 9237,
+      "sha256": "fee091816399e8ddf53cb5133940fd3ec94eb008daa2001ee11279323bbf9861"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/013-identity-authorization-and-customer-isolation-audit.md",
+      "size_bytes": 5800,
+      "sha256": "b315c2b0b1a7751aa8d8bfc6927c24858f911f0c39cf1f0e0a6f0ba4184b08a8"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/014-select-and-approve-the-first-tucson-or-pima-county-production-source.md",
+      "size_bytes": 9162,
+      "sha256": "db2c27a1b04a3708478696340bf3b5b0362997fbae116c2257ed9dea94a91e3a"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/015-implement-durable-scheduled-acquisition-and-the-approved-live-connector.md",
+      "size_bytes": 8955,
+      "sha256": "31231446755b1a1b5ee9eb24c6ac444605b0690b7c3b76a5378801d245af7591"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/016-implement-the-production-source-parser-replay-and-backfill-contract.md",
+      "size_bytes": 8905,
+      "sha256": "96853f0ea1d48048fd0da7dc0c4943f87d0916fd9984d49acc1e2425a77041c0"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/017-implement-required-production-geography-and-address-resolution.md",
+      "size_bytes": 9418,
+      "sha256": "8dc3926808115feee315414e1bf74f9a4ec6b9f04884b622e8945e3498478ba1"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/018-pilot-source-ingestion-normalization-and-geography-audit.md",
+      "size_bytes": 6029,
+      "sha256": "49536c41bf3186bfa4e70e7df1441e8efb59af8e4749ab8a6b8660c1fadaf635"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/019-implement-the-authorized-customer-api-and-query-projections.md",
+      "size_bytes": 9270,
+      "sha256": "1b9db35ea9a2328baa6c6875ea66cae681690c5f896c74b4835298cb34ad2d7b"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/020-build-the-authenticated-frontend-foundation-and-onboarding-experience.md",
+      "size_bytes": 9066,
+      "sha256": "cdf66abbc63740f7062194ae18baf9836553e4c6d9dd0be04f7249098a423ec8"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/021-build-the-explainable-opportunity-dashboard-and-lead-workflow.md",
+      "size_bytes": 9104,
+      "sha256": "4a3695977355009f8383ecbc1b024363b9afeb8e6ef31c8caa3e3bd8f2152207"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/022-customer-api-frontend-and-data-exposure-audit.md",
+      "size_bytes": 5946,
+      "sha256": "db4ddd373270ba67dc17737e35ed2c6d122a32ce4b87216320461fdc77dfa199"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/023-implement-email-notification-orchestration-and-delivery.md",
+      "size_bytes": 9604,
+      "sha256": "4d91df0a5e20731a3c7d2b31b28b96f282c02d07e90ec6ff0de6ab219dc43bf5"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/024-email-delivery-audit.md",
+      "size_bytes": 6239,
+      "sha256": "9d3cb8a6059dd6fc96b0c2ab6b2e93f4b37929b9f8d735174b50851b25d1e97f"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/025-implement-controlled-sms-infrastructure-behind-a-disabled-feature-flag.md",
+      "size_bytes": 9316,
+      "sha256": "2a5d366104815c0eaa41710f7ebd52fb38b61df2da1bcdee62d95c6dd75fbce8"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/026-build-internal-review-and-source-operations-tooling.md",
+      "size_bytes": 9165,
+      "sha256": "6a09e0dc3ead6a9581e6f317cc47b72de8a60bb2159a658cd8ce245668ff40cf"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/027-notification-sms-and-operations-audit.md",
+      "size_bytes": 5993,
+      "sha256": "19c387d50bf020fedee7d5be7b000494391caefc4683678c536b00d36ecdf1ec"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/028-implement-the-privacy-conscious-analytics-event-model.md",
+      "size_bytes": 9162,
+      "sha256": "895536ac620ed56be0ae0a0899641b17eb15fbc2e2c0888d2cf7968444e5e82e"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/029-implement-observability-health-alerting-and-operational-runbooks.md",
+      "size_bytes": 8740,
+      "sha256": "8fde5fb2512dc57fadd5f3c43df0020871a6b6befeba3aa12580c31a9a70b8c3"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/030-implement-backup-restore-reconciliation-and-rollback-procedures.md",
+      "size_bytes": 8808,
+      "sha256": "dd93323069eaa83a7e6a158c5b00b94b191071c373d7e05c53ea82797a66a663"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/031-security-privacy-performance-and-recovery-hardening-audit.md",
+      "size_bytes": 4348,
+      "sha256": "28a3f062d174f3765ec7aba73d28db1210702822605cf088ec43a05dc044744a"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/032-formal-pilot-release-test-matrix-and-release-gate-audit.md",
+      "size_bytes": 6536,
+      "sha256": "2f079609caf1b0ecb56dd77f76869f83d02ebe4d086e05e16d8acc98f95e10b1"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/033-prepare-controlled-staging-deployment-plan.md",
+      "size_bytes": 8864,
+      "sha256": "62c971640a497660e5e75aacd519556f58f79401ab5e526f0653005f331ee4ab"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/034-final-staging-and-pilot-readiness-audit.md",
+      "size_bytes": 6581,
+      "sha256": "27a195580a6c9a79ccf7778f0f91faed5542220b2cacb01b4240b41460504a12"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/035-prepare-controlled-production-pilot-release-plan.md",
+      "size_bytes": 8841,
+      "sha256": "af17cb245210c6250a8a202993e33e15bbe452bf3e194f172b19d54ce5a9fd66"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/036-production-pilot-launch-verification-audit.md",
+      "size_bytes": 6815,
+      "sha256": "fc1c80f7a0570b7aa1e6ac602c2440894501017b7743be6b94ae06124bf2281e"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/037-implement-pilot-feedback-and-business-validation-workflow.md",
+      "size_bytes": 9152,
+      "sha256": "e8959d40f023d37b568afb93792119314f62221e07424b4d3707adcafbc851e8"
+    },
+    {
+      "path": "repository-overlay/automation/numbered/038-pilot-feedback-and-business-validation-audit.md",
+      "size_bytes": 7739,
+      "sha256": "d8c416f7bd450f7827a3f1e88322ff3f62d640ab7e82bda90ee3d3739e96767d"
+    },
+    {
+      "path": "repository-overlay/automation/policy/AZPR-master-operating-prompt.md",
+      "size_bytes": 6583,
+      "sha256": "10aaf22124dce00936f5ac849b4d4f50226dea3afaba11bb44e0a63b7a50700f"
+    },
+    {
+      "path": "repository-overlay/automation/schemas/adapter-request.schema.json",
+      "size_bytes": 696,
+      "sha256": "16748ea14bd215bd9fcaf25aaad8d13ad43f07d5385cd78802ec6e0a355095e1"
+    },
+    {
+      "path": "repository-overlay/automation/schemas/adapter-response.schema.json",
+      "size_bytes": 588,
+      "sha256": "fecfe142b8437c7265e3d761e4a1f97acb32cac6fe51d0ca9f588d35c8d61ebd"
+    },
+    {
+      "path": "repository-overlay/automation/schemas/appendix-a-authorization.schema.json",
+      "size_bytes": 2053,
+      "sha256": "9d23033a8fb57228ed1696bd1e4621abbd0cfa65c7451389b2c5e3d5974e7c64"
+    },
+    {
+      "path": "repository-overlay/automation/schemas/approval.schema.json",
+      "size_bytes": 12092,
+      "sha256": "92852c1713585825158545de28240de1457959393db34a42e3f0685f1c64d8bf"
+    },
+    {
+      "path": "repository-overlay/automation/schemas/capability-manifest.schema.json",
+      "size_bytes": 2809,
+      "sha256": "0d3db162f423730ca4de610b557cc446feab3e18a7f9eb57716b1a7bd206009a"
+    },
+    {
+      "path": "repository-overlay/automation/schemas/deployment-plan.schema.json",
+      "size_bytes": 1665,
+      "sha256": "c956dd87a1db63ddb0ecb163619007a55bbe3d4c04bdcb4b7e09b7fd84d86f78"
+    },
+    {
+      "path": "repository-overlay/automation/schemas/evidence.schema.json",
+      "size_bytes": 2768,
+      "sha256": "3c297c5d247fda97cbf0fd860f47ad71e8a975ff061b618819696272cc0937a2"
+    },
+    {
+      "path": "repository-overlay/automation/schemas/external-runner-config.schema.json",
+      "size_bytes": 1165,
+      "sha256": "44fa26edb7bbd2c1109154e0f9cc40a310cd6c7eb4f237d7fc7b14f42f5e90d3"
+    },
+    {
+      "path": "repository-overlay/automation/schemas/external-runner-installation.schema.json",
+      "size_bytes": 921,
+      "sha256": "1b3255dd76c5da695f946f4ef0385459dec6863637f6b4ef4f2417e4e0856976"
+    },
+    {
+      "path": "repository-overlay/automation/schemas/journal-record.schema.json",
+      "size_bytes": 738,
+      "sha256": "c92ca73bc00ac2101d64cc9b054ae4f123f7cd9d7d3942f7c60ac9037b6db295"
+    },
+    {
+      "path": "repository-overlay/automation/schemas/public-keyring.schema.json",
+      "size_bytes": 840,
+      "sha256": "bd358c6e6531e05f9c1100ba579972a6a5c374cb9505aa1beef3f1a8989f8006"
+    },
+    {
+      "path": "repository-overlay/automation/schemas/result.schema.json",
+      "size_bytes": 8756,
+      "sha256": "3faf9b833b190e3d145577dcba2b3c6a8215696a78131b4959743ed441753e48"
+    },
+    {
+      "path": "repository-overlay/automation/schemas/roadmap.schema.json",
+      "size_bytes": 26213,
+      "sha256": "10007f18f5c5db15d32b6ca5751c5d3562a3ad6a826b11e77ccb2857d0e27555"
+    },
+    {
+      "path": "repository-overlay/automation/schemas/run-manifest.schema.json",
+      "size_bytes": 3819,
+      "sha256": "ef39511348a5d46f3e67da083069ee6e54c9cd1373c5c3fe0db3dca92d38ca9e"
+    },
+    {
+      "path": "repository-overlay/automation/schemas/target-attestation.schema.json",
+      "size_bytes": 1120,
+      "sha256": "ff52870335591165c11421e64d004d612bcea70202f24d3bb7b0a4f38a9476e8"
+    },
+    {
+      "path": "repository-overlay/automation/schemas/validation-profile.schema.json",
+      "size_bytes": 1885,
+      "sha256": "eea03c99813715869f2cd610ad14c0a71905577f8aa9c00bc7ac35b527688a54"
+    },
+    {
+      "path": "repository-overlay/automation/validation-profiles/backend-core.json",
+      "size_bytes": 1131,
+      "sha256": "7a11655e5b72f1cd8110e3e6b492c46836bc868233448739d6074c6abb73e881"
+    },
+    {
+      "path": "repository-overlay/automation/validation-profiles/frontend.json",
+      "size_bytes": 2115,
+      "sha256": "7e5ce320b63c0beb261cc6b11ffdca567e2c6440a923d1ae6be2127628709a68"
+    },
+    {
+      "path": "repository-overlay/automation/validation-profiles/infrastructure-plan.json",
+      "size_bytes": 1380,
+      "sha256": "84ddb6f554df1768928e3de25f1a25f443bc308f9017cd0b2ea8cfc28f398ddd"
+    },
+    {
+      "path": "repository-overlay/automation/validation-profiles/migration-persistence.json",
+      "size_bytes": 1508,
+      "sha256": "1a6d066b2d7ef4bc70131ddb58ffbd73acb9eabb6ba38a30c19f9836ce26c310"
+    },
+    {
+      "path": "repository-overlay/automation/validation-profiles/recovery.json",
+      "size_bytes": 1320,
+      "sha256": "eb285dafba9655365a92adbf42224e11d4a380d55162153a405f6d53a28b9ba0"
+    },
+    {
+      "path": "repository-overlay/automation/validation-profiles/release-evidence.json",
+      "size_bytes": 1046,
+      "sha256": "7522d7f72be72e32976da6f8ff22bdb4f8f5a635d79e65d56f02096351936dc6"
+    },
+    {
+      "path": "repository-overlay/automation/validation-profiles/security-privacy.json",
+      "size_bytes": 1433,
+      "sha256": "d35958143c37a46f79c9e6b71704e1f68e947ee7b1054659673028170271515e"
+    },
+    {
+      "path": "requirements-security.lock",
+      "size_bytes": 236,
+      "sha256": "08229f31b1d0c29d57523f6cbe342309dcb89f5059b6be0025a7b67eb87450f0"
+    },
+    {
+      "path": "tests/test_final_assessment_controls.py",
+      "size_bytes": 21236,
+      "sha256": "b0837cacf9878ce48c30b792a782e65edfb9e0408cff491cdcf19f2ebc60089b"
+    },
+    {
+      "path": "tests/test_refined_security.py",
+      "size_bytes": 15601,
+      "sha256": "b92c9c9214069107ad7bb3749d686f79b422d0c3560cbd236485c988696afb8a"
+    },
+    {
+      "path": "tests/test_validation_runner.py",
+      "size_bytes": 3311,
+      "sha256": "1119f4df7988814718800b366e03cf3f25f062107cc77df734b4aec3ee5a7933"
+    },
+    {
+      "path": "trusted-controller/controller.py",
+      "size_bytes": 126056,
+      "sha256": "a6c6f97a80676eb9346508451e4505c2e25edb830d14f3343e4c12e108824356"
+    },
+    {
+      "path": "trusted-controller/evidence_registry.py",
+      "size_bytes": 7302,
+      "sha256": "aad1691ea3da463d7c7aee187ef4b6d6cef0397b2262c42fbeb17bd7ed1a1f1e"
+    },
+    {
+      "path": "trusted-controller/secure_runtime.py",
+      "size_bytes": 45535,
+      "sha256": "21f0871ecd52193822a5566a973990bf57855244d65a61c376c0e3a8536d4ebd"
+    },
+    {
+      "path": "trusted-validation-runner/trusted_validation_runner.py",
+      "size_bytes": 16444,
+      "sha256": "156cebac1aab799ba964a678900b12839d62ef7de6fcca179140520c13380c69"
+    }
+  ],
+  "files_reviewed": [
+    "APPLY-DRAFT-IMPLEMENTATION-BUNDLE.md",
+    "CONFIDENCE-ASSESSMENT.md",
+    "EXTERNAL-CAPABILITY-RUNNER-OPERATIONS.md",
+    "FINAL-VERIFICATION.json",
+    "IMPLEMENTATION-DRAFT-REPORT.md",
+    "LINGERING-CONCERNS.md",
+    "MAJOR-CHANGES.md",
+    "PACK-SIGNING-INSTRUCTIONS.md",
+    "PROMOTION-GATES.md",
+    "PUBLIC-KEYRING.template.json",
+    "README.md",
+    "REMEDIATION-STATUS.json",
+    "ROADMAP-REGENERATION-PROMPT.md",
+    "SECURITY-CONTROL-TRACEABILITY.md",
+    "SECURITY-DECISIONS.md",
+    "SHA256SUMS.json",
+    "TRUST-BOUNDARY.md",
+    "VERIFY-DRAFT-PACK.py",
+    "assessment-inputs/final-assessment/AZPR-security-remediation-refined-final-assessment.md",
+    "assessment-inputs/final-assessment/AZPR-security-remediation-refined-final-scorecard.json",
+    "assessment-inputs/final-assessment/AZPR-security-remediation-refined-priority-fixes.md",
+    "assessment-inputs/final-assessment/AZPR-security-remediation-refined-verification-summary.json",
+    "assessment-inputs/priority-fix-plan.md",
+    "assessment-inputs/reassessment-scorecard.json",
+    "assessment-inputs/reassessment.md",
+    "external-capability-runner/capability_runner.py",
+    "external-capability-runner/config.example.json",
+    "external-capability-runner/installation-manifest.example.json",
+    "external-capability-runner/installed_launcher.py",
+    "external-capability-runner/secure_runtime.py",
+    "markdown-prompts-final-draft.zip",
+    "operator-tools/file_anchor_reference.py",
+    "operator-tools/generate_ed25519_keypair.py",
+    "operator-tools/sign_json_ed25519.py",
+    "repository-overlay/AGENTS.md",
+    "repository-overlay/automation/appendices/appendix-a-audit-correction-prompt.md",
+    "repository-overlay/automation/appendices/appendix-b-optional-controlled-sms-canary-enablement-prompt.md",
+    "repository-overlay/automation/appendices/appendix-c-optional-controlled-sms-canary-activation-audit.md",
+    "repository-overlay/automation/controller.config.refined.example.json",
+    "repository-overlay/automation/numbered/001-close-the-post-core-traceability-release-gate.md",
+    "repository-overlay/automation/numbered/002-post-core-traceability-corrective-audit.md",
+    "repository-overlay/automation/numbered/003-define-and-govern-the-narrow-pilot-scope.md",
+    "repository-overlay/automation/numbered/004-select-and-govern-the-production-application-stack.md",
+    "repository-overlay/automation/numbered/005-bootstrap-the-production-application-shell-and-engineering-baseline.md",
+    "repository-overlay/automation/numbered/006-mvp-scope-and-architecture-decision-audit.md",
+    "repository-overlay/automation/numbered/007-design-and-implement-the-durable-database-schema-and-migrations.md",
+    "repository-overlay/automation/numbered/008-implement-durable-repositories-and-transaction-boundaries.md",
+    "repository-overlay/automation/numbered/009-implement-immutable-artifact-storage-outbox-workers-and-crash-recovery.md",
+    "repository-overlay/automation/numbered/010-durable-platform-and-persistence-audit.md",
+    "repository-overlay/automation/numbered/011-implement-authentication-session-security-and-accesscontext-construction.md",
+    "repository-overlay/automation/numbered/012-implement-customer-account-lifecycle-versioned-configuration-and-onboarding-api.md",
+    "repository-overlay/automation/numbered/013-identity-authorization-and-customer-isolation-audit.md",
+    "repository-overlay/automation/numbered/014-select-and-approve-the-first-tucson-or-pima-county-production-source.md",
+    "repository-overlay/automation/numbered/015-implement-durable-scheduled-acquisition-and-the-approved-live-connector.md",
+    "repository-overlay/automation/numbered/016-implement-the-production-source-parser-replay-and-backfill-contract.md",
+    "repository-overlay/automation/numbered/017-implement-required-production-geography-and-address-resolution.md",
+    "repository-overlay/automation/numbered/018-pilot-source-ingestion-normalization-and-geography-audit.md",
+    "repository-overlay/automation/numbered/019-implement-the-authorized-customer-api-and-query-projections.md",
+    "repository-overlay/automation/numbered/020-build-the-authenticated-frontend-foundation-and-onboarding-experience.md",
+    "repository-overlay/automation/numbered/021-build-the-explainable-opportunity-dashboard-and-lead-workflow.md",
+    "repository-overlay/automation/numbered/022-customer-api-frontend-and-data-exposure-audit.md",
+    "repository-overlay/automation/numbered/023-implement-email-notification-orchestration-and-delivery.md",
+    "repository-overlay/automation/numbered/024-email-delivery-audit.md",
+    "repository-overlay/automation/numbered/025-implement-controlled-sms-infrastructure-behind-a-disabled-feature-flag.md",
+    "repository-overlay/automation/numbered/026-build-internal-review-and-source-operations-tooling.md",
+    "repository-overlay/automation/numbered/027-notification-sms-and-operations-audit.md",
+    "repository-overlay/automation/numbered/028-implement-the-privacy-conscious-analytics-event-model.md",
+    "repository-overlay/automation/numbered/029-implement-observability-health-alerting-and-operational-runbooks.md",
+    "repository-overlay/automation/numbered/030-implement-backup-restore-reconciliation-and-rollback-procedures.md",
+    "repository-overlay/automation/numbered/031-security-privacy-performance-and-recovery-hardening-audit.md",
+    "repository-overlay/automation/numbered/032-formal-pilot-release-test-matrix-and-release-gate-audit.md",
+    "repository-overlay/automation/numbered/033-prepare-controlled-staging-deployment-plan.md",
+    "repository-overlay/automation/numbered/034-final-staging-and-pilot-readiness-audit.md",
+    "repository-overlay/automation/numbered/035-prepare-controlled-production-pilot-release-plan.md",
+    "repository-overlay/automation/numbered/036-production-pilot-launch-verification-audit.md",
+    "repository-overlay/automation/numbered/037-implement-pilot-feedback-and-business-validation-workflow.md",
+    "repository-overlay/automation/numbered/038-pilot-feedback-and-business-validation-audit.md",
+    "repository-overlay/automation/policy/AZPR-master-operating-prompt.md",
+    "repository-overlay/automation/schemas/adapter-request.schema.json",
+    "repository-overlay/automation/schemas/adapter-response.schema.json",
+    "repository-overlay/automation/schemas/appendix-a-authorization.schema.json",
+    "repository-overlay/automation/schemas/approval.schema.json",
+    "repository-overlay/automation/schemas/capability-manifest.schema.json",
+    "repository-overlay/automation/schemas/deployment-plan.schema.json",
+    "repository-overlay/automation/schemas/evidence.schema.json",
+    "repository-overlay/automation/schemas/external-runner-config.schema.json",
+    "repository-overlay/automation/schemas/external-runner-installation.schema.json",
+    "repository-overlay/automation/schemas/journal-record.schema.json",
+    "repository-overlay/automation/schemas/public-keyring.schema.json",
+    "repository-overlay/automation/schemas/result.schema.json",
+    "repository-overlay/automation/schemas/roadmap.schema.json",
+    "repository-overlay/automation/schemas/run-manifest.schema.json",
+    "repository-overlay/automation/schemas/target-attestation.schema.json",
+    "repository-overlay/automation/schemas/validation-profile.schema.json",
+    "repository-overlay/automation/validation-profiles/backend-core.json",
+    "repository-overlay/automation/validation-profiles/frontend.json",
+    "repository-overlay/automation/validation-profiles/infrastructure-plan.json",
+    "repository-overlay/automation/validation-profiles/migration-persistence.json",
+    "repository-overlay/automation/validation-profiles/recovery.json",
+    "repository-overlay/automation/validation-profiles/release-evidence.json",
+    "repository-overlay/automation/validation-profiles/security-privacy.json",
+    "requirements-security.lock",
+    "tests/test_final_assessment_controls.py",
+    "tests/test_refined_security.py",
+    "tests/test_validation_runner.py",
+    "trusted-controller/controller.py",
+    "trusted-controller/evidence_registry.py",
+    "trusted-controller/secure_runtime.py",
+    "trusted-validation-runner/trusted_validation_runner.py",
+    "01_current_refined_baseline/AZ-Permit-Radar-Master-Operating-Prompt.docx",
+    "01_current_refined_baseline/AZPR-security-remediation-refined-pack.zip",
+    "01_current_refined_baseline/markdown-prompts-refined.zip",
+    "01_current_refined_baseline/roadmap.proposed.json",
+    "02_latest_security_findings/AZPR-security-remediation-refined-final-assessment.md",
+    "02_latest_security_findings/AZPR-security-remediation-refined-final-scorecard.json",
+    "02_latest_security_findings/AZPR-security-remediation-refined-priority-fixes.md",
+    "02_latest_security_findings/AZPR-security-remediation-refined-verification-summary.json",
+    "03_historical_traceability/AZPR-roadmap-security-consultation.md",
+    "03_historical_traceability/AZPR-roadmap-security-scorecard.json",
+    "03_historical_traceability/AZPR-security-remediation-priority-fix-plan.md",
+    "03_historical_traceability/AZPR-security-remediation-reassessment-scorecard.json",
+    "03_historical_traceability/AZPR-security-remediation-reassessment.md",
+    "CONTINUATION_PROMPT.md",
+    "PACKAGE_INVENTORY.json",
+    "START_HERE.md"
+  ],
+  "limitations": [
+    "No actual AZPR application repository or post-stage committed tree was supplied.",
+    "No finalized roadmap.json, production controller.config.json, real keyrings/keys, signed approvals, signed installation receipt, immutable validation image/engine artifacts or installed root-owned launchers were supplied.",
+    "No Docker/root-owned production installation, external provider account, cloud target, DNS, email/SMS provider, database or live staging/production environment was available.",
+    "Live apply, provider terms, customer-isolation behavior, migrations, backup/restore and real end-to-end application tests could not be executed.",
+    "Offline source review and temporary harnesses were kept outside the candidate source tree."
+  ],
+  "generated_outputs": [
+    "AZPR-finalized-security-assessment.md",
+    "AZPR-finalized-security-scorecard.json",
+    "AZPR-finalized-security-priority-fixes.md",
+    "AZPR-finalized-security-verification-summary.json"
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "$id": "https://azpr.local/schemas/probe-policy-v10.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "candidate_archive_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "challenge_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "format_version": {
+      "const": "1.1"
+    },
+    "host_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "maximum_envelope_age_seconds": {
+      "maximum": 1209600,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "policy_kind": {
+      "const": "AZPR_V10_1_PROBE_POLICY"
+    },
+    "policy_version": {
+      "maxLength": 64,
+      "minLength": 1,
+      "type": "string"
+    },
+    "probe_service_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "required_boundary": {
+      "additionalProperties": false,
+      "properties": {
+        "cgroup_v2": {
+          "const": true
+        },
+        "daemon_sockets": {
+          "const": false
+        },
+        "disposable": {
+          "const": true
+        },
+        "host_mounts": {
+          "const": false
+        },
+        "mount_namespace": {
+          "const": true
+        },
+        "network_mode": {
+          "enum": [
+            "DENY_ALL",
+            "ISOLATED_CONTROLLED_ENDPOINT_ONLY"
+          ]
+        },
+        "no_secrets": {
+          "const": true
+        },
+        "pid_namespace": {
+          "const": true
+        },
+        "rootless": {
+          "const": true
+        },
+        "run_as_gid": {
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "run_as_uid": {
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "rootless",
+        "no_secrets",
+        "host_mounts",
+        "daemon_sockets",
+        "pid_namespace",
+        "mount_namespace",
+        "cgroup_v2",
+        "disposable",
+        "run_as_uid",
+        "run_as_gid",
+        "network_mode"
+      ],
+      "type": "object"
+    },
+    "required_observations": {
+      "items": false,
+      "maxItems": 8,
+      "minItems": 8,
+      "prefixItems": [
+        {
+          "const": "secret_read_denied"
+        },
+        {
+          "const": "host_read_denied"
+        },
+        {
+          "const": "network_denied"
+        },
+        {
+          "const": "mount_denied"
+        },
+        {
+          "const": "daemon_access_denied"
+        },
+        {
+          "const": "escape_denied"
+        },
+        {
+          "const": "resource_exhaustion_contained"
+        },
+        {
+          "const": "evidence_mutation_denied"
+        }
+      ],
+      "type": "array",
+      "uniqueItems": true
+    },
+    "required_targets": {
+      "items": false,
+      "maxItems": 9,
+      "minItems": 9,
+      "prefixItems": [
+        {
+          "const": "git_binary"
+        },
+        {
+          "const": "python_binary"
+        },
+        {
+          "const": "codex_binary"
+        },
+        {
+          "const": "container_engine"
+        },
+        {
+          "const": "anchor_helper"
+        },
+        {
+          "const": "mount_binary"
+        },
+        {
+          "const": "umount_binary"
+        },
+        {
+          "const": "cleanroom_adapter"
+        },
+        {
+          "const": "qualification_verifier"
+        }
+      ],
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "format_version",
+    "policy_kind",
+    "policy_version",
+    "host_id",
+    "candidate_archive_sha256",
+    "challenge_sha256",
+    "probe_service_id",
+    "required_targets",
+    "required_boundary",
+    "required_observations",
+    "maximum_envelope_age_seconds"
+  ],
+  "type": "object"
+}

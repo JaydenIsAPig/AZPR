@@ -1,0 +1,71 @@
+{
+  "format_version": "2.0",
+  "resource_limits": {
+    "cpus": 2,
+    "memory_mb": 4096,
+    "pids": 256,
+    "tmpfs_mb": 1024,
+    "evidence_mb": 256,
+    "file_size_mb": 128
+  },
+  "profile_id": "security-privacy",
+  "risk_categories": [
+    "security",
+    "privacy",
+    "supply-chain",
+    "unit",
+    "integration",
+    "documentation"
+  ],
+  "commands": [
+    {
+      "name": "Security negative tests",
+      "category": "security",
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/security",
+        "-v"
+      ],
+      "timeout_seconds": 2400,
+      "evidence_files": [
+        "security-privacy/01-security.json"
+      ]
+    },
+    {
+      "name": "Dependency audit",
+      "category": "supply-chain",
+      "argv": [
+        "python3",
+        "-m",
+        "pip_audit",
+        "--require-hashes"
+      ],
+      "timeout_seconds": 1800,
+      "evidence_files": [
+        "security-privacy/02-supply-chain.json"
+      ]
+    },
+    {
+      "name": "Secret scan",
+      "category": "security",
+      "argv": [
+        "python3",
+        "scripts/check_secrets.py",
+        "--fail-closed"
+      ],
+      "timeout_seconds": 1200,
+      "evidence_files": [
+        "security-privacy/03-security.json"
+      ]
+    }
+  ],
+  "evidence_outputs": [
+    "security-privacy/summary.json",
+    "security-privacy/stdout.log",
+    "security-privacy/stderr.log"
+  ]
+}

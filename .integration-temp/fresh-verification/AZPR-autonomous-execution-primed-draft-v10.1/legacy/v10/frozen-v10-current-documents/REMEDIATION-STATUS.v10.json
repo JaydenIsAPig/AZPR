@@ -1,0 +1,23 @@
+{
+  "decision": {
+    "full_autonomous_pathway_viable": true,
+    "organization_release_signature_status": "NOT_PROVIDED_UNSIGNED_DEVELOPMENT_CANDIDATE",
+    "permitted_next_event": "INDEPENDENT_V10_SOURCE_REASSESSMENT_ONLY",
+    "pre_autonomous_staging": "FAIL",
+    "safe_for_unattended_execution_now": false,
+    "semi_autonomous_codex_staging_ready": false,
+    "trusted_pre_autonomous_installation_ready": false
+  },
+  "format_version": "1.0",
+  "generated_at": "2026-08-04T19:30:00Z",
+  "source_level_summary": {
+    "active_canonical_policy_present": false,
+    "independent_v9_defects_reproduced_before_patch": true,
+    "promoted_roadmap_present": false,
+    "prompt_archive_changed": false,
+    "release_blocking_tests_cataloged": 18,
+    "release_blocking_tests_precuration_passed": 18,
+    "v9_baseline_verified_and_frozen": true
+  },
+  "status": "READY_FOR_INDEPENDENT_V10_SOURCE_REASSESSMENT"
+}

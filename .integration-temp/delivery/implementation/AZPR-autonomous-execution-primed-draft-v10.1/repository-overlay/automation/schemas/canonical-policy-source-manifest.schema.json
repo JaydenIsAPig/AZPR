@@ -1,0 +1,219 @@
+{
+  "$id": "https://azpr.local/schemas/canonical-policy-source-manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "algorithm": {
+      "const": "AZPR_DOCX_SUPPORTED_OOXML_UNITS_V3"
+    },
+    "canonical_byte_length": {
+      "maximum": 33554432,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "canonical_policy_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "canonical_render_algorithm": {
+      "const": "AZPR_DOCX_SUPPORTED_OOXML_UTF8_V3"
+    },
+    "feature_inventory": {
+      "additionalProperties": false,
+      "properties": {
+        "breaks": {
+          "maximum": 1000000,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "package_member_count": {
+          "maximum": 10000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "paragraphs": {
+          "maximum": 10000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "rendered_break_count": {
+          "maximum": 1000000,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "rendered_tab_count": {
+          "maximum": 1000000,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "tabs": {
+          "maximum": 1000000,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "text_nodes": {
+          "maximum": 1000000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "unsupported_features": {
+          "items": {
+            "maxLength": 512,
+            "type": "string"
+          },
+          "maxItems": 1000,
+          "type": "array"
+        },
+        "unsupported_normative_parts": {
+          "items": {
+            "maxLength": 512,
+            "type": "string"
+          },
+          "maxItems": 1000,
+          "type": "array"
+        }
+      },
+      "required": [
+        "package_member_count",
+        "unsupported_features",
+        "unsupported_normative_parts",
+        "paragraphs",
+        "text_nodes",
+        "tabs",
+        "breaks",
+        "rendered_tab_count",
+        "rendered_break_count"
+      ],
+      "type": "object"
+    },
+    "format_version": {
+      "const": "3.0"
+    },
+    "source_document_name": {
+      "maxLength": 255,
+      "minLength": 1,
+      "type": "string"
+    },
+    "source_document_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "unit_chain_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "unit_count": {
+      "maximum": 10000,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "units": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "break_count": {
+            "maximum": 100000,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "canonical_end_byte": {
+            "maximum": 33554432,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "canonical_span_sha256": {
+            "maxLength": 64,
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "canonical_start_byte": {
+            "maximum": 33554432,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "canonical_text_end_byte": {
+            "maximum": 33554432,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "canonical_text_sha256": {
+            "maxLength": 64,
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "normalized_text_sha256": {
+            "maxLength": 64,
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "ordinal": {
+            "maximum": 10000,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "style": {
+            "maxLength": 200,
+            "type": "string"
+          },
+          "tab_count": {
+            "maximum": 100000,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "text_length_bytes": {
+            "maximum": 1048576,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "text_sha256": {
+            "maxLength": 64,
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "unit_id": {
+            "maxLength": 7,
+            "pattern": "^p[0-9]{6}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "unit_id",
+          "ordinal",
+          "style",
+          "text_sha256",
+          "normalized_text_sha256",
+          "text_length_bytes",
+          "tab_count",
+          "break_count",
+          "canonical_start_byte",
+          "canonical_text_end_byte",
+          "canonical_end_byte",
+          "canonical_text_sha256",
+          "canonical_span_sha256"
+        ],
+        "type": "object"
+      },
+      "maxItems": 10000,
+      "minItems": 1,
+      "type": "array"
+    }
+  },
+  "required": [
+    "format_version",
+    "algorithm",
+    "canonical_render_algorithm",
+    "source_document_name",
+    "source_document_sha256",
+    "canonical_policy_sha256",
+    "canonical_byte_length",
+    "unit_count",
+    "unit_chain_sha256",
+    "feature_inventory",
+    "units"
+  ],
+  "title": "AZPR Governing DOCX Supported-OOXML Exact Source Manifest",
+  "type": "object"
+}

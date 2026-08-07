@@ -1,0 +1,35 @@
+{
+  "boundary": {
+    "cgroup_v2": true,
+    "daemon_sockets": false,
+    "disposable": true,
+    "host_mounts": false,
+    "mount_namespace": true,
+    "network_mode": "DENY_ALL",
+    "no_secrets": true,
+    "pid_namespace": true,
+    "rootless": true,
+    "run_as_gid": 65534,
+    "run_as_uid": 65534
+  },
+  "completed_at": "2026-08-07T00:53:37.881159+00:00",
+  "envelope_kind": "AZPR_V9_NO_SECRET_PROBE_RESULT",
+  "exit_code": 0,
+  "format_version": "1.0",
+  "observations": {
+    "daemon_access_denied": true,
+    "escape_denied": true,
+    "evidence_mutation_denied": true,
+    "host_read_denied": true,
+    "mount_denied": true,
+    "network_denied": true,
+    "resource_exhaustion_contained": true,
+    "secret_read_denied": true
+  },
+  "probe_policy_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "signature": "b2sr/QgOZch9A7AjvbcjtCcQ2oxT26uLO4CdMiFSqkEF1YHdNpYnA89L8Jz6yijrszJIxiqUYPwiV7Q+qeSlAQ==",
+  "signer_key_id": "probe-key-0001",
+  "started_at": "2026-08-07T00:53:36.881159+00:00",
+  "target_role": "anchor_helper",
+  "target_sha256": "f4686e6ca43850c86d22a452643a25a583c7afbe992e497ca915b7c08d23ef61"
+}

@@ -1,0 +1,144 @@
+{
+  "$id": "https://azpr.local/schemas/qualification-trust-manifest-v10.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "candidate_archive_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "challenge_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "external_signer_identity_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "format_version": {
+      "const": "1.1"
+    },
+    "host_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "not_after": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "not_before": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "probe_attestor_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "probe_attestor_keyring_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "probe_attestor_revocation_state_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "probe_keyring_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "probe_policy_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "probe_revocation_state_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "probe_service_attestation_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "probe_service_executable_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "probe_service_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "probe_service_identity_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "qualification_receipt_signing_public_key_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "sequence": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "signature": {
+      "maxLength": 128,
+      "minLength": 80,
+      "pattern": "^[A-Za-z0-9+/=]+$",
+      "type": "string"
+    },
+    "signer_key_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "trust_manifest_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "trust_manifest_kind": {
+      "const": "AZPR_V10_1_QUALIFICATION_TRUST_ROOTS"
+    }
+  },
+  "required": [
+    "format_version",
+    "trust_manifest_kind",
+    "trust_manifest_id",
+    "sequence",
+    "issued_at",
+    "not_before",
+    "not_after",
+    "host_id",
+    "candidate_archive_sha256",
+    "challenge_sha256",
+    "probe_service_id",
+    "probe_attestor_id",
+    "probe_keyring_sha256",
+    "probe_policy_sha256",
+    "probe_service_identity_sha256",
+    "probe_service_attestation_sha256",
+    "probe_revocation_state_sha256",
+    "probe_attestor_keyring_sha256",
+    "probe_attestor_revocation_state_sha256",
+    "probe_service_executable_sha256",
+    "external_signer_identity_sha256",
+    "qualification_receipt_signing_public_key_sha256",
+    "signer_key_id",
+    "signature"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,779 @@
+{
+  "$id": "https://azpr.local/schemas/cleanroom-qualification-input.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "agent_gid": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "agent_uid": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "artifacts": {
+      "additionalProperties": false,
+      "properties": {
+        "agent_execution_profile": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "anchor_helper": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "approval_keyring": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "build_provenance": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "bundle_attestation": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "bundle_signing_public_key": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "bundle_zip": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "codex_binary": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "codex_isolation_qualification_report": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "container_engine": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "dedicated_host_policy": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "dependency_lock": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "dependency_mirror_attestation": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "dependency_mirror_inventory": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "dependency_mirror_public_key": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "evidence_keyring": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "evidence_private_key": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "evidence_public_key": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "git_binary": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "governing_policy_source": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "handoff_quota_profile": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "installation_signing_private_key": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "installation_signing_public_key": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "installer_fault_matrix_report": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "key_custody_qualification_report": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "key_lifecycle_state": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "phase_transition_keyring": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "python_binary": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "qualification_authorization_keyring": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "qualification_probe_envelopes_manifest": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "qualification_revocation_list": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "remote_anchor_qualification_report": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "requirements_input": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "runtime_private_key": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "runtime_public_key": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "sbom": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "supply_chain_rebuild_report": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "validation_dockerfile": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "validation_image_attestation": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "validation_registry_proof": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "agent_execution_profile",
+        "anchor_helper",
+        "approval_keyring",
+        "build_provenance",
+        "bundle_attestation",
+        "bundle_signing_public_key",
+        "bundle_zip",
+        "codex_binary",
+        "codex_isolation_qualification_report",
+        "container_engine",
+        "dedicated_host_policy",
+        "dependency_lock",
+        "dependency_mirror_attestation",
+        "dependency_mirror_inventory",
+        "dependency_mirror_public_key",
+        "evidence_keyring",
+        "evidence_private_key",
+        "evidence_public_key",
+        "git_binary",
+        "governing_policy_source",
+        "handoff_quota_profile",
+        "installation_signing_private_key",
+        "installation_signing_public_key",
+        "installer_fault_matrix_report",
+        "key_custody_qualification_report",
+        "key_lifecycle_state",
+        "phase_transition_keyring",
+        "python_binary",
+        "qualification_authorization_keyring",
+        "qualification_probe_envelopes_manifest",
+        "qualification_revocation_list",
+        "remote_anchor_qualification_report",
+        "requirements_input",
+        "runtime_private_key",
+        "runtime_public_key",
+        "sbom",
+        "supply_chain_rebuild_report",
+        "validation_dockerfile",
+        "validation_image_attestation",
+        "validation_registry_proof"
+      ],
+      "type": "object"
+    },
+    "bundle_manifest_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "candidate_archive_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "challenge_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "format_version": {
+      "const": "2.1"
+    },
+    "host_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "probe_targets": {
+      "additionalProperties": false,
+      "properties": {
+        "anchor_helper": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "cleanroom_adapter": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "codex_binary": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "container_engine": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "git_binary": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "mount_binary": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "python_binary": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "qualification_verifier": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "umount_binary": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "git_binary",
+        "python_binary",
+        "codex_binary",
+        "container_engine",
+        "anchor_helper",
+        "mount_binary",
+        "umount_binary",
+        "cleanroom_adapter",
+        "qualification_verifier"
+      ],
+      "type": "object"
+    },
+    "raw_evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "codex_isolation_qualification_report": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "dedicated_host_policy": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "installer_fault_matrix_report": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "key_custody_qualification_report": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "remote_anchor_qualification_report": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "supply_chain_rebuild_report": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "codex_isolation_qualification_report",
+        "remote_anchor_qualification_report",
+        "key_custody_qualification_report",
+        "installer_fault_matrix_report",
+        "supply_chain_rebuild_report",
+        "dedicated_host_policy"
+      ],
+      "type": "object"
+    },
+    "safe_for_unattended_execution_now": {
+      "const": false
+    },
+    "trusted_pre_autonomous_installation_ready": {
+      "const": false
+    },
+    "validation_image_digest": {
+      "maxLength": 256,
+      "minLength": 8,
+      "type": "string"
+    }
+  },
+  "required": [
+    "format_version",
+    "safe_for_unattended_execution_now",
+    "trusted_pre_autonomous_installation_ready",
+    "candidate_archive_sha256",
+    "bundle_manifest_sha256",
+    "challenge_sha256",
+    "host_id",
+    "agent_uid",
+    "agent_gid",
+    "validation_image_digest",
+    "raw_evidence",
+    "probe_targets",
+    "artifacts"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,315 @@
+{
+  "blocking_conflicts": [
+    {
+      "decision": "Choose and explicitly approve one canonical prompt generation and all required reference/manifest retirements.",
+      "detail": "All 41 current canonical prompts conflict: 38 content collisions and three filename/semantic collisions at IDs 031, 033, and 035. Prompt modification is forbidden.",
+      "id": "B01",
+      "paths": [
+        "automation/numbered/*.md",
+        "automation/appendices/*.md",
+        "automation/prompt-manifest.json"
+      ],
+      "stop_conditions": [
+        "integration_requires_prompt_changes"
+      ],
+      "type": "PROMPT_COLLISION"
+    },
+    {
+      "decision": "Approve controller ownership, install boundary, configuration model, and migration mapping.",
+      "detail": "Repository-local controller v1.0.1 conflicts with an external trusted-controller v7 draft and a different host/runtime model.",
+      "id": "B02",
+      "paths": [
+        "automation/controller.py",
+        "trusted-controller/controller.py",
+        "automation/controller.config.json"
+      ],
+      "stop_conditions": [
+        "current_and_delivered_controller_conflict"
+      ],
+      "type": "OWNERSHIP_COLLISION"
+    },
+    {
+      "decision": "Approve one controller/schema/reference contract; do not fabricate the audit index.",
+      "detail": "Schema locations/content and roadmap-generator instructions conflict; the delivered controller also requires a missing controller-owned audit index.",
+      "id": "B03",
+      "paths": [
+        "automation/result.schema.json",
+        "automation/roadmap.schema.json",
+        "automation/schemas/result.schema.json",
+        "automation/schemas/roadmap.schema.json",
+        "automation/roadmap-generator-prompt.md",
+        "docs/audits/index.json"
+      ],
+      "stop_conditions": [
+        "unclear_file_destination"
+      ],
+      "type": "REFERENCE_COLLISION"
+    },
+    {
+      "decision": "Define active-roadmap semantics and an approved non-destructive disposition.",
+      "detail": "Current controller treats the zero-byte roadmap and populated proposal as inactive; delivered verifier semantics reject path existence.",
+      "id": "B04",
+      "paths": [
+        "automation/roadmap.json",
+        "automation/roadmap.proposed.json",
+        ".codex-loop/generated-roadmap.json",
+        ".codex-loop/state.json"
+      ],
+      "stop_conditions": [
+        "unexpected_active_roadmap"
+      ],
+      "type": "ACTIVE_STATE_COLLISION"
+    },
+    {
+      "decision": "Define active-policy semantics and approve governance placement without activation.",
+      "detail": "Current repository has an operative autonomous-execution policy document; delivery checks only a narrower absent canonical-policy authority.",
+      "id": "B05",
+      "paths": [
+        "docs/automation/autonomous-execution-policy.md",
+        "automation/policy/README.md",
+        "AGENTS.md"
+      ],
+      "stop_conditions": [
+        "unexpected_active_policy"
+      ],
+      "type": "ACTIVE_STATE_COLLISION"
+    },
+    {
+      "decision": "Approve a delivery-provenance location and a separate governed documentation migration; never copy reports into docs/current.",
+      "detail": "Delivery's 17 security current-documents are not the repository's five governed product-document families; old controller documentation has no delivered replacement.",
+      "id": "B06",
+      "paths": [
+        "docs/current/",
+        "CURRENT-DOCUMENT-INDEX.json",
+        "AUTONOMOUS_LOOP_INSTALL.md",
+        "docs/automation/"
+      ],
+      "stop_conditions": [
+        "documentation_version_conflict"
+      ],
+      "type": "DOCUMENTATION_COLLISION"
+    },
+    {
+      "decision": "Approve ownership and exact destinations separately; host installation remains outside this task.",
+      "detail": "Operator, host installation, runtime, historical, and report content lacks an approved repository or host destination.",
+      "id": "B07",
+      "paths": [
+        "operator-tools/",
+        "external-capability-runner/",
+        "trusted-installation/",
+        "trusted-validation-runner/",
+        "requirements-security.in"
+      ],
+      "stop_conditions": [
+        "unclear_tool_ownership",
+        "unclear_file_destination"
+      ],
+      "type": "OWNERSHIP_COLLISION"
+    },
+    {
+      "decision": "Review and approve the exact CSV hash or return corrections.",
+      "detail": "The exhaustive mapping exists but has not received the specification's required human approval.",
+      "id": "B08",
+      "mapping_sha256": "007786c1c1748f8264cee452df815b47e41e15deb8b532b31f426cd18b4f2525",
+      "paths": [
+        ".integration-reports/AZPR-v10.1-integration-path-mapping.csv"
+      ],
+      "stop_conditions": [
+        "mapping_not_approved"
+      ],
+      "type": "UNKNOWN_INTENT"
+    },
+    {
+      "decision": "Explicitly approve base commit dac0e0bf1695d44f4b6c0e0e7673559f5d87ec02 or identify another base.",
+      "detail": "The clean current HEAD is recorded but was not explicitly approved as the integration base.",
+      "id": "B09",
+      "paths": [
+        "dac0e0bf1695d44f4b6c0e0e7673559f5d87ec02"
+      ],
+      "stop_conditions": [
+        "unapproved_base_commit"
+      ],
+      "type": "UNKNOWN_INTENT"
+    },
+    {
+      "decision": "Provide an approved offline dependency set/runtime and rerun both complete 120-test verifier passes.",
+      "detail": "Both verifier attempts stopped at 'jsonschema unavailable'; pytest is also unavailable. Source tests 0/120 and fresh-extraction tests 0/120 executed.",
+      "id": "B10",
+      "paths": [
+        "VERIFY-V10-CANDIDATE.py",
+        "requirements-security.in"
+      ],
+      "stop_conditions": [
+        "test_count_mismatch"
+      ],
+      "type": "UNKNOWN_INTENT"
+    }
+  ],
+  "checks": {
+    "approved_base_commit": false,
+    "archive_safety": true,
+    "classification_complete": true,
+    "controller_and_schema_paths_resolve": false,
+    "current_documentation_validation": {
+      "checks": [
+        "unique current status",
+        "business-data schema",
+        "logs",
+        "local links"
+      ],
+      "families": 5,
+      "status": "PASS"
+    },
+    "current_policy_active_semantics_resolved": false,
+    "current_repository_tests": {
+      "status": "PASS",
+      "tests_passed": 160
+    },
+    "current_roadmap_active_semantics_resolved": false,
+    "delivery_active_policy_present": false,
+    "delivery_active_roadmap_present": false,
+    "delivery_hashes_match": true,
+    "delivery_inventory_complete": true,
+    "duplicate_active_prompt_set_created": false,
+    "duplicate_controller_resolved": false,
+    "every_affected_current_file_has_disposition": true,
+    "every_delivered_file_has_disposition": true,
+    "fresh_extraction_verifier": {
+      "error": "VERIFY V10.1 FAILED: jsonschema unavailable",
+      "exit_code": 1,
+      "python_files_compiled_before_stop": 69,
+      "source_tree_mutation_detected": false,
+      "tests_expected": 120,
+      "tests_passed": 0
+    },
+    "implementation_manifest": {
+      "actual_included_paths": 312,
+      "declared_entries": 312,
+      "exclusion_semantics": "all files whose basename is SHA256SUMS.json",
+      "expected_inventory_count": 312,
+      "hash_mismatches": [],
+      "passed": true,
+      "path_sets_match": true
+    },
+    "isolated_branch_and_worktree": false,
+    "materialization_performed": false,
+    "missing_controller_path": "docs/audits/index.json",
+    "path_mapping_columns_exact": true,
+    "path_mapping_complete": true,
+    "path_mapping_human_approved": false,
+    "path_mapping_sha256": "007786c1c1748f8264cee452df815b47e41e15deb8b532b31f426cd18b4f2525",
+    "prompt_bytes_unchanged_in_repository": true,
+    "prompt_delivery_copies_byte_identical": {
+      "archives_byte_identical": true,
+      "embedded_archive_sha256": "3b235cb7e33ca409241ff26523f60f8fee89cec524b3f09e91a69927a0aa4880",
+      "overlay_prompt_count": 41,
+      "path_and_bytes_match": true,
+      "prompt_count": 41,
+      "standalone_archive_sha256": "3b235cb7e33ca409241ff26523f60f8fee89cec524b3f09e91a69927a0aa4880"
+    },
+    "python_compilation": {
+      "draft_2020_12_metaschema_validation": "BLOCKED_JSONSCHEMA_UNAVAILABLE",
+      "python_compile_issues": [],
+      "python_compile_passed": true,
+      "python_files": 69,
+      "schema_files": 73,
+      "schema_json_and_local_refs_passed": true,
+      "schema_json_parse_issues": [],
+      "schema_local_reference_issues": []
+    },
+    "reports_manifest": {
+      "actual_included_paths": 38,
+      "declared_entries": 38,
+      "exclusion_semantics": "all files whose basename is SHA256SUMS.json",
+      "expected_inventory_count": 38,
+      "hash_mismatches": [],
+      "passed": true,
+      "path_sets_match": true
+    },
+    "repository_inventory_complete": true,
+    "rollback_rehearsal": "PASS_NO_TRACKED_OR_STAGED_INTEGRATION_CHANGE",
+    "runtime_state_copied": false,
+    "schema_validation": {
+      "draft_2020_12": "BLOCKED_JSONSCHEMA_UNAVAILABLE",
+      "json_and_local_refs": true
+    },
+    "secret_files_copied": false,
+    "sidecars_verify": true,
+    "source_tree_verifier": {
+      "error": "VERIFY V10.1 FAILED: jsonschema unavailable",
+      "exit_code": 1,
+      "jsonschema_available": false,
+      "pytest_available": false,
+      "tests_expected": 120,
+      "tests_passed": 0
+    },
+    "stale_path_references_resolved": false,
+    "tracked_diff_empty": true,
+    "unnecessary_directories_created": 0,
+    "workspace_boundary_respected": true,
+    "writes_outside_allowed_parent_root": []
+  },
+  "counts": {
+    "affected_current_files_dispositioned": 60,
+    "blocking_conflicts": 10,
+    "delivered_files_dispositioned": 407,
+    "delivered_python_files_compiled": 69,
+    "delivered_schemas_json_parsed": 73,
+    "fresh_extraction_tests_passed": 0,
+    "non_blocking_conflicts": 4,
+    "repository_tests_passed": 160,
+    "source_tests_passed": 0
+  },
+  "final_result": {
+    "blocking_conflicts": 10,
+    "delivery_identity_verified": true,
+    "fresh_extraction_tests_passed": 0,
+    "next_required_action": "HUMAN_RESOLUTION_OF_BLOCKING_CONFLICTS_AND_APPROVAL_OF_BASE_MAPPING_AND_OFFLINE_VALIDATION_RUNTIME",
+    "non_blocking_conflicts": 4,
+    "path_mapping_complete": true,
+    "prompt_bytes_unchanged": true,
+    "ready_for_activation": false,
+    "ready_for_integration_staging": false,
+    "repository_bridge_complete": false,
+    "safe_for_unattended_execution_now": false,
+    "source_tests_passed": 0,
+    "unnecessary_directories_created": 0,
+    "workspace_boundary_respected": true
+  },
+  "generated_at": "2026-08-06T23:11:48+00:00",
+  "non_blocking_conflicts": [
+    {
+      "detail": "Three prompt representations and duplicate report/verification copies are byte-identical and safely mapped to QUARANTINE.",
+      "id": "N01",
+      "type": "GENERATED_FILE_COLLISION"
+    },
+    {
+      "detail": "Current generated roadmap notes still say the Master Operating Prompt is absent although the repository now tracks it.",
+      "id": "N02",
+      "type": "DOCUMENTATION_COLLISION"
+    },
+    {
+      "detail": "No formatter, linter, or static/type checker is configured; existing repository unittest/docs checks still pass.",
+      "id": "N03",
+      "type": "UNKNOWN_INTENT"
+    },
+    {
+      "detail": "Pre-existing ignored caches and inactive local controller state remain local and were not copied into staging.",
+      "id": "N04",
+      "type": "GENERATED_FILE_COLLISION"
+    }
+  ],
+  "overall_status": "BLOCKED",
+  "stop_conditions_triggered": [
+    "current_and_delivered_controller_conflict",
+    "documentation_version_conflict",
+    "integration_requires_prompt_changes",
+    "mapping_not_approved",
+    "test_count_mismatch",
+    "unapproved_base_commit",
+    "unclear_file_destination",
+    "unclear_tool_ownership",
+    "unexpected_active_policy",
+    "unexpected_active_roadmap"
+  ]
+}

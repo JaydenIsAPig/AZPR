@@ -1,0 +1,21 @@
+{
+  "format_version": "1.0",
+  "keys": [
+    {
+      "key_id": "lifecycle-authorizer-0001",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAmJ5ynWb4UDQ7np9EIjzm45Kxt76pvCF2lvpMc5eGSas=\n-----END PUBLIC KEY-----\n",
+      "roles": [
+        "key-lifecycle-authorizer"
+      ],
+      "signer_id": "operator-0001"
+    },
+    {
+      "key_id": "lifecycle-security-0001",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAVXqbQDg7Zcss0MzagB1iQ3lhzWmOZ42V9ZMRk94maDM=\n-----END PUBLIC KEY-----\n",
+      "roles": [
+        "security-approver"
+      ],
+      "signer_id": "security-0001"
+    }
+  ]
+}

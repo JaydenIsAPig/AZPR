@@ -1,0 +1,66 @@
+{
+  "format_version": "2.0",
+  "resource_limits": {
+    "cpus": 2,
+    "memory_mb": 4096,
+    "pids": 256,
+    "tmpfs_mb": 1024,
+    "evidence_mb": 256,
+    "file_size_mb": 128
+  },
+  "profile_id": "recovery",
+  "risk_categories": [
+    "restore",
+    "rollback",
+    "integration",
+    "security",
+    "evidence"
+  ],
+  "commands": [
+    {
+      "name": "Isolated restore",
+      "category": "restore",
+      "argv": [
+        "python3",
+        "scripts/test_restore.py",
+        "--ephemeral",
+        "--no-network"
+      ],
+      "timeout_seconds": 3600,
+      "evidence_files": [
+        "recovery/01-restore.json"
+      ]
+    },
+    {
+      "name": "Reconciliation",
+      "category": "integration",
+      "argv": [
+        "python3",
+        "scripts/test_reconciliation.py",
+        "--ephemeral"
+      ],
+      "timeout_seconds": 2400,
+      "evidence_files": [
+        "recovery/02-integration.json"
+      ]
+    },
+    {
+      "name": "Rollback proof",
+      "category": "rollback",
+      "argv": [
+        "python3",
+        "scripts/test_rollback.py",
+        "--ephemeral"
+      ],
+      "timeout_seconds": 3600,
+      "evidence_files": [
+        "recovery/03-rollback.json"
+      ]
+    }
+  ],
+  "evidence_outputs": [
+    "recovery/summary.json",
+    "recovery/stdout.log",
+    "recovery/stderr.log"
+  ]
+}

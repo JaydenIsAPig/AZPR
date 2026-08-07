@@ -1,0 +1,44 @@
+{
+  "candidate_archive_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "challenge_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "format_version": "1.1",
+  "host_id": "host-v10-1-test-0001",
+  "maximum_envelope_age_seconds": 1,
+  "policy_kind": "AZPR_V10_1_PROBE_POLICY",
+  "policy_version": "10.1.1",
+  "probe_service_id": "probe-service-v10-1-0001",
+  "required_boundary": {
+    "cgroup_v2": true,
+    "daemon_sockets": false,
+    "disposable": true,
+    "host_mounts": false,
+    "mount_namespace": true,
+    "network_mode": "DENY_ALL",
+    "no_secrets": true,
+    "pid_namespace": true,
+    "rootless": true,
+    "run_as_gid": 10001,
+    "run_as_uid": 10001
+  },
+  "required_observations": [
+    "secret_read_denied",
+    "host_read_denied",
+    "network_denied",
+    "mount_denied",
+    "daemon_access_denied",
+    "escape_denied",
+    "resource_exhaustion_contained",
+    "evidence_mutation_denied"
+  ],
+  "required_targets": [
+    "git_binary",
+    "python_binary",
+    "codex_binary",
+    "container_engine",
+    "anchor_helper",
+    "mount_binary",
+    "umount_binary",
+    "cleanroom_adapter",
+    "qualification_verifier"
+  ]
+}

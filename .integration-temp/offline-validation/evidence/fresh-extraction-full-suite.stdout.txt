@@ -1,0 +1,131 @@
+................F........................F................. [ 49%]
+..........................................F...F..............  [100%]
+=================================== FAILURES ===================================
+_ FinalAssessmentControlTests.test_external_runner_rolled_back_is_non_success_terminal _
+
+self = <test_final_assessment_controls.FinalAssessmentControlTests testMethod=test_external_runner_rolled_back_is_non_success_terminal>
+
+    def test_external_runner_rolled_back_is_non_success_terminal(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td); fixture=write_external_fixture(sr,PACK,root,apply_status='ROLLED_BACK')
+            evidence_dir=root/'evidence'; evidence_dir.mkdir()
+            command=[sys.executable,str(fixture['runner']),'--installation-manifest',str(fixture['installation_path']),'--development-mode',
+              '--plan',str(root/'plan.json'),'--manifest',str(root/'manifest.json'),'--target-attestation',str(root/'attestation.json'),
+              '--operation-ticket',str(root/'ticket.json'),'--evidence-dir',str(evidence_dir),'--confirm','APPLY SIGNED AZPR CAPABILITY']
+            completed=subprocess.run(command,capture_output=True,text=True,env={**os.environ,'AZPR_EXPLICIT_TEST_MODE':'1','AZPR_PRODUCTION_MODE':'0'})
+            self.assertNotEqual(completed.returncode,0,completed.stderr+completed.stdout)
+>           files=list(evidence_dir.glob('*.json')); self.assertEqual(len(files),1)
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError: 0 != 1
+
+tests/test_final_assessment_controls.py:257: AssertionError
+_ ExternalRunnerDryRunTests.test_signed_plan_attestation_and_live_probe_dry_run _
+
+self = <test_refined_security.ExternalRunnerDryRunTests testMethod=test_signed_plan_attestation_and_live_probe_dry_run>
+
+    def test_signed_plan_attestation_and_live_probe_dry_run(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td); fixture=write_external_fixture(sr,PACK,root)
+            evidence_dir=root/'evidence'; evidence_dir.mkdir()
+            command=[sys.executable,str(fixture['runner']),'--installation-manifest',str(fixture['installation_path']),'--development-mode',
+              '--plan',str(root/'plan.json'),'--manifest',str(root/'manifest.json'),'--target-attestation',str(root/'attestation.json'),
+              '--operation-ticket',str(root/'ticket.json'),'--evidence-dir',str(evidence_dir),'--confirm','APPLY SIGNED AZPR CAPABILITY','--dry-run']
+            completed=subprocess.run(command,capture_output=True,text=True,env={**os.environ,'AZPR_EXPLICIT_TEST_MODE':'1','AZPR_PRODUCTION_MODE':'0'})
+>           self.assertEqual(completed.returncode,0,completed.stderr+completed.stdout); self.assertIn('DRY_RUN_PASS',completed.stdout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError: 1 != 0 : Traceback (most recent call last):
+E             File "/Users/jayden/Desktop/Business/AZ-Permit-Radar/.azpr-v10.1-offline-validation/fresh/AZPR-autonomous-execution-primed-draft-v10.1/external-capability-runner/capability_runner.py", line 631, in <module>
+E               raise SystemExit(main())
+E                                ^^^^^^
+E             File "/Users/jayden/Desktop/Business/AZ-Permit-Radar/.azpr-v10.1-offline-validation/fresh/AZPR-autonomous-execution-primed-draft-v10.1/external-capability-runner/capability_runner.py", line 460, in main
+E               probe = invoke_adapter(
+E                       ^^^^^^^^^^^^^^^
+E             File "/Users/jayden/Desktop/Business/AZ-Permit-Radar/.azpr-v10.1-offline-validation/fresh/AZPR-autonomous-execution-primed-draft-v10.1/external-capability-runner/capability_runner.py", line 152, in invoke_adapter
+E               process = subprocess.Popen(
+E                         ^^^^^^^^^^^^^^^^^
+E             File "/Users/jayden/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 1026, in __init__
+E               self._execute_child(args, executable, preexec_fn, close_fds,
+E             File "/Users/jayden/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 1958, in _execute_child
+E               raise child_exception_type(err_msg)
+E           subprocess.SubprocessError: Exception occurred in preexec_fn.
+
+tests/test_refined_security.py:190: AssertionError
+______ V8CorrectiveControlTests.test_v8_blackbox_release_blocking_harness ______
+
+self = <test_v8_corrective_controls.V8CorrectiveControlTests testMethod=test_v8_blackbox_release_blocking_harness>
+
+    def test_v8_blackbox_release_blocking_harness(self):
+     r=run(ROOT/'operator-tools/v8_security_boundary_harness.py',timeout=180)
+>    self.assertEqual(r.returncode,0,r.stdout+r.stderr);value=json.loads(r.stdout);self.assertEqual(value['status'],'PASS');self.assertEqual(len(value['cases']),6);self.assertTrue(all(x['pass'] for x in value['cases']))
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E    AssertionError: 1 != 0 : {
+E      "cases": [
+E        {
+E          "detail": "positions=68281,68468,68629",
+E          "id": "blackbox.v8.installer_authorization_before_state",
+E          "pass": true
+E        },
+E        {
+E          "detail": "semantic clean-room verification must run as root\n",
+E          "id": "blackbox.v8.fabricated_qualification_rejected",
+E          "pass": true
+E        },
+E        {
+E          "detail": "token)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/jayden/Desktop/Business/AZ-Permit-Radar/.azpr-v10.1-offline-validation/fresh/AZPR-autonomous-execution-primed-draft-v10.1/trusted-controller/secure_runtime.py\", line 2564, in __init__\n    super().__init__(token);self.root_pid=None;self.baseline=set(_direct_children(os.getpid()))\n                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/jayden/Desktop/Business/AZ-Permit-Radar/.azpr-v10.1-offline-validation/fresh/AZPR-autonomous-execution-primed-draft-v10.1/trusted-controller/secure_runtime.py\", line 2611, in _direct_children\n    for entry in Path('/proc').iterdir():\n                 ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/jayden/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py\", line 1056, in iterdir\n    for name in os.listdir(self):\n                ^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/proc'\n",
+E          "id": "blackbox.v8.complete_process_tree_terminated",
+E          "pass": false
+E        },
+E        {
+E          "detail": "token)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/jayden/Desktop/Business/AZ-Permit-Radar/.azpr-v10.1-offline-validation/fresh/AZPR-autonomous-execution-primed-draft-v10.1/trusted-controller/secure_runtime.py\", line 2564, in __init__\n    super().__init__(token);self.root_pid=None;self.baseline=set(_direct_children(os.getpid()))\n                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/jayden/Desktop/Business/AZ-Permit-Radar/.azpr-v10.1-offline-validation/fresh/AZPR-autonomous-execution-primed-draft-v10.1/trusted-controller/secure_runtime.py\", line 2611, in _direct_children\n    for entry in Path('/proc').iterdir():\n                 ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/jayden/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py\", line 1056, in iterdir\n    for name in os.listdir(self):\n                ^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/proc'\n",
+E          "id": "blackbox.v8.duplex_io_deadline",
+E          "pass": false
+E        },
+E        {
+E          "detail": "token)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/jayden/Desktop/Business/AZ-Permit-Radar/.azpr-v10.1-offline-validation/fresh/AZPR-autonomous-execution-primed-draft-v10.1/trusted-controller/secure_runtime.py\", line 2564, in __init__\n    super().__init__(token);self.root_pid=None;self.baseline=set(_direct_children(os.getpid()))\n                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/jayden/Desktop/Business/AZ-Permit-Radar/.azpr-v10.1-offline-validation/fresh/AZPR-autonomous-execution-primed-draft-v10.1/trusted-controller/secure_runtime.py\", line 2611, in _direct_children\n    for entry in Path('/proc').iterdir():\n                 ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/jayden/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py\", line 1056, in iterdir\n    for name in os.listdir(self):\n                ^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/proc'\n",
+E          "id": "blackbox.v8.output_overflow_teardown",
+E          "pass": false
+E        },
+E        {
+E          "detail": "source-level mount and bounded-cleanup controls",
+E          "id": "blackbox.v8.production_quota_enforcement_present",
+E          "pass": true
+E        }
+E      ],
+E      "safe_for_unattended_execution_now": false,
+E      "status": "FAIL",
+E      "trusted_pre_autonomous_installation_ready": false
+E    }
+
+tests/test_v8_corrective_controls.py:16: AssertionError
+__ test_f01_external_signing_protocol_has_no_receipt_private_key_in_verifier ___
+
+tmp_path = PosixPath('/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR/.integration-temp/offline-validation/tmp/pytest-of-jayden/pytest-3/test_f01_external_signing_prot0')
+
+    def test_f01_external_signing_protocol_has_no_receipt_private_key_in_verifier(tmp_path: Path):
+        signer, priv, pub = keypair(tmp_path, "receipt")
+        reference = ROOT / "operator-tools" / "v9_external_signer_reference.py"
+        trusted_base = Path("/root") if os.geteuid() == 0 else Path("/home/oai")
+        trusted_dir = trusted_base / ("azpr-v9-signer-test-" + tmp_path.name)
+>       trusted_dir.mkdir(mode=0o700)
+
+tests/test_v9_security_closures.py:108: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/home/oai/azpr-v9-signer-test-test_f01_external_signing_prot0')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [Errno 2] No such file or directory: '/home/oai/azpr-v9-signer-test-test_f01_external_signing_prot0'
+
+/Users/jayden/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1311: FileNotFoundError
+=========================== short test summary info ============================
+FAILED tests/test_final_assessment_controls.py::FinalAssessmentControlTests::test_external_runner_rolled_back_is_non_success_terminal
+FAILED tests/test_refined_security.py::ExternalRunnerDryRunTests::test_signed_plan_attestation_and_live_probe_dry_run
+FAILED tests/test_v8_corrective_controls.py::V8CorrectiveControlTests::test_v8_blackbox_release_blocking_harness
+FAILED tests/test_v9_security_closures.py::test_f01_external_signing_protocol_has_no_receipt_private_key_in_verifier
+4 failed, 116 passed, 23 subtests passed in 22.86s

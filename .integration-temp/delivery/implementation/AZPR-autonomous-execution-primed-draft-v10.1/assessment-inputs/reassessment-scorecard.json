@@ -1,0 +1,831 @@
+{
+  "assessment_version": "2026-07-23.2-remediation-reassessment",
+  "assessment_date": "2026-07-23",
+  "overall": "NOT_ACCEPTABLE_FOR_UNATTENDED_AUTONOMOUS_EXECUTION",
+  "scope_note": "Security score measures prompt/control design. Confidence score measures safe executable readiness using the remediation pack as supplied. No regenerated roadmap, active schemas, actual repository tree, or external capability runner was supplied, so confidence is intentionally capped.",
+  "thresholds": {
+    "acceptable_security_min": 85,
+    "acceptable_confidence_min": 85
+  },
+  "counts": {
+    "ACCEPTABLE": 0,
+    "CONDITIONAL": 23,
+    "UNACCEPTABLE": 15
+  },
+  "appendix_counts": {
+    "ACCEPTABLE": 0,
+    "CONDITIONAL": 0,
+    "UNACCEPTABLE": 3
+  },
+  "input_hashes_sha256": {
+    "AZPR-security-remediation-pack(1).zip": "498c2380c38433776d6d0e64b77ac2c408c8271ac129eda09d89dee2388a667c",
+    "prior_consultation": "560985a96ebe55435306bd2240674a3ffd25959ff5ad9c0bfff9342a04e6b13e",
+    "prior_scorecard": "770a3e5fcb4c4a2fcd94bb52ba9bc337677bc73a4c5dee78f4088d500002173a"
+  },
+  "positive_verification": {
+    "sha256_manifest_entries_verified": 58,
+    "sha256_manifest_mismatches": 0,
+    "hardened_prompt_zip_files_verified": 41,
+    "prompt_zip_local_content_mismatches": 0,
+    "python_compile": "PASS",
+    "included_unit_tests": "2 PASS",
+    "zip_traversal": "No traversal entries found during safe extraction"
+  },
+  "critical_findings": [
+    {
+      "id": "CR-01",
+      "severity": "CRITICAL",
+      "title": "Approval signing secrets are inherited by the Codex child process",
+      "evidence": [
+        "controller.hardened.py:413-425 loads all HMAC verifier/signing secrets from AZPR_APPROVAL_KEYS_JSON.",
+        "controller.hardened.py:1031-1070 invokes Codex without a sanitized env, so the child inherits the operator environment."
+      ],
+      "impact": "A controlled agent or repository command can read approval keys, forge signatures, satisfy multiple key IDs, and place secrets into allowed files or logs even with network disabled.",
+      "remediation": "Use asymmetric signatures (for example Ed25519) so the controller holds public keys only. Launch Codex with a minimal isolated environment/HOME that excludes approval and operator secrets; keep signing in a separate process or hardware-backed operator tool."
+    },
+    {
+      "id": "CR-02",
+      "severity": "CRITICAL",
+      "title": "The authoritative controller state is unsigned, gitignored, and workspace-writable",
+      "evidence": [
+        "controller.hardened.py:647-703 stores state under .codex-loop/state.json with no signature or reconstruction.",
+        "controller.hardened.py:1628 explicitly declares that local state authoritative.",
+        "Git path enforcement cannot see ignored .codex-loop changes."
+      ],
+      "impact": "State can be changed or deleted to forge completed stages, latest audit PASS, pending corrections, consumed nonces, or active branch data. Crash/kill paths can preserve tampered state.",
+      "remediation": "Move runtime state outside the agent/validator writable workspace. Reconstruct gates from committed, signed audit/run records or use an append-only signed journal with atomic locking and strict permissions. Never treat mutable cache state as the root of trust."
+    },
+    {
+      "id": "CR-03",
+      "severity": "CRITICAL",
+      "title": "required_before_run can be bypassed with an empty approval list or zero quorum",
+      "evidence": [
+        "controller.hardened.py:867-872 checks only that approval keys exist, not that approval_files is non-empty or min_approvals is positive.",
+        "controller.hardened.py:1677-1683 treats an empty approval_files list as automatically satisfied."
+      ],
+      "impact": "A roadmap can claim approval is required while the controller executes the stage without any approval.",
+      "remediation": "Fail when required_before_run=true unless approval_files is non-empty, min_approvals>=1, required_actions is non-empty, environment is valid, and required_key_ids/quorum are coherent. Enforce this in mandatory JSON Schema and duplicate it in controller code."
+    },
+    {
+      "id": "CR-04",
+      "severity": "CRITICAL",
+      "title": "Validation sandbox can read host secrets and mutate the repository",
+      "evidence": [
+        "run_sandboxed.py:14 preserves HOME.",
+        "run_sandboxed.py:17 allows file-read* across macOS and file writes across the repository.",
+        "run_sandboxed.py:20 read-binds the entire Linux host, exposes /proc and /dev, and makes the repository writable."
+      ],
+      "impact": "Repository-controlled tests/scripts can read SSH/cloud/browser credentials or process environments, alter code/tests, and have those changes committed as stage output.",
+      "remediation": "Run validation in a disposable clean worktree/container with the repository mounted read-only, an empty HOME, minimal system mounts, isolated PID/user/IPC/UTS namespaces, no host /proc, limited devices, CPU/memory/disk limits, and a separate artifact output directory. Fail on any repository mutation."
+    },
+    {
+      "id": "CR-05",
+      "severity": "CRITICAL",
+      "title": "Sandbox wrapper integrity has a time-of-check/time-of-use gap",
+      "evidence": [
+        "controller.hardened.py:390-411 policy_hashes does not include automation/security/run_sandboxed.py.",
+        "Validation writes are permitted in the repository and path enforcement occurs only after all commands."
+      ],
+      "impact": "An early validator can modify the wrapper or related scripts so later validation commands escape restrictions before the final diff check notices the change.",
+      "remediation": "Place the runner outside the mutable repository or hash/verify it before every command. Execute validators from an immutable image/toolchain and compare the repository tree before and after every validation command."
+    }
+  ],
+  "high_findings": [
+    {
+      "id": "HI-01",
+      "severity": "HIGH",
+      "title": "HMAC approvals do not enforce independent human signers or durable single use",
+      "evidence": [
+        "approval.schema.json supports HMAC signatures only.",
+        "All verifier secrets are supplied together in AZPR_APPROVAL_KEYS_JSON.",
+        "Consumed nonces exist only in mutable .codex-loop state."
+      ],
+      "impact": "One operator/process can impersonate every signer, and deleting/resetting state can replay an approval.",
+      "remediation": "Use asymmetric per-approver keys, external identity/attestation, an append-only consumed-nonce ledger, key revocation/rotation metadata, and policy requiring distinct signer identities for production."
+    },
+    {
+      "id": "HI-02",
+      "severity": "HIGH",
+      "title": "Approval schema does not bind the full consequential decision",
+      "evidence": [
+        "approval.schema.json binds stage, commit, roadmap/prompt/master hashes, controller version, environment, and action strings only.",
+        "It lacks plan hash, capability-manifest hash, AGENTS/config/schema/runner hashes, account/resource/cohort/window/cost/backup fields claimed in the remediation report."
+      ],
+      "impact": "An approval can be valid while the actual deployment plan, resources, recipients, or capability manifest differ.",
+      "remediation": "Add typed, required bindings for plan/capability hashes, account/project/region, exact resources, database, hosts/methods, recipients/cohort, limits, window, backup/rollback point, evidence outputs, and all policy-root hashes."
+    },
+    {
+      "id": "HI-03",
+      "severity": "HIGH",
+      "title": "Path enforcement is bypass-prone and glob semantics are broader than they appear",
+      "evidence": [
+        "controller.hardened.py:211-223 parses newline-delimited porcelain output manually.",
+        "A proof test parsed \"allowed -> controller.py\" as controller.py and escaped quoted/newline filenames.",
+        "controller.hardened.py:226-228 uses fnmatch, where src/* matches nested paths.",
+        "controller.hardened.py:957-966 rejects only a small exact denylist of broad patterns."
+      ],
+      "impact": "Crafted filenames, rename syntax, or alternative globs can cause incorrect allowed/forbidden decisions and overbroad writes.",
+      "remediation": "Use NUL-delimited git status/diff output, reject control characters and ambiguous names, define segment-aware glob semantics, expand patterns against the actual tree, reject excessive scope quantitatively, and inspect staged diff objects directly."
+    },
+    {
+      "id": "HI-04",
+      "severity": "HIGH",
+      "title": "Filesystem escape handling is incomplete",
+      "evidence": [
+        "changed_symlinks checks changed paths only.",
+        "Controller output directories and runtime paths are not checked for symlink ancestry.",
+        "No hardlink, submodule, nested repository, or pre-existing symlink policy is enforced."
+      ],
+      "impact": "Writes can escape the intended repository or affect external files without appearing as changed product paths.",
+      "remediation": "Preflight every writable path and ancestor with lstat/openat O_NOFOLLOW, reject writable symlinks/hardlinks/submodules/nested repos, and use a disposable copy or mount namespace rather than trusting repository topology."
+    },
+    {
+      "id": "HI-05",
+      "severity": "HIGH",
+      "title": "Audit correction semantics are not enforced by controller code",
+      "evidence": [
+        "controller.hardened.py:1456-1478 verifies only audit outcome/report presence.",
+        "The result-schema security extension is an example that must be merged manually.",
+        "PASS/PASS_WITH_REQUIRED_CORRECTIONS/BLOCKED consistency, report YAML, correction path scope, and handler eligibility are not cross-validated."
+      ],
+      "impact": "A compromised or mistaken audit can authorize arbitrary exact files for Appendix A, issue contradictory verdicts, or advance with malformed evidence.",
+      "remediation": "Make schema support mandatory and add controller-native semantic checks. Bind each correction to the audited commit, finding evidence, allowed path budget, severity, owner, acceptance criteria, and a signed human authorization when touching security-sensitive files."
+    },
+    {
+      "id": "HI-06",
+      "severity": "HIGH",
+      "title": "Merge reconciliation accepts unrelated commits",
+      "evidence": [
+        "controller.hardened.py:1869 only checks that the stage commit is an ancestor of HEAD."
+      ],
+      "impact": "Additional unreviewed or malicious commits can be merged at the same time and the controller will still mark the stage complete and update audit gates.",
+      "remediation": "Require a fast-forward to exactly the expected commit or verify an approved merge commit whose complete delta contains only the pending stage commit and explicitly reviewed merge metadata."
+    },
+    {
+      "id": "HI-07",
+      "severity": "HIGH",
+      "title": "Run manifests and SHA manifests provide no durable authenticity",
+      "evidence": [
+        "Run manifests are written under mutable .codex-loop and are not signed or verified at completion.",
+        "SHA256SUMS.json matches all 58 listed files but is itself unsigned and can be replaced with altered files."
+      ],
+      "impact": "After-the-fact evidence cannot prove which policies or artifacts actually governed a run.",
+      "remediation": "Commit or externally attest signed run manifests, hash the validation toolchain and evidence, use unique run nonces, and publish the pack checksum/signature through a trusted channel."
+    },
+    {
+      "id": "HI-08",
+      "severity": "HIGH",
+      "title": "External capability and deployment evidence implementation is missing",
+      "evidence": [
+        "EXTERNAL-CAPABILITY-RUNNER-SPEC.md explicitly says no runner implementation is provided.",
+        "No typed deployment-plan/evidence schema is included; result-schema extension covers corrections only."
+      ],
+      "impact": "Stages 033-036 and Appendices B/C cannot form a trustworthy plan-approve-apply-attest-audit chain.",
+      "remediation": "Implement and separately review the runner, typed manifests, evidence signatures, account/drift preflight, nonce consumption, target allowlists, rollback proof, and secure evidence ingestion before staging, production, email/SMS, geocoder, or recovery actions."
+    },
+    {
+      "id": "HI-09",
+      "severity": "HIGH",
+      "title": "Validation and audit evidence can be incomplete while schemas are optional",
+      "evidence": [
+        "controller.hardened.py:720-727 silently skips JSON Schema validation when jsonschema is absent.",
+        "The pack supplies only examples/fragments, not integrated active schemas.",
+        "Only two controller security unit tests are included."
+      ],
+      "impact": "Malformed roadmaps/results/approvals or missing validation profiles can pass local checks, producing false assurance.",
+      "remediation": "Vendor or require the schema validator, fail closed when unavailable, ship complete schemas, add extensive negative tests, and require non-empty stage-specific validation profiles for every risk category."
+    },
+    {
+      "id": "HI-10",
+      "severity": "HIGH",
+      "title": "Logs and controller-created records can retain sensitive or injected content",
+      "evidence": [
+        "Codex stdout/stderr and full validator output are written without redaction.",
+        "Runtime directory permissions are not hardened.",
+        "Agent summary/remaining_risks and audit Markdown are committed without structural sanitization."
+      ],
+      "impact": "Secrets/PII may persist locally or in commits, and generated text can become a later prompt-injection source.",
+      "remediation": "Use 0700/0600 permissions, redaction and size limits, structured fields, fenced/untrusted rendering, retention policies, and never pass raw generated prose back as authority."
+    }
+  ],
+  "medium_findings": [
+    {
+      "id": "ME-01",
+      "severity": "MEDIUM",
+      "title": "Prompt and policy naming still create operator ambiguity",
+      "evidence": [
+        "Files 031, 033, and 035 retain implementation/deploy-oriented filenames while their titles are now read-only audit or plan-only stages.",
+        "Implementation prompts still say \u201cBefore committing\u201d despite controller-owned commits.",
+        "AGENTS allows external actions when a capability manifest authorizes them, while the autonomous capability schema always denies them."
+      ],
+      "impact": "Humans and automation may misunderstand whether a stage applies changes, and agents receive mixed terminology.",
+      "remediation": "Rename or clearly alias the files, use \u201cbefore controller handoff,\u201d and explicitly state that capability manifests are consumed only by the separate human-operated runner."
+    }
+  ],
+  "components": [
+    {
+      "component": "Hardened numbered prompt pack",
+      "security_score": 91,
+      "confidence_score": 65,
+      "verdict": "CONDITIONAL",
+      "summary": "Strong instruction-integrity, no-commit, read-only-audit, and plan-only rewrites; exact paths and controller enforcement are not integrated."
+    },
+    {
+      "component": "AGENTS.hardened.md",
+      "security_score": 90,
+      "confidence_score": 70,
+      "verdict": "CONDITIONAL",
+      "summary": "Strong authority and untrusted-data policy; external capability wording and generated-authority ordering should be tightened."
+    },
+    {
+      "component": "controller.hardened.py",
+      "security_score": 48,
+      "confidence_score": 42,
+      "verdict": "CRITICAL",
+      "summary": "Contains direct approval bypass, secret inheritance, mutable authoritative state, weak reconciliation, and incomplete audit/path enforcement."
+    },
+    {
+      "component": "run_sandboxed.py",
+      "security_score": 28,
+      "confidence_score": 30,
+      "verdict": "CRITICAL",
+      "summary": "Network denial is useful, but host-wide reads, writable repository, HOME/proc/dev exposure, and mutable runner make it unsafe for hostile repository code."
+    },
+    {
+      "component": "Approval schema and signing tools",
+      "security_score": 42,
+      "confidence_score": 36,
+      "verdict": "CRITICAL",
+      "summary": "HMAC/shared-secret design, incomplete decision binding, mutable nonce ledger, and child secret exposure defeat claimed two-person/single-use guarantees."
+    },
+    {
+      "component": "Capability policy schema",
+      "security_score": 90,
+      "confidence_score": 58,
+      "verdict": "UNACCEPTABLE",
+      "summary": "Autonomous default deny is correct, but only local/test is modeled and no external apply manifest/evidence schema or runner is implemented."
+    },
+    {
+      "component": "Audit/result schema extension",
+      "security_score": 68,
+      "confidence_score": 42,
+      "verdict": "UNACCEPTABLE",
+      "summary": "Useful correction fields, but only a fragment/example and no controller semantic cross-check."
+    },
+    {
+      "component": "External capability runner specification",
+      "security_score": 92,
+      "confidence_score": 25,
+      "verdict": "UNACCEPTABLE",
+      "summary": "The specification is directionally strong; there is intentionally no implementation to review or use."
+    },
+    {
+      "component": "Pack integrity manifest",
+      "security_score": 94,
+      "confidence_score": 75,
+      "verdict": "CONDITIONAL",
+      "summary": "All 58 listed hashes verified and prompt ZIP matched local files, but the manifest has no trusted signature/authenticity."
+    },
+    {
+      "component": "Controller security tests",
+      "security_score": 35,
+      "confidence_score": 25,
+      "verdict": "CRITICAL",
+      "summary": "Only two tests exist; they do not cover the identified approval, environment, state, path parsing, merge, sandbox, evidence, or schema failures."
+    }
+  ],
+  "prompts": [
+    {
+      "id": "001",
+      "title": "Close the Post-Core Traceability Release Gate",
+      "file": "001-close-the-post-core-traceability-release-gate.md",
+      "prompt_type": "Implementation",
+      "security_score": 90,
+      "confidence_score": 72,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 76,
+      "prior_confidence_score": 82,
+      "summary": "Traceability, provenance, privacy, and no-commit controls are strong. Safe execution still depends on a regenerated exact cross-layer path set and on fixing controller state, validation, and approval boundaries.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "002",
+      "title": "Post-Core Traceability Corrective Audit",
+      "file": "002-post-core-traceability-corrective-audit.md",
+      "prompt_type": "Read-only Audit",
+      "security_score": 96,
+      "confidence_score": 74,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 93,
+      "prior_confidence_score": 72,
+      "summary": "The read-only audit/report handoff contradiction is fixed. The controller still does not semantically validate correction payloads, report YAML, or audit-index integrity, and audit state is mutable.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "003",
+      "title": "Define and Govern the Narrow Pilot Scope",
+      "file": "003-define-and-govern-the-narrow-pilot-scope.md",
+      "prompt_type": "Decision and Conditional Implementation",
+      "security_score": 92,
+      "confidence_score": 77,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 88,
+      "prior_confidence_score": 88,
+      "summary": "The scope gate is well constrained and avoids silent activation. Exact files, approval values, and runtime activation controls are absent because no remediated roadmap was supplied.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "004",
+      "title": "Select and Govern the Production Application Stack",
+      "file": "004-select-and-govern-the-production-application-stack.md",
+      "prompt_type": "Architecture Decision Gate",
+      "security_score": 94,
+      "confidence_score": 75,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 95,
+      "prior_confidence_score": 93,
+      "summary": "The architecture decision prompt is appropriately decision-first and implementation-light. Confidence is limited by weak approval enforcement and lack of an authenticated research/dependency evidence channel.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "005",
+      "title": "Bootstrap the Production Application Shell and Engineering Baseline",
+      "file": "005-bootstrap-the-production-application-shell-and-engineering-baseline.md",
+      "prompt_type": "Implementation",
+      "security_score": 84,
+      "confidence_score": 61,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 62,
+      "prior_confidence_score": 86,
+      "summary": "The prompt correctly limits product behavior, but bootstrapping can alter dependencies, CI, scanners, scripts, and configuration. No exact remediated path list, SBOM/signature policy, or safe validator boundary is supplied.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "006",
+      "title": "MVP Scope and Architecture Decision Audit",
+      "file": "006-mvp-scope-and-architecture-decision-audit.md",
+      "prompt_type": "Read-only Audit",
+      "security_score": 96,
+      "confidence_score": 74,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 93,
+      "prior_confidence_score": 72,
+      "summary": "Read-only audit ownership is corrected. The remaining audit-result, correction, state-integrity, and validation-sandbox defects prevent reliable gating.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "007",
+      "title": "Design and Implement the Durable Database Schema and Migrations",
+      "file": "007-design-and-implement-the-durable-database-schema-and-migrations.md",
+      "prompt_type": "Implementation",
+      "security_score": 87,
+      "confidence_score": 64,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 76,
+      "prior_confidence_score": 78,
+      "summary": "Migration safeguards and customer-keyed constraints are strong. Exact database/migration-tool paths, isolated immutable migration validation, and protection from destructive validator code remain unresolved.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "008",
+      "title": "Implement Durable Repositories and Transaction Boundaries",
+      "file": "008-implement-durable-repositories-and-transaction-boundaries.md",
+      "prompt_type": "Implementation",
+      "security_score": 87,
+      "confidence_score": 66,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 74,
+      "prior_confidence_score": 84,
+      "summary": "Repository/UoW and concurrency requirements are good. The pack lacks architecture-specific paths and a safe database/concurrency validation profile.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "009",
+      "title": "Implement Immutable Artifact Storage, Outbox, Workers, and Crash Recovery",
+      "file": "009-implement-immutable-artifact-storage-outbox-workers-and-crash-recovery.md",
+      "prompt_type": "Implementation",
+      "security_score": 86,
+      "confidence_score": 63,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 70,
+      "prior_confidence_score": 82,
+      "summary": "Artifact, outbox, lease, retry, and reconciliation requirements are strong. Storage-provider decisions, exact worker/reconciliation paths, resource limits, and safe execution evidence remain unresolved.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "010",
+      "title": "Durable Platform and Persistence Audit",
+      "file": "010-durable-platform-and-persistence-audit.md",
+      "prompt_type": "Read-only Audit",
+      "security_score": 96,
+      "confidence_score": 72,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 93,
+      "prior_confidence_score": 72,
+      "summary": "The audit contract is fixed and the evidence list is strong. Audit semantics and persistence validation are not reliably enforced by the supplied controller/schema set.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "011",
+      "title": "Implement Authentication, Session Security, and AccessContext Construction",
+      "file": "011-implement-authentication-session-security-and-accesscontext-construction.md",
+      "prompt_type": "Implementation",
+      "security_score": 89,
+      "confidence_score": 55,
+      "verdict": "UNACCEPTABLE",
+      "prior_security_score": 58,
+      "prior_confidence_score": 88,
+      "summary": "The prompt has strong authentication and anti-enumeration requirements. It remains unsafe under a controller that exposes inherited environment secrets, uses mutable local state, and lacks exact auth-only paths.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "012",
+      "title": "Implement Customer Account Lifecycle, Versioned Configuration, and Onboarding API",
+      "file": "012-implement-customer-account-lifecycle-versioned-configuration-and-onboarding-api.md",
+      "prompt_type": "Implementation",
+      "security_score": 89,
+      "confidence_score": 64,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 76,
+      "prior_confidence_score": 78,
+      "summary": "PII minimization, versioned configuration, consent, and retention stops are good. The transport/schema paths and approved deletion/anonymization policy are not concretely bound.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "013",
+      "title": "Identity, Authorization, and Customer-Isolation Audit",
+      "file": "013-identity-authorization-and-customer-isolation-audit.md",
+      "prompt_type": "Read-only Audit",
+      "security_score": 97,
+      "confidence_score": 71,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 93,
+      "prior_confidence_score": 72,
+      "summary": "The audit prompt is strong and read-only. Trust still depends on mutable controller state, unvalidated corrections, and unsafe validator isolation.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "014",
+      "title": "Select and Approve the First Tucson or Pima County Production Source",
+      "file": "014-select-and-approve-the-first-tucson-or-pima-county-production-source.md",
+      "prompt_type": "Source Access Decision Gate",
+      "security_score": 90,
+      "confidence_score": 61,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 80,
+      "prior_confidence_score": 84,
+      "summary": "The legal/source-access decision gate is careful. Autonomous networking is denied, so current source evidence must be supplied through a trusted, hashed channel that the pack does not define.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "015",
+      "title": "Implement Durable Scheduled Acquisition and the Approved Live Connector",
+      "file": "015-implement-durable-scheduled-acquisition-and-the-approved-live-connector.md",
+      "prompt_type": "Implementation",
+      "security_score": 86,
+      "confidence_score": 58,
+      "verdict": "UNACCEPTABLE",
+      "prior_security_score": 78,
+      "prior_confidence_score": 76,
+      "summary": "The connector prompt is disciplined and can use offline fixtures, but exact source profile, scheduler/worker paths, host/method/response limits, and approved-source evidence are not integrated.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "016",
+      "title": "Implement the Production Source Parser, Replay, and Backfill Contract",
+      "file": "016-implement-the-production-source-parser-replay-and-backfill-contract.md",
+      "prompt_type": "Implementation",
+      "security_score": 91,
+      "confidence_score": 68,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 87,
+      "prior_confidence_score": 88,
+      "summary": "The parser/replay prompt is comparatively narrow and provenance-aware. Backfill resource ceilings, exact schema paths, and stage-specific validation are still missing.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "017",
+      "title": "Implement Required Production Geography and Address Resolution",
+      "file": "017-implement-required-production-geography-and-address-resolution.md",
+      "prompt_type": "Conditional Provider Implementation",
+      "security_score": 89,
+      "confidence_score": 61,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 82,
+      "prior_confidence_score": 78,
+      "summary": "Conditional geocoder/provider handling and provenance are strong. Exact adapter paths, provider licensing/retention approvals, and authenticated external evidence are not supplied.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "018",
+      "title": "Pilot Source, Ingestion, Normalization, and Geography Audit",
+      "file": "018-pilot-source-ingestion-normalization-and-geography-audit.md",
+      "prompt_type": "Read-only Audit",
+      "security_score": 96,
+      "confidence_score": 70,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 93,
+      "prior_confidence_score": 72,
+      "summary": "Read-only source/geography audit design is strong. Controller audit-state, evidence, correction, and validator defects remain gating risks.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "019",
+      "title": "Implement the Authorized Customer API and Query Projections",
+      "file": "019-implement-the-authorized-customer-api-and-query-projections.md",
+      "prompt_type": "Implementation",
+      "security_score": 91,
+      "confidence_score": 63,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 68,
+      "prior_confidence_score": 66,
+      "summary": "Authorization-from-Customer-Match and anti-enumeration intent are strong. The selected transport/OpenAPI paths and stack-specific security tests are unresolved.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "020",
+      "title": "Build the Authenticated Frontend Foundation and Onboarding Experience",
+      "file": "020-build-the-authenticated-frontend-foundation-and-onboarding-experience.md",
+      "prompt_type": "Implementation",
+      "security_score": 88,
+      "confidence_score": 59,
+      "verdict": "UNACCEPTABLE",
+      "prior_security_score": 69,
+      "prior_confidence_score": 72,
+      "summary": "The frontend prompt is safety-conscious, but the pack provides no mandatory frontend type/lint/build/browser/accessibility profile or exact dependency/lockfile paths.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "021",
+      "title": "Build the Explainable Opportunity Dashboard and Lead Workflow",
+      "file": "021-build-the-explainable-opportunity-dashboard-and-lead-workflow.md",
+      "prompt_type": "Implementation",
+      "security_score": 90,
+      "confidence_score": 61,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 78,
+      "prior_confidence_score": 76,
+      "summary": "The UI is correctly treated as non-authoritative and customer-scoped. Browser/E2E/accessibility validation and exact frontend/API contract paths remain absent.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "022",
+      "title": "Customer API, Frontend, and Data-Exposure Audit",
+      "file": "022-customer-api-frontend-and-data-exposure-audit.md",
+      "prompt_type": "Read-only Audit",
+      "security_score": 97,
+      "confidence_score": 70,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 93,
+      "prior_confidence_score": 72,
+      "summary": "The data-exposure audit is strong and read-only. Its PASS cannot be trusted until audit evidence, state, corrections, and validation are hardened.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "023",
+      "title": "Implement Email Notification Orchestration and Delivery",
+      "file": "023-implement-email-notification-orchestration-and-delivery.md",
+      "prompt_type": "Conditional Provider Implementation",
+      "security_score": 88,
+      "confidence_score": 54,
+      "verdict": "UNACCEPTABLE",
+      "prior_security_score": 54,
+      "prior_confidence_score": 74,
+      "summary": "Consent, outbox idempotency, and provider-neutral design are good. The external runner is absent, provider/webhook evidence is not schema-bound, and exact transport paths are unresolved.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "024",
+      "title": "Email Delivery Audit",
+      "file": "024-email-delivery-audit.md",
+      "prompt_type": "Read-only Audit",
+      "security_score": 96,
+      "confidence_score": 67,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 93,
+      "prior_confidence_score": 72,
+      "summary": "The email audit prompt is strong. Provider delivery facts and webhook evidence lack an authenticated, hashed ingestion and attestation path.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "025",
+      "title": "Implement Controlled SMS Infrastructure Behind a Disabled Feature Flag",
+      "file": "025-implement-controlled-sms-infrastructure-behind-a-disabled-feature-flag.md",
+      "prompt_type": "Conditional Provider Implementation",
+      "security_score": 90,
+      "confidence_score": 49,
+      "verdict": "UNACCEPTABLE",
+      "prior_security_score": 48,
+      "prior_confidence_score": 72,
+      "summary": "Disabled-by-default SMS, consent, STOP/HELP, quiet-hours, and idempotency controls are strong. Approval quorum is not independently enforced, the runner is absent, and the legal/cost blast radius remains high.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "026",
+      "title": "Build Internal Review and Source Operations Tooling",
+      "file": "026-build-internal-review-and-source-operations-tooling.md",
+      "prompt_type": "Implementation",
+      "security_score": 88,
+      "confidence_score": 55,
+      "verdict": "UNACCEPTABLE",
+      "prior_security_score": 58,
+      "prior_confidence_score": 72,
+      "summary": "The internal-operations prompt contains strong privilege and audit expectations. Exact RBAC/transport paths, dual control for destructive operations, and raw-evidence access enforcement are not bound.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "027",
+      "title": "Notification, SMS, and Operations Audit",
+      "file": "027-notification-sms-and-operations-audit.md",
+      "prompt_type": "Read-only Audit",
+      "security_score": 97,
+      "confidence_score": 67,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 93,
+      "prior_confidence_score": 72,
+      "summary": "The notification/SMS/operations audit is strong. The same mutable state, evidence, corrections, and validator issues prevent reliable PASS gating.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "028",
+      "title": "Implement the Privacy-Conscious Analytics Event Model",
+      "file": "028-implement-the-privacy-conscious-analytics-event-model.md",
+      "prompt_type": "Implementation",
+      "security_score": 91,
+      "confidence_score": 63,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 74,
+      "prior_confidence_score": 82,
+      "summary": "Privacy-conscious event design is strong. Exact taxonomy/retention paths and any analytics-vendor approval/evidence boundary are unresolved.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "029",
+      "title": "Implement Observability, Health, Alerting, and Operational Runbooks",
+      "file": "029-implement-observability-health-alerting-and-operational-runbooks.md",
+      "prompt_type": "Implementation",
+      "security_score": 88,
+      "confidence_score": 53,
+      "verdict": "UNACCEPTABLE",
+      "prior_security_score": 58,
+      "prior_confidence_score": 78,
+      "summary": "Redaction, bounded cardinality, and truthful readiness are explicit. Observability can touch most of the system and leak data; exact paths and a secret-safe validator are absent.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "030",
+      "title": "Implement Backup, Restore, Reconciliation, and Rollback Procedures",
+      "file": "030-implement-backup-restore-reconciliation-and-rollback-procedures.md",
+      "prompt_type": "Implementation",
+      "security_score": 89,
+      "confidence_score": 45,
+      "verdict": "UNACCEPTABLE",
+      "prior_security_score": 52,
+      "prior_confidence_score": 75,
+      "summary": "The prompt requires isolated restore and provenance-preserving reconciliation. The supplied validator can read the host and write the repository, and no recovery capability runner or signed restore-evidence schema exists.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "031",
+      "title": "Security, Privacy, Performance, and Recovery Hardening Audit",
+      "file": "031-perform-security-privacy-performance-and-recovery-hardening.md",
+      "prompt_type": "Read-only Formal Hardening Audit",
+      "security_score": 97,
+      "confidence_score": 68,
+      "verdict": "CONDITIONAL",
+      "prior_security_score": 35,
+      "prior_confidence_score": 80,
+      "summary": "The dangerous mega-hardening stage was correctly replaced by a read-only audit. Correction authorization, mutable runtime state, and unsafe validation remain; the legacy filename still implies implementation.",
+      "filename_title_changed": true
+    },
+    {
+      "id": "032",
+      "title": "Formal Pilot Release Test Matrix and Release Gate Audit",
+      "file": "032-formal-pilot-release-test-matrix-and-release-gate-audit.md",
+      "prompt_type": "Read-only Audit",
+      "security_score": 97,
+      "confidence_score": 58,
+      "verdict": "UNACCEPTABLE",
+      "prior_security_score": 93,
+      "prior_confidence_score": 68,
+      "summary": "The release matrix is comprehensive. The pack does not supply the mandatory stage-specific validation commands, so the controller can still lack the evidence needed for a trustworthy PASS.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "033",
+      "title": "Prepare the Controlled Staging Deployment Plan",
+      "file": "033-prepare-and-execute-the-controlled-staging-deployment.md",
+      "prompt_type": "Implementation and Deployment Planning",
+      "security_score": 93,
+      "confidence_score": 55,
+      "verdict": "UNACCEPTABLE",
+      "prior_security_score": 62,
+      "prior_confidence_score": 74,
+      "summary": "Plan-only staging is a major improvement. No machine-validated deployment-plan schema, implemented capability runner, signed evidence chain, or safe approval enforcement is supplied; the filename still says execute.",
+      "filename_title_changed": true
+    },
+    {
+      "id": "034",
+      "title": "Final Staging and Pilot Readiness Audit",
+      "file": "034-final-staging-and-pilot-readiness-audit.md",
+      "prompt_type": "Read-only Audit",
+      "security_score": 97,
+      "confidence_score": 52,
+      "verdict": "UNACCEPTABLE",
+      "prior_security_score": 93,
+      "prior_confidence_score": 68,
+      "summary": "The staging audit is strong and correctly limits its authority. There is no authenticated staging-evidence ingestion or plan/apply attestation mechanism.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "035",
+      "title": "Prepare the Controlled Production Pilot Release Plan",
+      "file": "035-deploy-the-controlled-production-pilot.md",
+      "prompt_type": "Implementation and Production Release Planning",
+      "security_score": 94,
+      "confidence_score": 45,
+      "verdict": "UNACCEPTABLE",
+      "prior_security_score": 42,
+      "prior_confidence_score": 70,
+      "summary": "Plan-only production and two-person intent are major improvements. HMAC key handling does not enforce independent humans, approval fields do not bind the full plan/account/resources, and the runner is absent; the filename still says deploy.",
+      "filename_title_changed": true
+    },
+    {
+      "id": "036",
+      "title": "Production Pilot Launch Verification Audit",
+      "file": "036-production-pilot-launch-verification-audit.md",
+      "prompt_type": "Read-only Audit",
+      "security_score": 97,
+      "confidence_score": 48,
+      "verdict": "UNACCEPTABLE",
+      "prior_security_score": 93,
+      "prior_confidence_score": 68,
+      "summary": "The production verification audit is strong in content. Production facts have no implemented trusted evidence channel or signed attestation chain.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "037",
+      "title": "Implement Pilot Feedback and Business Validation Workflow",
+      "file": "037-implement-pilot-feedback-and-business-validation-workflow.md",
+      "prompt_type": "Implementation after Pilot Approval",
+      "security_score": 89,
+      "confidence_score": 52,
+      "verdict": "UNACCEPTABLE",
+      "prior_security_score": 65,
+      "prior_confidence_score": 70,
+      "summary": "Customer-owned feedback, version binding, and negative-outcome retention are strong. Exact privacy/retention/transport paths and a human-approved pilot snapshot are not bound.",
+      "filename_title_changed": false
+    },
+    {
+      "id": "038",
+      "title": "Pilot Feedback and Business Validation Audit",
+      "file": "038-pilot-feedback-and-business-validation-audit.md",
+      "prompt_type": "Read-only Audit",
+      "security_score": 97,
+      "confidence_score": 54,
+      "verdict": "UNACCEPTABLE",
+      "prior_security_score": 93,
+      "prior_confidence_score": 68,
+      "summary": "The final audit is rigorous. Snapshot authenticity, reproducible evidence, correction semantics, and controller state/index integrity are unresolved.",
+      "filename_title_changed": false
+    }
+  ],
+  "appendices": [
+    {
+      "id": "A",
+      "file": "appendix-a-audit-correction-prompt.md",
+      "security_score": 89,
+      "confidence_score": 35,
+      "verdict": "UNACCEPTABLE",
+      "summary": "The prompt is now narrow and explicit, but correction paths are taken from agent output stored in unsigned, writable local state. A typed confirmation is not a cryptographic authorization."
+    },
+    {
+      "id": "B",
+      "file": "appendix-b-optional-controlled-sms-canary-enablement-prompt.md",
+      "security_score": 92,
+      "confidence_score": 40,
+      "verdict": "UNACCEPTABLE",
+      "summary": "The prompt correctly denies provider calls and sending. Safe activation still depends on a missing external runner and an approval model whose HMAC keys/quorum can be compromised or replayed through mutable state."
+    },
+    {
+      "id": "C",
+      "file": "appendix-c-optional-controlled-sms-canary-activation-audit.md",
+      "security_score": 96,
+      "confidence_score": 43,
+      "verdict": "UNACCEPTABLE",
+      "summary": "The audit is read-only and thorough, but the provider/deployment evidence channel, activation attestation, and controller audit-state integrity are not implemented."
+    }
+  ],
+  "promotion_blockers": [
+    "Replace HMAC/shared-secret approval verification with asymmetric public-key verification and isolate all child environments.",
+    "Move controller state and nonce consumption outside the agent/validator workspace and make gating reconstructible from signed committed evidence.",
+    "Fix required-approval empty-list/zero-quorum bypasses and enforce complete mandatory schemas.",
+    "Replace the validation wrapper with a disposable read-only repository sandbox that cannot read host secrets.",
+    "Implement NUL-safe diff/path parsing, segment-aware glob rules, and full symlink/hardlink/submodule protection.",
+    "Add controller-native semantic validation for audit verdicts, corrections, report headers, and Appendix A scope.",
+    "Require exact-commit/approved-merge reconciliation with no unrelated commits.",
+    "Implement and separately audit the external capability runner plus typed plan/evidence manifests.",
+    "Regenerate the roadmap against the actual repository with exact paths and complete stage-specific validation profiles.",
+    "Expand security tests to cover every fail-closed control and identified bypass."
+  ]
+}

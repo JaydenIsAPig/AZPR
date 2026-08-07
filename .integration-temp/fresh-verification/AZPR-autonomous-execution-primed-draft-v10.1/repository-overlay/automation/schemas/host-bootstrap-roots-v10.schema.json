@@ -1,0 +1,106 @@
+{
+  "$id": "https://azpr.local/schemas/host-bootstrap-roots-v10.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "bootstrap_kind": {
+      "const": "AZPR_V10_HOST_BOOTSTRAP_ROOTS"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "format_version": {
+      "const": "1.0"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "manifest_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "roots": {
+      "additionalProperties": false,
+      "properties": {
+        "authorization_anchor_identity_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "host_qualification_roots_authority_public_key_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "host_qualification_roots_manifest_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "phase_transition_keyring_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "qualification_authorization_keyring_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "qualification_receipt_signing_public_key_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "qualification_trust_authority_public_key_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "qualification_trust_manifest_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "qualification_authorization_keyring_sha256",
+        "qualification_receipt_signing_public_key_sha256",
+        "phase_transition_keyring_sha256",
+        "authorization_anchor_identity_sha256",
+        "qualification_trust_manifest_sha256",
+        "qualification_trust_authority_public_key_sha256",
+        "host_qualification_roots_manifest_sha256",
+        "host_qualification_roots_authority_public_key_sha256"
+      ],
+      "type": "object"
+    },
+    "sequence": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "signature": {
+      "maxLength": 128,
+      "minLength": 80,
+      "pattern": "^[A-Za-z0-9+/=]+$",
+      "type": "string"
+    },
+    "signer_key_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "format_version",
+    "bootstrap_kind",
+    "manifest_id",
+    "sequence",
+    "issued_at",
+    "expires_at",
+    "roots",
+    "signer_key_id",
+    "signature"
+  ],
+  "type": "object"
+}

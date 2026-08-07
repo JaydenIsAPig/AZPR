@@ -1,0 +1,230 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://azpr.local/schemas/run-manifest.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format_version",
+    "run_id",
+    "created_at",
+    "controller_version",
+    "action",
+    "stage_id",
+    "starting_commit",
+    "roadmap_version",
+    "nonce_journal_head",
+    "state_journal_head",
+    "master_prompt_sha256",
+    "prompt_catalog_sha256",
+    "roadmap_sha256",
+    "starting_tree",
+    "policy_hashes",
+    "approval_ids",
+    "validation_profile_hashes",
+    "nonce",
+    "signer_key_id",
+    "signature",
+    "installation_manifest_sha256",
+    "canonical_policy_record_sha256",
+    "operation_registration_ids"
+  ],
+  "properties": {
+    "format_version": {
+      "const": "2.0"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 24,
+      "maxLength": 8000
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 8000
+    },
+    "controller_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 8000
+    },
+    "action": {
+      "enum": [
+        "numbered",
+        "appendix_a",
+        "appendix_b",
+        "appendix_c"
+      ]
+    },
+    "stage_id": {
+      "type": "string",
+      "pattern": "^(?:[0-9]{3}|[ABC])$",
+      "maxLength": 8000
+    },
+    "starting_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$",
+      "maxLength": 8000
+    },
+    "roadmap_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 8000
+    },
+    "policy_hashes": {
+      "type": "object",
+      "minProperties": 8,
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$",
+        "maxLength": 8000
+      },
+      "maxProperties": 100
+    },
+    "approval_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "maxLength": 8000
+      },
+      "maxItems": 100
+    },
+    "validation_profile_hashes": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$",
+        "maxLength": 8000
+      },
+      "maxProperties": 100
+    },
+    "nonce": {
+      "type": "string",
+      "minLength": 24,
+      "maxLength": 8000
+    },
+    "signer_key_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 8000
+    },
+    "signature": {
+      "type": "string",
+      "minLength": 80,
+      "maxLength": 120
+    },
+    "approvals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "approval_id",
+          "nonce",
+          "sha256"
+        ],
+        "properties": {
+          "approval_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 8000
+          },
+          "nonce": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 8000
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "maxLength": 8000
+          }
+        }
+      },
+      "maxItems": 100
+    },
+    "starting_tree": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$",
+      "maxLength": 8000
+    },
+    "roadmap_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "maxLength": 8000
+    },
+    "prompt_catalog_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "maxLength": 8000
+    },
+    "master_prompt_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "maxLength": 8000
+    },
+    "state_journal_head": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sequence",
+        "record_sha256"
+      ],
+      "properties": {
+        "sequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "record_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "maxLength": 8000
+        }
+      }
+    },
+    "nonce_journal_head": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sequence",
+        "record_sha256"
+      ],
+      "properties": {
+        "sequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "record_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "maxLength": 8000
+        }
+      }
+    },
+    "installation_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "maxLength": 64
+    },
+    "canonical_policy_record_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "maxLength": 64
+    },
+    "operation_registration_ids": {
+      "type": "array",
+      "maxItems": 100,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 16,
+        "maxLength": 160
+      }
+    }
+  }
+}

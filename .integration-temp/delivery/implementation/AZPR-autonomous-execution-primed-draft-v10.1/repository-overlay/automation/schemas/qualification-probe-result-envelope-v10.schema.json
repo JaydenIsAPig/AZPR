@@ -1,0 +1,237 @@
+{
+  "$id": "https://azpr.local/schemas/qualification-probe-result-envelope-v10.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "boundary": {
+      "additionalProperties": false,
+      "properties": {
+        "cgroup_v2": {
+          "const": true
+        },
+        "daemon_sockets": {
+          "const": false
+        },
+        "disposable": {
+          "const": true
+        },
+        "host_mounts": {
+          "const": false
+        },
+        "mount_namespace": {
+          "const": true
+        },
+        "network_mode": {
+          "enum": [
+            "DENY_ALL",
+            "ISOLATED_CONTROLLED_ENDPOINT_ONLY"
+          ]
+        },
+        "no_secrets": {
+          "const": true
+        },
+        "pid_namespace": {
+          "const": true
+        },
+        "rootless": {
+          "const": true
+        },
+        "run_as_gid": {
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "run_as_uid": {
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "rootless",
+        "no_secrets",
+        "host_mounts",
+        "daemon_sockets",
+        "pid_namespace",
+        "mount_namespace",
+        "cgroup_v2",
+        "disposable",
+        "run_as_uid",
+        "run_as_gid",
+        "network_mode"
+      ],
+      "type": "object"
+    },
+    "candidate_archive_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "challenge_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "envelope_kind": {
+      "const": "AZPR_V10_1_NO_SECRET_PROBE_RESULT"
+    },
+    "exit_code": {
+      "const": 0
+    },
+    "format_version": {
+      "const": "1.1"
+    },
+    "host_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "observations": {
+      "additionalProperties": false,
+      "properties": {
+        "daemon_access_denied": {
+          "const": true
+        },
+        "escape_denied": {
+          "const": true
+        },
+        "evidence_mutation_denied": {
+          "const": true
+        },
+        "host_read_denied": {
+          "const": true
+        },
+        "mount_denied": {
+          "const": true
+        },
+        "network_denied": {
+          "const": true
+        },
+        "resource_exhaustion_contained": {
+          "const": true
+        },
+        "secret_read_denied": {
+          "const": true
+        }
+      },
+      "required": [
+        "secret_read_denied",
+        "host_read_denied",
+        "network_denied",
+        "mount_denied",
+        "daemon_access_denied",
+        "escape_denied",
+        "resource_exhaustion_contained",
+        "evidence_mutation_denied"
+      ],
+      "type": "object"
+    },
+    "probe_attestor_keyring_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "probe_attestor_revocation_state_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "probe_keyring_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "probe_policy_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "probe_revocation_state_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "probe_service_attestation_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "probe_service_executable_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "probe_service_identity_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "qualification_trust_manifest_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "signature": {
+      "maxLength": 128,
+      "minLength": 80,
+      "pattern": "^[A-Za-z0-9+/=]+$",
+      "type": "string"
+    },
+    "signer_key_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "signer_service_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "target_role": {
+      "enum": [
+        "git_binary",
+        "python_binary",
+        "codex_binary",
+        "container_engine",
+        "anchor_helper",
+        "mount_binary",
+        "umount_binary",
+        "cleanroom_adapter",
+        "qualification_verifier"
+      ]
+    },
+    "target_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "format_version",
+    "envelope_kind",
+    "target_role",
+    "target_sha256",
+    "host_id",
+    "candidate_archive_sha256",
+    "challenge_sha256",
+    "qualification_trust_manifest_sha256",
+    "probe_keyring_sha256",
+    "probe_policy_sha256",
+    "probe_service_identity_sha256",
+    "probe_service_attestation_sha256",
+    "probe_revocation_state_sha256",
+    "probe_attestor_keyring_sha256",
+    "probe_attestor_revocation_state_sha256",
+    "probe_service_executable_sha256",
+    "boundary",
+    "observations",
+    "exit_code",
+    "started_at",
+    "completed_at",
+    "signer_key_id",
+    "signer_service_id",
+    "signature"
+  ],
+  "type": "object"
+}

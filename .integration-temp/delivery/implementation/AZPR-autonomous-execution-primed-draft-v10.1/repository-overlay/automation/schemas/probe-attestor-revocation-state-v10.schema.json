@@ -1,0 +1,48 @@
+{
+  "$id": "https://azpr.local/schemas/probe-attestor-revocation-state-v10.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "format_version": {
+      "const": "1.0"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "revocation_kind": {
+      "const": "AZPR_V10_1_PROBE_ATTESTOR_REVOCATIONS"
+    },
+    "revoked_key_ids": {
+      "items": {
+        "maxLength": 160,
+        "minLength": 4,
+        "type": "string"
+      },
+      "maxItems": 128,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "sequence": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "service_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "format_version",
+    "revocation_kind",
+    "sequence",
+    "service_id",
+    "issued_at",
+    "revoked_key_ids"
+  ],
+  "type": "object"
+}

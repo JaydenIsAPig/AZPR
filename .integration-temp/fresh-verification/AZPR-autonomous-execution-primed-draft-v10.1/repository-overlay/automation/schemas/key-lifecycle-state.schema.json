@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://azpr.local/schemas/key-lifecycle-state.schema.json",
+  "title": "AZPR Installed Key Lifecycle State",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["format_version", "sequence", "last_transition_id", "transition_chain_sha256", "roles"],
+  "properties": {
+    "format_version": {"const": "1.0"},
+    "sequence": {"type": "integer", "minimum": 0, "maximum": 9223372036854775807},
+    "last_transition_id": {"type": ["string", "null"], "maxLength": 160},
+    "transition_chain_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "roles": {
+      "type": "object", "minProperties": 1, "maxProperties": 128,
+      "propertyNames": {"pattern": "^[A-Za-z0-9._:-]{3,128}$"},
+      "additionalProperties": {
+        "type": "object", "additionalProperties": false,
+        "required": ["epoch", "status", "key_id", "fingerprint", "effective_at", "historical_keys"],
+        "properties": {
+          "epoch": {"type": "integer", "minimum": 1},
+          "status": {"enum": ["ACTIVE", "REVOKED", "EMERGENCY_DISABLED"]},
+          "key_id": {"type": "string", "minLength": 8, "maxLength": 128},
+          "fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "effective_at": {"type": "string", "format": "date-time", "maxLength": 64},
+          "historical_keys": {
+            "type": "array", "maxItems": 64,
+            "items": {
+              "type": "object", "additionalProperties": false,
+              "required": ["epoch", "key_id", "fingerprint", "valid_until"],
+              "properties": {
+                "epoch": {"type": "integer", "minimum": 1},
+                "key_id": {"type": "string", "minLength": 8, "maxLength": 128},
+                "fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                "valid_until": {"type": "string", "format": "date-time", "maxLength": 64}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

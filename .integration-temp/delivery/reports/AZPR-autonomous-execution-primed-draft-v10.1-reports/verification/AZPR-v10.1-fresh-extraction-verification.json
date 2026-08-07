@@ -1,0 +1,870 @@
+{
+  "appendices_verified": 3,
+  "candidate_version": "v10.1",
+  "collected_tests_verified": 120,
+  "current_documents_verified": 17,
+  "environment": {
+    "credential_environment_inherited": false,
+    "effective_uid": 1000,
+    "network_required": false,
+    "reviewer_temp_mode": "0700",
+    "root_state_required": false,
+    "source_tree_mutation_detected": false
+  },
+  "fresh_extraction_invocation": true,
+  "full_autonomous_pathway_viable": true,
+  "manifest_entries_verified": 312,
+  "numbered_prompts_verified": 38,
+  "organization_release_signature_status": "NOT_PROVIDED_UNSIGNED_DEVELOPMENT_CANDIDATE",
+  "pre_autonomous_staging": "FAIL",
+  "prompt_zip_sha256": "3b235cb7e33ca409241ff26523f60f8fee89cec524b3f09e91a69927a0aa4880",
+  "python_files_compiled": 69,
+  "release_tests_passed": 120,
+  "safe_for_unattended_execution_now": false,
+  "schemas_verified": 73,
+  "semi_autonomous_codex_staging_ready": false,
+  "status": "PASS_READY_FOR_INDEPENDENT_V10_1_SOURCE_REASSESSMENT",
+  "test_execution": [
+    {
+      "category": "SCHEMA_AND_PRIMING_CONTROL",
+      "duration_seconds": 0.8396,
+      "node": "tests/test_autonomous_priming_controls.py::AutonomousPrimingControlTests::test_every_json_schema_is_bounded_and_strict",
+      "status": "PASS",
+      "test_id": "V10.1-REL-001-TEST-EVERY-JSON-SCHEMA-IS-BOUNDED-AND-STRICT"
+    },
+    {
+      "category": "SCHEMA_AND_PRIMING_CONTROL",
+      "duration_seconds": 0.7555,
+      "node": "tests/test_autonomous_priming_controls.py::AutonomousPrimingControlTests::test_installation_requires_policy_supply_chain_and_runtime_roots",
+      "status": "PASS",
+      "test_id": "V10.1-REL-002-TEST-INSTALLATION-REQUIRES-POLICY-SUPPLY-CHAIN-AND-RUNTIME-ROOTS"
+    },
+    {
+      "category": "SCHEMA_AND_PRIMING_CONTROL",
+      "duration_seconds": 0.7882,
+      "node": "tests/test_autonomous_priming_controls.py::AutonomousPrimingControlTests::test_installer_requires_distinct_policy_and_build_signer_roles",
+      "status": "PASS",
+      "test_id": "V10.1-REL-003-TEST-INSTALLER-REQUIRES-DISTINCT-POLICY-AND-BUILD-SIGNER-ROLES"
+    },
+    {
+      "category": "SCHEMA_AND_PRIMING_CONTROL",
+      "duration_seconds": 0.7395,
+      "node": "tests/test_autonomous_priming_controls.py::AutonomousPrimingControlTests::test_no_stale_external_runner_launcher_or_fake_lock",
+      "status": "PASS",
+      "test_id": "V10.1-REL-004-TEST-NO-STALE-EXTERNAL-RUNNER-LAUNCHER-OR-FAKE-LOCK"
+    },
+    {
+      "category": "SCHEMA_AND_PRIMING_CONTROL",
+      "duration_seconds": 0.8405,
+      "node": "tests/test_autonomous_priming_controls.py::AutonomousPrimingControlTests::test_operation_registry_is_authoritative_and_ticket_is_recoverable",
+      "status": "PASS",
+      "test_id": "V10.1-REL-005-TEST-OPERATION-REGISTRY-IS-AUTHORITATIVE-AND-TICKET-IS-RECOVERABLE"
+    },
+    {
+      "category": "SCHEMA_AND_PRIMING_CONTROL",
+      "duration_seconds": 0.7896,
+      "node": "tests/test_autonomous_priming_controls.py::AutonomousPrimingControlTests::test_result_schema_approval_and_external_plan_are_strict",
+      "status": "PASS",
+      "test_id": "V10.1-REL-006-TEST-RESULT-SCHEMA-APPROVAL-AND-EXTERNAL-PLAN-ARE-STRICT"
+    },
+    {
+      "category": "SCHEMA_AND_PRIMING_CONTROL",
+      "duration_seconds": 0.848,
+      "node": "tests/test_autonomous_priming_controls.py::AutonomousPrimingControlTests::test_roadmap_generation_is_post_prompt004_signed_gate",
+      "status": "PASS",
+      "test_id": "V10.1-REL-007-TEST-ROADMAP-GENERATION-IS-POST-PROMPT004-SIGNED-GATE"
+    },
+    {
+      "category": "SCHEMA_AND_PRIMING_CONTROL",
+      "duration_seconds": 0.7899,
+      "node": "tests/test_autonomous_priming_controls.py::AutonomousPrimingControlTests::test_unapproved_condensed_policy_is_quarantined",
+      "status": "PASS",
+      "test_id": "V10.1-REL-008-TEST-UNAPPROVED-CONDENSED-POLICY-IS-QUARANTINED"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 2.0437,
+      "node": "tests/test_final_assessment_controls.py::FinalAssessmentControlTests::test_aggregate_diff_budget_includes_untracked_files",
+      "status": "PASS",
+      "test_id": "V10.1-REL-009-TEST-AGGREGATE-DIFF-BUDGET-INCLUDES-UNTRACKED-FILES"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 1.9974,
+      "node": "tests/test_final_assessment_controls.py::FinalAssessmentControlTests::test_appendix_a_invented_authorization_id_does_not_pass",
+      "status": "PASS",
+      "test_id": "V10.1-REL-010-TEST-APPENDIX-A-INVENTED-AUTHORIZATION-ID-DOES-NOT-PASS"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 1.9423,
+      "node": "tests/test_final_assessment_controls.py::FinalAssessmentControlTests::test_approval_binding_has_no_self_hash_and_detects_policy_change",
+      "status": "PASS",
+      "test_id": "V10.1-REL-011-TEST-APPROVAL-BINDING-HAS-NO-SELF-HASH-AND-DETECTS-POLICY-CHANGE"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 11.7411,
+      "node": "tests/test_final_assessment_controls.py::FinalAssessmentControlTests::test_atomic_nonce_exactly_one_of_many_processes",
+      "status": "PASS",
+      "test_id": "V10.1-REL-012-TEST-ATOMIC-NONCE-EXACTLY-ONE-OF-MANY-PROCESSES"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 2.3249,
+      "node": "tests/test_final_assessment_controls.py::FinalAssessmentControlTests::test_atomic_nonce_exactly_one_of_many_threads",
+      "status": "PASS",
+      "test_id": "V10.1-REL-013-TEST-ATOMIC-NONCE-EXACTLY-ONE-OF-MANY-THREADS"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 2.1086,
+      "node": "tests/test_final_assessment_controls.py::FinalAssessmentControlTests::test_distinct_role_assignment_rejects_dual_role_shortcut",
+      "status": "PASS",
+      "test_id": "V10.1-REL-014-TEST-DISTINCT-ROLE-ASSIGNMENT-REJECTS-DUAL-ROLE-SHORTCUT"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 2.5576,
+      "node": "tests/test_final_assessment_controls.py::FinalAssessmentControlTests::test_evidence_registry_is_signed_bound_and_create_once",
+      "status": "PASS",
+      "test_id": "V10.1-REL-015-TEST-EVIDENCE-REGISTRY-IS-SIGNED-BOUND-AND-CREATE-ONCE"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 4.3094,
+      "node": "tests/test_final_assessment_controls.py::FinalAssessmentControlTests::test_external_anchor_detects_signed_journal_rollback",
+      "status": "PASS",
+      "test_id": "V10.1-REL-016-TEST-EXTERNAL-ANCHOR-DETECTS-SIGNED-JOURNAL-ROLLBACK"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 3.4558,
+      "node": "tests/test_final_assessment_controls.py::FinalAssessmentControlTests::test_external_runner_rolled_back_is_non_success_terminal",
+      "status": "PASS",
+      "test_id": "V10.1-REL-017-TEST-EXTERNAL-RUNNER-ROLLED-BACK-IS-NON-SUCCESS-TERMINAL"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 1.9931,
+      "node": "tests/test_final_assessment_controls.py::FinalAssessmentControlTests::test_hardened_git_rejects_host_code_configuration",
+      "status": "PASS",
+      "test_id": "V10.1-REL-018-TEST-HARDENED-GIT-REJECTS-HOST-CODE-CONFIGURATION"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 1.9424,
+      "node": "tests/test_final_assessment_controls.py::FinalAssessmentControlTests::test_secure_controller_write_rejects_symlink_ancestor",
+      "status": "PASS",
+      "test_id": "V10.1-REL-019-TEST-SECURE-CONTROLLER-WRITE-REJECTS-SYMLINK-ANCESTOR"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 1.942,
+      "node": "tests/test_final_assessment_controls.py::FinalAssessmentControlTests::test_state_binding_rejects_head_rollback",
+      "status": "PASS",
+      "test_id": "V10.1-REL-020-TEST-STATE-BINDING-REJECTS-HEAD-ROLLBACK"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 4.0661,
+      "node": "tests/test_finalized_composed_controls.py::FinalizedComposedControlTests::test_anchor_failure_never_releases_nonce_and_recovery_succeeds",
+      "status": "PASS",
+      "test_id": "V10.1-REL-021-TEST-ANCHOR-FAILURE-NEVER-RELEASES-NONCE-AND-RECOVERY-SUCCEEDS"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 2.2432,
+      "node": "tests/test_finalized_composed_controls.py::FinalizedComposedControlTests::test_bundle_has_no_stale_placeholder_controller_config",
+      "status": "PASS",
+      "test_id": "V10.1-REL-022-TEST-BUNDLE-HAS-NO-STALE-PLACEHOLDER-CONTROLLER-CONFIG"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 2.5467,
+      "node": "tests/test_finalized_composed_controls.py::FinalizedComposedControlTests::test_controller_output_is_bounded",
+      "status": "PASS",
+      "test_id": "V10.1-REL-023-TEST-CONTROLLER-OUTPUT-IS-BOUNDED"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 2.8513,
+      "node": "tests/test_finalized_composed_controls.py::FinalizedComposedControlTests::test_operation_evidence_exact_binding_matrix",
+      "status": "PASS",
+      "test_id": "V10.1-REL-024-TEST-OPERATION-EVIDENCE-EXACT-BINDING-MATRIX"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 2.5539,
+      "node": "tests/test_finalized_composed_controls.py::FinalizedComposedControlTests::test_operator_keygen_rejects_public_symlink",
+      "status": "PASS",
+      "test_id": "V10.1-REL-025-TEST-OPERATOR-KEYGEN-REJECTS-PUBLIC-SYMLINK"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 2.0452,
+      "node": "tests/test_finalized_composed_controls.py::FinalizedComposedControlTests::test_policy_identity_source_includes_evidence_roots",
+      "status": "PASS",
+      "test_id": "V10.1-REL-026-TEST-POLICY-IDENTITY-SOURCE-INCLUDES-EVIDENCE-ROOTS"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 1.9917,
+      "node": "tests/test_finalized_composed_controls.py::FinalizedComposedControlTests::test_production_trust_root_ignores_caller_selected_git",
+      "status": "PASS",
+      "test_id": "V10.1-REL-027-TEST-PRODUCTION-TRUST-ROOT-IGNORES-CALLER-SELECTED-GIT"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 2.0426,
+      "node": "tests/test_finalized_composed_controls.py::FinalizedComposedControlTests::test_true_diff_budget_counts_deletion_and_binary_patch",
+      "status": "PASS",
+      "test_id": "V10.1-REL-028-TEST-TRUE-DIFF-BUDGET-COUNTS-DELETION-AND-BINARY-PATCH"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 1.9913,
+      "node": "tests/test_refined_security.py::SecureRuntimeTests::test_distinct_signer_quorum_and_roles",
+      "status": "PASS",
+      "test_id": "V10.1-REL-029-TEST-DISTINCT-SIGNER-QUORUM-AND-ROLES"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 1.8413,
+      "node": "tests/test_refined_security.py::SecureRuntimeTests::test_minimal_child_environment_drops_parent_secrets",
+      "status": "PASS",
+      "test_id": "V10.1-REL-030-TEST-MINIMAL-CHILD-ENVIRONMENT-DROPS-PARENT-SECRETS"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 1.889,
+      "node": "tests/test_refined_security.py::SecureRuntimeTests::test_nul_path_parsing_and_control_character_rejection",
+      "status": "PASS",
+      "test_id": "V10.1-REL-031-TEST-NUL-PATH-PARSING-AND-CONTROL-CHARACTER-REJECTION"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 1.8411,
+      "node": "tests/test_refined_security.py::SecureRuntimeTests::test_redaction_and_size_cap",
+      "status": "PASS",
+      "test_id": "V10.1-REL-032-TEST-REDACTION-AND-SIZE-CAP"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 1.8441,
+      "node": "tests/test_refined_security.py::SecureRuntimeTests::test_runtime_root_must_be_outside_repository",
+      "status": "PASS",
+      "test_id": "V10.1-REL-033-TEST-RUNTIME-ROOT-MUST-BE-OUTSIDE-REPOSITORY"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 1.8999,
+      "node": "tests/test_refined_security.py::SecureRuntimeTests::test_segment_aware_globs",
+      "status": "PASS",
+      "test_id": "V10.1-REL-034-TEST-SEGMENT-AWARE-GLOBS"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 1.8917,
+      "node": "tests/test_refined_security.py::SecureRuntimeTests::test_sensitive_extra_environment_is_rejected",
+      "status": "PASS",
+      "test_id": "V10.1-REL-035-TEST-SENSITIVE-EXTRA-ENVIRONMENT-IS-REJECTED"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 1.9557,
+      "node": "tests/test_refined_security.py::SecureRuntimeTests::test_signed_journal_detects_tampering_and_nonce_replay",
+      "status": "PASS",
+      "test_id": "V10.1-REL-036-TEST-SIGNED-JOURNAL-DETECTS-TAMPERING-AND-NONCE-REPLAY"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 1.9025,
+      "node": "tests/test_refined_security.py::SecureRuntimeTests::test_topology_rejects_writable_symlink_and_hardlink",
+      "status": "PASS",
+      "test_id": "V10.1-REL-037-TEST-TOPOLOGY-REJECTS-WRITABLE-SYMLINK-AND-HARDLINK"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 2.0,
+      "node": "tests/test_refined_security.py::ControllerTests::test_audit_semantic_consistency",
+      "status": "PASS",
+      "test_id": "V10.1-REL-038-TEST-AUDIT-SEMANTIC-CONSISTENCY"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 1.99,
+      "node": "tests/test_refined_security.py::ControllerTests::test_refined_source_does_not_contain_retired_trust_models",
+      "status": "PASS",
+      "test_id": "V10.1-REL-039-TEST-REFINED-SOURCE-DOES-NOT-CONTAIN-RETIRED-TRUST-MODELS"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 2.2492,
+      "node": "tests/test_refined_security.py::ControllerTests::test_required_approval_empty_or_zero_fails",
+      "status": "PASS",
+      "test_id": "V10.1-REL-040-TEST-REQUIRED-APPROVAL-EMPTY-OR-ZERO-FAILS"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 1.9424,
+      "node": "tests/test_refined_security.py::ControllerTests::test_security_sensitive_correction_requires_human_authorization",
+      "status": "PASS",
+      "test_id": "V10.1-REL-041-TEST-SECURITY-SENSITIVE-CORRECTION-REQUIRES-HUMAN-AUTHORIZATION"
+    },
+    {
+      "category": "INHERITED_COMPOSED_SECURITY",
+      "duration_seconds": 6.3773,
+      "node": "tests/test_refined_security.py::ExternalRunnerDryRunTests::test_signed_plan_attestation_and_live_probe_dry_run",
+      "status": "PASS",
+      "test_id": "V10.1-REL-042-TEST-SIGNED-PLAN-ATTESTATION-AND-LIVE-PROBE-DRY-RUN"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 2.4985,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_approved_independent_authority_and_all_envelopes_pass",
+      "status": "PASS",
+      "test_id": "V10.1-REL-043-TEST-V10-1-APPROVED-INDEPENDENT-AUTHORITY-AND-ALL-ENVELOPES-PASS"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 1.8414,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_public_host_loader_has_no_caller_selectable_root_parameters",
+      "status": "PASS",
+      "test_id": "V10.1-REL-044-TEST-V10-1-PUBLIC-HOST-LOADER-HAS-NO-CALLER-SELECTABLE-ROOT-PARAMETERS"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 2.4045,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_qualification_contract_rejects_complete_caller_trust_chain",
+      "status": "PASS",
+      "test_id": "V10.1-REL-045-TEST-V10-1-QUALIFICATION-CONTRACT-REJECTS-COMPLETE-CALLER-TRUST-CHAIN"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 1.8455,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_input_schema_excludes_caller_trust_selection",
+      "status": "PASS",
+      "test_id": "V10.1-REL-046-TEST-V10-1-INPUT-SCHEMA-EXCLUDES-CALLER-TRUST-SELECTION"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 2.3965,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_signed_policy_network_mode_is_enforced_exactly",
+      "status": "PASS",
+      "test_id": "V10.1-REL-047-TEST-V10-1-SIGNED-POLICY-NETWORK-MODE-IS-ENFORCED-EXACTLY"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 2.4533,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_signed_policy_maximum_age_is_enforced_exactly",
+      "status": "PASS",
+      "test_id": "V10.1-REL-048-TEST-V10-1-SIGNED-POLICY-MAXIMUM-AGE-IS-ENFORCED-EXACTLY"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 2.5067,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_unsigned_or_forged_service_attestation_fails",
+      "status": "PASS",
+      "test_id": "V10.1-REL-049-TEST-V10-1-UNSIGNED-OR-FORGED-SERVICE-ATTESTATION-FAILS"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 2.4457,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_service_identity_must_match_actual_descriptor_opened_executable",
+      "status": "PASS",
+      "test_id": "V10.1-REL-050-TEST-V10-1-SERVICE-IDENTITY-MUST-MATCH-ACTUAL-DESCRIPTOR-OPENED-EXECUTAB"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 2.7469,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_future_trust_issued_at_fails",
+      "status": "PASS",
+      "test_id": "V10.1-REL-051-TEST-V10-1-FUTURE-TRUST-ISSUED-AT-FAILS"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 2.8483,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_future_revocation_issued_at_fails",
+      "status": "PASS",
+      "test_id": "V10.1-REL-052-TEST-V10-1-FUTURE-REVOCATION-ISSUED-AT-FAILS"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 3.0511,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_remote_anchor_rejects_rolled_back_host_root_sequence",
+      "status": "PASS",
+      "test_id": "V10.1-REL-053-TEST-V10-1-REMOTE-ANCHOR-REJECTS-ROLLED-BACK-HOST-ROOT-SEQUENCE"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 3.0155,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_revoked_and_wrong_role_probe_keys_fail",
+      "status": "PASS",
+      "test_id": "V10.1-REL-054-TEST-V10-1-REVOKED-AND-WRONG-ROLE-PROBE-KEYS-FAIL"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 2.4462,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_mutating_each_envelope_trust_binding_field_fails",
+      "status": "PASS",
+      "test_id": "V10.1-REL-055-TEST-V10-1-MUTATING-EACH-ENVELOPE-TRUST-BINDING-FIELD-FAILS"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 4.4645,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_external_signer_independently_reloads_fixed_authority",
+      "status": "PASS",
+      "test_id": "V10.1-REL-056-TEST-V10-1-EXTERNAL-SIGNER-INDEPENDENTLY-RELOADS-FIXED-AUTHORITY"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 1.9444,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_bootstrap_pins_higher_host_authority_and_rejects_symlink_hardlink",
+      "status": "PASS",
+      "test_id": "V10.1-REL-057-TEST-V10-1-BOOTSTRAP-PINS-HIGHER-HOST-AUTHORITY-AND-REJECTS-SYMLINK-HARD"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 1.9955,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_exact_versioned_57_artifacts_and_alias_substitution_fail",
+      "status": "PASS",
+      "test_id": "V10.1-REL-058-TEST-V10-1-EXACT-VERSIONED-57-ARTIFACTS-AND-ALIAS-SUBSTITUTION-FAIL"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 1.8941,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_first_install_remains_qualification_only",
+      "status": "PASS",
+      "test_id": "V10.1-REL-059-TEST-V10-1-FIRST-INSTALL-REMAINS-QUALIFICATION-ONLY"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 2.0444,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_installer_enforces_fixed_roots_before_reservation",
+      "status": "PASS",
+      "test_id": "V10.1-REL-060-TEST-V10-1-INSTALLER-ENFORCES-FIXED-ROOTS-BEFORE-RESERVATION"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 1.9438,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_reference_signer_removed_from_release_path",
+      "status": "PASS",
+      "test_id": "V10.1-REL-061-TEST-V10-1-REFERENCE-SIGNER-REMOVED-FROM-RELEASE-PATH"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 2.6514,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_host_trust_root_contains_no_private_key_material",
+      "status": "PASS",
+      "test_id": "V10.1-REL-062-TEST-V10-1-HOST-TRUST-ROOT-CONTAINS-NO-PRIVATE-KEY-MATERIAL"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 1.944,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_strict_schemas_are_bounded_and_no_generic_signer_objects",
+      "status": "PASS",
+      "test_id": "V10.1-REL-063-TEST-V10-1-STRICT-SCHEMAS-ARE-BOUNDED-AND-NO-GENERIC-SIGNER-OBJECTS"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 1.9438,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_prompt_archive_bytes_are_unchanged",
+      "status": "PASS",
+      "test_id": "V10.1-REL-064-TEST-V10-1-PROMPT-ARCHIVE-BYTES-ARE-UNCHANGED"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 1.8944,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_inherited_transaction_evidence_and_key_lifecycle_controls_remain",
+      "status": "PASS",
+      "test_id": "V10.1-REL-065-TEST-V10-1-INHERITED-TRANSACTION-EVIDENCE-AND-KEY-LIFECYCLE-CONTROLS-REM"
+    },
+    {
+      "category": "V10_1_INDEPENDENT_FINDING_REGRESSION",
+      "duration_seconds": 2.1985,
+      "node": "tests/test_v10_security_closures.py::test_v10_1_release_verifier_is_nonroot_isolated_and_complete_catalog_aware",
+      "status": "PASS",
+      "test_id": "V10.1-REL-066-TEST-V10-1-RELEASE-VERIFIER-IS-NONROOT-ISOLATED-AND-COMPLETE-CATALOG-AWA"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 2.696,
+      "node": "tests/test_v5_security_closures.py::V5SecurityClosureTests::test_all_schema_fragments_resolve_with_signed_fixtures",
+      "status": "PASS",
+      "test_id": "V10.1-REL-067-TEST-ALL-SCHEMA-FRAGMENTS-RESOLVE-WITH-SIGNED-FIXTURES"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 2.2437,
+      "node": "tests/test_v5_security_closures.py::V5SecurityClosureTests::test_anchor_concurrency_acknowledges_each_exact_head",
+      "status": "PASS",
+      "test_id": "V10.1-REL-068-TEST-ANCHOR-CONCURRENCY-ACKNOWLEDGES-EACH-EXACT-HEAD"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 4.9117,
+      "node": "tests/test_v5_security_closures.py::V5SecurityClosureTests::test_direct_source_entrypoints_fail_closed",
+      "status": "PASS",
+      "test_id": "V10.1-REL-069-TEST-DIRECT-SOURCE-ENTRYPOINTS-FAIL-CLOSED"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 1.8936,
+      "node": "tests/test_v5_security_closures.py::V5SecurityClosureTests::test_duplicate_cryptographic_key_material_is_rejected",
+      "status": "PASS",
+      "test_id": "V10.1-REL-070-TEST-DUPLICATE-CRYPTOGRAPHIC-KEY-MATERIAL-IS-REJECTED"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 2.3504,
+      "node": "tests/test_v5_security_closures.py::V5SecurityClosureTests::test_evidence_commit_interruption_resumes_without_reapply",
+      "status": "PASS",
+      "test_id": "V10.1-REL-071-TEST-EVIDENCE-COMMIT-INTERRUPTION-RESUMES-WITHOUT-REAPPLY"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 2.0464,
+      "node": "tests/test_v5_security_closures.py::V5SecurityClosureTests::test_installer_authenticates_before_writing_and_activates_generation_atomically",
+      "status": "PASS",
+      "test_id": "V10.1-REL-072-TEST-INSTALLER-AUTHENTICATES-BEFORE-WRITING-AND-ACTIVATES-GENERATION-ATO"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 2.1028,
+      "node": "tests/test_v5_security_closures.py::V5SecurityClosureTests::test_installer_rejects_mutable_or_manifest_mismatched_bundle_source",
+      "status": "PASS",
+      "test_id": "V10.1-REL-073-TEST-INSTALLER-REJECTS-MUTABLE-OR-MANIFEST-MISMATCHED-BUNDLE-SOURCE"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 1.9537,
+      "node": "tests/test_v5_security_closures.py::V5SecurityClosureTests::test_production_agent_execution_is_pinned_and_nonroot",
+      "status": "PASS",
+      "test_id": "V10.1-REL-074-TEST-PRODUCTION-AGENT-EXECUTION-IS-PINNED-AND-NONROOT"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 1.8913,
+      "node": "tests/test_v5_security_closures.py::V5SecurityClosureTests::test_supply_chain_uses_signed_offline_mirror_and_reproducible_resolution",
+      "status": "PASS",
+      "test_id": "V10.1-REL-075-TEST-SUPPLY-CHAIN-USES-SIGNED-OFFLINE-MIRROR-AND-REPRODUCIBLE-RESOLUTION"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 1.9935,
+      "node": "tests/test_v5_security_closures.py::V5SecurityClosureTests::test_validation_identity_is_the_captured_snapshot_not_later_head",
+      "status": "PASS",
+      "test_id": "V10.1-REL-076-TEST-VALIDATION-IDENTITY-IS-THE-CAPTURED-SNAPSHOT-NOT-LATER-HEAD"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 1.9929,
+      "node": "tests/test_v6_security_closures.py::V6SecurityClosureTests::test_activation_recovery_finalizes_pending_receipt",
+      "status": "PASS",
+      "test_id": "V10.1-REL-077-TEST-ACTIVATION-RECOVERY-FINALIZES-PENDING-RECEIPT"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 1.9421,
+      "node": "tests/test_v6_security_closures.py::V6SecurityClosureTests::test_activation_recovery_rejects_path_escape",
+      "status": "PASS",
+      "test_id": "V10.1-REL-078-TEST-ACTIVATION-RECOVERY-REJECTS-PATH-ESCAPE"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 2.2618,
+      "node": "tests/test_v6_security_closures.py::V6SecurityClosureTests::test_exact_docx_render_rejects_truncated_contradictory_policy",
+      "status": "PASS",
+      "test_id": "V10.1-REL-079-TEST-EXACT-DOCX-RENDER-REJECTS-TRUNCATED-CONTRADICTORY-POLICY"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 2.3507,
+      "node": "tests/test_v6_security_closures.py::V6SecurityClosureTests::test_git_info_exclude_cannot_hide_persistent_agent_file",
+      "status": "PASS",
+      "test_id": "V10.1-REL-080-TEST-GIT-INFO-EXCLUDE-CANNOT-HIDE-PERSISTENT-AGENT-FILE"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 2.2439,
+      "node": "tests/test_v6_security_closures.py::V6SecurityClosureTests::test_git_metadata_inventory_detects_exclude_and_config_mutation",
+      "status": "PASS",
+      "test_id": "V10.1-REL-081-TEST-GIT-METADATA-INVENTORY-DETECTS-EXCLUDE-AND-CONFIG-MUTATION"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 2.2557,
+      "node": "tests/test_v6_security_closures.py::V6SecurityClosureTests::test_git_metadata_write_access_is_rejected_for_agent_identity",
+      "status": "PASS",
+      "test_id": "V10.1-REL-082-TEST-GIT-METADATA-WRITE-ACCESS-IS-REJECTED-FOR-AGENT-IDENTITY"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 2.0439,
+      "node": "tests/test_v6_security_closures.py::V6SecurityClosureTests::test_mutation_oracle_detects_removed_ignore_independent_inventory",
+      "status": "PASS",
+      "test_id": "V10.1-REL-083-TEST-MUTATION-ORACLE-DETECTS-REMOVED-IGNORE-INDEPENDENT-INVENTORY"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 2.092,
+      "node": "tests/test_v6_security_closures.py::V6SecurityClosureTests::test_private_key_validator_rejects_readable_modes_and_proves_agent_denial",
+      "status": "PASS",
+      "test_id": "V10.1-REL-084-TEST-PRIVATE-KEY-VALIDATOR-REJECTS-READABLE-MODES-AND-PROVES-AGENT-DENIA"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 1.9432,
+      "node": "tests/test_v6_security_closures.py::V6SecurityClosureTests::test_private_public_key_pair_mismatch_fails_before_installation",
+      "status": "PASS",
+      "test_id": "V10.1-REL-085-TEST-PRIVATE-PUBLIC-KEY-PAIR-MISMATCH-FAILS-BEFORE-INSTALLATION"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 2.0425,
+      "node": "tests/test_v6_security_closures.py::V6SecurityClosureTests::test_production_runner_adapter_uses_manifest_component_not_config_path",
+      "status": "PASS",
+      "test_id": "V10.1-REL-086-TEST-PRODUCTION-RUNNER-ADAPTER-USES-MANIFEST-COMPONENT-NOT-CONFIG-PATH"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 2.1943,
+      "node": "tests/test_v6_security_closures.py::V6SecurityClosureTests::test_supply_chain_attestation_is_bound_to_exact_files",
+      "status": "PASS",
+      "test_id": "V10.1-REL-087-TEST-SUPPLY-CHAIN-ATTESTATION-IS-BOUND-TO-EXACT-FILES"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 1.9931,
+      "node": "tests/test_v7_preautonomous_closures.py::V7PreAutonomousClosureTests::test_agent_result_symlink_and_hardlink_are_rejected",
+      "status": "PASS",
+      "test_id": "V10.1-REL-088-TEST-AGENT-RESULT-SYMLINK-AND-HARDLINK-ARE-REJECTED"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 1.9919,
+      "node": "tests/test_v7_preautonomous_closures.py::V7PreAutonomousClosureTests::test_cleanroom_gate_rejects_empty_partial_unknown_and_alias_manifests",
+      "status": "PASS",
+      "test_id": "V10.1-REL-089-TEST-CLEANROOM-GATE-REJECTS-EMPTY-PARTIAL-UNKNOWN-AND-ALIAS-MANIFESTS"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 1.9927,
+      "node": "tests/test_v7_preautonomous_closures.py::V7PreAutonomousClosureTests::test_docx_renderer_preserves_tabs_and_explicit_breaks",
+      "status": "PASS",
+      "test_id": "V10.1-REL-090-TEST-DOCX-RENDERER-PRESERVES-TABS-AND-EXPLICIT-BREAKS"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 1.9951,
+      "node": "tests/test_v7_preautonomous_closures.py::V7PreAutonomousClosureTests::test_docx_unsupported_normative_containers_fail_closed",
+      "status": "PASS",
+      "test_id": "V10.1-REL-091-TEST-DOCX-UNSUPPORTED-NORMATIVE-CONTAINERS-FAIL-CLOSED"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 1.8924,
+      "node": "tests/test_v7_preautonomous_closures.py::V7PreAutonomousClosureTests::test_git_grafts_replace_refs_and_submodules_fail_preflight",
+      "status": "PASS",
+      "test_id": "V10.1-REL-092-TEST-GIT-GRAFTS-REPLACE-REFS-AND-SUBMODULES-FAIL-PREFLIGHT"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 1.949,
+      "node": "tests/test_v7_preautonomous_closures.py::V7PreAutonomousClosureTests::test_identity_ledger_cleanup_removes_only_stage_created_paths",
+      "status": "PASS",
+      "test_id": "V10.1-REL-093-TEST-IDENTITY-LEDGER-CLEANUP-REMOVES-ONLY-STAGE-CREATED-PATHS"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 1.8928,
+      "node": "tests/test_v7_preautonomous_closures.py::V7PreAutonomousClosureTests::test_nonroot_agent_surface_is_writable_and_controller_roots_remain_denied",
+      "status": "PASS",
+      "test_id": "V10.1-REL-094-TEST-NONROOT-AGENT-SURFACE-IS-WRITABLE-AND-CONTROLLER-ROOTS-REMAIN-DENIE"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 1.8917,
+      "node": "tests/test_v7_preautonomous_closures.py::V7PreAutonomousClosureTests::test_topology_preflight_is_before_nonce_and_branch_side_effects",
+      "status": "PASS",
+      "test_id": "V10.1-REL-095-TEST-TOPOLOGY-PREFLIGHT-IS-BEFORE-NONCE-AND-BRANCH-SIDE-EFFECTS"
+    },
+    {
+      "category": "INHERITED_SECURITY_AND_ARCHITECTURE",
+      "duration_seconds": 2.4464,
+      "node": "tests/test_v7_preautonomous_closures.py::V7PreAutonomousClosureTests::test_v6_incomplete_cleanroom_checker_is_retired",
+      "status": "PASS",
+      "test_id": "V10.1-REL-096-TEST-V6-INCOMPLETE-CLEANROOM-CHECKER-IS-RETIRED"
+    },
+    {
+      "category": "INHERITED_V8_SECURITY_REGRESSION",
+      "duration_seconds": 3.1504,
+      "node": "tests/test_v8_corrective_controls.py::V8CorrectiveControlTests::test_duplex_runner_covers_early_exit_broken_pipe_timeout_and_descendants",
+      "status": "PASS",
+      "test_id": "V10.1-REL-097-TEST-DUPLEX-RUNNER-COVERS-EARLY-EXIT-BROKEN-PIPE-TIMEOUT-AND-DESCENDANTS"
+    },
+    {
+      "category": "INHERITED_V8_SECURITY_REGRESSION",
+      "duration_seconds": 0.9408,
+      "node": "tests/test_v8_corrective_controls.py::V8CorrectiveControlTests::test_installer_authorization_is_first_gate_and_policy_phase_is_explicit",
+      "status": "PASS",
+      "test_id": "V10.1-REL-098-TEST-INSTALLER-AUTHORIZATION-IS-FIRST-GATE-AND-POLICY-PHASE-IS-EXPLICIT"
+    },
+    {
+      "category": "INHERITED_V8_SECURITY_REGRESSION",
+      "duration_seconds": 2.4553,
+      "node": "tests/test_v8_corrective_controls.py::V8CorrectiveControlTests::test_key_lifecycle_transition_replay_and_epoch_rollback_fail",
+      "status": "PASS",
+      "test_id": "V10.1-REL-099-TEST-KEY-LIFECYCLE-TRANSITION-REPLAY-AND-EPOCH-ROLLBACK-FAIL"
+    },
+    {
+      "category": "INHERITED_V8_SECURITY_REGRESSION",
+      "duration_seconds": 1.893,
+      "node": "tests/test_v8_corrective_controls.py::V8CorrectiveControlTests::test_quota_scan_rejects_entry_depth_size_and_special_files",
+      "status": "PASS",
+      "test_id": "V10.1-REL-100-TEST-QUOTA-SCAN-REJECTS-ENTRY-DEPTH-SIZE-AND-SPECIAL-FILES"
+    },
+    {
+      "category": "INHERITED_V8_SECURITY_REGRESSION",
+      "duration_seconds": 1.892,
+      "node": "tests/test_v8_corrective_controls.py::V8CorrectiveControlTests::test_semantic_qualification_positive_and_fabricated_mutations",
+      "status": "PASS",
+      "test_id": "V10.1-REL-101-TEST-SEMANTIC-QUALIFICATION-POSITIVE-AND-FABRICATED-MUTATIONS"
+    },
+    {
+      "category": "INHERITED_V8_SECURITY_REGRESSION",
+      "duration_seconds": 11.5581,
+      "node": "tests/test_v8_corrective_controls.py::V8CorrectiveControlTests::test_v8_blackbox_release_blocking_harness",
+      "status": "PASS",
+      "test_id": "V10.1-REL-102-TEST-V8-BLACKBOX-RELEASE-BLOCKING-HARNESS"
+    },
+    {
+      "category": "INHERITED_V8_SECURITY_REGRESSION",
+      "duration_seconds": 2.3439,
+      "node": "tests/test_v8_corrective_controls.py::V8CorrectiveControlTests::test_v8_new_schemas_are_strict_and_resolve",
+      "status": "PASS",
+      "test_id": "V10.1-REL-103-TEST-V8-NEW-SCHEMAS-ARE-STRICT-AND-RESOLVE"
+    },
+    {
+      "category": "INHERITED_V9_SECURITY_REGRESSION",
+      "duration_seconds": 0.7905,
+      "node": "tests/test_v9_security_closures.py::test_f01_no_secret_probe_envelopes_never_execute_targets",
+      "status": "PASS",
+      "test_id": "V10.1-REL-104-TEST-F01-NO-SECRET-PROBE-ENVELOPES-NEVER-EXECUTE-TARGETS"
+    },
+    {
+      "category": "INHERITED_V9_SECURITY_REGRESSION",
+      "duration_seconds": 0.8001,
+      "node": "tests/test_v9_security_closures.py::test_f01_root_or_secret_boundary_claim_fails",
+      "status": "PASS",
+      "test_id": "V10.1-REL-105-TEST-F01-ROOT-OR-SECRET-BOUNDARY-CLAIM-FAILS"
+    },
+    {
+      "category": "INHERITED_V9_SECURITY_REGRESSION",
+      "duration_seconds": 1.3561,
+      "node": "tests/test_v9_security_closures.py::test_f01_external_signing_protocol_has_no_receipt_private_key_in_verifier",
+      "status": "PASS",
+      "test_id": "V10.1-REL-106-TEST-F01-EXTERNAL-SIGNING-PROTOCOL-HAS-NO-RECEIPT-PRIVATE-KEY-IN-VERIFIE"
+    },
+    {
+      "category": "INHERITED_V9_SECURITY_REGRESSION",
+      "duration_seconds": 0.8397,
+      "node": "tests/test_v9_security_closures.py::test_f06_contradictory_machine_evidence_fails",
+      "status": "PASS",
+      "test_id": "V10.1-REL-107-TEST-F06-CONTRADICTORY-MACHINE-EVIDENCE-FAILS"
+    },
+    {
+      "category": "INHERITED_V9_SECURITY_REGRESSION",
+      "duration_seconds": 0.9402,
+      "node": "tests/test_v9_security_closures.py::test_f03_exact_39_bindings_and_each_substitution_fails",
+      "status": "PASS",
+      "test_id": "V10.1-REL-108-TEST-F03-EXACT-39-BINDINGS-AND-EACH-SUBSTITUTION-FAILS"
+    },
+    {
+      "category": "INHERITED_V9_SECURITY_REGRESSION",
+      "duration_seconds": 0.9403,
+      "node": "tests/test_v9_security_closures.py::test_f03_alias_symlink_and_path_substitution_fail",
+      "status": "PASS",
+      "test_id": "V10.1-REL-109-TEST-F03-ALIAS-SYMLINK-AND-PATH-SUBSTITUTION-FAIL"
+    },
+    {
+      "category": "INHERITED_V9_SECURITY_REGRESSION",
+      "duration_seconds": 1.0402,
+      "node": "tests/test_v9_security_closures.py::test_f03_pinned_bootstrap_root_substitution_fails",
+      "status": "PASS",
+      "test_id": "V10.1-REL-110-TEST-F03-PINNED-BOOTSTRAP-ROOT-SUBSTITUTION-FAILS"
+    },
+    {
+      "category": "INHERITED_V9_SECURITY_REGRESSION",
+      "duration_seconds": 0.9901,
+      "node": "tests/test_v9_security_closures.py::test_f05_first_install_forced_qualification_only_and_exact_transition",
+      "status": "PASS",
+      "test_id": "V10.1-REL-111-TEST-F05-FIRST-INSTALL-FORCED-QUALIFICATION-ONLY-AND-EXACT-TRANSITION"
+    },
+    {
+      "category": "INHERITED_V9_SECURITY_REGRESSION",
+      "duration_seconds": 6.2486,
+      "node": "tests/test_v9_security_closures.py::test_f02_f04_twenty_process_same_sequence_exactly_one_advances",
+      "status": "PASS",
+      "test_id": "V10.1-REL-112-TEST-F02-F04-TWENTY-PROCESS-SAME-SEQUENCE-EXACTLY-ONE-ADVANCES"
+    },
+    {
+      "category": "INHERITED_V9_SECURITY_REGRESSION",
+      "duration_seconds": 1.4455,
+      "node": "tests/test_v9_security_closures.py::test_f04_rollback_delete_restore_and_pending_recovery_fail_closed",
+      "status": "PASS",
+      "test_id": "V10.1-REL-113-TEST-F04-ROLLBACK-DELETE-RESTORE-AND-PENDING-RECOVERY-FAIL-CLOSED"
+    },
+    {
+      "category": "INHERITED_V9_SECURITY_REGRESSION",
+      "duration_seconds": 1.1895,
+      "node": "tests/test_v9_security_closures.py::test_f07_atomic_trust_epoch_and_interruption_recovery",
+      "status": "PASS",
+      "test_id": "V10.1-REL-114-TEST-F07-ATOMIC-TRUST-EPOCH-AND-INTERRUPTION-RECOVERY"
+    },
+    {
+      "category": "INHERITED_V9_SECURITY_REGRESSION",
+      "duration_seconds": 0.9445,
+      "node": "tests/test_v9_security_closures.py::test_installer_exact_enforcing_order_and_phase_not_policy_derived",
+      "status": "PASS",
+      "test_id": "V10.1-REL-115-TEST-INSTALLER-EXACT-ENFORCING-ORDER-AND-PHASE-NOT-POLICY-DERIVED"
+    },
+    {
+      "category": "VALIDATION_ISOLATION",
+      "duration_seconds": 0.8907,
+      "node": "tests/test_validation_runner.py::ValidationRunnerTests::test_container_command_has_required_isolation",
+      "status": "PASS",
+      "test_id": "V10.1-REL-116-TEST-CONTAINER-COMMAND-HAS-REQUIRED-ISOLATION"
+    },
+    {
+      "category": "VALIDATION_ISOLATION",
+      "duration_seconds": 1.3527,
+      "node": "tests/test_validation_runner.py::ValidationRunnerTests::test_process_output_is_bounded_and_killed",
+      "status": "PASS",
+      "test_id": "V10.1-REL-117-TEST-PROCESS-OUTPUT-IS-BOUNDED-AND-KILLED"
+    },
+    {
+      "category": "VALIDATION_ISOLATION",
+      "duration_seconds": 0.891,
+      "node": "tests/test_validation_runner.py::ValidationRunnerTests::test_snapshot_excludes_ignored_secret_artifacts",
+      "status": "PASS",
+      "test_id": "V10.1-REL-118-TEST-SNAPSHOT-EXCLUDES-IGNORED-SECRET-ARTIFACTS"
+    },
+    {
+      "category": "VALIDATION_ISOLATION",
+      "duration_seconds": 0.9923,
+      "node": "tests/test_validation_runner.py::ValidationRunnerTests::test_snapshot_is_read_only_and_rejects_symlink",
+      "status": "PASS",
+      "test_id": "V10.1-REL-119-TEST-SNAPSHOT-IS-READ-ONLY-AND-REJECTS-SYMLINK"
+    },
+    {
+      "category": "VALIDATION_ISOLATION",
+      "duration_seconds": 1.0454,
+      "node": "tests/test_validation_runner.py::ValidationRunnerTests::test_snapshot_uses_immutable_tree_when_worktree_changes_after_indexing",
+      "status": "PASS",
+      "test_id": "V10.1-REL-120-TEST-SNAPSHOT-USES-IMMUTABLE-TREE-WHEN-WORKTREE-CHANGES-AFTER-INDEXING"
+    }
+  ],
+  "trusted_pre_autonomous_installation_ready": false
+}

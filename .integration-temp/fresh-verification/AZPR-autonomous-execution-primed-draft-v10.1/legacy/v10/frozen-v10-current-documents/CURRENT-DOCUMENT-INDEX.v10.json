@@ -1,0 +1,111 @@
+{
+  "documents": [
+    {
+      "category": "adversarial_testing",
+      "path": "V10-ADVERSARIAL-MUTATION-SUBSTITUTION-AND-TEST-CATALOG-REPORT.md",
+      "sha256": "fdfee5f7ea4d28252112de3c98ea684b06557ecfc36c7bae43caa9131acd4aad",
+      "status": "CURRENT",
+      "version": "v10"
+    },
+    {
+      "category": "bootstrap_hardening",
+      "path": "V10-BOOTSTRAP-ROOT-HARDENING-REPORT.md",
+      "sha256": "fd52e4c58ba61208cf9ae2605f5e75845857a8a1b29171f6704836084f62f58e",
+      "status": "CURRENT",
+      "version": "v10"
+    },
+    {
+      "category": "evidence_and_key_lifecycle",
+      "path": "V10-EVIDENCE-DERIVATION-AND-KEY-LIFECYCLE-INTEGRATION-REPORT.md",
+      "sha256": "eeef8afe7a113a21f231016faeb4dc7017d8caaec2aee5a41ae1f049862f0082",
+      "status": "CURRENT",
+      "version": "v10"
+    },
+    {
+      "category": "finding_closure",
+      "path": "V10-FINDING-CLOSURE-MATRIX.md",
+      "sha256": "04da71194dbe39161a71b279942198a426e98d7644ee63d093ea9653756d1acb",
+      "status": "CURRENT",
+      "version": "v10"
+    },
+    {
+      "category": "installer_regression",
+      "path": "V10-INSTALLER-TRANSACTION-CONCURRENCY-ROLLBACK-FAULT-REGRESSION-REPORT.md",
+      "sha256": "b3e166c44e271f2db6e1b433a10980a00e908158d7beab928d0aaf89bb7f964f",
+      "status": "CURRENT",
+      "version": "v10"
+    },
+    {
+      "category": "known_limitations",
+      "path": "KNOWN-LIMITATIONS-AND-QUALIFICATION-DEPENDENCIES.md",
+      "sha256": "b45b86072174065cf928563de47ed4bd3974749e3bd95a7e0950c51b0c592d5c",
+      "status": "CURRENT",
+      "version": "v10"
+    },
+    {
+      "category": "major_changes",
+      "path": "MAJOR-CHANGES.md",
+      "sha256": "bd08d58b6e4b7293151692cac2001434962825ffbd849ae2b63303ccf0d14a71",
+      "status": "CURRENT",
+      "version": "v10"
+    },
+    {
+      "category": "modification_boundaries",
+      "path": "V10-AFFECTED-FILES-FUNCTIONS-SCHEMAS-AND-MODIFICATION-BOUNDARIES.md",
+      "sha256": "bf611f32ee436ccd644464c8656de59ce73c5328e1f4f17e29612131b2de8e64",
+      "status": "CURRENT",
+      "version": "v10"
+    },
+    {
+      "category": "nonroot_release_verifier",
+      "path": "V10-NONROOT-RELEASE-VERIFIER-REPORT.md",
+      "sha256": "07153b31db44e554d67060dc87a5088a7b1608d24451acc6b764d4a7d6f565a1",
+      "status": "CURRENT",
+      "version": "v10"
+    },
+    {
+      "category": "probe_trust_and_signing",
+      "path": "V10-PROBE-TRUST-ROOT-AND-EXTERNAL-SIGNING-REPORT.md",
+      "sha256": "8fd29c3dc9e5e8e8ccc870911a46cdd76c6eeb4a3f1ff659ad2461f2d5b63160",
+      "status": "CURRENT",
+      "version": "v10"
+    },
+    {
+      "category": "qualification_artifact_binding",
+      "path": "V10-QUALIFICATION-ARTIFACT-BINDING-MATRIX.md",
+      "sha256": "114d1f36248226c1b9e6058e6c3993654ca1e6af3bcecec1d152ba7b6ea222a7",
+      "status": "CURRENT",
+      "version": "v10"
+    },
+    {
+      "category": "qualification_handoff",
+      "path": "V10-QUALIFICATION-HANDOFF.md",
+      "sha256": "18c8a82f02abc9fa2279fc5d3240df34fc3ab7695c462adcc74dfd1b29a71a5b",
+      "status": "CURRENT",
+      "version": "v10"
+    },
+    {
+      "category": "release_readme",
+      "path": "README.md",
+      "sha256": "a6fe0bc2f8d8f79e8f66f95df6a2b114582ae0850313f92537b345d77ca709c8",
+      "status": "CURRENT",
+      "version": "v10"
+    },
+    {
+      "category": "security_architecture",
+      "path": "V10-SECURITY-INVARIANTS-AND-ARCHITECTURE.md",
+      "sha256": "989afed1624b95bd903dc86214d1d56652c3071073be39a7d4b8cce1d52ab702",
+      "status": "CURRENT",
+      "version": "v10"
+    },
+    {
+      "category": "security_decisions",
+      "path": "SECURITY-DECISIONS.md",
+      "sha256": "c55abe32dd0f6436f1d163492358d05069094d9b93f9f9d5af3d47af145b94ae",
+      "status": "CURRENT",
+      "version": "v10"
+    }
+  ],
+  "format_version": "1.0",
+  "index_kind": "AZPR_V10_CURRENT_DOCUMENT_INDEX"
+}

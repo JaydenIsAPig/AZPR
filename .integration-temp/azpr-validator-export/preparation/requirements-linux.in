@@ -1,0 +1,6 @@
+pytest==9.1.1
+cryptography==46.0.4
+jsonschema==4.26.0
+referencing==0.36.2
+rpds-py==0.30.0
+attrs==25.4.0

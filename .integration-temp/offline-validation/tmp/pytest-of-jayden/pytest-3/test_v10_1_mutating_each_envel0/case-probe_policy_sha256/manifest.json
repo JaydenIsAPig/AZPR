@@ -1,0 +1,58 @@
+{
+  "aggregate_sha256": "6612b4c6e7a9b31fc0ff0ae6a61262d335e17fe1565a46c4e66a7d62779c98f8",
+  "artifact_set_version": "2.1",
+  "candidate_archive_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "challenge_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "envelopes": {
+    "anchor_helper": {
+      "path": "/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR/.integration-temp/offline-validation/tmp/pytest-of-jayden/pytest-3/test_v10_1_mutating_each_envel0/case-probe_policy_sha256/anchor_helper.json",
+      "sha256": "416dec81ab6fc46b36d4f342bd0382b7e7f9848110940abbac9b844bb1b2010f"
+    },
+    "cleanroom_adapter": {
+      "path": "/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR/.integration-temp/offline-validation/tmp/pytest-of-jayden/pytest-3/test_v10_1_mutating_each_envel0/case-probe_policy_sha256/cleanroom_adapter.json",
+      "sha256": "6973ceecff0c9225aff45abf471edcf6ffbc28d21e9e482febe057963eb13481"
+    },
+    "codex_binary": {
+      "path": "/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR/.integration-temp/offline-validation/tmp/pytest-of-jayden/pytest-3/test_v10_1_mutating_each_envel0/case-probe_policy_sha256/codex_binary.json",
+      "sha256": "fc02c7b2b07262e569c60b46c7c71d65685f5916c1c7226a2042693c4fd8c1b9"
+    },
+    "container_engine": {
+      "path": "/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR/.integration-temp/offline-validation/tmp/pytest-of-jayden/pytest-3/test_v10_1_mutating_each_envel0/case-probe_policy_sha256/container_engine.json",
+      "sha256": "9ce1fce8615d95ca0e6afb67a30845db7bbe49976a7b3f625368d2f2c694eeaf"
+    },
+    "git_binary": {
+      "path": "/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR/.integration-temp/offline-validation/tmp/pytest-of-jayden/pytest-3/test_v10_1_mutating_each_envel0/case-probe_policy_sha256/git_binary.json",
+      "sha256": "e8a9388a54dedb55181922de7d141f05562ce9d6f95a89fd4c5aff33d70e76d1"
+    },
+    "mount_binary": {
+      "path": "/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR/.integration-temp/offline-validation/tmp/pytest-of-jayden/pytest-3/test_v10_1_mutating_each_envel0/case-probe_policy_sha256/mount_binary.json",
+      "sha256": "55c9a11ef9c4f95b327ed4cb1e5f1fe46f36a704d6b9d8f317f19ce69d11fc4a"
+    },
+    "python_binary": {
+      "path": "/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR/.integration-temp/offline-validation/tmp/pytest-of-jayden/pytest-3/test_v10_1_mutating_each_envel0/case-probe_policy_sha256/python_binary.json",
+      "sha256": "263898a651d20288845e477d0c109794e97314e76b1c9f8c43a17439035b7371"
+    },
+    "qualification_verifier": {
+      "path": "/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR/.integration-temp/offline-validation/tmp/pytest-of-jayden/pytest-3/test_v10_1_mutating_each_envel0/case-probe_policy_sha256/qualification_verifier.json",
+      "sha256": "f7112a92125fc097544736b79c865d866c9f0211f697381ae6c99368ee1099f1"
+    },
+    "umount_binary": {
+      "path": "/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR/.integration-temp/offline-validation/tmp/pytest-of-jayden/pytest-3/test_v10_1_mutating_each_envel0/case-probe_policy_sha256/umount_binary.json",
+      "sha256": "76816cf08c0cb1be21df607df5d658314bff95bc96e8acb3b11e9d215c02092d"
+    }
+  },
+  "format_version": "1.1",
+  "host_id": "host-v10-1-test-0001",
+  "issued_at": "2026-08-07T00:53:33.033491+00:00",
+  "manifest_kind": "AZPR_V10_1_PROBE_ENVELOPES_MANIFEST",
+  "probe_attestor_keyring_sha256": "9b532448a7f62074aac428fc0367dc94f0e725c51100f81af81491fa2e99f3c7",
+  "probe_attestor_revocation_state_sha256": "0d2b28f91f6593cb47157631df7e40b856facb5364d05bcc072e29db106608bb",
+  "probe_keyring_sha256": "db8c87809d13ba3531e466769c941e0c57db893f2fc2a41336b9fc2493f44512",
+  "probe_policy_sha256": "f1ff2eaad2db77e472e68bb52de8a69deb5c7fbea5ca91da1182c8b6fdbc8f34",
+  "probe_revocation_state_sha256": "1c59351b4a333cb15fa84ef093e56b706e68ee3405f214d3bfd2423b2dc760e0",
+  "probe_service_attestation_sha256": "bff2eb813646c667cf7cdd4a33340f4e671f04361ae89bf44a443b71eee2500a",
+  "probe_service_executable_sha256": "306c6ca7407560340797866e077e053627ad409277d1b9da58106fce4cf717cb",
+  "probe_service_identity_sha256": "4b00f2125d58f084b2f99040caceb7560ab330b3f9f47a6e149195518c326a5f",
+  "qualification_trust_binding_sha256": "b4c94b76c9c3ae8cf5231af016d260326a63b6b4ed6bf5ba181c23e61e2798ff",
+  "qualification_trust_manifest_sha256": "883ed492f9074bd42fa6984aa6d96c0079d23ffbf6e699f6481030e374430db0"
+}

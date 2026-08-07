@@ -1,0 +1,314 @@
+{
+  "$id": "https://azpr.local/schemas/trusted-installation.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "installation_phase": {
+            "const": "POLICY_ACTIVATED"
+          }
+        },
+        "required": [
+          "installation_phase"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "required": [
+              "canonical_policy",
+              "canonical_policy_record",
+              "canonical_policy_section_map",
+              "canonical_policy_source_manifest"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "installation_phase": {
+            "const": "QUALIFICATION_ONLY"
+          }
+        },
+        "required": [
+          "installation_phase"
+        ]
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "canonical_policy"
+                  ]
+                },
+                {
+                  "required": [
+                    "canonical_policy_record"
+                  ]
+                },
+                {
+                  "required": [
+                    "canonical_policy_section_map"
+                  ]
+                },
+                {
+                  "required": [
+                    "canonical_policy_source_manifest"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "format_version": {
+            "const": "2.0"
+          }
+        },
+        "required": [
+          "format_version"
+        ]
+      },
+      "then": {
+        "required": [
+          "authorization_journal_id",
+          "authorization_reservation_head_sha256",
+          "authorization_ledger_sequence",
+          "authorization_sequence",
+          "phase_transition_reservation_head_sha256"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "agent_gid": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "agent_uid": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "authorization_journal_id": {
+      "maxLength": 200,
+      "minLength": 8,
+      "pattern": "^[A-Za-z0-9._:-]{8,200}$",
+      "type": "string"
+    },
+    "authorization_ledger_sequence": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "authorization_reservation_head_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "authorization_sequence": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "components": {
+      "additionalProperties": {
+        "additionalProperties": false,
+        "properties": {
+          "mode": {
+            "maxLength": 4,
+            "pattern": "^[0-7]{3,4}$",
+            "type": "string"
+          },
+          "path": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "type": "string"
+          },
+          "sha256": {
+            "maxLength": 64,
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "sha256",
+          "mode"
+        ],
+        "type": "object"
+      },
+      "maxProperties": 200,
+      "minProperties": 10,
+      "required": [
+        "anchor_helper",
+        "approval_keyring",
+        "build_provenance",
+        "build_python_binary",
+        "bundle_attestation",
+        "bundle_manifest",
+        "bundle_signing_public_key",
+        "capability_runner_launcher",
+        "cleanroom_adapter",
+        "codex_binary",
+        "container_engine",
+        "controller",
+        "controller_launcher",
+        "dependency_lock",
+        "dependency_mirror_attestation",
+        "dependency_mirror_inventory",
+        "dependency_mirror_public_key",
+        "evidence_keyring",
+        "evidence_private_key",
+        "evidence_public_key",
+        "evidence_registry",
+        "external_runner",
+        "external_runner_config",
+        "external_secure_runtime",
+        "external_trusted_installation",
+        "git_binary",
+        "governing_policy_source",
+        "installation_signing_public_key",
+        "python_binary",
+        "python_runtime_manifest",
+        "requirements_input",
+        "runtime_private_key",
+        "runtime_public_key",
+        "sbom",
+        "secure_runtime",
+        "supply_chain_identity",
+        "trusted_installation",
+        "validation_dockerfile",
+        "validation_image_attestation",
+        "validation_runner",
+        "validation_trusted_installation",
+        "process_gate",
+        "external_process_gate",
+        "agent_execution_profile",
+        "handoff_quota_profile",
+        "mount_binary",
+        "umount_binary"
+      ],
+      "type": "object"
+    },
+    "created_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "directories": {
+      "additionalProperties": {
+        "additionalProperties": false,
+        "properties": {
+          "mode": {
+            "maxLength": 4,
+            "pattern": "^[0-7]{3,4}$",
+            "type": "string"
+          },
+          "path": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "mode"
+        ],
+        "type": "object"
+      },
+      "maxProperties": 20,
+      "minProperties": 2,
+      "required": [
+        "runtime_root",
+        "external_runner_runtime",
+        "secure_key_root",
+        "schema_dir",
+        "agent_handoff_root",
+        "agent_cgroup_root"
+      ],
+      "type": "object"
+    },
+    "evidence_key_id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "type": "string"
+    },
+    "format_version": {
+      "enum": [
+        "1.0",
+        "2.0"
+      ]
+    },
+    "host_id": {
+      "maxLength": 160,
+      "pattern": "^[A-Za-z0-9._:-]{8,160}$",
+      "type": "string"
+    },
+    "installation_id": {
+      "maxLength": 160,
+      "minLength": 16,
+      "type": "string"
+    },
+    "installation_phase": {
+      "enum": [
+        "QUALIFICATION_ONLY",
+        "POLICY_ACTIVATED"
+      ],
+      "type": "string"
+    },
+    "phase_transition_reservation_head_sha256": {
+      "oneOf": [
+        {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "runtime_signing_key_id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "type": "string"
+    },
+    "signature": {
+      "maxLength": 120,
+      "minLength": 80,
+      "type": "string"
+    },
+    "signer_key_id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "format_version",
+    "installation_id",
+    "created_at",
+    "components",
+    "directories",
+    "runtime_signing_key_id",
+    "evidence_key_id",
+    "signer_key_id",
+    "signature",
+    "agent_uid",
+    "agent_gid",
+    "host_id",
+    "installation_phase"
+  ],
+  "type": "object"
+}

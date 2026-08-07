@@ -1,0 +1,190 @@
+{
+  "$id": "https://azpr.local/schemas/build-provenance.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "builder": {
+      "additionalProperties": false,
+      "properties": {
+        "pip_version": {
+          "maxLength": 500,
+          "minLength": 1,
+          "type": "string"
+        },
+        "python_path": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "type": "string"
+        },
+        "python_sha256": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "python_version": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "python_path",
+        "python_sha256",
+        "python_version",
+        "pip_version"
+      ],
+      "type": "object"
+    },
+    "created_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "dependency_lock_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "format_version": {
+      "const": "2.0"
+    },
+    "mirror": {
+      "additionalProperties": false,
+      "properties": {
+        "attestation_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "file_count": {
+          "maximum": 10000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "inventory_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 255,
+          "minLength": 1,
+          "type": "string"
+        },
+        "public_key_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "signer_key_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "inventory_sha256",
+        "attestation_sha256",
+        "public_key_sha256",
+        "signer_key_id",
+        "file_count"
+      ],
+      "type": "object"
+    },
+    "reproducible": {
+      "const": true
+    },
+    "requirements_input_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "resolution_passes": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "command": {
+            "items": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 64,
+            "minItems": 1,
+            "type": "array"
+          },
+          "index": {
+            "maximum": 2,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "wheel_set_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "index",
+          "command",
+          "wheel_set_sha256"
+        ],
+        "type": "object"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "type": "array"
+    },
+    "wheels": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "filename": {
+            "maxLength": 500,
+            "minLength": 1,
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "size": {
+            "maximum": 1000000000,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "version": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "filename",
+          "sha256",
+          "name",
+          "version",
+          "size"
+        ],
+        "type": "object"
+      },
+      "maxItems": 200,
+      "minItems": 1,
+      "type": "array"
+    }
+  },
+  "required": [
+    "builder",
+    "created_at",
+    "dependency_lock_sha256",
+    "format_version",
+    "mirror",
+    "reproducible",
+    "requirements_input_sha256",
+    "resolution_passes",
+    "wheels"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,72 @@
+{
+  "format_version": "2.0",
+  "resource_limits": {
+    "cpus": 2,
+    "memory_mb": 4096,
+    "pids": 256,
+    "tmpfs_mb": 1024,
+    "evidence_mb": 256,
+    "file_size_mb": 128
+  },
+  "profile_id": "migration-persistence",
+  "risk_categories": [
+    "migration",
+    "integration",
+    "concurrency",
+    "restore",
+    "rollback",
+    "security"
+  ],
+  "commands": [
+    {
+      "name": "Migration syntax",
+      "category": "migration",
+      "argv": [
+        "python3",
+        "-m",
+        "alembic",
+        "check"
+      ],
+      "timeout_seconds": 1200,
+      "evidence_files": [
+        "migration-persistence/01-migration.json"
+      ]
+    },
+    {
+      "name": "Migration round trip",
+      "category": "rollback",
+      "argv": [
+        "python3",
+        "scripts/validate_migrations.py",
+        "--isolated",
+        "--upgrade-downgrade-upgrade"
+      ],
+      "timeout_seconds": 2400,
+      "evidence_files": [
+        "migration-persistence/02-rollback.json"
+      ]
+    },
+    {
+      "name": "Persistence concurrency",
+      "category": "concurrency",
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/persistence",
+        "-v"
+      ],
+      "timeout_seconds": 2400,
+      "evidence_files": [
+        "migration-persistence/03-concurrency.json"
+      ]
+    }
+  ],
+  "evidence_outputs": [
+    "migration-persistence/summary.json",
+    "migration-persistence/stdout.log",
+    "migration-persistence/stderr.log"
+  ]
+}

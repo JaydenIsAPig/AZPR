@@ -1,0 +1,188 @@
+{
+  "$id": "https://azpr.local/schemas/key-lifecycle-transition.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "transition_type": {
+            "const": "REVOKE"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "emergency_disable": {
+            "const": false
+          },
+          "new_key_fingerprint": {
+            "type": "null"
+          },
+          "new_key_id": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "transition_type": {
+            "const": "EMERGENCY_DISABLE"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "emergency_disable": {
+            "const": true
+          },
+          "new_key_fingerprint": {
+            "type": "null"
+          },
+          "new_key_id": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "transition_type": {
+            "enum": [
+              "ROTATE",
+              "CUSTODY_TRANSITION"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "emergency_disable": {
+            "const": false
+          },
+          "new_key_fingerprint": {
+            "maxLength": 64,
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "new_key_id": {
+            "maxLength": 128,
+            "minLength": 8,
+            "type": "string"
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "effective_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "emergency_disable": {
+      "type": "boolean"
+    },
+    "format_version": {
+      "const": "1.0"
+    },
+    "from_epoch": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "historical_verification_policy": {
+      "const": "OLD_KEY_MAY_VERIFY_PRE_EFFECTIVE_RECORDS_BUT_MAY_NOT_AUTHORIZE_NEW_RECORDS"
+    },
+    "key_role": {
+      "maxLength": 128,
+      "minLength": 3,
+      "type": "string"
+    },
+    "new_key_fingerprint": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "new_key_id": {
+      "maxLength": 128,
+      "minLength": 8,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "old_key_fingerprint": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "old_key_id": {
+      "maxLength": 128,
+      "minLength": 8,
+      "type": "string"
+    },
+    "required_approval_roles": {
+      "items": {
+        "maxLength": 128,
+        "minLength": 3,
+        "type": "string"
+      },
+      "maxItems": 5,
+      "minItems": 2,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "signatures": {
+      "items": {
+        "$ref": "approval.schema.json#/$defs/signature"
+      },
+      "maxItems": 10,
+      "minItems": 2,
+      "type": "array"
+    },
+    "to_epoch": {
+      "maximum": 2147483647,
+      "minimum": 2,
+      "type": "integer"
+    },
+    "transition_id": {
+      "maxLength": 160,
+      "pattern": "^key-transition-[A-Za-z0-9._-]{16,140}$",
+      "type": "string"
+    },
+    "transition_type": {
+      "enum": [
+        "ROTATE",
+        "REVOKE",
+        "EMERGENCY_DISABLE",
+        "CUSTODY_TRANSITION"
+      ]
+    }
+  },
+  "required": [
+    "format_version",
+    "transition_id",
+    "transition_type",
+    "key_role",
+    "from_epoch",
+    "to_epoch",
+    "old_key_id",
+    "old_key_fingerprint",
+    "new_key_id",
+    "new_key_fingerprint",
+    "effective_at",
+    "emergency_disable",
+    "historical_verification_policy",
+    "required_approval_roles",
+    "signatures"
+  ],
+  "title": "AZPR Signed Key Lifecycle Transition",
+  "type": "object"
+}

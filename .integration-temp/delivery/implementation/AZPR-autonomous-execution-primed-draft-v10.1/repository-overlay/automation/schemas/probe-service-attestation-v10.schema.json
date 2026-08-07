@@ -1,0 +1,106 @@
+{
+  "$id": "https://azpr.local/schemas/probe-service-attestation-v10.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "attestation_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "attestation_kind": {
+      "const": "AZPR_V10_1_PROBE_SERVICE_ATTESTATION"
+    },
+    "attestor_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "attestor_key_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "attestor_role": {
+      "const": "probe-service-attestor"
+    },
+    "candidate_archive_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "challenge_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "format_version": {
+      "const": "1.1"
+    },
+    "host_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "launcher_identity_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "runtime_configuration_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "service_executable_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "service_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "service_identity_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "signature": {
+      "maxLength": 128,
+      "minLength": 80,
+      "pattern": "^[A-Za-z0-9+/=]+$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "format_version",
+    "attestation_kind",
+    "attestation_id",
+    "service_id",
+    "service_identity_sha256",
+    "service_executable_sha256",
+    "launcher_identity_sha256",
+    "runtime_configuration_sha256",
+    "host_id",
+    "candidate_archive_sha256",
+    "challenge_sha256",
+    "issued_at",
+    "expires_at",
+    "attestor_id",
+    "attestor_key_id",
+    "attestor_role",
+    "signature"
+  ],
+  "type": "object"
+}

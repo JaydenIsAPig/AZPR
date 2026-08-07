@@ -1,0 +1,262 @@
+{
+  "artifacts": {
+    "AZPR-autonomous-execution-primed-draft-v9-reports.zip": {
+      "sha256": "8206b3c91da3a9d545bc5744480439d11f6b61589fbb6365c64d0a74e786745b",
+      "size_bytes": 255626
+    },
+    "AZPR-autonomous-execution-primed-draft-v9.zip": {
+      "sha256": "eeb5a826ab20aca7e4e618be435af2bbd51ca4d911dae3ff78d74a4d56e4f631",
+      "size_bytes": 880793
+    },
+    "prompt_archive": {
+      "sha256": "3b235cb7e33ca409241ff26523f60f8fee89cec524b3f09e91a69927a0aa4880",
+      "size_bytes": 152720
+    },
+    "v9_deliverables(1).zip": {
+      "sha256": "ec74c0ee846f32eb40c42f55578a8a407cb27245cffbfbb67e08315e08c7e415",
+      "size_bytes": 1250456
+    }
+  },
+  "decision": {
+    "full_autonomous_pathway_viable": true,
+    "permitted_now": "isolated non-root source review and supervised corrective development only",
+    "pre_autonomous_staging": "FAIL",
+    "safe_for_unattended_execution_now": false,
+    "semi_autonomous_codex_staging_ready": false,
+    "trusted_pre_autonomous_installation_ready": false
+  },
+  "execution_checks": [
+    {
+      "check": "Outer archive safe-member inspection",
+      "command": "Independent zipinfo/metadata walk and safe extraction of /mnt/data/v9_deliverables(1).zip",
+      "detail": "32 members; no traversal, absolute path, device, hard-link, or symlink member. 16 __MACOSX AppleDouble metadata files present.",
+      "outcome": "PASS_WITH_PACKAGING_NOISE"
+    },
+    {
+      "check": "Outer SHA-256",
+      "command": "sha256(v9_deliverables(1).zip)",
+      "detail": "ec74c0ee846f32eb40c42f55578a8a407cb27245cffbfbb67e08315e08c7e415",
+      "outcome": "PASS"
+    },
+    {
+      "check": "Implementation internal manifest",
+      "command": "Recompute every file hash against SHA256SUMS.json",
+      "detail": "233 entries, 233 files excluding manifest; no missing, extra, or mismatched files.",
+      "outcome": "PASS"
+    },
+    {
+      "check": "Prompt identity",
+      "command": "Compare top-level and embedded prompt ZIP bytes",
+      "detail": "38 numbered prompts + Appendices A-C; SHA-256 3b235cb7e33ca409241ff26523f60f8fee89cec524b3f09e91a69927a0aa4880; unchanged v8 prompt archive.",
+      "outcome": "PASS_BYTES_ONLY"
+    },
+    {
+      "check": "Sidecar resolution",
+      "command": "Resolve and hash every outer .sha256 target",
+      "detail": "7 valid; prompt sidecar references absent canonical name while '(3)' copy exists with matching bytes.",
+      "outcome": "FAIL_1_OF_8"
+    },
+    {
+      "check": "Official candidate verifier, fresh extraction, non-root",
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 VERIFY-V9-CANDIDATE.py",
+      "detail": "PermissionError at VERIFY-V9-CANDIDATE.py:157 due hardcoded /root temporary directory.",
+      "outcome": "FAIL"
+    },
+    {
+      "check": "Submitted test suite, direct shared-process run",
+      "command": "python3 -m pytest -q -p no:cacheprovider",
+      "detail": "83 passed, 11 failed, 2 skipped in 42.65s. Several failures were caused by privilege assumptions and shared-tree permission mutation; therefore they were not all treated as product defects.",
+      "outcome": "INCONCLUSIVE_PARTIAL"
+    },
+    {
+      "check": "Selected v9 security tests, isolated nodes",
+      "command": "pytest selected test_f01/test_f03 nodes individually",
+      "detail": "5/5 passed: no-secret probe does not execute targets; root/secret boundary claims fail; exact 39-artifact substitution fails; alias/symlink qualified artifacts fail; pinned downstream bootstrap-root content substitution fails.",
+      "outcome": "PASS"
+    },
+    {
+      "check": "Caller-selected probe-root adversarial harness",
+      "command": "Generate caller Ed25519 keyring, arbitrary policy hash, and 9 signed fabricated PASS envelopes; call verify_probe_manifest",
+      "detail": "All 9 fabricated envelopes accepted. Signature mutation was rejected.",
+      "outcome": "FAIL_SECURITY"
+    },
+    {
+      "check": "Bootstrap symlink adversarial harness",
+      "command": "Call verify_bootstrap_roots with symlinked signed manifest and authority public key",
+      "detail": "Both symlinked root-of-trust inputs accepted.",
+      "outcome": "FAIL_SECURITY"
+    }
+  ],
+  "format_version": "1.0",
+  "generated_at": "2026-07-30T23:08:22.393009+00:00",
+  "generated_outputs": [
+    "AZPR-v9-pre-autonomous-security-assessment.md",
+    "AZPR-v9-pre-autonomous-execution-evidence.json"
+  ],
+  "limitations": [
+    "No root/privileged installer execution in this sandbox.",
+    "No dedicated host, cgroup/namespace/LSM qualification, external HSM signer, remote anchor, or supply-chain mirror.",
+    "No AZPR application repository, production provider, credentials, or customer data exercised.",
+    "Full one-process-per-test catalog could not be reproduced because the official verifier hardcodes /root."
+  ],
+  "risk_counts": {
+    "CRITICAL": 1,
+    "HIGH": 3,
+    "MEDIUM": 3
+  },
+  "risks": [
+    {
+      "affected": [
+        "operator-tools/verify_v9_cleanroom_prerequisites.py:50-68,217-242,253-290",
+        "operator-tools/v9_probe_boundary.py:62-85,95-202",
+        "operator-tools/v9_external_signer_client.py:75-82",
+        "trusted-installation/v9_binding.py:17-58",
+        "trusted-installation/install.py:583-602"
+      ],
+      "evidence": "Independent harness generated a fresh Ed25519 caller key and nine fabricated PASS envelopes. verify_probe_manifest accepted all 9. A mutated signature was rejected, proving the cryptography works but the trust root is caller-controlled. The signed receipt binds the envelope-manifest hash but not the probe-keyring hash or an approved probe-policy hash.",
+      "failure_scenario": "A qualification submitter supplies its own probe keyring and signs invented all-PASS observations. The verifier builds a receipt that an external signer cannot distinguish from evidence rooted in an approved probe service because the unsigned receipt omits the probe keyring and authoritative probe policy.",
+      "id": "AZPR-V9-IND-F01",
+      "impact": "CRITICAL",
+      "likelihood": "HIGH",
+      "remediation": "Pin and sign the probe keyring, probe policy, and probe-service identity/attestation; include their hashes in the canonical artifact set, receipt, installation authorization, and transition state. Make the external signer validate those bindings and have the installer reverify envelope signatures and policy identity.",
+      "severity": "CRITICAL",
+      "status": "OPEN_BLOCKER",
+      "title": "Probe qualification trusts a caller-selected keyring and unpinned probe policy"
+    },
+    {
+      "affected": [
+        "trusted-installation/v9_binding.py:149-180",
+        "trusted-installation/install.py fixed bootstrap inputs"
+      ],
+      "evidence": "Independent harness passed symlink paths for both the signed bootstrap manifest and its Ed25519 authority public key. verify_bootstrap_roots accepted them. The four downstream root artifacts use hash_regular, but the bootstrap manifest/key use Path.read_bytes without O_NOFOLLOW or ownership/ancestor checks.",
+      "failure_scenario": "A provisioning mistake, writable ancestor, or privileged local compromise substitutes a symlinked authority key and matching signed manifest, redefining all supposedly pinned qualification and authorization roots.",
+      "id": "AZPR-V9-IND-F02",
+      "impact": "HIGH",
+      "likelihood": "MEDIUM",
+      "remediation": "Read both fixed bootstrap files with descriptor-based O_NOFOLLOW/openat2 resolution, require root ownership, one link, non-writable mode and trusted ancestors, compare inode metadata before/after, and reject symlink/hard-link/rename races.",
+      "severity": "HIGH",
+      "status": "OPEN_BLOCKER",
+      "title": "Bootstrap authority manifest and authority key are read through symlinks"
+    },
+    {
+      "affected": [
+        "VERIFY-V9-CANDIDATE.py:149-171 (especially line 157)",
+        "README.md verifier instructions"
+      ],
+      "evidence": "On a fresh safe extraction with PYTHONDONTWRITEBYTECODE=1, python3 VERIFY-V9-CANDIDATE.py exited 1 with PermissionError creating /root/azpr-v9-test-... because TemporaryDirectory is hardcoded to dir='/root'.",
+      "failure_scenario": "Independent reviewers either cannot reproduce the release gate or must run the entire verifier as root, expanding the blast radius of test code and contradicting the least-privilege qualification design.",
+      "id": "AZPR-V9-IND-F03",
+      "impact": "HIGH",
+      "likelihood": "HIGH",
+      "remediation": "Use an explicitly created reviewer-owned temporary root or secure TMPDIR, isolate each test without requiring UID 0, and add a release-blocking test that runs the verifier as a dedicated unprivileged account from a fresh extraction.",
+      "severity": "HIGH",
+      "status": "OPEN_BLOCKER",
+      "title": "Official v9 verifier cannot run under the documented least-privilege source-review workflow"
+    },
+    {
+      "affected": [
+        "README.md",
+        "V9-KNOWN-LIMITATIONS-AND-QUALIFICATION-DEPENDENCIES.md",
+        "PROMOTION-GATES.md"
+      ],
+      "evidence": "The candidate is unsigned and explicitly has no dedicated hardened host, production external signer/HSM, qualified rollback-resistant anchor, real power/disk/inode/reboot fault matrix, reproducible supply-chain evidence, key ceremonies, active canonical policy, Prompt 004 result, or promoted roadmap.",
+      "failure_scenario": "Installing or executing prompts now converts synthetic/source-level claims into trusted state without the independent roots and host measurements those claims depend on.",
+      "id": "AZPR-V9-IND-F04",
+      "impact": "HIGH",
+      "likelihood": "CERTAIN",
+      "remediation": "Complete the v10 source fixes first, then perform organization signing, dedicated-host qualification, external signer and anchor qualification, supply-chain rebuild/SBOM/provenance, key custody, canonical-policy approval, manual Prompt 004, and independent roadmap review in that order.",
+      "severity": "HIGH",
+      "status": "OPEN_GATE",
+      "title": "Mandatory real-world qualification and release-authority prerequisites are absent"
+    },
+    {
+      "affected": [
+        "markdown-prompts-autonomous-priming-draft-v8.zip.sha256",
+        "AZPR-v9-delivery-manifest.json",
+        "outer ZIP member markdown-prompts-autonomous-priming-draft-v8(3).zip"
+      ],
+      "evidence": "The prompt bytes match the expected SHA-256, but the sidecar target markdown-prompts-autonomous-priming-draft-v8.zip does not exist; the actual member has '(3)' in its name. Seven other sidecars resolve and match. The outer ZIP also contains 16 __MACOSX AppleDouble files.",
+      "failure_scenario": "Automated intake rejects the delivery or binds a missing path even though the intended bytes are present.",
+      "id": "AZPR-V9-IND-F05",
+      "impact": "MEDIUM",
+      "likelihood": "CERTAIN",
+      "remediation": "Repackage with canonical filenames, regenerate the manifest/sidecars, remove platform metadata, and verify names and hashes from a fresh extraction.",
+      "severity": "MEDIUM",
+      "status": "OPEN",
+      "title": "Prompt sidecar and delivery manifest reference a filename absent from the outer delivery"
+    },
+    {
+      "affected": [
+        "PROMOTION-GATES.md",
+        "PRIORITY-FIX-DISPOSITION.md",
+        "LINGERING-CONCERNS.md"
+      ],
+      "evidence": "These files are shipped in the v9 implementation but retain v8 titles, v8 gate language, and v7/v8 disposition framing.",
+      "failure_scenario": "Operators apply stale hashes, stage names, or closure assumptions during promotion, creating documentation/version drift at a security gate.",
+      "id": "AZPR-V9-IND-F06",
+      "impact": "MEDIUM",
+      "likelihood": "CERTAIN",
+      "remediation": "Issue v9-specific replacements, retain old documents only under an explicit historical/legacy path, and validate that current operational docs contain the exact v9 candidate hashes and findings.",
+      "severity": "MEDIUM",
+      "status": "OPEN",
+      "title": "Several governing promotion documents remain titled and worded as v8 inside v9"
+    },
+    {
+      "affected": [
+        "tests/test_v9_security_closures.py:178-193",
+        "v9 release test catalog"
+      ],
+      "evidence": "Five selected v9 security tests passed individually, including content substitution and qualified-artifact symlink checks. However, the bootstrap test mutates a downstream root file only; it does not symlink the bootstrap manifest/authority key. No test rejects a caller-created probe keyring and arbitrary policy.",
+      "failure_scenario": "A green self-test report gives false assurance while the root-of-trust substitution paths remain executable.",
+      "id": "AZPR-V9-IND-F07",
+      "impact": "HIGH",
+      "likelihood": "HIGH",
+      "remediation": "Add independent negative tests for caller-generated probe roots/policies, signer inability to validate omitted bindings, bootstrap leaf/ancestor symlinks, hard links, ownership/mode, TOCTOU, and least-privilege verifier execution.",
+      "severity": "MEDIUM",
+      "status": "OPEN",
+      "title": "Release-blocking tests miss the trust-root and bootstrap-path cases found independently"
+    }
+  ],
+  "v8_regression": [
+    {
+      "finding": "AZPR-V8-F01",
+      "rationale": "Direct root execution/private receipt-key exposure is removed, but caller-selected probe trust can still fabricate qualification evidence.",
+      "status": "PARTIALLY_CLOSED"
+    },
+    {
+      "finding": "AZPR-V8-F02",
+      "rationale": "Global lock and anchored transaction source exist; full 20-process/fault reproduction was not completed independently in this environment.",
+      "status": "PARTIALLY_CLOSED"
+    },
+    {
+      "finding": "AZPR-V8-F03",
+      "rationale": "Exact 39 artifacts are bound, but probe keyring/policy/service identity are omitted and bootstrap authority paths are weak.",
+      "status": "PARTIALLY_CLOSED"
+    },
+    {
+      "finding": "AZPR-V8-F04",
+      "rationale": "Anchored signed journal source exists; only a TEST ONLY file anchor is supplied and real rollback-resistant service is absent.",
+      "status": "PARTIALLY_CLOSED"
+    },
+    {
+      "finding": "AZPR-V8-F05",
+      "rationale": "First install is forced to QUALIFICATION_ONLY and policy activation is a separate transition in source/tests; real host exercise remains.",
+      "status": "CLOSED_SOURCE_LEVEL"
+    },
+    {
+      "finding": "AZPR-V8-F06",
+      "rationale": "Raw-evidence derivation logic exists; no independent real-machine evidence set is supplied.",
+      "status": "PARTIALLY_CLOSED"
+    },
+    {
+      "finding": "AZPR-V8-F07",
+      "rationale": "Atomic ten-store epoch tool exists but is not integrated/exercised across real consumers.",
+      "status": "PARTIALLY_CLOSED"
+    },
+    {
+      "finding": "AZPR-V8-F08",
+      "rationale": "Real host, organization release, supply-chain, key-custody, signer, anchor, and application evidence remain absent.",
+      "status": "NOT_CLOSED"
+    }
+  ]
+}

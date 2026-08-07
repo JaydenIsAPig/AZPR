@@ -1,0 +1,40 @@
+{
+  "generated_at": "2026-07-24T21:43:04.281938+00:00",
+  "inputs": {
+    "AZPR-security-remediation-refined-pack(1).zip": {
+      "sha256": "e1ac23cdc71eca0cdacf04a0e8ade5bbb487ae822183570aef4ed96aed68a0b9",
+      "size_bytes": 436427
+    },
+    "markdown-prompts-refined(1).zip": {
+      "sha256": "15695bdc0a511723075226e77869c946d73afb46fe03820e992fa3dfc8133476",
+      "size_bytes": 151146
+    }
+  },
+  "verification": {
+    "pack_sha256": "e1ac23cdc71eca0cdacf04a0e8ade5bbb487ae822183570aef4ed96aed68a0b9",
+    "standalone_prompt_zip_sha256": "15695bdc0a511723075226e77869c946d73afb46fe03820e992fa3dfc8133476",
+    "prompt_file_count": 41,
+    "numbered_prompt_count": 38,
+    "appendix_count": 3,
+    "pack_manifest_entries_verified": 92,
+    "schema_count_verified": 12,
+    "validation_profile_count_verified": 7,
+    "test_count_passed": 16,
+    "prompt_copy_consistency": "All 41 standalone prompt files matched both the embedded prompt ZIP and repository-overlay copies byte-for-byte by SHA-256.",
+    "archive_safety": "No traversal or symlink archive entries were detected during controlled extraction.",
+    "nonce_race_reproduction": "Two simultaneous consume() calls for the same 24-character nonce both succeeded and produced two signed journal records."
+  },
+  "decision": {
+    "safe_for_unattended_execution_now": false,
+    "promotion_recommendation": "BLOCK",
+    "prompt_text_quality": "STRONG",
+    "controller_and_external_runner_readiness": "NOT_READY",
+    "threshold": "A prompt is acceptable only when both security and confidence are at least 85.",
+    "summary": "The 41 refined prompts are internally strong and consistently apply the intended security boundaries. The supplied execution system still contains critical defects in approvals, nonce replay protection, state/repository binding, trusted evidence, controller-owned writes, Git execution, and the external capability runner."
+  },
+  "artifact_outputs": [
+    "AZPR-security-remediation-refined-final-assessment.md",
+    "AZPR-security-remediation-refined-final-scorecard.json",
+    "AZPR-security-remediation-refined-priority-fixes.md"
+  ]
+}

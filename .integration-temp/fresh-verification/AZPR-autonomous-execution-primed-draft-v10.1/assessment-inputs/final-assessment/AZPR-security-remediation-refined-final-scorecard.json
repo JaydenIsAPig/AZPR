@@ -1,0 +1,703 @@
+{
+  "format_version": "1.0",
+  "assessment": "AZPR security remediation refined final assessment",
+  "generated_at": "2026-07-24T21:43:04.281938+00:00",
+  "decision": {
+    "safe_for_unattended_execution_now": false,
+    "promotion_recommendation": "BLOCK",
+    "prompt_text_quality": "STRONG",
+    "controller_and_external_runner_readiness": "NOT_READY",
+    "threshold": "A prompt is acceptable only when both security and confidence are at least 85.",
+    "summary": "The 41 refined prompts are internally strong and consistently apply the intended security boundaries. The supplied execution system still contains critical defects in approvals, nonce replay protection, state/repository binding, trusted evidence, controller-owned writes, Git execution, and the external capability runner."
+  },
+  "verification": {
+    "pack_sha256": "e1ac23cdc71eca0cdacf04a0e8ade5bbb487ae822183570aef4ed96aed68a0b9",
+    "standalone_prompt_zip_sha256": "15695bdc0a511723075226e77869c946d73afb46fe03820e992fa3dfc8133476",
+    "prompt_file_count": 41,
+    "numbered_prompt_count": 38,
+    "appendix_count": 3,
+    "pack_manifest_entries_verified": 92,
+    "schema_count_verified": 12,
+    "validation_profile_count_verified": 7,
+    "test_count_passed": 16,
+    "prompt_copy_consistency": "All 41 standalone prompt files matched both the embedded prompt ZIP and repository-overlay copies byte-for-byte by SHA-256.",
+    "archive_safety": "No traversal or symlink archive entries were detected during controlled extraction.",
+    "nonce_race_reproduction": "Two simultaneous consume() calls for the same 24-character nonce both succeeded and produced two signed journal records."
+  },
+  "counts": {
+    "acceptable": 0,
+    "conditional": 3,
+    "unacceptable_for_unattended_execution": 38,
+    "critical_findings": 8,
+    "high_findings": 11,
+    "medium_findings": 1
+  },
+  "findings": [
+    {
+      "id": "F-01",
+      "severity": "CRITICAL",
+      "title": "Approval policy hash is self-referential",
+      "component": "trusted-controller/controller.py",
+      "evidence": "`policy_hashes()` adds each approval file to the policy hash map, while `verify_approval_file()` requires the approval's embedded `bindings.policy_hashes` to equal that same map. The approval therefore has to contain its own final SHA-256.",
+      "impact": "Approval-required stages cannot be authorized in a practical, deterministic way. Operators may be tempted to weaken or bypass binding checks.",
+      "recommendation": "Exclude approval documents from the policy-hash set they sign. Bind them to the roadmap, prompt, controller, schemas, target commit, environment, and actions; then record each approval document's own hash separately in the signed run manifest.",
+      "references": [
+        "trusted-controller/controller.py:1502-1570",
+        "trusted-controller/controller.py:1583-1645"
+      ]
+    },
+    {
+      "id": "F-02",
+      "severity": "CRITICAL",
+      "title": "Nonce consumption is not atomic",
+      "component": "trusted-controller/secure_runtime.py",
+      "evidence": "`NonceLedger.consume()` performs a separate read/check and append. A two-thread test against the supplied implementation allowed both calls to consume the same nonce, creating two valid journal records.",
+      "impact": "Supposedly one-time approvals or external apply manifests can be replayed by concurrent runs.",
+      "recommendation": "Hold one exclusive lock across verification and append, or use an atomic transactional store with a uniqueness constraint. Add multiprocess and multithread replay tests.",
+      "references": [
+        "trusted-controller/secure_runtime.py:484-512"
+      ]
+    },
+    {
+      "id": "F-03",
+      "severity": "CRITICAL",
+      "title": "Signed state is not bound to the current repository HEAD and exact roadmap",
+      "component": "trusted-controller/controller.py",
+      "evidence": "Eligibility checks trust completed stage IDs and audit state from the signed journal, but do not require current HEAD to equal or descend from the last reconciled commit. The state is associated with a roadmap version string rather than the exact roadmap hash.",
+      "impact": "A branch reset or a modified roadmap retaining the same version can make later stages run on stale or altered code while the controller still believes prerequisites passed.",
+      "recommendation": "Record the reconciled commit, tree hash, roadmap SHA-256, prompt catalog hash, master-prompt hash, and controller version in signed state. Verify ancestry/equality before every action and require a signed migration event when policy artifacts change.",
+      "references": [
+        "trusted-controller/controller.py:156",
+        "trusted-controller/controller.py:852-899"
+      ]
+    },
+    {
+      "id": "F-04",
+      "severity": "CRITICAL",
+      "title": "No trusted ingestion path for signed external evidence",
+      "component": "trusted-controller",
+      "evidence": "Prompts 034, 036, and Appendix C require controller-verified external evidence, but the controller only hashes the evidence schema. No command was found that ingests an evidence document, verifies its schema/signature/target/nonce/plan bindings, stores it in a trusted registry, and injects a verified evidence envelope into the audit.",
+      "impact": "Release and canary audits must either remain blocked or rely on model assertions about untrusted repository files.",
+      "recommendation": "Implement a trusted `ingest-evidence` workflow with signature verification, schema identity, plan and target-attestation hashes, nonce and operation bindings, immutable storage, and stage-specific required evidence IDs.",
+      "references": [
+        "trusted-controller/controller.py:1539-1548",
+        "automation/numbered/034-*",
+        "automation/numbered/036-*",
+        "automation/appendices/appendix-c-*"
+      ]
+    },
+    {
+      "id": "F-05",
+      "severity": "CRITICAL",
+      "title": "Controller-owned repository writes can follow symlinks",
+      "component": "trusted-controller/controller.py",
+      "evidence": "Run history, current status, and audit artifacts are written with normal `mkdir`/`write_text` operations without descriptor-relative no-follow enforcement immediately before the write.",
+      "impact": "A repository stage can prepare a symlink at a controller-owned path and cause the trusted controller to overwrite a file outside the repository before later checks detect the topology.",
+      "recommendation": "Use a repository root file descriptor plus `openat`/`O_NOFOLLOW` semantics, reject symlink ancestors and non-regular leaves at write time, and keep controller output directories unwritable by the agent.",
+      "references": [
+        "trusted-controller/controller.py:1062-1129",
+        "trusted-controller/controller.py:2203-2257"
+      ]
+    },
+    {
+      "id": "F-06",
+      "severity": "CRITICAL",
+      "title": "Repository Git configuration and hooks can execute host code",
+      "component": "trusted-controller/controller.py",
+      "evidence": "The controller invokes ordinary Git add/commit operations. The supplied implementation does not comprehensively pin a trusted Git binary and neutralize hooks, filters, signing helpers, fsmonitor, pager, credential helpers, or hostile local/global configuration.",
+      "impact": "Repository-controlled configuration or hooks may execute outside the validation container with the controller/operator's host privileges.",
+      "recommendation": "Use a sanitized Git environment and a pinned absolute binary; force a trusted empty hooks path, disable signing/fsmonitor/pagers/helpers and unsafe filters, inspect config before use, and invoke commits with verification hooks disabled.",
+      "references": [
+        "trusted-controller/controller.py:1132-1145"
+      ]
+    },
+    {
+      "id": "F-07",
+      "severity": "CRITICAL",
+      "title": "External runner trust roots are replaceable through command-line paths",
+      "component": "external-capability-runner/capability_runner.py",
+      "evidence": "The runner accepts arbitrary `--config` and `--schema-dir` paths. The config selects keyrings, adapter paths/hashes, evidence keys, and the nonce ledger.",
+      "impact": "A caller can substitute a self-controlled trust configuration, schema set, signing keys, and adapter while still using the official runner code.",
+      "recommendation": "Install a root-owned launcher that hard-pins signed config/schema paths and hashes, verifies ownership and permissions, and rejects caller-supplied trust-root overrides.",
+      "references": [
+        "external-capability-runner/capability_runner.py:182-205"
+      ]
+    },
+    {
+      "id": "F-08",
+      "severity": "CRITICAL",
+      "title": "Appendix A human authorization is not cryptographically enforced",
+      "component": "trusted-controller/controller.py / Appendix A",
+      "evidence": "The correction workflow checks that a `human_authorization_id` is present, but does not dynamically require and verify a signed human authorization document bound to the exact audit corrections, file set, commit, and expiration.",
+      "impact": "An audit result can supply an invented authorization identifier and make a security-sensitive correction appear human-authorized.",
+      "recommendation": "Require a separately signed, expiring, one-use authorization document whose hash and correction IDs are bound into the Appendix A run manifest. Reject security-sensitive corrections without it.",
+      "references": [
+        "trusted-controller/controller.py:1701-1744",
+        "trusted-controller/controller.py:2195-2199"
+      ]
+    },
+    {
+      "id": "F-09",
+      "severity": "HIGH",
+      "title": "Signed journals remain rollback/truncation vulnerable",
+      "component": "trusted-controller/secure_runtime.py",
+      "evidence": "Hash chaining and signatures detect edits within the retained log, but a valid earlier prefix can be restored. No independently anchored monotonic head was found.",
+      "impact": "An attacker with filesystem rollback capability can rewind completed stages or nonce consumption.",
+      "recommendation": "Anchor journal heads in a remote append-only store, transparency log, WORM object, TPM/HSM monotonic counter, or independently signed checkpoint service.",
+      "references": [
+        "trusted-controller/secure_runtime.py:392-432"
+      ]
+    },
+    {
+      "id": "F-10",
+      "severity": "HIGH",
+      "title": "Agent and controller output paths share the same change allowlist",
+      "component": "trusted-controller/controller.py",
+      "evidence": "`allowed_controller_paths()` adds current status and all run-history files to the overall allowed change set rather than reserving them exclusively for trusted controller writes.",
+      "impact": "The implementation agent can alter or delete historical handoff records and status files before the controller commits them.",
+      "recommendation": "Maintain separate pre-controller and post-controller diff policies. Reject any agent modification to controller-owned paths, then add only the exact files created by the controller.",
+      "references": [
+        "trusted-controller/controller.py:1034-1040"
+      ]
+    },
+    {
+      "id": "F-11",
+      "severity": "HIGH",
+      "title": "Path budgets do not cap aggregate or untracked changes",
+      "component": "trusted-controller/controller.py",
+      "evidence": "Budget checks are applied per pattern and rely mainly on tracked path expansion. Multiple patterns can collectively exceed the intended limit, and newly created untracked files are not fully covered.",
+      "impact": "A nominally narrow stage can create a much larger change set than reviewers expect.",
+      "recommendation": "Enforce one aggregate union budget over actual changed paths, include untracked files, separately cap additions/deletions/bytes, and exempt only exact trusted controller outputs.",
+      "references": [
+        "trusted-controller/controller.py:610-633",
+        "trusted-controller/controller.py:1765-1807"
+      ]
+    },
+    {
+      "id": "F-12",
+      "severity": "HIGH",
+      "title": "Validation snapshot may include ignored secrets and local artifacts",
+      "component": "trusted-validation-runner/trusted_validation_runner.py",
+      "evidence": "The snapshot copies the worktree while excluding `.git`, rather than materializing only tracked files plus explicitly authorized new files.",
+      "impact": "Repository validation code can read ignored `.env` files, local credentials, caches, or other developer artifacts and exfiltrate them into evidence output.",
+      "recommendation": "Build snapshots from Git-indexed files and the approved diff only. Apply a hard secret-deny policy and never copy arbitrary ignored files.",
+      "references": [
+        "trusted-validation-runner/trusted_validation_runner.py:61-103"
+      ]
+    },
+    {
+      "id": "F-13",
+      "severity": "HIGH",
+      "title": "Validation and adapter output capture is unbounded",
+      "component": "trusted-validation-runner / external-capability-runner",
+      "evidence": "Child stdout and stderr are collected with `communicate()` into memory without a strict byte cap.",
+      "impact": "A malicious or broken process can exhaust host memory even when CPU and wall-clock limits exist.",
+      "recommendation": "Use bounded streaming capture or ring buffers, enforce stdout/stderr byte quotas, and terminate the process when limits are exceeded.",
+      "references": [
+        "trusted-validation-runner/trusted_validation_runner.py:125-171",
+        "external-capability-runner/capability_runner.py:116-149"
+      ]
+    },
+    {
+      "id": "F-14",
+      "severity": "HIGH",
+      "title": "External signer-role separation is weaker than stated",
+      "component": "trusted-controller/secure_runtime.py / external runner",
+      "evidence": "Role coverage and distinct signer quorum are checked independently. A dual-role signer plus an unrelated second signer can satisfy a two-role, two-signer policy without one distinct signer per role.",
+      "impact": "Separation of duties can be nominal rather than real.",
+      "recommendation": "Solve role assignment against distinct signer identities and reject overlapping privileged roles for sensitive operations unless an explicit policy exception is signed.",
+      "references": [
+        "trusted-controller/secure_runtime.py:292-339",
+        "external-capability-runner/capability_runner.py:162-177"
+      ]
+    },
+    {
+      "id": "F-15",
+      "severity": "HIGH",
+      "title": "External adapter verification has path and TOCTOU weaknesses",
+      "component": "external-capability-runner/capability_runner.py",
+      "evidence": "The runner hashes an adapter path and later executes that pathname. It does not establish immutable, root-owned ancestry or execute an already verified descriptor.",
+      "impact": "The adapter can be replaced between verification and execution or modified by an untrusted user.",
+      "recommendation": "Require root-owned non-writable ancestry, verify device/inode/mtime, use immutable deployment, and execute a verified descriptor or tightly controlled installed wrapper.",
+      "references": [
+        "external-capability-runner/capability_runner.py:210-280"
+      ]
+    },
+    {
+      "id": "F-16",
+      "severity": "HIGH",
+      "title": "ROLLED_BACK can still produce an APPLY_COMPLETE result",
+      "component": "external-capability-runner/capability_runner.py",
+      "evidence": "`ROLLED_BACK` is accepted as an operation status, but the final top-level status remains `APPLY_COMPLETE` unless an explicit failure path is triggered.",
+      "impact": "Downstream audits may interpret a rolled-back deployment as a successful apply.",
+      "recommendation": "Stop on rollback and emit a distinct terminal status such as `APPLY_ROLLED_BACK` or `APPLY_FAILED`; require follow-up verification before any success evidence.",
+      "references": [
+        "external-capability-runner/capability_runner.py:283-378"
+      ]
+    },
+    {
+      "id": "F-17",
+      "severity": "HIGH",
+      "title": "Signed evidence files are overwriteable",
+      "component": "external-capability-runner / secure runtime",
+      "evidence": "The evidence output path is written with truncation semantics rather than create-once semantics.",
+      "impact": "Previously reviewed evidence can be replaced at the same pathname.",
+      "recommendation": "Use unique content-addressed evidence IDs, `O_EXCL`, append-only/WORM storage, and a separately signed evidence index.",
+      "references": [
+        "external-capability-runner/capability_runner.py:351-378"
+      ]
+    },
+    {
+      "id": "F-18",
+      "severity": "HIGH",
+      "title": "Generated reports and result payloads need stronger bounds and redaction",
+      "component": "trusted-controller / result schemas",
+      "evidence": "Model-generated summaries, risks, findings, corrections, approval metadata, and external-plan data are not consistently constrained by strict size/count schemas or redacted before being written.",
+      "impact": "Secrets, personal data, prompt-injection content, or very large payloads can persist in trusted history and audit artifacts.",
+      "recommendation": "Set maximum lengths/counts, apply centralized secret/PII redaction, mark source-derived text as untrusted, and validate external plans against a dedicated strict schema.",
+      "references": [
+        "trusted-controller/controller.py:1062-1129",
+        "trusted-controller/controller.py:2203-2257"
+      ]
+    },
+    {
+      "id": "F-19",
+      "severity": "HIGH",
+      "title": "Security tests do not cover the highest-risk trust boundaries",
+      "component": "tests",
+      "evidence": "All 16 supplied tests pass, but there is no end-to-end approval test, nonce concurrency test, state/HEAD rollback test, secure-write symlink test, external-evidence ingestion test, bounded-output test, role-overlap test, or rollback-status test.",
+      "impact": "Severe regressions can pass the pack's own verification.",
+      "recommendation": "Add adversarial integration and concurrency tests for every critical finding before promotion.",
+      "references": [
+        "tests/test_refined_security.py",
+        "tests/test_pack_structure.py"
+      ]
+    },
+    {
+      "id": "F-20",
+      "severity": "MEDIUM",
+      "title": "Operational hardening remains incomplete",
+      "component": "operator tools / dependency and container configuration",
+      "evidence": "The signing helper accepts a schema argument without clearly enforcing a full schema-validation and review workflow; Python dependencies are version-pinned without artifact hashes; the container engine is selected through PATH; snapshot consistency and practical read-only build behavior are not proven.",
+      "impact": "Supply-chain, operator-error, and availability risks remain even after core logic defects are fixed.",
+      "recommendation": "Hash-pin dependencies and binaries, hard-pin the container engine, schema-validate before signing, display canonical hashes for confirmation, use a locked immutable checkout, and test every validation profile against the real repository.",
+      "references": [
+        "requirements-security.lock",
+        "operator-tools/sign_json_ed25519.py",
+        "trusted-validation-runner/trusted_validation_runner.py"
+      ]
+    }
+  ],
+  "prompt_scores": [
+    {
+      "id": "001",
+      "type": "numbered",
+      "title": "001-close-the-post-core-traceability-release-gate",
+      "path": "automation/numbered/001-close-the-post-core-traceability-release-gate.md",
+      "security_score": 93,
+      "confidence_score": 61,
+      "status": "CONDITIONAL",
+      "sha256": "d8594893a0d780d1e6b7c24310da1d59ea0b28ccae126aa82bc3c122ee558bec"
+    },
+    {
+      "id": "002",
+      "type": "numbered",
+      "title": "002-post-core-traceability-corrective-audit",
+      "path": "automation/numbered/002-post-core-traceability-corrective-audit.md",
+      "security_score": 94,
+      "confidence_score": 58,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "eca79f169f1fc2510289a95fef0ffc99fd640183c1f6397af65ecd2c16164966"
+    },
+    {
+      "id": "003",
+      "type": "numbered",
+      "title": "003-define-and-govern-the-narrow-pilot-scope",
+      "path": "automation/numbered/003-define-and-govern-the-narrow-pilot-scope.md",
+      "security_score": 94,
+      "confidence_score": 63,
+      "status": "CONDITIONAL",
+      "sha256": "150db831ce9683c32c30febafcd3635c191dd84c222d7ca0528dc348d1a33e9d"
+    },
+    {
+      "id": "004",
+      "type": "numbered",
+      "title": "004-select-and-govern-the-production-application-stack",
+      "path": "automation/numbered/004-select-and-govern-the-production-application-stack.md",
+      "security_score": 95,
+      "confidence_score": 60,
+      "status": "CONDITIONAL",
+      "sha256": "21ea0aa1ede17ffcaa3e25a79564fd08cd9f3d61d129f1a8c46f50ff76fbad61"
+    },
+    {
+      "id": "005",
+      "type": "numbered",
+      "title": "005-bootstrap-the-production-application-shell-and-engineering-baseline",
+      "path": "automation/numbered/005-bootstrap-the-production-application-shell-and-engineering-baseline.md",
+      "security_score": 92,
+      "confidence_score": 59,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "29a60ccb3b6b8418f154a981e0ef7695cacf154147250f0883d32a2c06cc273a"
+    },
+    {
+      "id": "006",
+      "type": "numbered",
+      "title": "006-mvp-scope-and-architecture-decision-audit",
+      "path": "automation/numbered/006-mvp-scope-and-architecture-decision-audit.md",
+      "security_score": 94,
+      "confidence_score": 58,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "b42f75dc3204bd7f514eeea59aa5b0422e52552de817b821e289510d19039e70"
+    },
+    {
+      "id": "007",
+      "type": "numbered",
+      "title": "007-design-and-implement-the-durable-database-schema-and-migrations",
+      "path": "automation/numbered/007-design-and-implement-the-durable-database-schema-and-migrations.md",
+      "security_score": 93,
+      "confidence_score": 55,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "d0fb70cab887c986560e3ca6aedd44574eb69a0b912666b03f6262133487ac0a"
+    },
+    {
+      "id": "008",
+      "type": "numbered",
+      "title": "008-implement-durable-repositories-and-transaction-boundaries",
+      "path": "automation/numbered/008-implement-durable-repositories-and-transaction-boundaries.md",
+      "security_score": 93,
+      "confidence_score": 55,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "047cb07632e03b33ec9593d8c866681590655a5dcb1d8f164fc99d161bfc3a00"
+    },
+    {
+      "id": "009",
+      "type": "numbered",
+      "title": "009-implement-immutable-artifact-storage-outbox-workers-and-crash-recovery",
+      "path": "automation/numbered/009-implement-immutable-artifact-storage-outbox-workers-and-crash-recovery.md",
+      "security_score": 94,
+      "confidence_score": 53,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "d0bd03555df577df1d0424db5c8ff882a6cb7b4b7ab926717dc9e64edb033275"
+    },
+    {
+      "id": "010",
+      "type": "numbered",
+      "title": "010-durable-platform-and-persistence-audit",
+      "path": "automation/numbered/010-durable-platform-and-persistence-audit.md",
+      "security_score": 95,
+      "confidence_score": 54,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "e8e8ca59eb9abf3c1c1271ebd312d56905550630e1d5df95bf23d6eceeecad52"
+    },
+    {
+      "id": "011",
+      "type": "numbered",
+      "title": "011-implement-authentication-session-security-and-accesscontext-construction",
+      "path": "automation/numbered/011-implement-authentication-session-security-and-accesscontext-construction.md",
+      "security_score": 94,
+      "confidence_score": 50,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "95746a2b094178f6e17686e3c730430030ba00bcad73a8852d1bc7b46d01ec0e"
+    },
+    {
+      "id": "012",
+      "type": "numbered",
+      "title": "012-implement-customer-account-lifecycle-versioned-configuration-and-onboarding-api",
+      "path": "automation/numbered/012-implement-customer-account-lifecycle-versioned-configuration-and-onboarding-api.md",
+      "security_score": 93,
+      "confidence_score": 52,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "fee091816399e8ddf53cb5133940fd3ec94eb008daa2001ee11279323bbf9861"
+    },
+    {
+      "id": "013",
+      "type": "numbered",
+      "title": "013-identity-authorization-and-customer-isolation-audit",
+      "path": "automation/numbered/013-identity-authorization-and-customer-isolation-audit.md",
+      "security_score": 96,
+      "confidence_score": 50,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "b315c2b0b1a7751aa8d8bfc6927c24858f911f0c39cf1f0e0a6f0ba4184b08a8"
+    },
+    {
+      "id": "014",
+      "type": "numbered",
+      "title": "014-select-and-approve-the-first-tucson-or-pima-county-production-source",
+      "path": "automation/numbered/014-select-and-approve-the-first-tucson-or-pima-county-production-source.md",
+      "security_score": 95,
+      "confidence_score": 48,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "db2c27a1b04a3708478696340bf3b5b0362997fbae116c2257ed9dea94a91e3a"
+    },
+    {
+      "id": "015",
+      "type": "numbered",
+      "title": "015-implement-durable-scheduled-acquisition-and-the-approved-live-connector",
+      "path": "automation/numbered/015-implement-durable-scheduled-acquisition-and-the-approved-live-connector.md",
+      "security_score": 94,
+      "confidence_score": 47,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "31231446755b1a1b5ee9eb24c6ac444605b0690b7c3b76a5378801d245af7591"
+    },
+    {
+      "id": "016",
+      "type": "numbered",
+      "title": "016-implement-the-production-source-parser-replay-and-backfill-contract",
+      "path": "automation/numbered/016-implement-the-production-source-parser-replay-and-backfill-contract.md",
+      "security_score": 94,
+      "confidence_score": 58,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "96853f0ea1d48048fd0da7dc0c4943f87d0916fd9984d49acc1e2425a77041c0"
+    },
+    {
+      "id": "017",
+      "type": "numbered",
+      "title": "017-implement-required-production-geography-and-address-resolution",
+      "path": "automation/numbered/017-implement-required-production-geography-and-address-resolution.md",
+      "security_score": 93,
+      "confidence_score": 52,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "8dc3926808115feee315414e1bf74f9a4ec6b9f04884b622e8945e3498478ba1"
+    },
+    {
+      "id": "018",
+      "type": "numbered",
+      "title": "018-pilot-source-ingestion-normalization-and-geography-audit",
+      "path": "automation/numbered/018-pilot-source-ingestion-normalization-and-geography-audit.md",
+      "security_score": 96,
+      "confidence_score": 48,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "49536c41bf3186bfa4e70e7df1441e8efb59af8e4749ab8a6b8660c1fadaf635"
+    },
+    {
+      "id": "019",
+      "type": "numbered",
+      "title": "019-implement-the-authorized-customer-api-and-query-projections",
+      "path": "automation/numbered/019-implement-the-authorized-customer-api-and-query-projections.md",
+      "security_score": 94,
+      "confidence_score": 54,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "1b9db35ea9a2328baa6c6875ea66cae681690c5f896c74b4835298cb34ad2d7b"
+    },
+    {
+      "id": "020",
+      "type": "numbered",
+      "title": "020-build-the-authenticated-frontend-foundation-and-onboarding-experience",
+      "path": "automation/numbered/020-build-the-authenticated-frontend-foundation-and-onboarding-experience.md",
+      "security_score": 93,
+      "confidence_score": 55,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "cdf66abbc63740f7062194ae18baf9836553e4c6d9dd0be04f7249098a423ec8"
+    },
+    {
+      "id": "021",
+      "type": "numbered",
+      "title": "021-build-the-explainable-opportunity-dashboard-and-lead-workflow",
+      "path": "automation/numbered/021-build-the-explainable-opportunity-dashboard-and-lead-workflow.md",
+      "security_score": 93,
+      "confidence_score": 56,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "4a3695977355009f8383ecbc1b024363b9afeb8e6ef31c8caa3e3bd8f2152207"
+    },
+    {
+      "id": "022",
+      "type": "numbered",
+      "title": "022-customer-api-frontend-and-data-exposure-audit",
+      "path": "automation/numbered/022-customer-api-frontend-and-data-exposure-audit.md",
+      "security_score": 96,
+      "confidence_score": 50,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "db4ddd373270ba67dc17737e35ed2c6d122a32ce4b87216320461fdc77dfa199"
+    },
+    {
+      "id": "023",
+      "type": "numbered",
+      "title": "023-implement-email-notification-orchestration-and-delivery",
+      "path": "automation/numbered/023-implement-email-notification-orchestration-and-delivery.md",
+      "security_score": 94,
+      "confidence_score": 47,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "4d91df0a5e20731a3c7d2b31b28b96f282c02d07e90ec6ff0de6ab219dc43bf5"
+    },
+    {
+      "id": "024",
+      "type": "numbered",
+      "title": "024-email-delivery-audit",
+      "path": "automation/numbered/024-email-delivery-audit.md",
+      "security_score": 96,
+      "confidence_score": 46,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "9d3cb8a6059dd6fc96b0c2ab6b2e93f4b37929b9f8d735174b50851b25d1e97f"
+    },
+    {
+      "id": "025",
+      "type": "numbered",
+      "title": "025-implement-controlled-sms-infrastructure-behind-a-disabled-feature-flag",
+      "path": "automation/numbered/025-implement-controlled-sms-infrastructure-behind-a-disabled-feature-flag.md",
+      "security_score": 96,
+      "confidence_score": 44,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "2a5d366104815c0eaa41710f7ebd52fb38b61df2da1bcdee62d95c6dd75fbce8"
+    },
+    {
+      "id": "026",
+      "type": "numbered",
+      "title": "026-build-internal-review-and-source-operations-tooling",
+      "path": "automation/numbered/026-build-internal-review-and-source-operations-tooling.md",
+      "security_score": 93,
+      "confidence_score": 45,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "6a09e0dc3ead6a9581e6f317cc47b72de8a60bb2159a658cd8ce245668ff40cf"
+    },
+    {
+      "id": "027",
+      "type": "numbered",
+      "title": "027-notification-sms-and-operations-audit",
+      "path": "automation/numbered/027-notification-sms-and-operations-audit.md",
+      "security_score": 96,
+      "confidence_score": 44,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "19c387d50bf020fedee7d5be7b000494391caefc4683678c536b00d36ecdf1ec"
+    },
+    {
+      "id": "028",
+      "type": "numbered",
+      "title": "028-implement-the-privacy-conscious-analytics-event-model",
+      "path": "automation/numbered/028-implement-the-privacy-conscious-analytics-event-model.md",
+      "security_score": 94,
+      "confidence_score": 56,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "895536ac620ed56be0ae0a0899641b17eb15fbc2e2c0888d2cf7968444e5e82e"
+    },
+    {
+      "id": "029",
+      "type": "numbered",
+      "title": "029-implement-observability-health-alerting-and-operational-runbooks",
+      "path": "automation/numbered/029-implement-observability-health-alerting-and-operational-runbooks.md",
+      "security_score": 94,
+      "confidence_score": 49,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "8fde5fb2512dc57fadd5f3c43df0020871a6b6befeba3aa12580c31a9a70b8c3"
+    },
+    {
+      "id": "030",
+      "type": "numbered",
+      "title": "030-implement-backup-restore-reconciliation-and-rollback-procedures",
+      "path": "automation/numbered/030-implement-backup-restore-reconciliation-and-rollback-procedures.md",
+      "security_score": 95,
+      "confidence_score": 43,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "dd93323069eaa83a7e6a158c5b00b94b191071c373d7e05c53ea82797a66a663"
+    },
+    {
+      "id": "031",
+      "type": "numbered",
+      "title": "031-security-privacy-performance-and-recovery-hardening-audit",
+      "path": "automation/numbered/031-security-privacy-performance-and-recovery-hardening-audit.md",
+      "security_score": 96,
+      "confidence_score": 48,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "28a3f062d174f3765ec7aba73d28db1210702822605cf088ec43a05dc044744a"
+    },
+    {
+      "id": "032",
+      "type": "numbered",
+      "title": "032-formal-pilot-release-test-matrix-and-release-gate-audit",
+      "path": "automation/numbered/032-formal-pilot-release-test-matrix-and-release-gate-audit.md",
+      "security_score": 96,
+      "confidence_score": 46,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "2f079609caf1b0ecb56dd77f76869f83d02ebe4d086e05e16d8acc98f95e10b1"
+    },
+    {
+      "id": "033",
+      "type": "numbered",
+      "title": "033-prepare-controlled-staging-deployment-plan",
+      "path": "automation/numbered/033-prepare-controlled-staging-deployment-plan.md",
+      "security_score": 97,
+      "confidence_score": 44,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "62c971640a497660e5e75aacd519556f58f79401ab5e526f0653005f331ee4ab"
+    },
+    {
+      "id": "034",
+      "type": "numbered",
+      "title": "034-final-staging-and-pilot-readiness-audit",
+      "path": "automation/numbered/034-final-staging-and-pilot-readiness-audit.md",
+      "security_score": 97,
+      "confidence_score": 38,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "957516cfb77e64ea6a8c67e665ad58bcf59cc73a356b9a290e1729bc71d9b5eb"
+    },
+    {
+      "id": "035",
+      "type": "numbered",
+      "title": "035-prepare-controlled-production-pilot-release-plan",
+      "path": "automation/numbered/035-prepare-controlled-production-pilot-release-plan.md",
+      "security_score": 98,
+      "confidence_score": 42,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "af17cb245210c6250a8a202993e33e15bbe452bf3e194f172b19d54ce5a9fd66"
+    },
+    {
+      "id": "036",
+      "type": "numbered",
+      "title": "036-production-pilot-launch-verification-audit",
+      "path": "automation/numbered/036-production-pilot-launch-verification-audit.md",
+      "security_score": 98,
+      "confidence_score": 35,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "7c990efd36de6428fa0886cf45293e835465cce3db889c37dd1a94b95af94aa4"
+    },
+    {
+      "id": "037",
+      "type": "numbered",
+      "title": "037-implement-pilot-feedback-and-business-validation-workflow",
+      "path": "automation/numbered/037-implement-pilot-feedback-and-business-validation-workflow.md",
+      "security_score": 93,
+      "confidence_score": 50,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "e8959d40f023d37b568afb93792119314f62221e07424b4d3707adcafbc851e8"
+    },
+    {
+      "id": "038",
+      "type": "numbered",
+      "title": "038-pilot-feedback-and-business-validation-audit",
+      "path": "automation/numbered/038-pilot-feedback-and-business-validation-audit.md",
+      "security_score": 96,
+      "confidence_score": 46,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "d8c416f7bd450f7827a3f1e88322ff3f62d640ab7e82bda90ee3d3739e96767d"
+    },
+    {
+      "id": "A",
+      "type": "appendix",
+      "title": "appendix-a-audit-correction-prompt",
+      "path": "automation/appendices/appendix-a-audit-correction-prompt.md",
+      "security_score": 96,
+      "confidence_score": 38,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "8b4b3f5560d868c6ea5c0408a7d46c8178c79b6efcaef60e290250b6de9afd4c"
+    },
+    {
+      "id": "B",
+      "type": "appendix",
+      "title": "appendix-b-optional-controlled-sms-canary-enablement-prompt",
+      "path": "automation/appendices/appendix-b-optional-controlled-sms-canary-enablement-prompt.md",
+      "security_score": 98,
+      "confidence_score": 40,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "180f2202301bff00627ee3493b411a18a2fff94884b62d814590c2e4f76f830d"
+    },
+    {
+      "id": "C",
+      "type": "appendix",
+      "title": "appendix-c-optional-controlled-sms-canary-activation-audit",
+      "path": "automation/appendices/appendix-c-optional-controlled-sms-canary-activation-audit.md",
+      "security_score": 98,
+      "confidence_score": 34,
+      "status": "UNACCEPTABLE_FOR_UNATTENDED_EXECUTION",
+      "sha256": "cf74ab1eeb8094fe4ee06cff0720913553b3ec2c403aeb5a02dec3f03a37cb52"
+    }
+  ]
+}

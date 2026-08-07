@@ -1,0 +1,91 @@
+{
+  "$id": "https://azpr.local/schemas/qualification-authorization-consumption.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authorization_id": {
+      "maxLength": 160,
+      "pattern": "^[A-Za-z0-9._:-]{8,160}$",
+      "type": "string"
+    },
+    "authorization_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "completed_at": {
+      "oneOf": [
+        {
+          "format": "date-time",
+          "maxLength": 64,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "failure_sha256": {
+      "oneOf": [
+        {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "format_version": {
+      "const": "1.0"
+    },
+    "installation_id": {
+      "oneOf": [
+        {
+          "maxLength": 160,
+          "pattern": "^[A-Za-z0-9._:-]{8,160}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "nonce": {
+      "maxLength": 160,
+      "pattern": "^[A-Za-z0-9._:-]{8,160}$",
+      "type": "string"
+    },
+    "reserved_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "sequence": {
+      "maximum": 9223372036854775807,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "status": {
+      "enum": [
+        "RESERVED",
+        "CONSUMED",
+        "FAILED_CONSUMED"
+      ]
+    }
+  },
+  "required": [
+    "format_version",
+    "authorization_id",
+    "authorization_sha256",
+    "nonce",
+    "sequence",
+    "status",
+    "reserved_at",
+    "completed_at",
+    "installation_id",
+    "failure_sha256"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,51 @@
+{
+  "epoch_id": "epoch-00000001",
+  "epoch_kind": "AZPR_V9_ATOMIC_TRUST_STORE_EPOCH",
+  "epoch_sha256": "d1b31e5b05157fc02d9ba98d094e0f6df3c8a8796d6209b10f500c8c23543bc8",
+  "format_version": "1.0",
+  "previous_epoch_id": null,
+  "sequence": 1,
+  "stores": {
+    "adapter_authorization_keyring": {
+      "path": "/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR/.integration-temp/offline-validation/tmp/pytest-of-jayden/pytest-2/test_f07_atomic_trust_epoch_an0/epochs-state/epochs/epoch-00000001/adapter_authorization_keyring.bin",
+      "sha256": "1d637107ea1db4b283d005c5712e94ab147b9cc31314d2deca30c0ca7b37ef60"
+    },
+    "approval_keyring": {
+      "path": "/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR/.integration-temp/offline-validation/tmp/pytest-of-jayden/pytest-2/test_f07_atomic_trust_epoch_an0/epochs-state/epochs/epoch-00000001/approval_keyring.bin",
+      "sha256": "795be5d9fbb970417cd505de121f4dcf521a750ae833dd3ba3e05f2188b4e3dd"
+    },
+    "bootstrap_root_manifest": {
+      "path": "/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR/.integration-temp/offline-validation/tmp/pytest-of-jayden/pytest-2/test_f07_atomic_trust_epoch_an0/epochs-state/epochs/epoch-00000001/bootstrap_root_manifest.bin",
+      "sha256": "afa7abfe07931d8bd212cfff67bbfeb4df82a981ee8061e072fb0fde51814c93"
+    },
+    "evidence_keyring": {
+      "path": "/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR/.integration-temp/offline-validation/tmp/pytest-of-jayden/pytest-2/test_f07_atomic_trust_epoch_an0/epochs-state/epochs/epoch-00000001/evidence_keyring.bin",
+      "sha256": "e0b03dbfe911513fec6ddffdd7ad818938c0ee692d256ab3dab301052dd12061"
+    },
+    "installation_verification_key": {
+      "path": "/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR/.integration-temp/offline-validation/tmp/pytest-of-jayden/pytest-2/test_f07_atomic_trust_epoch_an0/epochs-state/epochs/epoch-00000001/installation_verification_key.bin",
+      "sha256": "cc1e85257f34736a6b51c1802fe8c7c942da735b9919baa10027070f936995e1"
+    },
+    "phase_transition_keyring": {
+      "path": "/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR/.integration-temp/offline-validation/tmp/pytest-of-jayden/pytest-2/test_f07_atomic_trust_epoch_an0/epochs-state/epochs/epoch-00000001/phase_transition_keyring.bin",
+      "sha256": "73c79b91e87062fbec29594b5018ddb52ff0899ac8d7de7585a5e4f0121cc3dc"
+    },
+    "qualification_authorization_keyring": {
+      "path": "/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR/.integration-temp/offline-validation/tmp/pytest-of-jayden/pytest-2/test_f07_atomic_trust_epoch_an0/epochs-state/epochs/epoch-00000001/qualification_authorization_keyring.bin",
+      "sha256": "86c91f7fcd5834f901e4178f6d196ff8170ffcf6043afb8e4aa9838767d87fff"
+    },
+    "qualification_receipt_verification_key": {
+      "path": "/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR/.integration-temp/offline-validation/tmp/pytest-of-jayden/pytest-2/test_f07_atomic_trust_epoch_an0/epochs-state/epochs/epoch-00000001/qualification_receipt_verification_key.bin",
+      "sha256": "ab2c80b7333791f40aa0611307bf8c7400b388233b09681f57b5f7ed9de35efd"
+    },
+    "release_verification_key": {
+      "path": "/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR/.integration-temp/offline-validation/tmp/pytest-of-jayden/pytest-2/test_f07_atomic_trust_epoch_an0/epochs-state/epochs/epoch-00000001/release_verification_key.bin",
+      "sha256": "579e1c312241dadb7ad2fe030e809345a18231b1ee48033187cb576b31335118"
+    },
+    "runtime_verification_key": {
+      "path": "/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR/.integration-temp/offline-validation/tmp/pytest-of-jayden/pytest-2/test_f07_atomic_trust_epoch_an0/epochs-state/epochs/epoch-00000001/runtime_verification_key.bin",
+      "sha256": "91779c4dbb3cae5b270e04c20ebbd85a5947a2de355994d2c7cb3c24a0dd609d"
+    }
+  },
+  "transition_sha256": "fc8c16b30de5d3798b994909fcb286bd1b34c9a87118fbe7d8a8aaf0faabb002"
+}

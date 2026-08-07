@@ -1,0 +1,21 @@
+.....F........                                                           [100%]
+=================================== FAILURES ===================================
+___ test_v10_bootstrap_writable_ancestor_wrong_owner_and_stale_sequence_fail ___
+
+tmp_path = PosixPath('/tmp/pytest-of-oai/pytest-3/test_v10_bootstrap_writable_an0')
+
+    def test_v10_bootstrap_writable_ancestor_wrong_owner_and_stale_sequence_fail(tmp_path: Path):
+        fixture = build_bootstrap_fixture(tmp_path)
+        trusted, manifest, key, *_ = fixture
+        unsafe = trusted / "unsafe"; unsafe.mkdir(mode=0o770)
+        copied_manifest = unsafe / "manifest.json"; copied_key = unsafe / "key.pem"
+        shutil.copy2(manifest, copied_manifest); shutil.copy2(key, copied_key)
+        copied_manifest.chmod(0o444); copied_key.chmod(0o444)
+>       with pytest.raises(SystemExit, match="group/world writable"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'SystemExit'>
+
+tests/test_v10_security_closures.py:423: Failed
+=========================== short test summary info ============================
+FAILED tests/test_v10_security_closures.py::test_v10_bootstrap_writable_ancestor_wrong_owner_and_stale_sequence_fail - Failed: DID NOT RAISE <class 'SystemExit'>
+1 failed, 13 passed in 1.38s

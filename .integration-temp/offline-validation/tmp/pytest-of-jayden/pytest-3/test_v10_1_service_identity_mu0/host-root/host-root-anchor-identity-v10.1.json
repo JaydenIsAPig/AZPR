@@ -1,0 +1,11 @@
+{
+  "anchor_client_sha256": "6f40c623b8dab85f3acd0c7688e4b3a31a6393001bf9fe44978863ae32be0a7a",
+  "anchor_id": "host-root-anchor-v10-1-0001",
+  "anchor_public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAaxJ+nwXfD/hR2sVrzWD+rY1QhJvbq3w8VRgYTxijck0=\n-----END PUBLIC KEY-----\n",
+  "candidate_archive_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "format_version": "1.0",
+  "host_id": "host-v10-1-test-0001",
+  "identity_kind": "AZPR_V10_1_HOST_ROOT_ANCHOR_IDENTITY",
+  "not_after": "2026-08-14T00:53:30.191793+00:00",
+  "not_before": "2026-08-06T00:53:30.191793+00:00"
+}

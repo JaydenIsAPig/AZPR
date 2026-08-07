@@ -1,0 +1,3927 @@
+{
+  "archive": "../AZPR-v10.1-final-deliverables.zip",
+  "findings": [],
+  "member_count": 13,
+  "members": [
+    {
+      "compressed_size": 61087,
+      "crc32": "fc596e1f",
+      "mode": "0o100444",
+      "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports.zip",
+      "size": 70867,
+      "type": "regular"
+    },
+    {
+      "compressed_size": 111,
+      "crc32": "78b9d242",
+      "mode": "0o100444",
+      "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports.zip.sha256",
+      "size": 123,
+      "type": "regular"
+    },
+    {
+      "compressed_size": 983399,
+      "crc32": "ac984225",
+      "mode": "0o100444",
+      "name": "AZPR-autonomous-execution-primed-draft-v10.1.zip",
+      "size": 1060493,
+      "type": "regular"
+    },
+    {
+      "compressed_size": 107,
+      "crc32": "16f0927e",
+      "mode": "0o100444",
+      "name": "AZPR-autonomous-execution-primed-draft-v10.1.zip.sha256",
+      "size": 115,
+      "type": "regular"
+    },
+    {
+      "compressed_size": 1211,
+      "crc32": "0f7b5640",
+      "mode": "0o100444",
+      "name": "AZPR-v10.1-delivery-manifest.json",
+      "size": 2790,
+      "type": "regular"
+    },
+    {
+      "compressed_size": 93,
+      "crc32": "0ba524ec",
+      "mode": "0o100444",
+      "name": "AZPR-v10.1-delivery-manifest.json.sha256",
+      "size": 100,
+      "type": "regular"
+    },
+    {
+      "compressed_size": 7912,
+      "crc32": "82cd5da3",
+      "mode": "0o100444",
+      "name": "AZPR-v10.1-fresh-extraction-verification.json",
+      "size": 42176,
+      "type": "regular"
+    },
+    {
+      "compressed_size": 1441,
+      "crc32": "18bd2824",
+      "mode": "0o100444",
+      "name": "AZPR-v10.1-release-verification-summary.md",
+      "size": 2764,
+      "type": "regular"
+    },
+    {
+      "compressed_size": 1917,
+      "crc32": "243d5809",
+      "mode": "0o100444",
+      "name": "AZPR-v10.1-release-verification.json",
+      "size": 4503,
+      "type": "regular"
+    },
+    {
+      "compressed_size": 7928,
+      "crc32": "d129db8b",
+      "mode": "0o100444",
+      "name": "AZPR-v10.1-source-tree-verification.json",
+      "size": 42177,
+      "type": "regular"
+    },
+    {
+      "compressed_size": 389,
+      "crc32": "ec98164c",
+      "mode": "0o100444",
+      "name": "V10.1-FINAL-VERIFICATION-RECORD.md",
+      "size": 571,
+      "type": "regular"
+    },
+    {
+      "compressed_size": 144923,
+      "crc32": "e0ff9c6a",
+      "mode": "0o100444",
+      "name": "markdown-prompts-autonomous-priming-draft-v10.1.zip",
+      "size": 152720,
+      "type": "regular"
+    },
+    {
+      "compressed_size": 104,
+      "crc32": "c3b12790",
+      "mode": "0o100444",
+      "name": "markdown-prompts-autonomous-priming-draft-v10.1.zip.sha256",
+      "size": 118,
+      "type": "regular"
+    }
+  ],
+  "nested_archives": [
+    {
+      "archive": "../AZPR-v10.1-final-deliverables.zip!/AZPR-autonomous-execution-primed-draft-v10.1-reports.zip",
+      "findings": [],
+      "member_count": 44,
+      "members": [
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/current-documents/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/development-evidence/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/development-evidence/failed-freeze-attempts/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/verification/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 457,
+          "crc32": "8bf72cb9",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/ASSESSMENT-BASIS.md",
+          "size": 766,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2428,
+          "crc32": "fed88026",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/SHA256SUMS.json",
+          "size": 5415,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1598,
+          "crc32": "2b1b7c54",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/current-documents/CURRENT-DOCUMENT-INDEX.json",
+          "size": 4444,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 917,
+          "crc32": "85069970",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/current-documents/KNOWN-LIMITATIONS-AND-QUALIFICATION-DEPENDENCIES.md",
+          "size": 1717,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2689,
+          "crc32": "eefafdc0",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/current-documents/MAJOR-CHANGES.md",
+          "size": 6113,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 721,
+          "crc32": "d9212929",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/current-documents/README.md",
+          "size": 1223,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 692,
+          "crc32": "fc4b7139",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/current-documents/REMEDIATION-STATUS.json",
+          "size": 1435,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 975,
+          "crc32": "415fb580",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/current-documents/SECURITY-DECISIONS.md",
+          "size": 1944,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 722,
+          "crc32": "45a479c6",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/current-documents/V10-ADVERSARIAL-MUTATION-SUBSTITUTION-AND-TEST-CATALOG-REPORT.md",
+          "size": 1315,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 597,
+          "crc32": "4c40ca29",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/current-documents/V10-AFFECTED-FILES-FUNCTIONS-SCHEMAS-AND-MODIFICATION-BOUNDARIES.md",
+          "size": 1190,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 389,
+          "crc32": "74fe814e",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/current-documents/V10-BOOTSTRAP-ROOT-HARDENING-REPORT.md",
+          "size": 701,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 382,
+          "crc32": "0a8f2891",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/current-documents/V10-EVIDENCE-DERIVATION-AND-KEY-LIFECYCLE-INTEGRATION-REPORT.md",
+          "size": 636,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1021,
+          "crc32": "1d4b0805",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/current-documents/V10-FINDING-CLOSURE-MATRIX.md",
+          "size": 2298,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 438,
+          "crc32": "4f12813e",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/current-documents/V10-INSTALLER-TRANSACTION-CONCURRENCY-ROLLBACK-FAULT-REGRESSION-REPORT.md",
+          "size": 718,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 536,
+          "crc32": "ac7b4077",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/current-documents/V10-NONROOT-RELEASE-VERIFIER-REPORT.md",
+          "size": 858,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 520,
+          "crc32": "aab7c2bd",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/current-documents/V10-PROBE-TRUST-ROOT-AND-EXTERNAL-SIGNING-REPORT.md",
+          "size": 1038,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 459,
+          "crc32": "cc7d05a3",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/current-documents/V10-QUALIFICATION-ARTIFACT-BINDING-MATRIX.md",
+          "size": 835,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 374,
+          "crc32": "f2ea15f2",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/current-documents/V10-QUALIFICATION-HANDOFF.md",
+          "size": 600,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 6919,
+          "crc32": "b1ac5ada",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/current-documents/V10-RELEASE-TEST-CATALOG.json",
+          "size": 37796,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 997,
+          "crc32": "f0e25afc",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/current-documents/V10-SECURITY-INVARIANTS-AND-ARCHITECTURE.md",
+          "size": 2072,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 981,
+          "crc32": "23550341",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/current-documents/V10.1-FINDING-VERIFICATION-SUMMARY.json",
+          "size": 2371,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4267,
+          "crc32": "cf038e07",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/current-documents/V10.1-INTERNAL-SECURITY-MANAGEMENT-CORRECTIVE-REPORT.md",
+          "size": 10128,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 722,
+          "crc32": "6582c02e",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/development-evidence/failed-freeze-attempts/source-tree-verification-final.json",
+          "size": 1828,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 120,
+          "crc32": "06329c40",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/development-evidence/failed-freeze-attempts/source-tree-verification-final.stderr",
+          "size": 130,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1001,
+          "crc32": "ae0e8e82",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/development-evidence/failed-freeze-attempts/source-tree-verification-final2.json",
+          "size": 2672,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 130,
+          "crc32": "498b8255",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/development-evidence/failed-freeze-attempts/source-tree-verification-final2.stderr",
+          "size": 141,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1387,
+          "crc32": "f5e9ca1e",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/development-evidence/failed-freeze-attempts/source-tree-verification-final3.json",
+          "size": 4693,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 118,
+          "crc32": "2faf65f4",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/development-evidence/failed-freeze-attempts/source-tree-verification-final3.stderr",
+          "size": 124,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1517,
+          "crc32": "2668c458",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/development-evidence/failed-freeze-attempts/source-tree-verification.json",
+          "size": 3768,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 119,
+          "crc32": "0587aa4d",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/development-evidence/failed-freeze-attempts/source-tree-verification.stderr",
+          "size": 126,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1266,
+          "crc32": "86dac9e7",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/verification/AZPR-v10.1-diff-summary.json",
+          "size": 5611,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 7912,
+          "crc32": "82cd5da3",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/verification/AZPR-v10.1-fresh-extraction-verification.json",
+          "size": 42176,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2,
+          "crc32": "00000000",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/verification/AZPR-v10.1-fresh-extraction-verification.stderr",
+          "size": 0,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1441,
+          "crc32": "18bd2824",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/verification/AZPR-v10.1-release-verification-summary.md",
+          "size": 2764,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1917,
+          "crc32": "243d5809",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/verification/AZPR-v10.1-release-verification.json",
+          "size": 4503,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 7928,
+          "crc32": "d129db8b",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/verification/AZPR-v10.1-source-tree-verification.json",
+          "size": 42177,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2,
+          "crc32": "00000000",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/verification/AZPR-v10.1-source-tree-verification.stderr",
+          "size": 0,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 389,
+          "crc32": "ec98164c",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/verification/V10.1-FINAL-VERIFICATION-RECORD.md",
+          "size": 571,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3017,
+          "crc32": "fd68ddc1",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1-reports/verification/collect-v10.1-frozen.txt",
+          "size": 13487,
+          "type": "regular"
+        }
+      ],
+      "nested_archives": [],
+      "safe": true
+    },
+    {
+      "archive": "../AZPR-v10.1-final-deliverables.zip!/AZPR-autonomous-execution-primed-draft-v10.1.zip",
+      "findings": [],
+      "member_count": 346,
+      "members": [
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/final-assessment/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/finalized-consultation/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/finalized-v5-consultation/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/v7-final-security-consultation/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/evidence/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/evidence/source-development/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/external-capability-runner/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v10/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v10/frozen-v10-current-documents/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v10/unsafe-reference-signer/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/policy-tools/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/provenance/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/provenance/independent-v9/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/appendices/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/policy/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/validation-profiles/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/tests/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/tests/fixtures/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/tests/fixtures/root-owned-bundle-auth/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/tests/fixtures/root-owned-bundle-auth/release/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/trusted-controller/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/trusted-installation/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 0,
+          "crc32": "00000000",
+          "mode": "0o40555",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/trusted-validation-runner/",
+          "size": 0,
+          "type": "directory"
+        },
+        {
+          "compressed_size": 1598,
+          "crc32": "2b1b7c54",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/CURRENT-DOCUMENT-INDEX.json",
+          "size": 4444,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 917,
+          "crc32": "85069970",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/KNOWN-LIMITATIONS-AND-QUALIFICATION-DEPENDENCIES.md",
+          "size": 1717,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2689,
+          "crc32": "eefafdc0",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/MAJOR-CHANGES.md",
+          "size": 6113,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 721,
+          "crc32": "d9212929",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/README.md",
+          "size": 1223,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 692,
+          "crc32": "fc4b7139",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/REMEDIATION-STATUS.json",
+          "size": 1435,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 975,
+          "crc32": "415fb580",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/SECURITY-DECISIONS.md",
+          "size": 1944,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 17331,
+          "crc32": "865c5e23",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/SHA256SUMS.json",
+          "size": 44394,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 722,
+          "crc32": "45a479c6",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/V10-ADVERSARIAL-MUTATION-SUBSTITUTION-AND-TEST-CATALOG-REPORT.md",
+          "size": 1315,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 597,
+          "crc32": "4c40ca29",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/V10-AFFECTED-FILES-FUNCTIONS-SCHEMAS-AND-MODIFICATION-BOUNDARIES.md",
+          "size": 1190,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 389,
+          "crc32": "74fe814e",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/V10-BOOTSTRAP-ROOT-HARDENING-REPORT.md",
+          "size": 701,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 382,
+          "crc32": "0a8f2891",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/V10-EVIDENCE-DERIVATION-AND-KEY-LIFECYCLE-INTEGRATION-REPORT.md",
+          "size": 636,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1021,
+          "crc32": "1d4b0805",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/V10-FINDING-CLOSURE-MATRIX.md",
+          "size": 2298,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 438,
+          "crc32": "4f12813e",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/V10-INSTALLER-TRANSACTION-CONCURRENCY-ROLLBACK-FAULT-REGRESSION-REPORT.md",
+          "size": 718,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 536,
+          "crc32": "ac7b4077",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/V10-NONROOT-RELEASE-VERIFIER-REPORT.md",
+          "size": 858,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 520,
+          "crc32": "aab7c2bd",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/V10-PROBE-TRUST-ROOT-AND-EXTERNAL-SIGNING-REPORT.md",
+          "size": 1038,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 459,
+          "crc32": "cc7d05a3",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/V10-QUALIFICATION-ARTIFACT-BINDING-MATRIX.md",
+          "size": 835,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 374,
+          "crc32": "f2ea15f2",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/V10-QUALIFICATION-HANDOFF.md",
+          "size": 600,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 6919,
+          "crc32": "b1ac5ada",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/V10-RELEASE-TEST-CATALOG.json",
+          "size": 37796,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 997,
+          "crc32": "f0e25afc",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/V10-SECURITY-INVARIANTS-AND-ARCHITECTURE.md",
+          "size": 2072,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 981,
+          "crc32": "23550341",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/V10.1-FINDING-VERIFICATION-SUMMARY.json",
+          "size": 2371,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4267,
+          "crc32": "cf038e07",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/V10.1-INTERNAL-SECURITY-MANAGEMENT-CORRECTIVE-REPORT.md",
+          "size": 10128,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 5994,
+          "crc32": "e6de7025",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/VERIFY-V10-CANDIDATE.py",
+          "size": 19074,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 5278,
+          "crc32": "3bee8b57",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/AZPR-security-continuation-handoff.md",
+          "size": 12383,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 7014,
+          "crc32": "b8e2d734",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/final-assessment/AZPR-security-remediation-refined-final-assessment.md",
+          "size": 19936,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 9889,
+          "crc32": "3f8d54b2",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/final-assessment/AZPR-security-remediation-refined-final-scorecard.json",
+          "size": 37120,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3037,
+          "crc32": "e793e2a4",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/final-assessment/AZPR-security-remediation-refined-priority-fixes.md",
+          "size": 6731,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1017,
+          "crc32": "8cc079e5",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/final-assessment/AZPR-security-remediation-refined-verification-summary.json",
+          "size": 2136,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 182,
+          "crc32": "3b153745",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/finalized-consultation/AZPR-finalized-security-assessment-attachment-error.xml",
+          "size": 212,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2713,
+          "crc32": "0f3b2a09",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/finalized-consultation/AZPR-finalized-security-priority-fixes.md",
+          "size": 5998,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 6502,
+          "crc32": "c5d26382",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/finalized-consultation/AZPR-finalized-security-scorecard.json",
+          "size": 49198,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 11618,
+          "crc32": "576718d0",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/finalized-consultation/AZPR-finalized-security-verification-summary.json",
+          "size": 46928,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 293,
+          "crc32": "2e10a027",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/finalized-consultation/README.md",
+          "size": 521,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 12594,
+          "crc32": "e1eba498",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/finalized-v5-consultation/AZPR-v5-finalized-security-assessment.md",
+          "size": 35704,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3332,
+          "crc32": "dc0065e5",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/finalized-v5-consultation/AZPR-v5-finalized-security-priority-fixes.md",
+          "size": 7655,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 6502,
+          "crc32": "c5d26382",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/finalized-v5-consultation/AZPR-v5-finalized-security-scorecard.json",
+          "size": 49198,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 11618,
+          "crc32": "576718d0",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/finalized-v5-consultation/AZPR-v5-finalized-security-verification-summary.json",
+          "size": 46928,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1476,
+          "crc32": "7ebded65",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/priority-fix-plan.md",
+          "size": 3008,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 11664,
+          "crc32": "47c8fd94",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/reassessment-scorecard.json",
+          "size": 44324,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 10953,
+          "crc32": "65d9f9b0",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/reassessment.md",
+          "size": 30406,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 239,
+          "crc32": "b5bab9c5",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/v7-final-security-consultation/ASSESSMENT-AUTHORITY-NOTE.md",
+          "size": 367,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 11328,
+          "crc32": "73d9d1b3",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/v7-final-security-consultation/AZPR-v7-finalized-security-assessment.md",
+          "size": 30564,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3549,
+          "crc32": "9486c057",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/v7-final-security-consultation/AZPR-v7-finalized-security-priority-fixes.md",
+          "size": 8210,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 6502,
+          "crc32": "c5d26382",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/v7-final-security-consultation/AZPR-v7-finalized-security-scorecard.json",
+          "size": 49198,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 11618,
+          "crc32": "576718d0",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/assessment-inputs/v7-final-security-consultation/AZPR-v7-finalized-security-verification-summary.json",
+          "size": 46928,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 487,
+          "crc32": "8f54192d",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/evidence/source-development/v10-blocker-tests.stdout.txt",
+          "size": 1321,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 773,
+          "crc32": "e10aa358",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/evidence/source-development/v10-precuration-release-test-results.json",
+          "size": 5202,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 89,
+          "crc32": "44caa12d",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/evidence/source-development/v9-baseline-manifest-verification.json",
+          "size": 122,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 149,
+          "crc32": "4ec15879",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/evidence/source-development/v9-independent-reproduction.json",
+          "size": 209,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 506,
+          "crc32": "9af066cc",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/evidence/source-development/v9-nonroot-verifier-reproduction.stderr.txt",
+          "size": 1365,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 7936,
+          "crc32": "4b4919f1",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/external-capability-runner/capability_runner.py",
+          "size": 32295,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 439,
+          "crc32": "dc91c1b8",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/external-capability-runner/mock_noop_adapter.py",
+          "size": 786,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1493,
+          "crc32": "e3f65751",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/external-capability-runner/process_gate.py",
+          "size": 3094,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 31939,
+          "crc32": "926079ca",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/external-capability-runner/secure_runtime.py",
+          "size": 127245,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4033,
+          "crc32": "75b44432",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/external-capability-runner/trusted_installation.py",
+          "size": 13980,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1415,
+          "crc32": "11611a02",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v10/frozen-v10-current-documents/CURRENT-DOCUMENT-INDEX.v10.json",
+          "size": 3845,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1080,
+          "crc32": "7445e25c",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v10/frozen-v10-current-documents/KNOWN-LIMITATIONS-AND-QUALIFICATION-DEPENDENCIES.md",
+          "size": 2000,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1308,
+          "crc32": "ecaccd92",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v10/frozen-v10-current-documents/MAJOR-CHANGES.md",
+          "size": 2566,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 628,
+          "crc32": "2bfdcfaf",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v10/frozen-v10-current-documents/README.md",
+          "size": 1035,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 482,
+          "crc32": "2c83dfed",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v10/frozen-v10-current-documents/REMEDIATION-STATUS.v10.json",
+          "size": 909,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 920,
+          "crc32": "abfb9d5e",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v10/frozen-v10-current-documents/SECURITY-DECISIONS.md",
+          "size": 1754,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 869,
+          "crc32": "58eea452",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v10/frozen-v10-current-documents/V10-ADVERSARIAL-MUTATION-SUBSTITUTION-AND-TEST-CATALOG-REPORT.md",
+          "size": 1620,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 885,
+          "crc32": "8124f2e0",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v10/frozen-v10-current-documents/V10-AFFECTED-FILES-FUNCTIONS-SCHEMAS-AND-MODIFICATION-BOUNDARIES.md",
+          "size": 1804,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 722,
+          "crc32": "f8e4c7cb",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v10/frozen-v10-current-documents/V10-BOOTSTRAP-ROOT-HARDENING-REPORT.md",
+          "size": 1412,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 644,
+          "crc32": "ec8010d9",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v10/frozen-v10-current-documents/V10-EVIDENCE-DERIVATION-AND-KEY-LIFECYCLE-INTEGRATION-REPORT.md",
+          "size": 1183,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1551,
+          "crc32": "c506ac2b",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v10/frozen-v10-current-documents/V10-FINDING-CLOSURE-MATRIX.md",
+          "size": 3380,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 622,
+          "crc32": "8b506589",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v10/frozen-v10-current-documents/V10-INSTALLER-TRANSACTION-CONCURRENCY-ROLLBACK-FAULT-REGRESSION-REPORT.md",
+          "size": 1233,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 684,
+          "crc32": "fbea3d72",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v10/frozen-v10-current-documents/V10-NONROOT-RELEASE-VERIFIER-REPORT.md",
+          "size": 1203,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 924,
+          "crc32": "f9430b36",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v10/frozen-v10-current-documents/V10-PROBE-TRUST-ROOT-AND-EXTERNAL-SIGNING-REPORT.md",
+          "size": 2005,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1085,
+          "crc32": "0b3b6532",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v10/frozen-v10-current-documents/V10-QUALIFICATION-ARTIFACT-BINDING-MATRIX.md",
+          "size": 5961,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 834,
+          "crc32": "a910f4e9",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v10/frozen-v10-current-documents/V10-QUALIFICATION-HANDOFF.md",
+          "size": 1497,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2364,
+          "crc32": "26345920",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v10/frozen-v10-current-documents/V10-SECURITY-INVARIANTS-AND-ARCHITECTURE.md",
+          "size": 5505,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1307,
+          "crc32": "1985793c",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v10/unsafe-reference-signer/v10_external_signer_reference.py.disabled",
+          "size": 3975,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 443,
+          "crc32": "b76f91c5",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/ANCHOR-AND-RECOVERY-PROTOCOL.md",
+          "size": 851,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 230,
+          "crc32": "351bfef1",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/APPLY-AUTONOMOUS-EXECUTION-DRAFT.md",
+          "size": 329,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 597,
+          "crc32": "4b259ae0",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/CANONICAL-POLICY-GATE.md",
+          "size": 1027,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 459,
+          "crc32": "0ccf6f3b",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/CLEANROOM-QUALIFICATION.md",
+          "size": 745,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 681,
+          "crc32": "f7c41421",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/CONFIDENCE-ASSESSMENT.md",
+          "size": 1263,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 414,
+          "crc32": "5da5f4f8",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/EXTERNAL-CAPABILITY-RUNNER-OPERATIONS.md",
+          "size": 712,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2966,
+          "crc32": "9e10db35",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/FINAL-VERIFICATION.json",
+          "size": 11891,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1108,
+          "crc32": "8e55a95a",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/FUTURE-QUALIFICATION-INPUTS.template.json",
+          "size": 7869,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 979,
+          "crc32": "490ec559",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/IMPLEMENTATION-DRAFT-REPORT.md",
+          "size": 1877,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1072,
+          "crc32": "5d9f74c6",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/INSTALLER-RECOVERY-MATRIX.md",
+          "size": 2246,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1104,
+          "crc32": "e20c43ea",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/LINGERING-CONCERNS.md",
+          "size": 2058,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 704,
+          "crc32": "971b7955",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/MAJOR-CHANGES.md",
+          "size": 1274,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 392,
+          "crc32": "021a0061",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/OPERATION-EVIDENCE-LIFECYCLE.md",
+          "size": 670,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 429,
+          "crc32": "9f61d901",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/PACK-SIGNING-INSTRUCTIONS.md",
+          "size": 775,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1142,
+          "crc32": "d6918326",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/PRIORITY-FIX-DISPOSITION.md",
+          "size": 2368,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 777,
+          "crc32": "26d56b4b",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/PROMOTION-GATES.md",
+          "size": 1426,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 242,
+          "crc32": "e96f7bde",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/PUBLIC-KEYRING.template.json",
+          "size": 720,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1168,
+          "crc32": "a7653680",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/README.md",
+          "size": 1963,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 686,
+          "crc32": "7e55edef",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/REMEDIATION-STATUS.json",
+          "size": 1509,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 442,
+          "crc32": "4fcf034c",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/ROADMAP-REGENERATION-GATE.md",
+          "size": 784,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2013,
+          "crc32": "56262ad4",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/ROADMAP-REGENERATION-PROMPT.md",
+          "size": 4163,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1439,
+          "crc32": "be2d9619",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/SECURITY-CONTROL-TRACEABILITY.md",
+          "size": 2954,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 979,
+          "crc32": "5e70c7e7",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/SECURITY-DECISIONS.md",
+          "size": 1910,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 606,
+          "crc32": "6a99ccae",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/TRUST-BOUNDARY.md",
+          "size": 1124,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 798,
+          "crc32": "2cc91e08",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/TRUSTED-INSTALLATION.md",
+          "size": 1516,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1692,
+          "crc32": "1fd53a3a",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/V7-FINDING-CLOSURE-MATRIX.md",
+          "size": 3578,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 769,
+          "crc32": "3b3b0bad",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/V8-ADVERSARIAL-TEST-REPORT.md",
+          "size": 1472,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1767,
+          "crc32": "9c66c193",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/V8-FINDING-CLOSURE-MATRIX.md",
+          "size": 3797,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2264,
+          "crc32": "560dab6e",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/V8-INDEPENDENT-VERIFICATION-REPORT.md",
+          "size": 4663,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 547,
+          "crc32": "f2647544",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/V8-INSTALLER-FAULT-MATRIX-REPORT.md",
+          "size": 1122,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 665,
+          "crc32": "8cde31e3",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/V8-KNOWN-LIMITATIONS-AND-QUALIFICATION-DEPENDENCIES.md",
+          "size": 1163,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 842,
+          "crc32": "01b49dce",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/V8-QUALIFICATION-HANDOFF.md",
+          "size": 1480,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1199,
+          "crc32": "d49a450d",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/V9-ADVERSARIAL-AND-MUTATION-TEST-REPORT.md",
+          "size": 2284,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1327,
+          "crc32": "008817ac",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/V9-AFFECTED-FILES-FUNCTIONS-SCHEMAS-AND-MODIFICATION-BOUNDARIES.md",
+          "size": 3822,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 893,
+          "crc32": "b63275b4",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/V9-AUTHORIZATION-ANCHOR-REPLAY-RECOVERY-REPORT.md",
+          "size": 1709,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 963,
+          "crc32": "cda8988a",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/V9-INSTALLER-TRANSACTION-CONCURRENCY-FAULT-REPORT.md",
+          "size": 1888,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 778,
+          "crc32": "2e7d6d66",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/V9-KEY-LIFECYCLE-ATOMICITY-STATUS.md",
+          "size": 1471,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 942,
+          "crc32": "75e6bc3b",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/V9-KNOWN-LIMITATIONS-AND-QUALIFICATION-DEPENDENCIES.md",
+          "size": 1800,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 690,
+          "crc32": "6006f8ac",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/V9-MACHINE-REPRODUCIBLE-EVIDENCE-DERIVATION-REPORT.md",
+          "size": 1215,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 515,
+          "crc32": "4554e3bc",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/V9-QUALIFICATION-HANDOFF.md",
+          "size": 829,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 644,
+          "crc32": "8bc0471f",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/V9-QUALIFICATION-ONLY-PHASE-TRANSITION-REPORT.md",
+          "size": 1197,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 966,
+          "crc32": "927fe568",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/V9-QUALIFICATION-PROBE-ISOLATION-AND-EXTERNAL-SIGNING-REPORT.md",
+          "size": 1748,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1228,
+          "crc32": "e80dadca",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/V9-QUALIFICATION-TO-INSTALLATION-BINDING-MATRIX.md",
+          "size": 6965,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1883,
+          "crc32": "a4153e08",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/V9-SECURITY-INVARIANTS-AND-ARCHITECTURE.md",
+          "size": 3939,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 602,
+          "crc32": "72569bc1",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/V9-SECURITY-SCORECARD.json",
+          "size": 1305,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 560,
+          "crc32": "b2c62b16",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/V9-SECURITY-VERIFICATION-SUMMARY.json",
+          "size": 979,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 191,
+          "crc32": "360b1a7e",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/VERIFY-AUTONOMOUS-DRAFT.py",
+          "size": 231,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1348,
+          "crc32": "990295db",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/VERIFY-REPORTS-BUNDLE.py",
+          "size": 3250,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 5864,
+          "crc32": "3e53fbf2",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/legacy/v9-candidate/VERIFY-V9-CANDIDATE.py",
+          "size": 15551,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 144923,
+          "crc32": "e0ff9c6a",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/markdown-prompts-autonomous-priming-draft.zip",
+          "size": 152720,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2313,
+          "crc32": "60cfb87d",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/apply_key_lifecycle_transition.py",
+          "size": 6365,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3785,
+          "crc32": "1eaf57b5",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/apply_key_lifecycle_transition_v9.py",
+          "size": 11611,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3839,
+          "crc32": "643f19d4",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/build_supply_chain_bundle.py",
+          "size": 10596,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4945,
+          "crc32": "0ce2c706",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/build_v8_qualification_fixture.py",
+          "size": 14499,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1369,
+          "crc32": "5d62ff99",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/create_bundle_attestation.py",
+          "size": 2884,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1598,
+          "crc32": "b678a610",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/create_canonical_policy_record.py",
+          "size": 4310,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1136,
+          "crc32": "1352df10",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/create_dependency_mirror_attestation.py",
+          "size": 2201,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1235,
+          "crc32": "053403f4",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/create_key_lifecycle_transition.py",
+          "size": 2579,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1295,
+          "crc32": "45c20bee",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/create_roadmap_regeneration_authorization.py",
+          "size": 2890,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1462,
+          "crc32": "10def825",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/create_v8_installation_authorization.py",
+          "size": 2962,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 878,
+          "crc32": "0c53f29a",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/create_validation_image_attestation.py",
+          "size": 1816,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1296,
+          "crc32": "e326d87c",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/exercise_agent_handoff.py",
+          "size": 3078,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1141,
+          "crc32": "cb265378",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/exercise_v8_execution_unit.py",
+          "size": 2470,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1551,
+          "crc32": "8ebe99bf",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/extract_master_prompt_docx.py",
+          "size": 4026,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 577,
+          "crc32": "f7fc291c",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/file_anchor_reference.py",
+          "size": 1323,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1668,
+          "crc32": "d93c3a49",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/generate_controller_config.py",
+          "size": 3976,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 993,
+          "crc32": "89c53161",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/generate_ed25519_keypair.py",
+          "size": 2077,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2126,
+          "crc32": "d0d4e281",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/sign_json_ed25519.py",
+          "size": 6289,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4182,
+          "crc32": "739c7024",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/v10_1_host_trust.py",
+          "size": 18662,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1771,
+          "crc32": "1389283c",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/v10_external_signer_client.py",
+          "size": 6262,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 6692,
+          "crc32": "c5d3a6db",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/v10_probe_boundary.py",
+          "size": 33080,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1882,
+          "crc32": "773584ff",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/v10_trusted_io.py",
+          "size": 6327,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1719,
+          "crc32": "24905ae5",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/v7_phase_boundary_harness.py",
+          "size": 4045,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1355,
+          "crc32": "3a15a2d7",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/v8_security_boundary_harness.py",
+          "size": 3048,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1964,
+          "crc32": "2bdbdbc6",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/v9_evidence_derivation.py",
+          "size": 5637,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1811,
+          "crc32": "ca07612c",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/v9_external_signer_client.py",
+          "size": 5268,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 924,
+          "crc32": "1070d643",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/v9_external_signer_reference.py",
+          "size": 2035,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 967,
+          "crc32": "4bbb59cb",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/v9_file_anchor_reference.py",
+          "size": 2067,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2724,
+          "crc32": "514e8277",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/v9_probe_boundary.py",
+          "size": 8801,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 458,
+          "crc32": "8f558698",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/verify_repository_topology.py",
+          "size": 682,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 6355,
+          "crc32": "e2e5ec4c",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/verify_v10_cleanroom_prerequisites.py",
+          "size": 24262,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 131,
+          "crc32": "600a7dc5",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/verify_v6_cleanroom_prerequisites.py",
+          "size": 159,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4416,
+          "crc32": "88b26ad9",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/verify_v7_cleanroom_prerequisites.py",
+          "size": 14594,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 9046,
+          "crc32": "807f7082",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/verify_v8_cleanroom_prerequisites.py",
+          "size": 30565,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 5448,
+          "crc32": "0885b0bc",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/operator-tools/verify_v9_cleanroom_prerequisites.py",
+          "size": 18878,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3038,
+          "crc32": "b0c29479",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/policy-tools/UNAPPROVED-legacy-condensed-master-prompt.md",
+          "size": 6885,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 7912,
+          "crc32": "b30d322a",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/provenance/independent-v9/AZ-Permit-Radar-Master-Operating-Prompt.docx",
+          "size": 8409,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 5251,
+          "crc32": "86c06035",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/provenance/independent-v9/AZPR-v9-pre-autonomous-execution-evidence.json",
+          "size": 15023,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 8183,
+          "crc32": "f928376e",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/provenance/independent-v9/AZPR-v9-pre-autonomous-security-assessment.md",
+          "size": 22001,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 12565,
+          "crc32": "51cca8a0",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/provenance/independent-v9/V10-SECURITY-DEVELOPMENT-HANDOFF-PROMPT.md",
+          "size": 35321,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4390,
+          "crc32": "c683821e",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/AGENTS.md",
+          "size": 10766,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1597,
+          "crc32": "8aca237c",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/appendices/appendix-a-audit-correction-prompt.md",
+          "size": 3339,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1286,
+          "crc32": "c1ac05dc",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/appendices/appendix-b-optional-controlled-sms-canary-enablement-prompt.md",
+          "size": 2599,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1519,
+          "crc32": "e44a0a51",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/appendices/appendix-c-optional-controlled-sms-canary-activation-audit.md",
+          "size": 3050,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4406,
+          "crc32": "dd4e63fa",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/001-close-the-post-core-traceability-release-gate.md",
+          "size": 10389,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2697,
+          "crc32": "d5aba8fb",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/002-post-core-traceability-corrective-audit.md",
+          "size": 5911,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4500,
+          "crc32": "5df18353",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/003-define-and-govern-the-narrow-pilot-scope.md",
+          "size": 10534,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4579,
+          "crc32": "469ad32c",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/004-select-and-govern-the-production-application-stack.md",
+          "size": 10579,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3909,
+          "crc32": "811d92fd",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/005-bootstrap-the-production-application-shell-and-engineering-baseline.md",
+          "size": 9003,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2751,
+          "crc32": "3a4fe891",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/006-mvp-scope-and-architecture-decision-audit.md",
+          "size": 6014,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4147,
+          "crc32": "56069cac",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/007-design-and-implement-the-durable-database-schema-and-migrations.md",
+          "size": 9618,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3926,
+          "crc32": "2a3cc3d1",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/008-implement-durable-repositories-and-transaction-boundaries.md",
+          "size": 9077,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3945,
+          "crc32": "6bbdd5f6",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/009-implement-immutable-artifact-storage-outbox-workers-and-crash-recovery.md",
+          "size": 9064,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2756,
+          "crc32": "89bdfa2b",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/010-durable-platform-and-persistence-audit.md",
+          "size": 5928,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3975,
+          "crc32": "9ac3723b",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/011-implement-authentication-session-security-and-accesscontext-construction.md",
+          "size": 9125,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4037,
+          "crc32": "d4db61d1",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/012-implement-customer-account-lifecycle-versioned-configuration-and-onboarding-api.md",
+          "size": 9237,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2674,
+          "crc32": "6f9bb0f0",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/013-identity-authorization-and-customer-isolation-audit.md",
+          "size": 5800,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4037,
+          "crc32": "7949f0e9",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/014-select-and-approve-the-first-tucson-or-pima-county-production-source.md",
+          "size": 9162,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3957,
+          "crc32": "8289e6a8",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/015-implement-durable-scheduled-acquisition-and-the-approved-live-connector.md",
+          "size": 8955,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3936,
+          "crc32": "568b3293",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/016-implement-the-production-source-parser-replay-and-backfill-contract.md",
+          "size": 8905,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4095,
+          "crc32": "349e06cb",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/017-implement-required-production-geography-and-address-resolution.md",
+          "size": 9418,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2747,
+          "crc32": "94bb998c",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/018-pilot-source-ingestion-normalization-and-geography-audit.md",
+          "size": 6029,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4072,
+          "crc32": "ed89f110",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/019-implement-the-authorized-customer-api-and-query-projections.md",
+          "size": 9270,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4007,
+          "crc32": "dfbd6656",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/020-build-the-authenticated-frontend-foundation-and-onboarding-experience.md",
+          "size": 9066,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4079,
+          "crc32": "bf5954be",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/021-build-the-explainable-opportunity-dashboard-and-lead-workflow.md",
+          "size": 9104,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2764,
+          "crc32": "913b3f03",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/022-customer-api-frontend-and-data-exposure-audit.md",
+          "size": 5946,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4172,
+          "crc32": "24c7ebc9",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/023-implement-email-notification-orchestration-and-delivery.md",
+          "size": 9604,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2825,
+          "crc32": "015d6a8d",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/024-email-delivery-audit.md",
+          "size": 6239,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4058,
+          "crc32": "ce1cb00f",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/025-implement-controlled-sms-infrastructure-behind-a-disabled-feature-flag.md",
+          "size": 9316,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4052,
+          "crc32": "d66833e5",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/026-build-internal-review-and-source-operations-tooling.md",
+          "size": 9165,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2732,
+          "crc32": "657af54b",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/027-notification-sms-and-operations-audit.md",
+          "size": 5993,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4013,
+          "crc32": "83260e8f",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/028-implement-the-privacy-conscious-analytics-event-model.md",
+          "size": 9162,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3845,
+          "crc32": "46499e8e",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/029-implement-observability-health-alerting-and-operational-runbooks.md",
+          "size": 8740,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3826,
+          "crc32": "699bbf9a",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/030-implement-backup-restore-reconciliation-and-rollback-procedures.md",
+          "size": 8808,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2161,
+          "crc32": "9e06e819",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/031-security-privacy-performance-and-recovery-hardening-audit.md",
+          "size": 4348,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2981,
+          "crc32": "0249e662",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/032-formal-pilot-release-test-matrix-and-release-gate-audit.md",
+          "size": 6536,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4068,
+          "crc32": "e4fe155b",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/033-prepare-controlled-staging-deployment-plan.md",
+          "size": 9370,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3094,
+          "crc32": "1b1d6454",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/034-final-staging-and-pilot-readiness-audit.md",
+          "size": 6920,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4050,
+          "crc32": "68ce6291",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/035-prepare-controlled-production-pilot-release-plan.md",
+          "size": 9324,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3200,
+          "crc32": "e15b8a2c",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/036-production-pilot-launch-verification-audit.md",
+          "size": 7196,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4052,
+          "crc32": "d632fdcf",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/037-implement-pilot-feedback-and-business-validation-workflow.md",
+          "size": 9152,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3417,
+          "crc32": "f847c6d1",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/numbered/038-pilot-feedback-and-business-validation-audit.md",
+          "size": 7739,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 262,
+          "crc32": "ae50c703",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/policy/README.md",
+          "size": 411,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 624,
+          "crc32": "87f113e1",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/adapter-installation-manifest.schema.json",
+          "size": 1463,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 285,
+          "crc32": "53a22e53",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/adapter-request.schema.json",
+          "size": 696,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 322,
+          "crc32": "fcdcad6a",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/adapter-response.schema.json",
+          "size": 613,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 720,
+          "crc32": "36877ee5",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/agent-execution-profile.schema.json",
+          "size": 3411,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 667,
+          "crc32": "edaa2a12",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/appendix-a-authorization.schema.json",
+          "size": 2761,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1390,
+          "crc32": "96b41d26",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/approval.schema.json",
+          "size": 14149,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 554,
+          "crc32": "09076d04",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/approved-probe-keyring-v10.schema.json",
+          "size": 2260,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 738,
+          "crc32": "0823b4c0",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/build-provenance.schema.json",
+          "size": 4294,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 425,
+          "crc32": "c23f022a",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/bundle-attestation.schema.json",
+          "size": 1348,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 697,
+          "crc32": "17b4cb41",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/canonical-policy-record.schema.json",
+          "size": 2699,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 675,
+          "crc32": "d101113c",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/canonical-policy-section-map.schema.json",
+          "size": 3249,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 903,
+          "crc32": "9c67cf17",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/canonical-policy-source-manifest.schema.json",
+          "size": 5450,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 826,
+          "crc32": "a096c240",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/capability-manifest.schema.json",
+          "size": 4210,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1320,
+          "crc32": "434d10d7",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/cleanroom-qualification-input.schema.json",
+          "size": 19322,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2129,
+          "crc32": "2ed3a522",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/cleanroom-qualification-receipt-v10.schema.json",
+          "size": 21523,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1423,
+          "crc32": "25c93c96",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/cleanroom-qualification-receipt-v9.schema.json",
+          "size": 11800,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1337,
+          "crc32": "74df8653",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/cleanroom-qualification-receipt.schema.json",
+          "size": 11288,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 380,
+          "crc32": "8f8c3238",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/dependency-mirror-attestation.schema.json",
+          "size": 938,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 400,
+          "crc32": "4b88eb91",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/dependency-mirror-inventory.schema.json",
+          "size": 1119,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 724,
+          "crc32": "083efee9",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/deployment-plan.schema.json",
+          "size": 3164,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 956,
+          "crc32": "da4bc637",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/evidence.schema.json",
+          "size": 4577,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 444,
+          "crc32": "c1b09d67",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/external-receipt-signer-identity-v10.schema.json",
+          "size": 1372,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2570,
+          "crc32": "50487466",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/external-receipt-signing-request-v10.schema.json",
+          "size": 31529,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 352,
+          "crc32": "c038bf0e",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/external-receipt-signing-request-v9.schema.json",
+          "size": 877,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2342,
+          "crc32": "5b93cf6a",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/external-receipt-signing-response-v10.schema.json",
+          "size": 25735,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 358,
+          "crc32": "5d97ecdc",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/external-receipt-signing-response-v9.schema.json",
+          "size": 877,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 684,
+          "crc32": "1a6752f8",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/external-runner-config.schema.json",
+          "size": 5395,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 334,
+          "crc32": "ad9fe6d9",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/external-runner-installation.schema.json",
+          "size": 1076,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 487,
+          "crc32": "2ef36413",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/handoff-quota-profile.schema.json",
+          "size": 1740,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 603,
+          "crc32": "731dc4cb",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/host-bootstrap-roots-v10.schema.json",
+          "size": 2863,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 502,
+          "crc32": "c368fcda",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/host-bootstrap-roots-v9.schema.json",
+          "size": 1453,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 929,
+          "crc32": "038b9943",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/host-qualification-roots-v10.schema.json",
+          "size": 11284,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 438,
+          "crc32": "680b5980",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/host-root-anchor-identity-v10.schema.json",
+          "size": 1356,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 594,
+          "crc32": "7f3bf10a",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/installation-receipt.schema.json",
+          "size": 2606,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 379,
+          "crc32": "27923d2a",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/journal-record.schema.json",
+          "size": 1186,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 644,
+          "crc32": "fae15f9d",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/key-lifecycle-state.schema.json",
+          "size": 2008,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 766,
+          "crc32": "5433986d",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/key-lifecycle-transition-v9.schema.json",
+          "size": 3601,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 890,
+          "crc32": "817a75db",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/key-lifecycle-transition.schema.json",
+          "size": 3922,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 616,
+          "crc32": "134ba8ef",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/operation-registration.schema.json",
+          "size": 2874,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 555,
+          "crc32": "bc459504",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/probe-attestor-keyring-v10.schema.json",
+          "size": 2260,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 440,
+          "crc32": "0269161d",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/probe-attestor-revocation-state-v10.schema.json",
+          "size": 1043,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 896,
+          "crc32": "1a319438",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/probe-policy-v10.schema.json",
+          "size": 3932,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 431,
+          "crc32": "3fa3663d",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/probe-revocation-state-v10.schema.json",
+          "size": 1029,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 528,
+          "crc32": "35507603",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/probe-service-attestation-v10.schema.json",
+          "size": 2462,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 394,
+          "crc32": "69de8a1e",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/probe-service-identity-v10.schema.json",
+          "size": 1093,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 417,
+          "crc32": "3d96159f",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/public-keyring.schema.json",
+          "size": 1424,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 338,
+          "crc32": "a007ecd7",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/python-runtime-manifest.schema.json",
+          "size": 862,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 509,
+          "crc32": "517aa019",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/qualification-authorization-consumption.schema.json",
+          "size": 1832,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1569,
+          "crc32": "ff2ca063",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/qualification-evidence-report.schema.json",
+          "size": 9201,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1611,
+          "crc32": "df47b21e",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/qualification-installation-authorization-v10.schema.json",
+          "size": 12401,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1588,
+          "crc32": "9e74aa9f",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/qualification-installation-authorization-v9.schema.json",
+          "size": 12098,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1298,
+          "crc32": "bc11daed",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/qualification-installation-authorization.schema.json",
+          "size": 9142,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 667,
+          "crc32": "1e0252b2",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/qualification-phase-transition-authorization-v10.schema.json",
+          "size": 2770,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 634,
+          "crc32": "eb6d8c34",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/qualification-phase-transition-authorization-v9.schema.json",
+          "size": 2033,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 767,
+          "crc32": "c659283f",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/qualification-probe-envelopes-manifest-v10.schema.json",
+          "size": 7167,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 591,
+          "crc32": "e8b9f6b8",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/qualification-probe-envelopes-manifest-v9.schema.json",
+          "size": 5947,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1040,
+          "crc32": "5def811c",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/qualification-probe-result-envelope-v10.schema.json",
+          "size": 5511,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1153,
+          "crc32": "41cd81f5",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/qualification-probe-result-envelope-v9.schema.json",
+          "size": 3873,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 717,
+          "crc32": "a48ffee7",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/qualification-raw-evidence-v9.schema.json",
+          "size": 2025,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 552,
+          "crc32": "4464a5b4",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/qualification-revocation-list.schema.json",
+          "size": 1901,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 655,
+          "crc32": "f20217e8",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/qualification-trust-manifest-v10.schema.json",
+          "size": 3546,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1309,
+          "crc32": "d0b65493",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/qualified-artifact-inputs-v10.schema.json",
+          "size": 35127,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 916,
+          "crc32": "2babe0d7",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/qualified-artifact-inputs-v9.schema.json",
+          "size": 6043,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1696,
+          "crc32": "0d2cffdc",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/result.schema.json",
+          "size": 11502,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 574,
+          "crc32": "5a92d4c4",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/roadmap-regeneration-authorization.schema.json",
+          "size": 1952,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3020,
+          "crc32": "4b189797",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/roadmap.schema.json",
+          "size": 27994,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 869,
+          "crc32": "ab1a4433",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/run-manifest.schema.json",
+          "size": 5032,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 372,
+          "crc32": "36f50de8",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/supply-chain-identity.schema.json",
+          "size": 1915,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 495,
+          "crc32": "65250ea2",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/target-attestation.schema.json",
+          "size": 1712,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 418,
+          "crc32": "f1c8ba46",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/trust-store-epoch-v9.schema.json",
+          "size": 1112,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1357,
+          "crc32": "a6edb817",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/trusted-installation.schema.json",
+          "size": 7265,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 422,
+          "crc32": "bb8fb60d",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/validation-image-attestation.schema.json",
+          "size": 1161,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 792,
+          "crc32": "09e22ae4",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/schemas/validation-profile.schema.json",
+          "size": 3565,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 406,
+          "crc32": "779906bb",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/validation-profiles/backend-core.json",
+          "size": 1131,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 532,
+          "crc32": "c86f4d1f",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/validation-profiles/frontend.json",
+          "size": 2115,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 432,
+          "crc32": "ff977901",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/validation-profiles/infrastructure-plan.json",
+          "size": 1380,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 469,
+          "crc32": "e192073f",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/validation-profiles/migration-persistence.json",
+          "size": 1508,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 418,
+          "crc32": "9c2a7637",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/validation-profiles/recovery.json",
+          "size": 1320,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 441,
+          "crc32": "84e86f53",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/validation-profiles/release-evidence.json",
+          "size": 1046,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 466,
+          "crc32": "c12b2408",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/repository-overlay/automation/validation-profiles/security-privacy.json",
+          "size": 1433,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 149,
+          "crc32": "dea6bd12",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/requirements-security.in",
+          "size": 192,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 286,
+          "crc32": "d4f00b3a",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/tests/fixtures/root-owned-bundle-auth/attestation.json",
+          "size": 383,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 155,
+          "crc32": "a6cf900c",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/tests/fixtures/root-owned-bundle-auth/release/SHA256SUMS.json",
+          "size": 181,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 26,
+          "crc32": "1fd6e7f7",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/tests/fixtures/root-owned-bundle-auth/release/controller.py",
+          "size": 24,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 93,
+          "crc32": "9ed43ae2",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/tests/fixtures/root-owned-bundle-auth/release-signing.pub.pem",
+          "size": 113,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2588,
+          "crc32": "aa540ec6",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/tests/security_fixtures.py",
+          "size": 7962,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1647,
+          "crc32": "00c5aac2",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/tests/test_autonomous_priming_controls.py",
+          "size": 4853,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 5438,
+          "crc32": "73d5d730",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/tests/test_final_assessment_controls.py",
+          "size": 18763,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3308,
+          "crc32": "7be5a664",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/tests/test_finalized_composed_controls.py",
+          "size": 9782,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3655,
+          "crc32": "fbf7892d",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/tests/test_refined_security.py",
+          "size": 11958,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 6198,
+          "crc32": "1115cc53",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/tests/test_v10_security_closures.py",
+          "size": 25307,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4544,
+          "crc32": "c57aca85",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/tests/test_v5_security_closures.py",
+          "size": 13935,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4790,
+          "crc32": "3ab7d756",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/tests/test_v6_security_closures.py",
+          "size": 17722,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4679,
+          "crc32": "46d7ca80",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/tests/test_v7_preautonomous_closures.py",
+          "size": 15241,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3743,
+          "crc32": "5a2549ee",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/tests/test_v8_corrective_controls.py",
+          "size": 10447,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 6684,
+          "crc32": "8c814ff3",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/tests/test_v9_security_closures.py",
+          "size": 24293,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1520,
+          "crc32": "70cd1829",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/tests/test_validation_runner.py",
+          "size": 4746,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4601,
+          "crc32": "765124f9",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/tests/v10_1_test_support.py",
+          "size": 20825,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 35564,
+          "crc32": "ab9516c2",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/trusted-controller/controller.py",
+          "size": 157812,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3717,
+          "crc32": "b5b16962",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/trusted-controller/evidence_registry.py",
+          "size": 13218,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1493,
+          "crc32": "e3f65751",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/trusted-controller/process_gate.py",
+          "size": 3094,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 32178,
+          "crc32": "2560b0fa",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/trusted-controller/secure_runtime.py",
+          "size": 128058,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4033,
+          "crc32": "75b44432",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/trusted-controller/trusted_installation.py",
+          "size": 13980,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 21551,
+          "crc32": "13b702bd",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/trusted-installation/install.py",
+          "size": 88021,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3916,
+          "crc32": "ce8bf3ac",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/trusted-installation/v10_binding.py",
+          "size": 14625,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3173,
+          "crc32": "82d41d0d",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/trusted-installation/v9_binding.py",
+          "size": 11189,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4979,
+          "crc32": "8990f2da",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/trusted-installation/v9_transaction.py",
+          "size": 20717,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4033,
+          "crc32": "75b44432",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/trusted-validation-runner/trusted_installation.py",
+          "size": 13980,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 7261,
+          "crc32": "cf2ae224",
+          "mode": "0o100444",
+          "name": "AZPR-autonomous-execution-primed-draft-v10.1/trusted-validation-runner/trusted_validation_runner.py",
+          "size": 25653,
+          "type": "regular"
+        }
+      ],
+      "nested_archives": [
+        {
+          "archive": "../AZPR-v10.1-final-deliverables.zip!/AZPR-autonomous-execution-primed-draft-v10.1.zip!/AZPR-autonomous-execution-primed-draft-v10.1/markdown-prompts-autonomous-priming-draft.zip",
+          "findings": [],
+          "member_count": 41,
+          "members": [
+            {
+              "compressed_size": 4406,
+              "crc32": "dd4e63fa",
+              "mode": "0o100644",
+              "name": "automation/numbered/001-close-the-post-core-traceability-release-gate.md",
+              "size": 10389,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 2697,
+              "crc32": "d5aba8fb",
+              "mode": "0o100644",
+              "name": "automation/numbered/002-post-core-traceability-corrective-audit.md",
+              "size": 5911,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 4500,
+              "crc32": "5df18353",
+              "mode": "0o100644",
+              "name": "automation/numbered/003-define-and-govern-the-narrow-pilot-scope.md",
+              "size": 10534,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 4579,
+              "crc32": "469ad32c",
+              "mode": "0o100644",
+              "name": "automation/numbered/004-select-and-govern-the-production-application-stack.md",
+              "size": 10579,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 3909,
+              "crc32": "811d92fd",
+              "mode": "0o100644",
+              "name": "automation/numbered/005-bootstrap-the-production-application-shell-and-engineering-baseline.md",
+              "size": 9003,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 2751,
+              "crc32": "3a4fe891",
+              "mode": "0o100644",
+              "name": "automation/numbered/006-mvp-scope-and-architecture-decision-audit.md",
+              "size": 6014,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 4147,
+              "crc32": "56069cac",
+              "mode": "0o100644",
+              "name": "automation/numbered/007-design-and-implement-the-durable-database-schema-and-migrations.md",
+              "size": 9618,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 3926,
+              "crc32": "2a3cc3d1",
+              "mode": "0o100644",
+              "name": "automation/numbered/008-implement-durable-repositories-and-transaction-boundaries.md",
+              "size": 9077,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 3945,
+              "crc32": "6bbdd5f6",
+              "mode": "0o100644",
+              "name": "automation/numbered/009-implement-immutable-artifact-storage-outbox-workers-and-crash-recovery.md",
+              "size": 9064,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 2756,
+              "crc32": "89bdfa2b",
+              "mode": "0o100644",
+              "name": "automation/numbered/010-durable-platform-and-persistence-audit.md",
+              "size": 5928,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 3975,
+              "crc32": "9ac3723b",
+              "mode": "0o100644",
+              "name": "automation/numbered/011-implement-authentication-session-security-and-accesscontext-construction.md",
+              "size": 9125,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 4037,
+              "crc32": "d4db61d1",
+              "mode": "0o100644",
+              "name": "automation/numbered/012-implement-customer-account-lifecycle-versioned-configuration-and-onboarding-api.md",
+              "size": 9237,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 2674,
+              "crc32": "6f9bb0f0",
+              "mode": "0o100644",
+              "name": "automation/numbered/013-identity-authorization-and-customer-isolation-audit.md",
+              "size": 5800,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 4037,
+              "crc32": "7949f0e9",
+              "mode": "0o100644",
+              "name": "automation/numbered/014-select-and-approve-the-first-tucson-or-pima-county-production-source.md",
+              "size": 9162,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 3957,
+              "crc32": "8289e6a8",
+              "mode": "0o100644",
+              "name": "automation/numbered/015-implement-durable-scheduled-acquisition-and-the-approved-live-connector.md",
+              "size": 8955,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 3936,
+              "crc32": "568b3293",
+              "mode": "0o100644",
+              "name": "automation/numbered/016-implement-the-production-source-parser-replay-and-backfill-contract.md",
+              "size": 8905,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 4095,
+              "crc32": "349e06cb",
+              "mode": "0o100644",
+              "name": "automation/numbered/017-implement-required-production-geography-and-address-resolution.md",
+              "size": 9418,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 2747,
+              "crc32": "94bb998c",
+              "mode": "0o100644",
+              "name": "automation/numbered/018-pilot-source-ingestion-normalization-and-geography-audit.md",
+              "size": 6029,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 4072,
+              "crc32": "ed89f110",
+              "mode": "0o100644",
+              "name": "automation/numbered/019-implement-the-authorized-customer-api-and-query-projections.md",
+              "size": 9270,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 4007,
+              "crc32": "dfbd6656",
+              "mode": "0o100644",
+              "name": "automation/numbered/020-build-the-authenticated-frontend-foundation-and-onboarding-experience.md",
+              "size": 9066,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 4079,
+              "crc32": "bf5954be",
+              "mode": "0o100644",
+              "name": "automation/numbered/021-build-the-explainable-opportunity-dashboard-and-lead-workflow.md",
+              "size": 9104,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 2764,
+              "crc32": "913b3f03",
+              "mode": "0o100644",
+              "name": "automation/numbered/022-customer-api-frontend-and-data-exposure-audit.md",
+              "size": 5946,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 4172,
+              "crc32": "24c7ebc9",
+              "mode": "0o100644",
+              "name": "automation/numbered/023-implement-email-notification-orchestration-and-delivery.md",
+              "size": 9604,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 2825,
+              "crc32": "015d6a8d",
+              "mode": "0o100644",
+              "name": "automation/numbered/024-email-delivery-audit.md",
+              "size": 6239,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 4058,
+              "crc32": "ce1cb00f",
+              "mode": "0o100644",
+              "name": "automation/numbered/025-implement-controlled-sms-infrastructure-behind-a-disabled-feature-flag.md",
+              "size": 9316,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 4052,
+              "crc32": "d66833e5",
+              "mode": "0o100644",
+              "name": "automation/numbered/026-build-internal-review-and-source-operations-tooling.md",
+              "size": 9165,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 2732,
+              "crc32": "657af54b",
+              "mode": "0o100644",
+              "name": "automation/numbered/027-notification-sms-and-operations-audit.md",
+              "size": 5993,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 4013,
+              "crc32": "83260e8f",
+              "mode": "0o100644",
+              "name": "automation/numbered/028-implement-the-privacy-conscious-analytics-event-model.md",
+              "size": 9162,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 3845,
+              "crc32": "46499e8e",
+              "mode": "0o100644",
+              "name": "automation/numbered/029-implement-observability-health-alerting-and-operational-runbooks.md",
+              "size": 8740,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 3826,
+              "crc32": "699bbf9a",
+              "mode": "0o100644",
+              "name": "automation/numbered/030-implement-backup-restore-reconciliation-and-rollback-procedures.md",
+              "size": 8808,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 2161,
+              "crc32": "9e06e819",
+              "mode": "0o100644",
+              "name": "automation/numbered/031-security-privacy-performance-and-recovery-hardening-audit.md",
+              "size": 4348,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 2981,
+              "crc32": "0249e662",
+              "mode": "0o100644",
+              "name": "automation/numbered/032-formal-pilot-release-test-matrix-and-release-gate-audit.md",
+              "size": 6536,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 4068,
+              "crc32": "e4fe155b",
+              "mode": "0o100644",
+              "name": "automation/numbered/033-prepare-controlled-staging-deployment-plan.md",
+              "size": 9370,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 3094,
+              "crc32": "1b1d6454",
+              "mode": "0o100644",
+              "name": "automation/numbered/034-final-staging-and-pilot-readiness-audit.md",
+              "size": 6920,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 4050,
+              "crc32": "68ce6291",
+              "mode": "0o100644",
+              "name": "automation/numbered/035-prepare-controlled-production-pilot-release-plan.md",
+              "size": 9324,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 3200,
+              "crc32": "e15b8a2c",
+              "mode": "0o100644",
+              "name": "automation/numbered/036-production-pilot-launch-verification-audit.md",
+              "size": 7196,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 4052,
+              "crc32": "d632fdcf",
+              "mode": "0o100644",
+              "name": "automation/numbered/037-implement-pilot-feedback-and-business-validation-workflow.md",
+              "size": 9152,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 3417,
+              "crc32": "f847c6d1",
+              "mode": "0o100644",
+              "name": "automation/numbered/038-pilot-feedback-and-business-validation-audit.md",
+              "size": 7739,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 1597,
+              "crc32": "8aca237c",
+              "mode": "0o100644",
+              "name": "automation/appendices/appendix-a-audit-correction-prompt.md",
+              "size": 3339,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 1286,
+              "crc32": "c1ac05dc",
+              "mode": "0o100644",
+              "name": "automation/appendices/appendix-b-optional-controlled-sms-canary-enablement-prompt.md",
+              "size": 2599,
+              "type": "regular"
+            },
+            {
+              "compressed_size": 1519,
+              "crc32": "e44a0a51",
+              "mode": "0o100644",
+              "name": "automation/appendices/appendix-c-optional-controlled-sms-canary-activation-audit.md",
+              "size": 3050,
+              "type": "regular"
+            }
+          ],
+          "nested_archives": [],
+          "safe": true
+        }
+      ],
+      "safe": true
+    },
+    {
+      "archive": "../AZPR-v10.1-final-deliverables.zip!/markdown-prompts-autonomous-priming-draft-v10.1.zip",
+      "findings": [],
+      "member_count": 41,
+      "members": [
+        {
+          "compressed_size": 4406,
+          "crc32": "dd4e63fa",
+          "mode": "0o100644",
+          "name": "automation/numbered/001-close-the-post-core-traceability-release-gate.md",
+          "size": 10389,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2697,
+          "crc32": "d5aba8fb",
+          "mode": "0o100644",
+          "name": "automation/numbered/002-post-core-traceability-corrective-audit.md",
+          "size": 5911,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4500,
+          "crc32": "5df18353",
+          "mode": "0o100644",
+          "name": "automation/numbered/003-define-and-govern-the-narrow-pilot-scope.md",
+          "size": 10534,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4579,
+          "crc32": "469ad32c",
+          "mode": "0o100644",
+          "name": "automation/numbered/004-select-and-govern-the-production-application-stack.md",
+          "size": 10579,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3909,
+          "crc32": "811d92fd",
+          "mode": "0o100644",
+          "name": "automation/numbered/005-bootstrap-the-production-application-shell-and-engineering-baseline.md",
+          "size": 9003,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2751,
+          "crc32": "3a4fe891",
+          "mode": "0o100644",
+          "name": "automation/numbered/006-mvp-scope-and-architecture-decision-audit.md",
+          "size": 6014,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4147,
+          "crc32": "56069cac",
+          "mode": "0o100644",
+          "name": "automation/numbered/007-design-and-implement-the-durable-database-schema-and-migrations.md",
+          "size": 9618,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3926,
+          "crc32": "2a3cc3d1",
+          "mode": "0o100644",
+          "name": "automation/numbered/008-implement-durable-repositories-and-transaction-boundaries.md",
+          "size": 9077,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3945,
+          "crc32": "6bbdd5f6",
+          "mode": "0o100644",
+          "name": "automation/numbered/009-implement-immutable-artifact-storage-outbox-workers-and-crash-recovery.md",
+          "size": 9064,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2756,
+          "crc32": "89bdfa2b",
+          "mode": "0o100644",
+          "name": "automation/numbered/010-durable-platform-and-persistence-audit.md",
+          "size": 5928,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3975,
+          "crc32": "9ac3723b",
+          "mode": "0o100644",
+          "name": "automation/numbered/011-implement-authentication-session-security-and-accesscontext-construction.md",
+          "size": 9125,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4037,
+          "crc32": "d4db61d1",
+          "mode": "0o100644",
+          "name": "automation/numbered/012-implement-customer-account-lifecycle-versioned-configuration-and-onboarding-api.md",
+          "size": 9237,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2674,
+          "crc32": "6f9bb0f0",
+          "mode": "0o100644",
+          "name": "automation/numbered/013-identity-authorization-and-customer-isolation-audit.md",
+          "size": 5800,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4037,
+          "crc32": "7949f0e9",
+          "mode": "0o100644",
+          "name": "automation/numbered/014-select-and-approve-the-first-tucson-or-pima-county-production-source.md",
+          "size": 9162,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3957,
+          "crc32": "8289e6a8",
+          "mode": "0o100644",
+          "name": "automation/numbered/015-implement-durable-scheduled-acquisition-and-the-approved-live-connector.md",
+          "size": 8955,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3936,
+          "crc32": "568b3293",
+          "mode": "0o100644",
+          "name": "automation/numbered/016-implement-the-production-source-parser-replay-and-backfill-contract.md",
+          "size": 8905,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4095,
+          "crc32": "349e06cb",
+          "mode": "0o100644",
+          "name": "automation/numbered/017-implement-required-production-geography-and-address-resolution.md",
+          "size": 9418,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2747,
+          "crc32": "94bb998c",
+          "mode": "0o100644",
+          "name": "automation/numbered/018-pilot-source-ingestion-normalization-and-geography-audit.md",
+          "size": 6029,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4072,
+          "crc32": "ed89f110",
+          "mode": "0o100644",
+          "name": "automation/numbered/019-implement-the-authorized-customer-api-and-query-projections.md",
+          "size": 9270,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4007,
+          "crc32": "dfbd6656",
+          "mode": "0o100644",
+          "name": "automation/numbered/020-build-the-authenticated-frontend-foundation-and-onboarding-experience.md",
+          "size": 9066,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4079,
+          "crc32": "bf5954be",
+          "mode": "0o100644",
+          "name": "automation/numbered/021-build-the-explainable-opportunity-dashboard-and-lead-workflow.md",
+          "size": 9104,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2764,
+          "crc32": "913b3f03",
+          "mode": "0o100644",
+          "name": "automation/numbered/022-customer-api-frontend-and-data-exposure-audit.md",
+          "size": 5946,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4172,
+          "crc32": "24c7ebc9",
+          "mode": "0o100644",
+          "name": "automation/numbered/023-implement-email-notification-orchestration-and-delivery.md",
+          "size": 9604,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2825,
+          "crc32": "015d6a8d",
+          "mode": "0o100644",
+          "name": "automation/numbered/024-email-delivery-audit.md",
+          "size": 6239,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4058,
+          "crc32": "ce1cb00f",
+          "mode": "0o100644",
+          "name": "automation/numbered/025-implement-controlled-sms-infrastructure-behind-a-disabled-feature-flag.md",
+          "size": 9316,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4052,
+          "crc32": "d66833e5",
+          "mode": "0o100644",
+          "name": "automation/numbered/026-build-internal-review-and-source-operations-tooling.md",
+          "size": 9165,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2732,
+          "crc32": "657af54b",
+          "mode": "0o100644",
+          "name": "automation/numbered/027-notification-sms-and-operations-audit.md",
+          "size": 5993,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4013,
+          "crc32": "83260e8f",
+          "mode": "0o100644",
+          "name": "automation/numbered/028-implement-the-privacy-conscious-analytics-event-model.md",
+          "size": 9162,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3845,
+          "crc32": "46499e8e",
+          "mode": "0o100644",
+          "name": "automation/numbered/029-implement-observability-health-alerting-and-operational-runbooks.md",
+          "size": 8740,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3826,
+          "crc32": "699bbf9a",
+          "mode": "0o100644",
+          "name": "automation/numbered/030-implement-backup-restore-reconciliation-and-rollback-procedures.md",
+          "size": 8808,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2161,
+          "crc32": "9e06e819",
+          "mode": "0o100644",
+          "name": "automation/numbered/031-security-privacy-performance-and-recovery-hardening-audit.md",
+          "size": 4348,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 2981,
+          "crc32": "0249e662",
+          "mode": "0o100644",
+          "name": "automation/numbered/032-formal-pilot-release-test-matrix-and-release-gate-audit.md",
+          "size": 6536,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4068,
+          "crc32": "e4fe155b",
+          "mode": "0o100644",
+          "name": "automation/numbered/033-prepare-controlled-staging-deployment-plan.md",
+          "size": 9370,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3094,
+          "crc32": "1b1d6454",
+          "mode": "0o100644",
+          "name": "automation/numbered/034-final-staging-and-pilot-readiness-audit.md",
+          "size": 6920,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4050,
+          "crc32": "68ce6291",
+          "mode": "0o100644",
+          "name": "automation/numbered/035-prepare-controlled-production-pilot-release-plan.md",
+          "size": 9324,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3200,
+          "crc32": "e15b8a2c",
+          "mode": "0o100644",
+          "name": "automation/numbered/036-production-pilot-launch-verification-audit.md",
+          "size": 7196,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 4052,
+          "crc32": "d632fdcf",
+          "mode": "0o100644",
+          "name": "automation/numbered/037-implement-pilot-feedback-and-business-validation-workflow.md",
+          "size": 9152,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 3417,
+          "crc32": "f847c6d1",
+          "mode": "0o100644",
+          "name": "automation/numbered/038-pilot-feedback-and-business-validation-audit.md",
+          "size": 7739,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1597,
+          "crc32": "8aca237c",
+          "mode": "0o100644",
+          "name": "automation/appendices/appendix-a-audit-correction-prompt.md",
+          "size": 3339,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1286,
+          "crc32": "c1ac05dc",
+          "mode": "0o100644",
+          "name": "automation/appendices/appendix-b-optional-controlled-sms-canary-enablement-prompt.md",
+          "size": 2599,
+          "type": "regular"
+        },
+        {
+          "compressed_size": 1519,
+          "crc32": "e44a0a51",
+          "mode": "0o100644",
+          "name": "automation/appendices/appendix-c-optional-controlled-sms-canary-activation-audit.md",
+          "size": 3050,
+          "type": "regular"
+        }
+      ],
+      "nested_archives": [],
+      "safe": true
+    }
+  ],
+  "safe": true
+}

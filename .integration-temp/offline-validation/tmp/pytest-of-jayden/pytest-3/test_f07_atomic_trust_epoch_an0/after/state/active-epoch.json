@@ -1,0 +1,7 @@
+{
+  "epoch_id": "epoch-after-00001",
+  "epoch_manifest_path": "/Users/jayden/Desktop/Business/AZ-Permit-Radar/AZPR/.integration-temp/offline-validation/tmp/pytest-of-jayden/pytest-3/test_f07_atomic_trust_epoch_an0/after/state/epochs/epoch-after-00001/epoch-manifest.json",
+  "epoch_manifest_sha256": "f80596c6c1488285ab9e93f8de7c66ecb95fc40446cf85aac2b41a57be1776b1",
+  "format_version": "1.0",
+  "sequence": 1
+}

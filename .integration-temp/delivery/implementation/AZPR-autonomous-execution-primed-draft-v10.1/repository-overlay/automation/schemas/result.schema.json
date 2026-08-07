@@ -1,0 +1,485 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://azpr.local/schemas/result.schema.json",
+  "title": "AZPR Stage Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format_version",
+    "stage_id",
+    "outcome",
+    "summary",
+    "changed_paths",
+    "validation_summary",
+    "remaining_risks",
+    "proposed_commit_message",
+    "audit",
+    "corrections",
+    "approval",
+    "external_plan"
+  ],
+  "properties": {
+    "format_version": {
+      "const": "2.0"
+    },
+    "stage_id": {
+      "type": "string",
+      "pattern": "^(?:[0-9]{3}|[ABC])$",
+      "maxLength": 8000
+    },
+    "outcome": {
+      "enum": [
+        "COMPLETED",
+        "PASS",
+        "PASS_WITH_REQUIRED_CORRECTIONS",
+        "BLOCKED",
+        "APPROVAL_REQUIRED",
+        "FAILED"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "maxLength": 12000
+    },
+    "changed_paths": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[\\x00-\\x1f\\x7f\\\\]).+$",
+        "maxLength": 8000
+      },
+      "maxItems": 100
+    },
+    "validation_summary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "category",
+          "status",
+          "evidence"
+        ],
+        "properties": {
+          "category": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "status": {
+            "enum": [
+              "PASS",
+              "FAIL",
+              "NOT_RUN",
+              "BLOCKED"
+            ]
+          },
+          "evidence": {
+            "type": "string",
+            "maxLength": 8000
+          }
+        }
+      },
+      "maxItems": 100
+    },
+    "remaining_risks": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 2000
+      },
+      "maxItems": 100
+    },
+    "proposed_commit_message": {
+      "type": "string",
+      "maxLength": 300
+    },
+    "audit": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "is_audit",
+            "verdict",
+            "audited_commit",
+            "findings",
+            "report_markdown"
+          ],
+          "properties": {
+            "is_audit": {
+              "const": true
+            },
+            "verdict": {
+              "enum": [
+                "PASS",
+                "PASS_WITH_REQUIRED_CORRECTIONS",
+                "BLOCKED"
+              ]
+            },
+            "audited_commit": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{40}$",
+              "maxLength": 8000
+            },
+            "findings": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "finding_id",
+                  "severity",
+                  "title",
+                  "evidence",
+                  "impact",
+                  "required_action",
+                  "owner",
+                  "progression_effect",
+                  "blocking"
+                ],
+                "properties": {
+                  "finding_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 8000
+                  },
+                  "severity": {
+                    "enum": [
+                      "INFO",
+                      "LOW",
+                      "MEDIUM",
+                      "HIGH",
+                      "CRITICAL"
+                    ]
+                  },
+                  "title": {
+                    "type": "string",
+                    "maxLength": 4000
+                  },
+                  "evidence": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string",
+                      "maxLength": 8000
+                    },
+                    "maxItems": 100
+                  },
+                  "impact": {
+                    "type": "string",
+                    "maxLength": 4000
+                  },
+                  "required_action": {
+                    "type": "string",
+                    "maxLength": 4000
+                  },
+                  "owner": {
+                    "type": "string",
+                    "maxLength": 4000
+                  },
+                  "progression_effect": {
+                    "type": "string",
+                    "maxLength": 4000
+                  },
+                  "blocking": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "maxItems": 100
+            },
+            "report_markdown": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 150000
+            }
+          }
+        }
+      ]
+    },
+    "corrections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "correction_id",
+          "finding_id",
+          "severity",
+          "evidence",
+          "required_action",
+          "owner",
+          "acceptance_criteria",
+          "progression_effect",
+          "blocking",
+          "authorized_handler",
+          "audited_commit",
+          "allowed_change_paths",
+          "path_budget",
+          "security_sensitive",
+          "human_authorization_id"
+        ],
+        "properties": {
+          "correction_id": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "finding_id": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "severity": {
+            "enum": [
+              "LOW",
+              "MEDIUM",
+              "HIGH",
+              "CRITICAL"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "maxLength": 8000
+            },
+            "maxItems": 100
+          },
+          "required_action": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "owner": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "acceptance_criteria": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "maxLength": 8000
+            },
+            "maxItems": 100
+          },
+          "progression_effect": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "blocking": {
+            "const": true
+          },
+          "authorized_handler": {
+            "const": "APPENDIX_A"
+          },
+          "audited_commit": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40}$",
+            "maxLength": 8000
+          },
+          "allowed_change_paths": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^(?!.*[*?\\[\\]])(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[\\x00-\\x1f\\x7f\\\\]).+$",
+              "maxLength": 8000
+            },
+            "maxItems": 100
+          },
+          "path_budget": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 40
+          },
+          "security_sensitive": {
+            "type": "boolean"
+          },
+          "human_authorization_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 8000
+          }
+        }
+      },
+      "maxItems": 50
+    },
+    "approval": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "approval_request_id",
+            "reason",
+            "required_actions",
+            "required_roles",
+            "environment",
+            "decision_summary"
+          ],
+          "properties": {
+            "approval_request_id": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 160
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000
+            },
+            "required_actions": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 40,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 160
+              }
+            },
+            "required_roles": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 20,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+              }
+            },
+            "environment": {
+              "enum": [
+                "local",
+                "test",
+                "staging",
+                "production"
+              ]
+            },
+            "decision_summary": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000
+            },
+            "decision_package_paths": {
+              "type": "array",
+              "maxItems": 40,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "maxLength": 512
+              }
+            }
+          }
+        }
+      ]
+    },
+    "external_plan": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "deployment-plan.schema.json"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "PASS"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "audit": {
+            "type": "object",
+            "maxProperties": 100
+          },
+          "corrections": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "PASS_WITH_REQUIRED_CORRECTIONS"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "audit": {
+            "type": "object",
+            "maxProperties": 100
+          },
+          "corrections": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "BLOCKED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "audit": {
+            "type": "object",
+            "maxProperties": 100
+          },
+          "corrections": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "enum": [
+              "COMPLETED",
+              "APPROVAL_REQUIRED",
+              "FAILED"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "audit": {
+            "type": "null"
+          },
+          "corrections": {
+            "maxItems": 0
+          }
+        }
+      }
+    }
+  ]
+}

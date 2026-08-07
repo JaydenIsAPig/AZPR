@@ -1,0 +1,28 @@
+{
+  "candidate": "AZPR-autonomous-execution-primed-draft-v9",
+  "decision": {
+    "manual_non_privileged_review_and_remediation_only": true,
+    "organization_release_signature_status": "NOT_PROVIDED_UNSIGNED_DEVELOPMENT_CANDIDATE",
+    "safe_for_unattended_execution_now": false,
+    "status": "V9_CORRECTIVE_IMPLEMENTATION_CANDIDATE_INDEPENDENT_REASSESSMENT_REQUIRED",
+    "trusted_pre_autonomous_installation_ready": false
+  },
+  "format_version": "2.0",
+  "next_required_event": "independent v9 source-level security consultation",
+  "preserved_controls": {
+    "active_canonical_policy_present": false,
+    "active_roadmap_present": false,
+    "production_loader_rejects_qualification_only": true,
+    "prompt_identity": true
+  },
+  "v8_findings": {
+    "AZPR-V8-F01": "CLOSED_AND_TESTED_SOURCE_LEVEL_REAL_ISOLATION_AND_SIGNER_QUALIFICATION_PENDING",
+    "AZPR-V8-F02": "CLOSED_AND_TESTED_SOURCE_LEVEL_HOST_FILESYSTEM_AND_POWER_FAULT_QUALIFICATION_PENDING",
+    "AZPR-V8-F03": "CLOSED_AND_TESTED_SOURCE_LEVEL_INDEPENDENT_SUBSTITUTION_REASSESSMENT_PENDING",
+    "AZPR-V8-F04": "CLOSED_AND_TESTED_SOURCE_LEVEL_REAL_REMOTE_ANCHOR_QUALIFICATION_PENDING",
+    "AZPR-V8-F05": "CLOSED_AND_TESTED_SOURCE_LEVEL_REAL_HOST_PHASE_EXERCISE_PENDING",
+    "AZPR-V8-F06": "CLOSED_AND_TESTED_SOURCE_LEVEL_REAL_RAW_EVIDENCE_PENDING",
+    "AZPR-V8-F07": "PARTIALLY_CLOSED_ATOMIC_EPOCH_TOOL_NOT_YET_DEPLOYED_TO_REAL_HOST_CONSUMERS",
+    "AZPR-V8-F08": "NOT_CLOSED_REAL_INFRASTRUCTURE_AND_ORGANIZATION_EVIDENCE_ABSENT"
+  }
+}

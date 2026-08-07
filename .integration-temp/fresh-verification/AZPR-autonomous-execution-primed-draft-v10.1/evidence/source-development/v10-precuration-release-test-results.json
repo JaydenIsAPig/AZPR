@@ -1,0 +1,128 @@
+[
+  {
+    "id": "test_v10_security_closures.test_v10_approved_probe_authority_and_all_envelopes_pass",
+    "status": "PASS",
+    "seconds": 0.818,
+    "stdout": ".                                                                        [100%]\n1 passed in 0.05s\n",
+    "stderr": ""
+  },
+  {
+    "id": "test_v10_security_closures.test_v10_caller_generated_probe_keyring_and_policy_are_rejected",
+    "status": "PASS",
+    "seconds": 0.808,
+    "stdout": ".                                                                        [100%]\n1 passed in 0.05s\n",
+    "stderr": ""
+  },
+  {
+    "id": "test_v10_security_closures.test_v10_every_probe_binding_field_mutation_fails",
+    "status": "PASS",
+    "seconds": 0.813,
+    "stdout": ".                                                                        [100%]\n1 passed in 0.05s\n",
+    "stderr": ""
+  },
+  {
+    "id": "test_v10_security_closures.test_v10_revoked_and_wrong_role_probe_keys_fail",
+    "status": "PASS",
+    "seconds": 0.828,
+    "stdout": ".                                                                        [100%]\n1 passed in 0.05s\n",
+    "stderr": ""
+  },
+  {
+    "id": "test_v10_security_closures.test_v10_bootstrap_leaf_symlinks_and_hardlinks_fail",
+    "status": "PASS",
+    "seconds": 0.848,
+    "stdout": ".                                                                        [100%]\n1 passed in 0.05s\n",
+    "stderr": ""
+  },
+  {
+    "id": "test_v10_security_closures.test_v10_bootstrap_writable_ancestor_wrong_owner_and_stale_sequence_fail",
+    "status": "PASS",
+    "seconds": 0.942,
+    "stdout": ".                                                                        [100%]\n1 passed in 0.04s\n",
+    "stderr": ""
+  },
+  {
+    "id": "test_v10_security_closures.test_v10_exact_versioned_48_artifacts_and_alias_substitution_fail",
+    "status": "PASS",
+    "seconds": 0.801,
+    "stdout": ".                                                                        [100%]\n1 passed in 0.04s\n",
+    "stderr": ""
+  },
+  {
+    "id": "test_v10_security_closures.test_v10_external_signer_independently_validates_binding",
+    "status": "PASS",
+    "seconds": 2.041,
+    "stdout": ".                                                                        [100%]\n1 passed in 1.26s\n",
+    "stderr": ""
+  },
+  {
+    "id": "test_v10_security_closures.test_v10_first_install_still_forced_qualification_only",
+    "status": "PASS",
+    "seconds": 0.859,
+    "stdout": ".                                                                        [100%]\n1 passed in 0.05s\n",
+    "stderr": ""
+  },
+  {
+    "id": "test_v10_security_closures.test_v10_installer_enforces_trust_before_authorization_reservation",
+    "status": "PASS",
+    "seconds": 0.877,
+    "stdout": ".                                                                        [100%]\n1 passed in 0.04s\n",
+    "stderr": ""
+  },
+  {
+    "id": "test_v10_security_closures.test_v10_inherited_transaction_evidence_and_key_lifecycle_controls_remain",
+    "status": "PASS",
+    "seconds": 0.82,
+    "stdout": ".                                                                        [100%]\n1 passed in 0.04s\n",
+    "stderr": ""
+  },
+  {
+    "id": "test_v10_security_closures.test_v10_machine_derived_evidence_rejects_contradictory_pass",
+    "status": "PASS",
+    "seconds": 0.801,
+    "stdout": ".                                                                        [100%]\n1 passed in 0.04s\n",
+    "stderr": ""
+  },
+  {
+    "id": "test_v10_security_closures.test_v10_prompt_archive_and_numbered_prompt_bytes_unchanged",
+    "status": "PASS",
+    "seconds": 0.793,
+    "stdout": ".                                                                        [100%]\n1 passed in 0.04s\n",
+    "stderr": ""
+  },
+  {
+    "id": "test_v10_security_closures.test_v10_release_verifier_has_no_root_path_or_root_requirement",
+    "status": "PASS",
+    "seconds": 0.809,
+    "stdout": ".                                                                        [100%]\n1 passed in 0.04s\n",
+    "stderr": ""
+  },
+  {
+    "id": "test_v9_security_closures.test_f02_f04_twenty_process_same_sequence_exactly_one_advances",
+    "status": "PASS",
+    "seconds": 6.891,
+    "stdout": ".                                                                        [100%]\n1 passed in 6.09s\n",
+    "stderr": ""
+  },
+  {
+    "id": "test_v9_security_closures.test_f04_rollback_delete_restore_and_pending_recovery_fail_closed",
+    "status": "PASS",
+    "seconds": 1.296,
+    "stdout": ".                                                                        [100%]\n1 passed in 0.54s\n",
+    "stderr": ""
+  },
+  {
+    "id": "test_v9_security_closures.test_f05_first_install_forced_qualification_only_and_exact_transition",
+    "status": "PASS",
+    "seconds": 0.912,
+    "stdout": ".                                                                        [100%]\n1 passed in 0.05s\n",
+    "stderr": ""
+  },
+  {
+    "id": "test_v9_security_closures.test_f07_atomic_trust_epoch_and_interruption_recovery",
+    "status": "PASS",
+    "seconds": 1.207,
+    "stdout": ".                                                                        [100%]\n1 passed in 0.44s\n",
+    "stderr": ""
+  }
+]

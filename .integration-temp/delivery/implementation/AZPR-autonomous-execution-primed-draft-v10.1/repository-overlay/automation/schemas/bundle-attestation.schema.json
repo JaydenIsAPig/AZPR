@@ -1,0 +1,61 @@
+{
+  "$id": "https://azpr.local/schemas/bundle-attestation.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "bundle_archive_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "bundle_file_count": {
+      "maximum": 5000,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "bundle_manifest_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "bundle_name": {
+      "maxLength": 256,
+      "type": "string"
+    },
+    "bundle_total_bytes": {
+      "maximum": 104857600,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "created_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "format_version": {
+      "const": "2.0"
+    },
+    "signature": {
+      "maxLength": 88,
+      "pattern": "^[A-Za-z0-9+/]{86}==$",
+      "type": "string"
+    },
+    "signer_key_id": {
+      "maxLength": 160,
+      "pattern": "^[A-Za-z0-9._:-]{8,160}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "format_version",
+    "bundle_name",
+    "bundle_archive_sha256",
+    "bundle_manifest_sha256",
+    "bundle_file_count",
+    "bundle_total_bytes",
+    "created_at",
+    "signer_key_id",
+    "signature"
+  ],
+  "type": "object"
+}

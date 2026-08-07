@@ -1,0 +1,82 @@
+{
+  "candidate_archive_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "challenge_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "external_signer_id": "receipt-signer-v10-1-0001",
+  "external_signer_identity_sha256": "fdcac1b3846ceee68494a8fe69e7732d7354194528d1aa6f5e2d4d96c79c9475",
+  "format_version": "1.0",
+  "host_id": "host-v10-1-test-0001",
+  "issued_at": "2026-08-07T00:31:31.330261+00:00",
+  "manifest_id": "host-qualification-roots-v10-1-0001",
+  "manifest_kind": "AZPR_V10_1_HOST_QUALIFICATION_ROOTS",
+  "minimum_attestor_revocation_sequence": 7,
+  "minimum_probe_revocation_sequence": 5,
+  "minimum_trust_sequence": 9,
+  "not_after": "2026-08-15T00:32:31.330261+00:00",
+  "not_before": "2026-08-06T00:32:31.330261+00:00",
+  "receipt_signing_key_id": "receipt-key-v10-1",
+  "roots": {
+    "external_signer_client": {
+      "filename": "external-receipt-signer-client-v10.1",
+      "sha256": "708e2d1e2c55d3f37f5051967a4a96463da12b6db44547c9b9c5cac905e6bd70"
+    },
+    "external_signer_identity": {
+      "filename": "external-receipt-signer-identity-v10.1.json",
+      "sha256": "fdcac1b3846ceee68494a8fe69e7732d7354194528d1aa6f5e2d4d96c79c9475"
+    },
+    "host_root_anchor_client": {
+      "filename": "host-root-anchor-client-v10.1",
+      "sha256": "c4f8fbeef66491f2a45c4fed1fbe23c00f3515acf9e1f0a858c7735d72edea52"
+    },
+    "host_root_anchor_identity": {
+      "filename": "host-root-anchor-identity-v10.1.json",
+      "sha256": "909c858eff54fe16ab555915fed83f26bf63df38af63888136b56ce5e876ee71"
+    },
+    "probe_attestor_keyring": {
+      "filename": "probe-attestor-keyring-v10.1.json",
+      "sha256": "486f404d8a5925f54924e1fafc108c140de179bc07b2db2a94622e607547ab65"
+    },
+    "probe_attestor_revocation_state": {
+      "filename": "probe-attestor-revocation-state-v10.1.json",
+      "sha256": "54b3b680d4c529aab4ef9be6d6397a6db842f806bd3137cade2533eb74ba9a91"
+    },
+    "probe_keyring": {
+      "filename": "probe-keyring-v10.1.json",
+      "sha256": "f940fe5ea79500a9ff0405d26968420f8ae092187094138ec0deda7cb9c81953"
+    },
+    "probe_policy": {
+      "filename": "probe-policy-v10.1.json",
+      "sha256": "f1ff2eaad2db77e472e68bb52de8a69deb5c7fbea5ca91da1182c8b6fdbc8f34"
+    },
+    "probe_revocation_state": {
+      "filename": "probe-revocation-state-v10.1.json",
+      "sha256": "3dde5bf3c53196ba66d9d3c79e7d2194ca2030a981ff007d8371b501a94bc912"
+    },
+    "probe_service_attestation": {
+      "filename": "probe-service-attestation-v10.1.json",
+      "sha256": "7e167589772e9a60e270a40ed26fe198a365f0a1e34ecd53ea32a13a979f6b61"
+    },
+    "probe_service_executable": {
+      "filename": "probe-service-v10.1",
+      "sha256": "306c6ca7407560340797866e077e053627ad409277d1b9da58106fce4cf717cb"
+    },
+    "probe_service_identity": {
+      "filename": "probe-service-identity-v10.1.json",
+      "sha256": "4b00f2125d58f084b2f99040caceb7560ab330b3f9f47a6e149195518c326a5f"
+    },
+    "qualification_receipt_signing_public_key": {
+      "filename": "qualification-receipt-signing-v10.1.pem",
+      "sha256": "1684bbb63c2735cd39bdb6e59cff42676847f9f9a5d098ae43d79ab05493be94"
+    },
+    "qualification_trust_authority_public_key": {
+      "filename": "qualification-trust-authority-v10.1.pem",
+      "sha256": "c9159fbf72bb8c0b087e596fbf66149c93ee45fcd499201d805d09de8ba05da8"
+    },
+    "qualification_trust_manifest": {
+      "filename": "qualification-trust-manifest-v10.1.json",
+      "sha256": "bdae37839093f5cf48a71fcf8818458ef797655205cc085f016f25834cc707ab"
+    }
+  },
+  "sequence": 11,
+  "signature": "+0HjgldSyOt2aMWh7DXH0s3Zsjz5NzWIKKmj1vGks4Iln7GbiNL4PeaW1fkgj1uZkwap2PerC48inPX5Ze9cDQ==",
+  "signer_key_id": "host-qualification-authority-v10-1"
+}

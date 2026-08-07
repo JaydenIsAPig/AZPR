@@ -1,0 +1,248 @@
+{
+  "_template_warning": "This placeholder template is intentionally invalid until every REPLACE value is supplied from independently generated immutable evidence.",
+  "agent_gid": 65534,
+  "agent_uid": 65534,
+  "artifacts": {
+    "agent_execution_profile": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "agent_execution_profile",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "json"
+    },
+    "anchor_helper": {
+      "path": "/usr/bin/REPLACE",
+      "role": "rollback_resistant_anchor_helper",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "executable"
+    },
+    "approval_keyring": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "approval_authorization_keyring",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "json"
+    },
+    "build_provenance": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "validation_image_build_provenance",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "json"
+    },
+    "bundle_attestation": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "release_attestation",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "json"
+    },
+    "bundle_signing_public_key": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "release_verification_key",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "public_key"
+    },
+    "bundle_zip": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "implementation_bundle",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "regular"
+    },
+    "codex_binary": {
+      "path": "/usr/bin/REPLACE",
+      "role": "pinned_codex_executable",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "executable"
+    },
+    "codex_isolation_qualification_report": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "codex_isolation_qualification",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "qualification_report"
+    },
+    "container_engine": {
+      "path": "/usr/bin/REPLACE",
+      "role": "pinned_container_engine",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "executable"
+    },
+    "dedicated_host_policy": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "dedicated_host_policy",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "qualification_report"
+    },
+    "dependency_lock": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "hash_locked_dependency_lock",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "regular"
+    },
+    "dependency_mirror_attestation": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "offline_mirror_attestation",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "json"
+    },
+    "dependency_mirror_inventory": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "offline_mirror_inventory",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "json"
+    },
+    "dependency_mirror_public_key": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "offline_mirror_verification_key",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "public_key"
+    },
+    "evidence_keyring": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "external_evidence_keyring",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "json"
+    },
+    "evidence_private_key": {
+      "path": "/ROOT_PRIVATE/REPLACE",
+      "role": "external_evidence_signing_key",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "secret_key"
+    },
+    "evidence_public_key": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "external_evidence_verification_key",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "public_key"
+    },
+    "git_binary": {
+      "path": "/usr/bin/REPLACE",
+      "role": "trusted_git_executable",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "executable"
+    },
+    "governing_policy_source": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "master_operating_prompt_docx",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "regular"
+    },
+    "handoff_quota_profile": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "handoff_quota_profile",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "json"
+    },
+    "installation_signing_private_key": {
+      "path": "/ROOT_PRIVATE/REPLACE",
+      "role": "installation_receipt_signing_key",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "secret_key"
+    },
+    "installation_signing_public_key": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "installation_receipt_verification_key",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "public_key"
+    },
+    "installer_fault_matrix_report": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "installer_fault_matrix",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "qualification_report"
+    },
+    "key_custody_qualification_report": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "key_custody_qualification",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "qualification_report"
+    },
+    "python_binary": {
+      "path": "/usr/bin/REPLACE",
+      "role": "trusted_python_executable",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "executable"
+    },
+    "qualification_authorization_keyring": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "qualification_authorization_keyring",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "json"
+    },
+    "qualification_receipt_signing_private_key": {
+      "path": "/ROOT_PRIVATE/REPLACE",
+      "role": "qualification_receipt_signing_key",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "secret_key"
+    },
+    "qualification_receipt_signing_public_key": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "qualification_receipt_verification_key",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "public_key"
+    },
+    "qualification_revocation_list": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "qualification_revocation_list",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "json"
+    },
+    "remote_anchor_qualification_report": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "remote_anchor_qualification",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "qualification_report"
+    },
+    "requirements_input": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "dependency_requirements_input",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "regular"
+    },
+    "runtime_private_key": {
+      "path": "/ROOT_PRIVATE/REPLACE",
+      "role": "controller_runtime_signing_key",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "secret_key"
+    },
+    "runtime_public_key": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "controller_runtime_verification_key",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "public_key"
+    },
+    "sbom": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "validation_image_sbom",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "json"
+    },
+    "supply_chain_rebuild_report": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "supply_chain_rebuild",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "qualification_report"
+    },
+    "validation_dockerfile": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "validation_image_build_definition",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "regular"
+    },
+    "validation_image_attestation": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "validation_image_attestation",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "json"
+    },
+    "validation_registry_proof": {
+      "path": "/ROOT_OWNED/REPLACE",
+      "role": "validation_registry_proof",
+      "sha256": "REPLACE_WITH_64_HEX",
+      "type": "json"
+    }
+  },
+  "bundle_manifest_sha256": "REPLACE_WITH_64_HEX",
+  "candidate_archive_sha256": "REPLACE_WITH_64_HEX",
+  "format_version": "3.0",
+  "host_id": "REPLACE-HOST-ID",
+  "receipt_signing_key_id": "REPLACE-QUALIFICATION-RECEIPT-KEY-ID",
+  "safe_for_unattended_execution_now": false,
+  "validation_image_digest": "sha256:REPLACE_WITH_64_HEX"
+}

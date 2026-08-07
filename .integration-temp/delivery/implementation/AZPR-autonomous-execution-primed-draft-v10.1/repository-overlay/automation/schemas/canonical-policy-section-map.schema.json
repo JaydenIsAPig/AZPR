@@ -1,0 +1,127 @@
+{
+  "$id": "https://azpr.local/schemas/canonical-policy-section-map.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "algorithm": {
+      "const": "AZPR_DOCX_SUPPORTED_OOXML_UTF8_V3"
+    },
+    "canonical_byte_length": {
+      "maximum": 33554432,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "canonical_policy_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "feature_inventory_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "format_version": {
+      "const": "4.0"
+    },
+    "mappings": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "canonical_end_byte": {
+            "maximum": 33554432,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "canonical_span_sha256": {
+            "maxLength": 64,
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "canonical_start_byte": {
+            "maximum": 33554432,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "canonical_text_end_byte": {
+            "maximum": 33554432,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "canonical_text_sha256": {
+            "maxLength": 64,
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "mapping_id": {
+            "maxLength": 7,
+            "pattern": "^m[0-9]{6}$",
+            "type": "string"
+          },
+          "review_status": {
+            "const": "EXACT_SUPPORTED_OOXML"
+          },
+          "source_text_sha256": {
+            "maxLength": 64,
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "source_unit_id": {
+            "maxLength": 7,
+            "pattern": "^p[0-9]{6}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "mapping_id",
+          "source_unit_id",
+          "canonical_start_byte",
+          "canonical_text_end_byte",
+          "canonical_end_byte",
+          "source_text_sha256",
+          "canonical_text_sha256",
+          "canonical_span_sha256",
+          "review_status"
+        ],
+        "type": "object"
+      },
+      "maxItems": 10000,
+      "minItems": 1,
+      "type": "array"
+    },
+    "source_document_name": {
+      "maxLength": 255,
+      "minLength": 1,
+      "type": "string"
+    },
+    "source_document_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "source_manifest_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "source_unit_count": {
+      "maximum": 10000,
+      "minimum": 1,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "format_version",
+    "algorithm",
+    "source_document_name",
+    "source_document_sha256",
+    "source_manifest_sha256",
+    "canonical_policy_sha256",
+    "canonical_byte_length",
+    "source_unit_count",
+    "feature_inventory_sha256",
+    "mappings"
+  ],
+  "title": "AZPR Supported-OOXML Exact Governing DOCX Byte-Span Map",
+  "type": "object"
+}

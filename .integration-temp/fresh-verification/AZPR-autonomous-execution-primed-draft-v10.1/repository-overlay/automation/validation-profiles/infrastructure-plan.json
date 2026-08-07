@@ -1,0 +1,65 @@
+{
+  "format_version": "2.0",
+  "resource_limits": {
+    "cpus": 2,
+    "memory_mb": 4096,
+    "pids": 256,
+    "tmpfs_mb": 1024,
+    "evidence_mb": 256,
+    "file_size_mb": 128
+  },
+  "profile_id": "infrastructure-plan",
+  "risk_categories": [
+    "infrastructure",
+    "security",
+    "documentation",
+    "evidence",
+    "rollback"
+  ],
+  "commands": [
+    {
+      "name": "Plan schema",
+      "category": "infrastructure",
+      "argv": [
+        "python3",
+        "scripts/validate_deployment_plan.py",
+        "--offline"
+      ],
+      "timeout_seconds": 1200,
+      "evidence_files": [
+        "infrastructure-plan/01-infrastructure.json"
+      ]
+    },
+    {
+      "name": "IaC validate",
+      "category": "infrastructure",
+      "argv": [
+        "terraform",
+        "validate",
+        "-no-color"
+      ],
+      "timeout_seconds": 1200,
+      "evidence_files": [
+        "infrastructure-plan/02-infrastructure.json"
+      ]
+    },
+    {
+      "name": "IaC policy",
+      "category": "security",
+      "argv": [
+        "python3",
+        "scripts/check_iac_policy.py",
+        "--offline"
+      ],
+      "timeout_seconds": 1200,
+      "evidence_files": [
+        "infrastructure-plan/03-security.json"
+      ]
+    }
+  ],
+  "evidence_outputs": [
+    "infrastructure-plan/summary.json",
+    "infrastructure-plan/stdout.log",
+    "infrastructure-plan/stderr.log"
+  ]
+}

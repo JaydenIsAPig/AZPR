@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://azpr.local/schemas/deployment-plan.schema.json",
+  "title": "AZPR Typed External Action Plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format_version",
+    "plan_id",
+    "created_from_commit",
+    "environment",
+    "target",
+    "actions",
+    "constraints",
+    "rollback",
+    "evidence_requirements",
+    "stage_id",
+    "created_from_tree",
+    "repository_id",
+    "target_sha256",
+    "operations_sha256"
+  ],
+  "properties": {
+    "format_version": {
+      "const": "1.0"
+    },
+    "plan_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 8000
+    },
+    "created_from_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$",
+      "maxLength": 8000
+    },
+    "environment": {
+      "enum": [
+        "staging",
+        "production"
+      ]
+    },
+    "target": {
+      "$ref": "capability-manifest.schema.json#/properties/target"
+    },
+    "actions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "adapter",
+          "operation",
+          "parameters"
+        ],
+        "properties": {
+          "adapter": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "operation": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "parameters": {
+            "type": "object",
+            "maxProperties": 100
+          }
+        }
+      },
+      "maxItems": 100
+    },
+    "constraints": {
+      "$ref": "approval.schema.json#/$defs/decision"
+    },
+    "rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "precondition",
+        "steps",
+        "success_criteria"
+      ],
+      "properties": {
+        "precondition": {
+          "type": "string",
+          "maxLength": 8000
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "maxItems": 100
+        },
+        "success_criteria": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "maxItems": 100
+        }
+      }
+    },
+    "evidence_requirements": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "maxLength": 8000
+      },
+      "maxItems": 100
+    },
+    "stage_id": {
+      "type": "string",
+      "pattern": "^[0-9]{3}$",
+      "maxLength": 3
+    },
+    "created_from_tree": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$",
+      "maxLength": 40
+    },
+    "repository_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 160
+    },
+    "target_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "maxLength": 64
+    },
+    "operations_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "maxLength": 64
+    }
+  }
+}

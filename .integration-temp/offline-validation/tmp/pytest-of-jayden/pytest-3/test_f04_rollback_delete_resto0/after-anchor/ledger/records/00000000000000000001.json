@@ -1,0 +1,17 @@
+{
+  "authorization_id": "auth-00000003",
+  "authorization_sequence": 1,
+  "authorization_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "failure_sha256": null,
+  "format_version": "2.0",
+  "installation_id": null,
+  "journal_id": "journal-after",
+  "ledger_sequence": 1,
+  "nonce": "nonce-00000003",
+  "previous_head_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "record_kind": "RESERVATION",
+  "recorded_at": "2026-08-07T00:53:44.684814+00:00",
+  "signature": "e06I7h+gil5kyGYaFx8YYsMkiiSpk+x7a/7E2sBZ+608GRJBmVl3dMGXWlV3dMinOdCUPVPI8BHnBHQbiUXRDw==",
+  "signer_key_id": "ledger-key-0001",
+  "status": "RESERVED"
+}

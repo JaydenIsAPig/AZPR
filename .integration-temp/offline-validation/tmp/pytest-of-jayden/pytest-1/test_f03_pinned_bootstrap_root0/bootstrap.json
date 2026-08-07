@@ -1,0 +1,15 @@
+{
+  "bootstrap_kind": "AZPR_V9_HOST_BOOTSTRAP_ROOTS",
+  "format_version": "1.0",
+  "issued_at": "2026-08-07T00:32:39.873211+00:00",
+  "manifest_id": "bootstrap-0001",
+  "roots": {
+    "authorization_anchor_identity_sha256": "79bfb0e2ba76b9d447606ddbcc494834f05a4c11deb052e74b49ea307a3c5bcd",
+    "phase_transition_keyring_sha256": "02195b8e989603e4dfb45352b902e8dc34bff40bb228f3c26e56a6ddebdb85ad",
+    "qualification_authorization_keyring_sha256": "8e35c2cd3bf6641bdb0e2050b76932cbb2e6034a0ddacc1d9bea82a6ba57f7cf",
+    "qualification_receipt_signing_public_key_sha256": "6f32860910ca0fb2a20c7fda143666b09dbf8db5238195c90a586fb542ff0cad"
+  },
+  "sequence": 1,
+  "signature": "G2zuc6/unCVVfyuzgh1vmD4v3BsyBtjAVolYVnShM1x7i43H3hW+LDZMLYc6HgyoeFVkJqVLo7f2njB24DiNBA==",
+  "signer_key_id": "bootstrap-authority-0001"
+}

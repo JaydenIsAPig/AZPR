@@ -1,0 +1,126 @@
+{
+  "candidate_version": "v10.1",
+  "documents": [
+    {
+      "category": "adversarial_testing",
+      "path": "V10-ADVERSARIAL-MUTATION-SUBSTITUTION-AND-TEST-CATALOG-REPORT.md",
+      "sha256": "90f33f795d779a503fdc8cbb13b4b567abf473c75c6c1be933d650501e842928",
+      "status": "CURRENT",
+      "version": "v10.1"
+    },
+    {
+      "category": "bootstrap_hardening",
+      "path": "V10-BOOTSTRAP-ROOT-HARDENING-REPORT.md",
+      "sha256": "5ff9d0508f8ff3f2d0fe3a5d12fafbd790a38044bd32df59a5ac7085d011f356",
+      "status": "CURRENT",
+      "version": "v10.1"
+    },
+    {
+      "category": "evidence_and_key_lifecycle",
+      "path": "V10-EVIDENCE-DERIVATION-AND-KEY-LIFECYCLE-INTEGRATION-REPORT.md",
+      "sha256": "0312a3734985c6dce9fea258fb58b0a0d62346e1dd38d0e7b344006c88f49a4f",
+      "status": "CURRENT",
+      "version": "v10.1"
+    },
+    {
+      "category": "finding_closure",
+      "path": "V10-FINDING-CLOSURE-MATRIX.md",
+      "sha256": "a3e87dcc920dff1295c1046d239265d0c65802574f165781329cda58fe22610d",
+      "status": "CURRENT",
+      "version": "v10.1"
+    },
+    {
+      "category": "finding_verification_summary",
+      "path": "V10.1-FINDING-VERIFICATION-SUMMARY.json",
+      "sha256": "70e54668350defd0260db0d5d20a0195ba5fef3a921b147b1c9dca9b4bc41ff9",
+      "status": "CURRENT",
+      "version": "v10.1"
+    },
+    {
+      "category": "installer_regression",
+      "path": "V10-INSTALLER-TRANSACTION-CONCURRENCY-ROLLBACK-FAULT-REGRESSION-REPORT.md",
+      "sha256": "1403f0701f9b9692c729cba75b235eca75a9833ae43ee8f9f3e96b7293dad33e",
+      "status": "CURRENT",
+      "version": "v10.1"
+    },
+    {
+      "category": "internal_security_corrective_report",
+      "path": "V10.1-INTERNAL-SECURITY-MANAGEMENT-CORRECTIVE-REPORT.md",
+      "sha256": "5d3e7c40d3eabb1076c94170df15fe8e50262dc515514a7f7d7d61d720ab2357",
+      "status": "CURRENT",
+      "version": "v10.1"
+    },
+    {
+      "category": "known_limitations",
+      "path": "KNOWN-LIMITATIONS-AND-QUALIFICATION-DEPENDENCIES.md",
+      "sha256": "8e84114e607a61afa8fef48bdd3e907048b362e0f4398a43d90c7f90a04ae605",
+      "status": "CURRENT",
+      "version": "v10.1"
+    },
+    {
+      "category": "major_changes",
+      "path": "MAJOR-CHANGES.md",
+      "sha256": "23407216a60264f3e4b42bb9e9dd5c5eec22a65ee0ee5b48d92d31206d251c01",
+      "status": "CURRENT",
+      "version": "v10.1"
+    },
+    {
+      "category": "modification_boundaries",
+      "path": "V10-AFFECTED-FILES-FUNCTIONS-SCHEMAS-AND-MODIFICATION-BOUNDARIES.md",
+      "sha256": "a255c6b4b13cdc5a40151f1590be5d233e39d25a653df757dc913def55720458",
+      "status": "CURRENT",
+      "version": "v10.1"
+    },
+    {
+      "category": "nonroot_release_verifier",
+      "path": "V10-NONROOT-RELEASE-VERIFIER-REPORT.md",
+      "sha256": "fe21ba6cffc5d8aa4954dc401ef7be54a51ba0c715067ca071f0c3a25a450414",
+      "status": "CURRENT",
+      "version": "v10.1"
+    },
+    {
+      "category": "probe_trust_and_signing",
+      "path": "V10-PROBE-TRUST-ROOT-AND-EXTERNAL-SIGNING-REPORT.md",
+      "sha256": "5240119a342e5b6c29a43ab1754813ec1afffb58c6004dd3abf00b6f43b4347b",
+      "status": "CURRENT",
+      "version": "v10.1"
+    },
+    {
+      "category": "qualification_artifact_binding",
+      "path": "V10-QUALIFICATION-ARTIFACT-BINDING-MATRIX.md",
+      "sha256": "3cddbcbffde867740dd19e2d401d611c55589b9d636976897feac28b9e3edf83",
+      "status": "CURRENT",
+      "version": "v10.1"
+    },
+    {
+      "category": "qualification_handoff",
+      "path": "V10-QUALIFICATION-HANDOFF.md",
+      "sha256": "5247fa5b8d5c2ec5df187623bfc309fefa569e1bf8cc792609c031f361095049",
+      "status": "CURRENT",
+      "version": "v10.1"
+    },
+    {
+      "category": "release_readme",
+      "path": "README.md",
+      "sha256": "35465084c089a00f4af55b1b7d7e59e59d014b0c557be15c311b1459d6dd4776",
+      "status": "CURRENT",
+      "version": "v10.1"
+    },
+    {
+      "category": "security_architecture",
+      "path": "V10-SECURITY-INVARIANTS-AND-ARCHITECTURE.md",
+      "sha256": "c659c113526fef375a45d1fc14ebc3ea4aa9a6a8226ef20fcb9e450104dbfb35",
+      "status": "CURRENT",
+      "version": "v10.1"
+    },
+    {
+      "category": "security_decisions",
+      "path": "SECURITY-DECISIONS.md",
+      "sha256": "e2a29719389b66bc745c0cbaea3ab8de163ac2e48f3f225ce2d27556dee3638d",
+      "status": "CURRENT",
+      "version": "v10.1"
+    }
+  ],
+  "format_version": "1.1",
+  "index_kind": "AZPR_V10_1_CURRENT_DOCUMENT_INDEX"
+}

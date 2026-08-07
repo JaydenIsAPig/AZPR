@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://azpr.local/schemas/target-attestation.schema.json",
+  "title": "AZPR Signed Target Attestation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format_version",
+    "attestation_id",
+    "observed_at",
+    "expires_at",
+    "target",
+    "drift_sha256",
+    "adapter_hashes",
+    "signatures"
+  ],
+  "properties": {
+    "format_version": {
+      "const": "1.0"
+    },
+    "attestation_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 8000
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 8000
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 8000
+    },
+    "target": {
+      "$ref": "capability-manifest.schema.json#/properties/target"
+    },
+    "drift_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "maxLength": 8000
+    },
+    "adapter_hashes": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$",
+        "maxLength": 8000
+      },
+      "maxProperties": 100
+    },
+    "signatures": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "key_id",
+          "ed25519"
+        ],
+        "properties": {
+          "key_id": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "ed25519": {
+            "type": "string",
+            "maxLength": 8000
+          }
+        }
+      },
+      "maxItems": 100
+    }
+  }
+}

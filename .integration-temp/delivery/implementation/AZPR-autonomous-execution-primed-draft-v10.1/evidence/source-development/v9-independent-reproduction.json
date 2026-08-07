@@ -1,0 +1,9 @@
+{
+  "AZPR-V9-IND-F01": {
+    "caller_selected_probe_root_accepted_count": 9,
+    "signature_mutation_rejected": true
+  },
+  "AZPR-V9-IND-F02": {
+    "symlinked_manifest_and_authority_key_accepted": true
+  }
+}

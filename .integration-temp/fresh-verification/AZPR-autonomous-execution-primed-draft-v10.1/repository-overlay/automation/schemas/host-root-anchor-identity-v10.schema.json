@@ -1,0 +1,61 @@
+{
+  "$id": "https://azpr.local/schemas/host-root-anchor-identity-v10.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "anchor_client_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "anchor_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "anchor_public_key_pem": {
+      "maxLength": 4096,
+      "minLength": 80,
+      "type": "string"
+    },
+    "candidate_archive_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "format_version": {
+      "const": "1.0",
+      "type": "string"
+    },
+    "host_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "type": "string"
+    },
+    "identity_kind": {
+      "const": "AZPR_V10_1_HOST_ROOT_ANCHOR_IDENTITY",
+      "type": "string"
+    },
+    "not_after": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "not_before": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    }
+  },
+  "required": [
+    "format_version",
+    "identity_kind",
+    "anchor_id",
+    "anchor_client_sha256",
+    "anchor_public_key_pem",
+    "host_id",
+    "candidate_archive_sha256",
+    "not_before",
+    "not_after"
+  ],
+  "type": "object"
+}

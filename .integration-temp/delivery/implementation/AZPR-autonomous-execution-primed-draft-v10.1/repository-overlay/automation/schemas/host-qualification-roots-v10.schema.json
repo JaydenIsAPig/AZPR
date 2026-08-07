@@ -1,0 +1,437 @@
+{
+  "$id": "https://azpr.local/schemas/host-qualification-roots-v10.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "candidate_archive_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "challenge_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "external_signer_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "external_signer_identity_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "format_version": {
+      "const": "1.0"
+    },
+    "host_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "manifest_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "manifest_kind": {
+      "const": "AZPR_V10_1_HOST_QUALIFICATION_ROOTS"
+    },
+    "minimum_attestor_revocation_sequence": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "minimum_probe_revocation_sequence": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "minimum_trust_sequence": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "not_after": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "not_before": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "receipt_signing_key_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    },
+    "roots": {
+      "additionalProperties": false,
+      "properties": {
+        "external_signer_client": {
+          "additionalProperties": false,
+          "properties": {
+            "filename": {
+              "maxLength": 160,
+              "minLength": 4,
+              "pattern": "^[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "filename",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "external_signer_identity": {
+          "additionalProperties": false,
+          "properties": {
+            "filename": {
+              "maxLength": 160,
+              "minLength": 4,
+              "pattern": "^[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "filename",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "host_root_anchor_client": {
+          "additionalProperties": false,
+          "properties": {
+            "filename": {
+              "const": "host-root-anchor-client-v10.1",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "filename",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "host_root_anchor_identity": {
+          "additionalProperties": false,
+          "properties": {
+            "filename": {
+              "const": "host-root-anchor-identity-v10.1.json",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "filename",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "probe_attestor_keyring": {
+          "additionalProperties": false,
+          "properties": {
+            "filename": {
+              "maxLength": 160,
+              "minLength": 4,
+              "pattern": "^[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "filename",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "probe_attestor_revocation_state": {
+          "additionalProperties": false,
+          "properties": {
+            "filename": {
+              "maxLength": 160,
+              "minLength": 4,
+              "pattern": "^[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "filename",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "probe_keyring": {
+          "additionalProperties": false,
+          "properties": {
+            "filename": {
+              "maxLength": 160,
+              "minLength": 4,
+              "pattern": "^[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "filename",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "probe_policy": {
+          "additionalProperties": false,
+          "properties": {
+            "filename": {
+              "maxLength": 160,
+              "minLength": 4,
+              "pattern": "^[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "filename",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "probe_revocation_state": {
+          "additionalProperties": false,
+          "properties": {
+            "filename": {
+              "maxLength": 160,
+              "minLength": 4,
+              "pattern": "^[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "filename",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "probe_service_attestation": {
+          "additionalProperties": false,
+          "properties": {
+            "filename": {
+              "maxLength": 160,
+              "minLength": 4,
+              "pattern": "^[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "filename",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "probe_service_executable": {
+          "additionalProperties": false,
+          "properties": {
+            "filename": {
+              "maxLength": 160,
+              "minLength": 4,
+              "pattern": "^[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "filename",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "probe_service_identity": {
+          "additionalProperties": false,
+          "properties": {
+            "filename": {
+              "maxLength": 160,
+              "minLength": 4,
+              "pattern": "^[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "filename",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "qualification_receipt_signing_public_key": {
+          "additionalProperties": false,
+          "properties": {
+            "filename": {
+              "maxLength": 160,
+              "minLength": 4,
+              "pattern": "^[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "filename",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "qualification_trust_authority_public_key": {
+          "additionalProperties": false,
+          "properties": {
+            "filename": {
+              "maxLength": 160,
+              "minLength": 4,
+              "pattern": "^[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "filename",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "qualification_trust_manifest": {
+          "additionalProperties": false,
+          "properties": {
+            "filename": {
+              "maxLength": 160,
+              "minLength": 4,
+              "pattern": "^[A-Za-z0-9._-]+$",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "filename",
+            "sha256"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "external_signer_client",
+        "external_signer_identity",
+        "host_root_anchor_client",
+        "host_root_anchor_identity",
+        "probe_attestor_keyring",
+        "probe_attestor_revocation_state",
+        "probe_keyring",
+        "probe_policy",
+        "probe_revocation_state",
+        "probe_service_attestation",
+        "probe_service_executable",
+        "probe_service_identity",
+        "qualification_receipt_signing_public_key",
+        "qualification_trust_authority_public_key",
+        "qualification_trust_manifest"
+      ],
+      "type": "object"
+    },
+    "sequence": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "signature": {
+      "maxLength": 128,
+      "minLength": 80,
+      "pattern": "^[A-Za-z0-9+/=]+$",
+      "type": "string"
+    },
+    "signer_key_id": {
+      "maxLength": 160,
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "format_version",
+    "manifest_kind",
+    "manifest_id",
+    "sequence",
+    "issued_at",
+    "not_before",
+    "not_after",
+    "host_id",
+    "candidate_archive_sha256",
+    "challenge_sha256",
+    "minimum_trust_sequence",
+    "minimum_probe_revocation_sequence",
+    "minimum_attestor_revocation_sequence",
+    "external_signer_id",
+    "external_signer_identity_sha256",
+    "receipt_signing_key_id",
+    "roots",
+    "signer_key_id",
+    "signature"
+  ],
+  "type": "object"
+}

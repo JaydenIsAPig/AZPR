@@ -1,0 +1,62 @@
+{
+  "format_version": "1.0",
+  "purpose": "AZPR v10.1 candidate-reproduction validation",
+  "status": "LOCAL_DEPENDENCIES_AVAILABLE_NOT_EXTERNAL_QUALIFICATION",
+  "platform": {
+    "system": "Darwin",
+    "machine": "arm64",
+    "wheel_platform": "macosx-11.0-arm64"
+  },
+  "python": {
+    "version": "3.12.13",
+    "implementation": "CPython",
+    "base_executable": "/Users/jayden/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "base_executable_sha256": "eb9d74b9c7cfdfb2c9b91614edb2c3607360ba46c5aa7fc4557b3a4a23e97cff",
+    "environment": ".integration-temp/offline-validation/venv",
+    "environment_mode": "symlinked_base_runtime",
+    "pip_version": "25.0.1"
+  },
+  "dependency_inputs": {
+    "requirements_input": "docs/delivery-provenance/v10.1/validation/requirements-validation.in",
+    "requirements_input_sha256": "187dfa3693c92b5a9b068e05e8a9aa18c1fefb578e9e0427cee00e83e93b98d4",
+    "requirements_lock": "docs/delivery-provenance/v10.1/validation/requirements-validation.lock",
+    "requirements_lock_sha256": "5057a612639515c54d2b7cb09a3f1995b6d5e171b6a5dc85f10553ee6b67d5e3",
+    "wheelhouse_manifest": "docs/delivery-provenance/v10.1/validation/wheelhouse-manifest.json",
+    "wheelhouse": ".integration-temp/offline-validation/wheelhouse",
+    "wheel_count": 14
+  },
+  "installation": {
+    "network_used_to_construct_wheelhouse": true,
+    "dependency_action_authority": "Current project-owner request on 2026-08-06 to make pytest, jsonschema, and all necessary dependencies available.",
+    "network_acquisition_authority": "Interactive sandbox escalation approved during this task for downloading the pinned validation wheels.",
+    "wheel_acquisition_source": "Configured Python package index; every retained wheel is bound by the committed wheelhouse manifest and requirements lock SHA-256.",
+    "installed_from_network": false,
+    "no_index": true,
+    "binary_wheels_only": true,
+    "hashes_required": true,
+    "user_site_disabled": true
+  },
+  "verification": {
+    "pip_check": "PASS",
+    "imports": "PASS",
+    "pytest_version": "9.1.1",
+    "jsonschema_version": "4.26.0",
+    "cryptography_version": "46.0.4",
+    "referencing_version": "0.36.2",
+    "attrs_version": "25.4.0",
+    "rpds_py_version": "0.30.0",
+    "repository_test_command": "PYTHONPATH=src PYTHONNOUSERSITE=1 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .integration-temp/offline-validation/venv/bin/python -m pytest -q -p no:cacheprovider",
+    "repository_unit_tests": "PASS_172_OF_172",
+    "delivered_source_suite": "FAIL_116_OF_120_ON_LOCAL_PLATFORM",
+    "delivered_fresh_suite": "FAIL_116_OF_120_ON_LOCAL_PLATFORM",
+    "exact_source_verifier": "FAIL_AT_CATALOG_TEST_17",
+    "exact_fresh_verifier": "FAIL_AT_CATALOG_TEST_17"
+  },
+  "limitations": [
+    "This environment proves local dependency availability only and grants no controller, provider, installer or production authority.",
+    "The delivered candidate did not specify a pytest version or provide a dependency lock, wheelhouse, Python patch identity or signed build provenance.",
+    "The complete release catalog includes Linux-specific non-root and /home/oai behavior that cannot be qualified on this macOS host.",
+    "The ignored wheelhouse, virtual environments, bundle, and external base executable establish reproducibility on this workstation and compatible macOS arm64 CPython 3.12 hosts only; they are not portable Linux qualification artifacts.",
+    "External-controller cutover still requires a separately approved hash-locked Linux validation runtime and both complete 120-test verifier passes."
+  ]
+}

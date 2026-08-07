@@ -1,0 +1,155 @@
+{
+  "$id": "https://azpr.local/schemas/agent-execution-profile.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "acl_profile_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "agent_gid": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "agent_uid": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "capabilities_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "cgroup_kill_required": {
+      "const": true
+    },
+    "cgroup_profile_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "cgroup_root": {
+      "maxLength": 4096,
+      "pattern": "^/",
+      "type": "string"
+    },
+    "cpu_max": {
+      "maxLength": 64,
+      "pattern": "^[0-9]+ [0-9]+$",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "format_version": {
+      "const": "1.0"
+    },
+    "host_id": {
+      "maxLength": 160,
+      "pattern": "^[A-Za-z0-9._:-]{8,160}$",
+      "type": "string"
+    },
+    "lsm_profile_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "memory_max_bytes": {
+      "maximum": 68719476736,
+      "minimum": 67108864,
+      "type": "integer"
+    },
+    "mount_namespace_required": {
+      "const": true
+    },
+    "mount_profile_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "namespace_profile_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "network_namespace_mode": {
+      "enum": [
+        "DENY_ALL",
+        "QUALIFIED_RESTRICTED"
+      ]
+    },
+    "pid_namespace_required": {
+      "const": true
+    },
+    "pids_max": {
+      "maximum": 4096,
+      "minimum": 8,
+      "type": "integer"
+    },
+    "process_empty_timeout_seconds": {
+      "maximum": 120,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "process_gate_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "profile_id": {
+      "maxLength": 160,
+      "pattern": "^[A-Za-z0-9._:-]{8,160}$",
+      "type": "string"
+    },
+    "quota_profile_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "supplementary_groups": {
+      "items": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "maxItems": 64,
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "format_version",
+    "profile_id",
+    "host_id",
+    "agent_uid",
+    "agent_gid",
+    "supplementary_groups",
+    "cgroup_root",
+    "cgroup_kill_required",
+    "pid_namespace_required",
+    "mount_namespace_required",
+    "network_namespace_mode",
+    "capabilities_sha256",
+    "mount_profile_sha256",
+    "quota_profile_sha256",
+    "lsm_profile_sha256",
+    "cgroup_profile_sha256",
+    "process_gate_sha256",
+    "created_at",
+    "expires_at",
+    "namespace_profile_sha256",
+    "acl_profile_sha256",
+    "pids_max",
+    "memory_max_bytes",
+    "cpu_max",
+    "process_empty_timeout_seconds"
+  ],
+  "type": "object"
+}

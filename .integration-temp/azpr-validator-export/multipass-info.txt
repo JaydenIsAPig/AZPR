@@ -1,0 +1,11 @@
+Name:           azpr-validator
+State:          Running
+Snapshots:      0
+IPv4:           192.168.252.2
+Release:        Ubuntu 24.04.4 LTS
+Image hash:     aa6da05756e8 (Ubuntu 24.04 LTS)
+CPU(s):         4
+Load:           0.00 0.00 0.00
+Disk usage:     2.4GiB out of 29.0GiB
+Memory usage:   339.9MiB out of 7.7GiB
+Mounts:         --

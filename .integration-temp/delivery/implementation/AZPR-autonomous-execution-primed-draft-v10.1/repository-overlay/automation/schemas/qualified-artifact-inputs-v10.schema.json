@@ -1,0 +1,1398 @@
+{
+  "$id": "https://azpr.local/schemas/qualified-artifact-inputs-v10.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_set_version": {
+      "const": "2.1",
+      "type": "string"
+    },
+    "artifacts": {
+      "additionalProperties": false,
+      "maxProperties": 57,
+      "minProperties": 57,
+      "properties": {
+        "agent_execution_profile": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "anchor_helper": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "approval_keyring": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "build_provenance": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "bundle_attestation": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "bundle_signing_public_key": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "bundle_zip": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "codex_binary": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "codex_isolation_qualification_report": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "container_engine": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "dedicated_host_policy": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "dependency_lock": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "dependency_mirror_attestation": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "dependency_mirror_inventory": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "dependency_mirror_public_key": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "evidence_keyring": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "evidence_private_key": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "evidence_public_key": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "external_signer_client": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "external_signer_identity": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "git_binary": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "governing_policy_source": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "handoff_quota_profile": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "host_qualification_roots_authority_public_key": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "host_qualification_roots_manifest": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "host_root_anchor_client": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "host_root_anchor_identity": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "installation_signing_private_key": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "installation_signing_public_key": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "installer_fault_matrix_report": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "key_custody_qualification_report": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "key_lifecycle_state": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "phase_transition_keyring": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "probe_attestor_keyring": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "probe_attestor_revocation_state": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "probe_keyring": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "probe_policy": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "probe_revocation_state": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "probe_service_attestation": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "probe_service_executable": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "probe_service_identity": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "python_binary": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "qualification_authorization_keyring": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "qualification_probe_envelopes_manifest": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "qualification_receipt_signing_public_key": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "qualification_revocation_list": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "qualification_trust_authority_public_key": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "qualification_trust_manifest": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "remote_anchor_qualification_report": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "requirements_input": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "runtime_private_key": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "runtime_public_key": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "sbom": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "supply_chain_rebuild_report": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "validation_dockerfile": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "validation_image_attestation": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        },
+        "validation_registry_proof": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "secret": {
+              "type": "boolean"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "secret"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "agent_execution_profile",
+        "anchor_helper",
+        "approval_keyring",
+        "build_provenance",
+        "bundle_attestation",
+        "bundle_signing_public_key",
+        "bundle_zip",
+        "codex_binary",
+        "codex_isolation_qualification_report",
+        "container_engine",
+        "dedicated_host_policy",
+        "dependency_lock",
+        "dependency_mirror_attestation",
+        "dependency_mirror_inventory",
+        "dependency_mirror_public_key",
+        "evidence_keyring",
+        "evidence_private_key",
+        "evidence_public_key",
+        "external_signer_client",
+        "external_signer_identity",
+        "git_binary",
+        "governing_policy_source",
+        "handoff_quota_profile",
+        "host_qualification_roots_authority_public_key",
+        "host_qualification_roots_manifest",
+        "host_root_anchor_client",
+        "host_root_anchor_identity",
+        "installation_signing_private_key",
+        "installation_signing_public_key",
+        "installer_fault_matrix_report",
+        "key_custody_qualification_report",
+        "key_lifecycle_state",
+        "phase_transition_keyring",
+        "probe_attestor_keyring",
+        "probe_attestor_revocation_state",
+        "probe_keyring",
+        "probe_policy",
+        "probe_revocation_state",
+        "probe_service_attestation",
+        "probe_service_executable",
+        "probe_service_identity",
+        "python_binary",
+        "qualification_authorization_keyring",
+        "qualification_probe_envelopes_manifest",
+        "qualification_receipt_signing_public_key",
+        "qualification_revocation_list",
+        "qualification_trust_authority_public_key",
+        "qualification_trust_manifest",
+        "remote_anchor_qualification_report",
+        "requirements_input",
+        "runtime_private_key",
+        "runtime_public_key",
+        "sbom",
+        "supply_chain_rebuild_report",
+        "validation_dockerfile",
+        "validation_image_attestation",
+        "validation_registry_proof"
+      ],
+      "type": "object"
+    },
+    "format_version": {
+      "const": "1.0"
+    }
+  },
+  "required": [
+    "format_version",
+    "artifact_set_version",
+    "artifacts"
+  ],
+  "type": "object"
+}

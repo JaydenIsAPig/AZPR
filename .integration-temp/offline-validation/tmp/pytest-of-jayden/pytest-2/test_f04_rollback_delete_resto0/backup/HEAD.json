@@ -1,0 +1,6 @@
+{
+  "authorization_sequence": 1,
+  "head_sha256": "0d89380302afe109deb7e7782bf7eaeba5fbac76f6f34e1ed8e0daa8f1ba2140",
+  "journal_id": "journal-replay",
+  "ledger_sequence": 1
+}

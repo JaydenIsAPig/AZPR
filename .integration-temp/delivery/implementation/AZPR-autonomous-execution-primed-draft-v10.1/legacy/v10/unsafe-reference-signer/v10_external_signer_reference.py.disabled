@@ -1,0 +1,78 @@
+#!/usr/bin/env python3
+"""TEST-ONLY v10 signer that independently validates the probe trust binding."""
+from __future__ import annotations
+
+import base64
+import hashlib
+import json
+import os
+import sys
+from pathlib import Path
+
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from v10_probe_boundary import canonical, load_approved_probe_authority  # noqa: E402
+
+
+def main() -> None:
+    if os.environ.get("AZPR_V10_TEST_REFERENCE_SIGNER") != "1":
+        raise SystemExit("reference signer is test-only")
+    if len(sys.argv) != 2 or sys.argv[1] != "sign-receipt":
+        raise SystemExit("unsupported operation")
+    request = json.load(sys.stdin)
+    expected = {
+        "format_version", "request_kind", "request_nonce", "signer_identity_sha256",
+        "qualification_trust_binding", "qualification_trust_binding_sha256",
+        "unsigned_receipt_sha256", "unsigned_receipt",
+    }
+    if set(request) != expected or request.get("request_kind") != "AZPR_V10_EXTERNAL_RECEIPT_SIGNING_REQUEST":
+        raise SystemExit("request invalid")
+    unsigned = request["unsigned_receipt"]
+    if hashlib.sha256(canonical(unsigned)).hexdigest() != request["unsigned_receipt_sha256"]:
+        raise SystemExit("request hash mismatch")
+    config_path = os.environ.get("AZPR_V10_TEST_TRUST_CONFIG")
+    key_path = os.environ.get("AZPR_V10_TEST_REFERENCE_SIGNER_PRIVATE_KEY")
+    if not config_path or not key_path:
+        raise SystemExit("test signer configuration missing")
+    config = json.loads(Path(config_path).read_text())
+    authority = load_approved_probe_authority(
+        qualification_trust_manifest_path=Path(config["qualification_trust_manifest"]),
+        qualification_trust_authority_public_key_path=Path(config["qualification_trust_authority_public_key"]),
+        probe_keyring_path=Path(config["probe_keyring"]),
+        probe_policy_path=Path(config["probe_policy"]),
+        probe_service_identity_path=Path(config["probe_service_identity"]),
+        probe_service_attestation_path=Path(config["probe_service_attestation"]),
+        probe_revocation_state_path=Path(config["probe_revocation_state"]),
+        trusted_ancestor=Path(config["trusted_ancestor"]),
+        expected_owner_uid=int(config["expected_owner_uid"]),
+        expected_host_id=config["host_id"],
+        expected_candidate_archive_sha256=config["candidate_archive_sha256"],
+        expected_challenge_sha256=config["challenge_sha256"],
+        minimum_trust_sequence=int(config.get("minimum_trust_sequence", 1)),
+    )
+    if request["qualification_trust_binding"] != authority.trust_binding:
+        raise SystemExit("signer independently rejected qualification trust binding")
+    if request["qualification_trust_binding_sha256"] != authority.trust_binding_sha256:
+        raise SystemExit("signer independently rejected qualification trust binding hash")
+    if unsigned.get("qualification_trust_binding_sha256") != authority.trust_binding_sha256:
+        raise SystemExit("unsigned receipt does not bind approved probe authority")
+    key = serialization.load_pem_private_key(Path(key_path).read_bytes(), password=None)
+    if not isinstance(key, Ed25519PrivateKey):
+        raise SystemExit("test signer key is not Ed25519")
+    signed = dict(unsigned)
+    signed["signature"] = base64.b64encode(key.sign(canonical(unsigned))).decode()
+    print(json.dumps({
+        "format_version": "1.0",
+        "response_kind": "AZPR_V10_EXTERNAL_RECEIPT_SIGNING_RESPONSE",
+        "request_nonce": request["request_nonce"],
+        "signer_identity_sha256": request["signer_identity_sha256"],
+        "qualification_trust_binding_sha256": authority.trust_binding_sha256,
+        "unsigned_receipt_sha256": request["unsigned_receipt_sha256"],
+        "signed_receipt": signed,
+    }, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

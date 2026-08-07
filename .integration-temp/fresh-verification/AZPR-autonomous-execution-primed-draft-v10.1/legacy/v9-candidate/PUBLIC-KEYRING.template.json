@@ -1,0 +1,26 @@
+{
+  "format_version": "1.0",
+  "keys": [
+    {
+      "key_id": "operator-key-01",
+      "signer_id": "operator-person-id",
+      "roles": ["operator"],
+      "public_key_pem": "REPLACE_WITH_ED25519_PUBLIC_KEY_PEM",
+      "revoked_at": null
+    },
+    {
+      "key_id": "security-key-01",
+      "signer_id": "independent-security-person-id",
+      "roles": ["security-approver"],
+      "public_key_pem": "REPLACE_WITH_ED25519_PUBLIC_KEY_PEM",
+      "revoked_at": null
+    },
+    {
+      "key_id": "target-attestor-key-01",
+      "signer_id": "target-attestation-service-or-person-id",
+      "roles": ["target-attestor"],
+      "public_key_pem": "REPLACE_WITH_ED25519_PUBLIC_KEY_PEM",
+      "revoked_at": null
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "candidate_archive_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  "challenge_nonce": "challenge-0001",
+  "checks": {
+    "anchor_endpoint_id": "anchor-0001",
+    "challenge_response_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "compare_and_publish_passed": true,
+    "outage_failed_closed": true,
+    "restore_test_passed": true,
+    "rollback_test_passed": false
+  },
+  "commands": [
+    {
+      "argv_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "command_id": "cmd-0001",
+      "exit_code": 0,
+      "stderr_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+      "stdout_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+      "tool_sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+    }
+  ],
+  "evidence_kind": "AZPR_V9_MACHINE_DERIVABLE_QUALIFICATION_EVIDENCE",
+  "format_version": "1.0",
+  "host_id": "host-00000001",
+  "report_kind": "REMOTE_ANCHOR_QUALIFICATION",
+  "transcript_sha256": "5555555555555555555555555555555555555555555555555555555555555555"
+}

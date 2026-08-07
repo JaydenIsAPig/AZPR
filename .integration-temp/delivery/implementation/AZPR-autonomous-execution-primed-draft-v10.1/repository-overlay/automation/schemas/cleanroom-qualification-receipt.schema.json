@@ -1,0 +1,411 @@
+{
+  "$id": "https://azpr.local/schemas/cleanroom-qualification-receipt.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "agent_execution_profile_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "agent_gid": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "agent_uid": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "artifact_bindings": {
+      "additionalProperties": false,
+      "properties": {
+        "agent_execution_profile": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "anchor_helper": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "approval_keyring": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "build_provenance": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "bundle_attestation": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "bundle_signing_public_key": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "bundle_zip": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "codex_binary": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "codex_isolation_qualification_report": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "container_engine": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "dedicated_host_policy": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "dependency_lock": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "dependency_mirror_attestation": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "dependency_mirror_inventory": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "dependency_mirror_public_key": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "evidence_keyring": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "evidence_private_key": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "evidence_public_key": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "git_binary": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "governing_policy_source": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "handoff_quota_profile": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "installation_signing_private_key": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "installation_signing_public_key": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "installer_fault_matrix_report": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "key_custody_qualification_report": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "python_binary": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "qualification_authorization_keyring": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "qualification_receipt_signing_private_key": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "qualification_receipt_signing_public_key": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "qualification_revocation_list": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "remote_anchor_qualification_report": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "requirements_input": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "runtime_private_key": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "runtime_public_key": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "sbom": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "supply_chain_rebuild_report": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "validation_dockerfile": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "validation_image_attestation": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "validation_registry_proof": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "agent_execution_profile",
+        "anchor_helper",
+        "approval_keyring",
+        "build_provenance",
+        "bundle_attestation",
+        "bundle_signing_public_key",
+        "bundle_zip",
+        "codex_binary",
+        "codex_isolation_qualification_report",
+        "container_engine",
+        "dedicated_host_policy",
+        "dependency_lock",
+        "dependency_mirror_attestation",
+        "dependency_mirror_inventory",
+        "dependency_mirror_public_key",
+        "evidence_keyring",
+        "evidence_private_key",
+        "evidence_public_key",
+        "git_binary",
+        "governing_policy_source",
+        "handoff_quota_profile",
+        "installation_signing_private_key",
+        "installation_signing_public_key",
+        "installer_fault_matrix_report",
+        "key_custody_qualification_report",
+        "python_binary",
+        "qualification_authorization_keyring",
+        "qualification_receipt_signing_private_key",
+        "qualification_receipt_signing_public_key",
+        "qualification_revocation_list",
+        "remote_anchor_qualification_report",
+        "requirements_input",
+        "runtime_private_key",
+        "runtime_public_key",
+        "sbom",
+        "supply_chain_rebuild_report",
+        "validation_dockerfile",
+        "validation_image_attestation",
+        "validation_registry_proof"
+      ],
+      "type": "object"
+    },
+    "bundle_manifest_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "candidate_archive_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "format_version": {
+      "const": "2.0"
+    },
+    "handoff_quota_profile_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "host_id": {
+      "maxLength": 160,
+      "pattern": "^[A-Za-z0-9._:-]{8,160}$",
+      "type": "string"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "qualification_report_hashes": {
+      "additionalProperties": false,
+      "properties": {
+        "codex_isolation_qualification_report": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "dedicated_host_policy": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "installer_fault_matrix_report": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "key_custody_qualification_report": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "remote_anchor_qualification_report": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "supply_chain_rebuild_report": {
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "codex_isolation_qualification_report",
+        "dedicated_host_policy",
+        "installer_fault_matrix_report",
+        "key_custody_qualification_report",
+        "remote_anchor_qualification_report",
+        "supply_chain_rebuild_report"
+      ],
+      "type": "object"
+    },
+    "receipt_id": {
+      "maxLength": 160,
+      "pattern": "^[A-Za-z0-9._:-]{8,160}$",
+      "type": "string"
+    },
+    "receipt_kind": {
+      "const": "AZPR_V8_SEMANTIC_CLEANROOM_QUALIFICATION_RECEIPT"
+    },
+    "remaining_closed_gates": {
+      "items": {
+        "maxLength": 128,
+        "type": "string"
+      },
+      "maxItems": 16,
+      "minItems": 7,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "revocation_list_sha256": {
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "safe_for_unattended_execution_now": {
+      "const": false
+    },
+    "signature": {
+      "maxLength": 88,
+      "pattern": "^[A-Za-z0-9+/]{86}==$",
+      "type": "string"
+    },
+    "signer_key_id": {
+      "maxLength": 160,
+      "pattern": "^[A-Za-z0-9._:-]{8,160}$",
+      "type": "string"
+    },
+    "status": {
+      "const": "SEMANTIC_QUALIFICATION_EVIDENCE_VERIFIED_INSTALLATION_STILL_BLOCKED"
+    },
+    "trusted_pre_autonomous_installation_ready": {
+      "const": false
+    },
+    "validation_image_digest": {
+      "maxLength": 71,
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "format_version",
+    "receipt_kind",
+    "receipt_id",
+    "status",
+    "safe_for_unattended_execution_now",
+    "trusted_pre_autonomous_installation_ready",
+    "issued_at",
+    "expires_at",
+    "host_id",
+    "candidate_archive_sha256",
+    "bundle_manifest_sha256",
+    "agent_uid",
+    "agent_gid",
+    "validation_image_digest",
+    "artifact_bindings",
+    "qualification_report_hashes",
+    "agent_execution_profile_sha256",
+    "handoff_quota_profile_sha256",
+    "revocation_list_sha256",
+    "remaining_closed_gates",
+    "signer_key_id",
+    "signature"
+  ],
+  "type": "object"
+}

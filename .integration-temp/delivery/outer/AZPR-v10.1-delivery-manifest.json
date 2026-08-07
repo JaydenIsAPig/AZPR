@@ -1,0 +1,64 @@
+{
+  "artifacts": {
+    "AZPR-autonomous-execution-primed-draft-v10.1-reports.zip": {
+      "sha256": "f6c26f3dc745bd9ddba6e47039433bbf0b6687cda64a9b134ce775c4a659c228",
+      "size_bytes": 70867
+    },
+    "AZPR-autonomous-execution-primed-draft-v10.1-reports.zip.sha256": {
+      "sha256": "2517c051ee410cd14d0786ae898db467421145896752117159125c7aae217ed3",
+      "size_bytes": 123
+    },
+    "AZPR-autonomous-execution-primed-draft-v10.1.zip": {
+      "sha256": "618449d73fd921e0fb366c0aed8c9a666b2ead3847e529a6ced9692fe41e2b24",
+      "size_bytes": 1060493
+    },
+    "AZPR-autonomous-execution-primed-draft-v10.1.zip.sha256": {
+      "sha256": "b13a8fb1d3aa2b2919d7f8aadab30477bbf3d4bf5b0f452493cf06c8ec988d71",
+      "size_bytes": 115
+    },
+    "AZPR-v10.1-fresh-extraction-verification.json": {
+      "sha256": "f95105126defe64fbab809e9b1513af8b02b812a9c5a21fd7691a9cb9d13f60c",
+      "size_bytes": 42176
+    },
+    "AZPR-v10.1-release-verification-summary.md": {
+      "sha256": "7a153dcd7649bafd6aca09b40ffc6cd472635f1769b9231910da2a2612762117",
+      "size_bytes": 2764
+    },
+    "AZPR-v10.1-release-verification.json": {
+      "sha256": "766f94f80227125afd4394ec1fd0a49f987a2e044c4af02c7fd00564f7ddeaba",
+      "size_bytes": 4503
+    },
+    "AZPR-v10.1-source-tree-verification.json": {
+      "sha256": "c4309758b92f6a62d5df04020557ff2cdf7eb12c22ae545ca9d22af12b2c912a",
+      "size_bytes": 42177
+    },
+    "V10.1-FINAL-VERIFICATION-RECORD.md": {
+      "sha256": "ddd3389535f664ad93cb942dbd36dfacb8dd67bba594c2ce7e4d9275a3ff6cae",
+      "size_bytes": 571
+    },
+    "markdown-prompts-autonomous-priming-draft-v10.1.zip": {
+      "sha256": "3b235cb7e33ca409241ff26523f60f8fee89cec524b3f09e91a69927a0aa4880",
+      "size_bytes": 152720
+    },
+    "markdown-prompts-autonomous-priming-draft-v10.1.zip.sha256": {
+      "sha256": "23a898bb95368ad842a280e4220d9d495932a07b2d34e1c83fd74caa69f7a353",
+      "size_bytes": 118
+    }
+  },
+  "decision": {
+    "full_autonomous_pathway_viable": true,
+    "organization_release_signature_status": "NOT_PROVIDED_UNSIGNED_DEVELOPMENT_CANDIDATE",
+    "permitted_next_event": "INDEPENDENT_V10_1_SOURCE_REASSESSMENT_ONLY",
+    "pre_autonomous_staging": "FAIL",
+    "ready_for_codex_seating_and_application": false,
+    "ready_for_final_integration_prompt_authoring": false,
+    "safe_for_unattended_execution_now": false,
+    "semi_autonomous_codex_staging_ready": false,
+    "trusted_pre_autonomous_installation_ready": false
+  },
+  "format_version": "1.1",
+  "generated_at": "2026-08-04T21:27:48Z",
+  "manifest_kind": "AZPR_V10_1_DEVELOPMENT_DELIVERY_MANIFEST",
+  "self_reference_policy": "Manifest, its sidecar, and enclosing delivery ZIP are excluded to avoid self-reference.",
+  "status": "READY_FOR_INDEPENDENT_V10_1_SOURCE_REASSESSMENT"
+}
