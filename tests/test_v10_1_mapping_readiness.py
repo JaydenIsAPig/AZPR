@@ -48,6 +48,7 @@ class V101MappingReadinessTests(unittest.TestCase):
         mapping: Path | None = None,
         contract: Path | None = None,
         attempts: Path | None = None,
+        head: str = APPROVED_BASE,
     ):
         return mapping_readiness.assess(
             mapping or self.mapping,
@@ -55,7 +56,7 @@ class V101MappingReadinessTests(unittest.TestCase):
             self.validation,
             attempts or self.attempts,
             root=ROOT,
-            head=APPROVED_BASE,
+            head=head,
         )
 
     def test_current_mapping_is_structurally_ready_but_final_approval_is_deferred(self) -> None:
@@ -69,6 +70,9 @@ class V101MappingReadinessTests(unittest.TestCase):
         self.assertTrue(result["checks"]["both_delivery_verifiers_pass"])
         self.assertFalse(result["checks"]["formal_int_01_verification_present"])
         self.assertTrue(result["checks"]["transition_base_human_approved"])
+        self.assertTrue(result["checks"]["head_descends_from_approved_base"])
+        self.assertEqual(result["base_commit"], APPROVED_BASE)
+        self.assertEqual(result["head_commit"], APPROVED_BASE)
         self.assertFalse(result["checks"]["h0_ansible_preparation_complete"])
         self.assertTrue(result["pre_ansible_transition_base_ready"])
         self.assertFalse(result["ready_for_materialization"])
@@ -249,6 +253,31 @@ class V101MappingReadinessTests(unittest.TestCase):
             result = self.assess(contract=altered)
         self.assertFalse(result["mapping_structurally_ready_for_review"])
         self.assertTrue(any("transition-base" in error for error in result["errors"]))
+
+    def test_controller_owned_descendant_commit_preserves_transition_base(self) -> None:
+        descendant = "5" * 40
+        with mock.patch.object(
+            mapping_readiness,
+            "commit_is_ancestor",
+            return_value=True,
+        ):
+            result = self.assess(head=descendant)
+        self.assertTrue(result["mapping_structurally_ready_for_review"])
+        self.assertTrue(result["checks"]["head_descends_from_approved_base"])
+        self.assertEqual(result["base_commit"], APPROVED_BASE)
+        self.assertEqual(result["head_commit"], descendant)
+
+    def test_unrelated_head_fails_approved_base_lineage(self) -> None:
+        unrelated = "f" * 40
+        with mock.patch.object(
+            mapping_readiness,
+            "commit_is_ancestor",
+            return_value=False,
+        ):
+            result = self.assess(head=unrelated)
+        self.assertFalse(result["mapping_structurally_ready_for_review"])
+        self.assertFalse(result["checks"]["head_descends_from_approved_base"])
+        self.assertTrue(any("does not descend" in error for error in result["errors"]))
 
     def test_int_00_cannot_be_unblocked_during_pre_ansible_preparation(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

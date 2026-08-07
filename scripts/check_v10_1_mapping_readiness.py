@@ -483,6 +483,19 @@ def observed_head(root: Path) -> str | None:
     return result.stdout.strip() if result.returncode == 0 else None
 
 
+def commit_is_ancestor(root: Path, ancestor: str, descendant: str) -> bool:
+    if ancestor == descendant:
+        return True
+    result = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", ancestor, descendant],
+        cwd=root,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    return result.returncode == 0
+
+
 def observed_worktree_paths(root: Path) -> tuple[set[str], str | None]:
     result = subprocess.run(
         ["git", "status", "--porcelain=v1", "-z", "--untracked-files=all"],
@@ -812,8 +825,16 @@ def assess(
         errors.append("delivery identity does not bind the implementation archive")
 
     current_head = head if head is not None else observed_head(root)
-    if current_head != contract.get("base_commit"):
-        errors.append(f"HEAD {current_head!r} does not match contract base commit")
+    approved_base = contract.get("base_commit")
+    head_descends_from_approved_base = (
+        isinstance(current_head, str)
+        and isinstance(approved_base, str)
+        and commit_is_ancestor(root, approved_base, current_head)
+    )
+    if not head_descends_from_approved_base:
+        errors.append(
+            f"HEAD {current_head!r} does not descend from contract base commit {approved_base!r}"
+        )
     controller_path = root / "automation" / "controller.py"
     if not controller_path.is_file() or sha256(controller_path) != repo_controller.get("sha256"):
         errors.append("repository controller bytes drifted from the transition contract")
@@ -1087,7 +1108,7 @@ def assess(
         mapping_path=mapping_path,
         contract_path=contract_path,
         verifier_attempts_path=verifier_attempts_path,
-        base_commit=current_head,
+        base_commit=approved_base if isinstance(approved_base, str) else None,
         prompt_sha256=expected_prompt_sha256,
     )
     if not approval_path.is_file():
@@ -1172,7 +1193,8 @@ def assess(
         "prompt_stage_hash_manifest_sha256": (
             sha256(pack_hash_manifest_path) if pack_hash_manifest_path.is_file() else None
         ),
-        "base_commit": current_head,
+        "base_commit": approved_base,
+        "head_commit": current_head,
         "row_count": len(mapping),
         "checks": {
             "mapping_structurally_complete": mapping_structurally_ready,
@@ -1195,6 +1217,7 @@ def assess(
             "both_delivery_verifiers_pass": verifier_pass,
             "formal_int_01_verification_present": formal_delivery_verification,
             "transition_base_human_approved": transition_base_approved,
+            "head_descends_from_approved_base": head_descends_from_approved_base,
             "h0_ansible_preparation_complete": h0_ansible_preparation_complete,
             "linux_environment_human_approved": linux_environment_approved,
             "formal_linux_run_a_accepted": formal_linux_run_a_accepted,
