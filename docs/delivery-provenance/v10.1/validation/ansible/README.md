@@ -20,6 +20,11 @@ the adjudicating PASS.
   engineering evidence that repeated fresh operator-terminal connections pass
   before and after a disposable-guest restart. It unblocks validation only and
   is not convergence, idempotence, qualification, approval, or H0 completion.
+- `h0-t01-transport-authority.json` records the exact, human-supplied,
+  time-bounded H0-T01 network-exception authority and its rollback boundary.
+  It authorizes only H0-T02 transport validation and has no qualification,
+  verifier, INT-00, materialization, controller, provider, or production
+  effect.
 
 Raw output is retained only when needed and must be checked for secrets before
 commit. Hash-only summaries are preferred.

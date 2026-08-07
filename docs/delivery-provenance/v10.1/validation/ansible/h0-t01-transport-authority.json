@@ -1,0 +1,94 @@
+{
+  "format_version": "1.0",
+  "stage": "H0-T01_TRANSPORT_AUTHORITY",
+  "classification": "NON_AUTHORITATIVE_AUTHORITY_HANDOFF",
+  "approved": true,
+  "approval_created_by_agent": false,
+  "artifact_compiled_by_agent": true,
+  "approver": {
+    "name": "Marc Jayden",
+    "role": "Head of AZPR Operations",
+    "authority_assertion": "AUTHORIZED_HOST_NETWORK_SECURITY_OWNER"
+  },
+  "approved_option": "SCOPED_MULTIPASS_PATH",
+  "approved_target": {
+    "host_laboratory": {
+      "operating_system": "macOS 26.5.2",
+      "architecture": "arm64",
+      "multipass_version": "1.16.3+mac",
+      "driver": "qemu",
+      "bridge": "bridge100",
+      "bridge_ipv4": "192.168.252.1",
+      "subnet": "192.168.252.0/24",
+      "observed_network_extension": "com.eventur.Hide.me.systemextension"
+    },
+    "guest": {
+      "name": "azpr-h0-ansible-validation-20260807",
+      "purpose": "DISPOSABLE_H0_ANSIBLE_VALIDATION",
+      "ipv4_at_authority_handoff": "192.168.252.5",
+      "image_release": "Ubuntu 24.04 LTS",
+      "image_sha256": "aa6da05756e85ea6dde4836b841fecb10cfd1ba3bcea320189d9af945db70476",
+      "configuration_identity_sha256": "b0b4f7420a92b2376322390f1b2e84fae7b2cda2abcf944aa07b2d24394d0cbf"
+    }
+  },
+  "permitted_change": {
+    "purpose": "Restore only the host-to-disposable-guest Multipass control path required by H0-T02 transport validation.",
+    "operator": "HUMAN_SECURITY_OPERATOR",
+    "network_exception": "A target-specific exception on bridge100 for the approved disposable guest only.",
+    "permitted_traffic": [
+      "ARP limited to bridge100 and 192.168.252.0/24 for the approved guest",
+      "Host 192.168.252.1 to guest 192.168.252.5 TCP/22 for Multipass control"
+    ],
+    "guest_internet_access_authorized": false,
+    "ansible_connection_model": "OPERATOR_MEDIATED_LOCAL_CONNECTION_INSIDE_GUEST"
+  },
+  "prohibited_collateral_changes": [
+    "Global disablement or weakening of the observed network extension, firewall, VPN, route, or isolation controls",
+    "Exceptions for any other guest, host, interface, address, subnet, port, protocol, or application traffic",
+    "Guest internet-access enablement",
+    "SSH key, password, token, certificate, signer material, or other credential creation or regeneration",
+    "Retained azpr-validator mutation, startup, deletion, reconfiguration, or use as the disposable target",
+    "Frozen candidate, prompt, dependency, wheelhouse, historical evidence, or preserved mapping mutation",
+    "Formal verifier execution or adjudication",
+    "Formal environment qualification or approval",
+    "INT-00, prompt, policy, roadmap, mapping materialization, controller, provider, external capability, staging, or production activation"
+  ],
+  "validation_window": {
+    "activation_event": "HUMAN_SECURITY_OPERATOR_RECORDS_EXCEPTION_ACTIVATION_FOR_H0_T02",
+    "effective_only_during_stage": "H0-T02_TRANSPORT_VALIDATION",
+    "maximum_duration": "PT2H",
+    "expiry_rule": "EARLIER_OF_H0_T02_COMPLETION_OR_TWO_HOURS_AFTER_ACTIVATION",
+    "unbounded_authority": false
+  },
+  "rollback": {
+    "owner": "Marc Jayden",
+    "trigger": "H0-T02 completion, validation-window expiry, or an unexpected collateral effect, whichever occurs first",
+    "procedure": [
+      "Remove only the exact target-specific Multipass network exception authorized by this record.",
+      "Verify that the prior network-extension, firewall, VPN, route, and isolation-control state is restored without broad weakening.",
+      "Record a non-secret rollback observation that identifies the authorization reference, removal time, target, and result."
+    ],
+    "preserve": [
+      "Retained azpr-validator",
+      "Frozen candidate and prompt inputs",
+      "Historical and non-authoritative evidence"
+    ]
+  },
+  "authorization_reference": "AZPR-H0-TRANSPORT-20260807-001",
+  "authorization_source": "HUMAN_SUPPLIED_IN_ACTIVE_STAGE_INVOCATION",
+  "evidence_bindings": {
+    "qualification_preflight_path": "docs/delivery-provenance/v10.1/validation/ansible/qualification-preflight.json",
+    "qualification_preflight_sha256": "f5b5fc50d50d4c5fcb1cc0e942caa0385301502c4d4447516b3119fc4ff70190",
+    "multipass_transport_repair_path": "docs/delivery-provenance/v10.1/validation/ansible/multipass-transport-repair.json",
+    "multipass_transport_repair_sha256": "d9626af61e27e9833d1ecc36dfe847138803238f422942242f91e38cc0a5b974",
+    "controller_transition_contract_path": "automation/integration/v10.1/controller-transition-contract.json",
+    "controller_transition_contract_sha256": "34266ca5b121f1cfa76d708a7180d5ff3cad4d22c47ed7b787400e980534c310"
+  },
+  "network_state_changed": false,
+  "credentials_created": false,
+  "qualification_effect": false,
+  "verifier_execution_authorized": false,
+  "int_00_effect": false,
+  "disposition": "H0_T01_TRANSPORT_AUTHORITY_RESOLVED",
+  "next_stage": "H0-T02_TRANSPORT_VALIDATION"
+}
