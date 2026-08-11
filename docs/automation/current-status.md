@@ -34,6 +34,13 @@ State: staged-hybrid transition selected for integration review.
   and configuration remained unchanged and that guest is stopped. This
   non-authoritative engineering evidence only unblocks live check/diff and
   two-apply idempotence work; neither has been run or inferred from the repair.
+  Before H0-T02, approval ID `AZPR-H0-TRANSPORT-20260807-001` is now represented
+  by a version-controlled stage manifest, canonical ticket, and immutable
+  review view. The ticket SHA-256 is
+  `f74a416c8770f7268e8fa2353c880ed46c65adf9ddad67f38db29859373aef67`.
+  The prior H0-T01 authority handoff is preserved as evidence but is not alone
+  executable authority. No authenticated digest-bound decision or execution
+  outcome exists, so H0-T02 remains stopped at the approval checkpoint.
   Ansible may establish requested machine state but may not approve or qualify
   it. Formal Linux-environment approval,
   two independently evidenced 120/120 verifier runs, proof of run

@@ -1,0 +1,118 @@
+{
+  "format_version": "1.0",
+  "manifest_kind": "AZPR_STAGE_APPROVAL_MANIFEST",
+  "approval_id": "AZPR-H0-TRANSPORT-20260807-001",
+  "revision": null,
+  "stage_id": "H0-T02",
+  "title": "Scoped Multipass transport validation",
+  "lifecycle": "H0",
+  "scope": "TRANSPORT",
+  "issued_on": "2026-08-07",
+  "validity": {
+    "activation_event": "AUTHENTICATED_OPERATOR_ACTIVATES_H0_T02_WINDOW",
+    "maximum_duration_seconds": 7200,
+    "expiry_rule": "EARLIER_OF_H0_T02_COMPLETION_OR_TWO_HOURS_AFTER_AUTHENTICATED_DECISION"
+  },
+  "actions": [
+    {
+      "action_id": "ACT-001",
+      "kind": "SCOPED_HOST_NETWORK_EXCEPTION",
+      "target": {
+        "host_operating_system": "macOS 26.5.2",
+        "host_architecture": "arm64",
+        "multipass_version": "1.16.3+mac",
+        "multipass_driver": "qemu",
+        "bridge": "bridge100",
+        "host_ipv4": "192.168.252.1",
+        "subnet": "192.168.252.0/24",
+        "guest_name": "azpr-h0-ansible-validation-20260807",
+        "guest_ipv4": "192.168.252.5",
+        "guest_image_sha256": "aa6da05756e85ea6dde4836b841fecb10cfd1ba3bcea320189d9af945db70476",
+        "guest_configuration_identity_sha256": "b0b4f7420a92b2376322390f1b2e84fae7b2cda2abcf944aa07b2d24394d0cbf",
+        "protocol": "tcp",
+        "port": 22
+      },
+      "permission": "A human security operator may activate only the target-specific bridge100 exception required for Multipass control to the named disposable guest.",
+      "expected_effect": "Host 192.168.252.1 can reach guest 192.168.252.5 on TCP/22 without guest internet access or a broader host-control change.",
+      "test": {
+        "method": "Run a fresh Multipass control probe to the named guest and independently observe that only the approved target path is reachable.",
+        "expected_result": "The exact guest control probe succeeds and no other guest, subnet, port, protocol, route, firewall, VPN, or network-extension exception is introduced."
+      },
+      "stop_condition": "Stop before activation or execution on any target-binding mismatch, broader rule, credential request, guest-internet enablement, retained-validator impact, or unexpected collateral effect."
+    },
+    {
+      "action_id": "ACT-002",
+      "kind": "SCOPED_EXCEPTION_ROLLBACK",
+      "target": {
+        "host_operating_system": "macOS 26.5.2",
+        "host_architecture": "arm64",
+        "multipass_version": "1.16.3+mac",
+        "multipass_driver": "qemu",
+        "bridge": "bridge100",
+        "host_ipv4": "192.168.252.1",
+        "subnet": "192.168.252.0/24",
+        "guest_name": "azpr-h0-ansible-validation-20260807",
+        "guest_ipv4": "192.168.252.5",
+        "guest_image_sha256": "aa6da05756e85ea6dde4836b841fecb10cfd1ba3bcea320189d9af945db70476",
+        "guest_configuration_identity_sha256": "b0b4f7420a92b2376322390f1b2e84fae7b2cda2abcf944aa07b2d24394d0cbf",
+        "protocol": "tcp",
+        "port": 22
+      },
+      "permission": "The human security operator may remove only the exact exception activated under ACT-001 at completion, expiry, failure, or collateral-effect detection.",
+      "expected_effect": "The approved temporary exception is absent and the prior host security-control posture is restored without changing the disposable or retained guest.",
+      "test": {
+        "method": "Inspect the exact target-specific rule and the surrounding firewall, VPN, route, and network-extension state after removal.",
+        "expected_result": "The temporary target rule is absent, prior controls remain present, and no unrelated state changed."
+      },
+      "stop_condition": "Stop and preserve evidence if removal would affect any other rule, target, credential, guest, route, firewall, VPN, or network-extension state."
+    }
+  ],
+  "security_boundary": {
+    "prohibited_changes": [
+      "Global disablement or weakening of a network extension, firewall, VPN, route, or isolation control",
+      "An exception for any other guest, host, interface, address, subnet, port, protocol, or application traffic",
+      "Guest internet-access enablement",
+      "SSH key, password, token, certificate, signer material, or other credential creation or regeneration",
+      "Retained azpr-validator mutation, startup, deletion, reconfiguration, or use as the disposable target",
+      "Frozen candidate, prompt, dependency, wheelhouse, historical evidence, or preserved mapping mutation",
+      "Formal verifier execution, environment qualification, INT-00 progression, materialization, controller activation, provider activation, staging, or production activity"
+    ],
+    "rollback_required": true
+  },
+  "authentication_policy": {
+    "authenticated_decision_required": true,
+    "adapter": "TRUSTED_CONTROLLER_ADAPTER_REQUIRED",
+    "allowed_roles": [
+      "Head of AZPR Operations"
+    ],
+    "digest_challenge_required": true
+  },
+  "evidence": [
+    {
+      "path": "docs/delivery-provenance/v10.1/validation/ansible/h0-t01-transport-authority.json",
+      "sha256": "f5df328f6aef4791a9b3438b942c9620ba2034cac323f7e9b79e636f9273f1ee",
+      "purpose": "Preserved human-supplied authority handoff and scope boundary"
+    },
+    {
+      "path": "docs/delivery-provenance/v10.1/validation/ansible/qualification-preflight.json",
+      "sha256": "f5b5fc50d50d4c5fcb1cc0e942caa0385301502c4d4447516b3119fc4ff70190",
+      "purpose": "Pre-repair transport failure and target context"
+    },
+    {
+      "path": "docs/delivery-provenance/v10.1/validation/ansible/multipass-transport-repair.json",
+      "sha256": "d9626af61e27e9833d1ecc36dfe847138803238f422942242f91e38cc0a5b974",
+      "purpose": "Non-authoritative repair diagnostics and current target fingerprints"
+    },
+    {
+      "path": "automation/integration/v10.1/controller-transition-contract.json",
+      "sha256": "34266ca5b121f1cfa76d708a7180d5ff3cad4d22c47ed7b787400e980534c310",
+      "purpose": "Governing H0 single-writer and authority boundary"
+    }
+  ],
+  "related_records": [],
+  "notes": [
+    "This ticket does not approve the Linux environment, a verifier result, INT-00, mapping materialization, either controller, a provider, staging, or production.",
+    "No execution may start until a trusted authentication adapter binds an APPROVED decision to the canonical ticket SHA-256.",
+    "Approval, execution run, evidence bundle, and outcome record remain separate records linked by immutable IDs."
+  ]
+}

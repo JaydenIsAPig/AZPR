@@ -193,7 +193,7 @@ H0_ANSIBLE_GENERATED_PATHS = {
     "docs/current/business-data-v1.7.json",
     "docs/current/business-logic-v1.12.md",
     "docs/current/frontend-design-v1.1.md",
-    "docs/current/project-structure-v1.13.md",
+    "docs/current/project-structure-v1.14.md",
     "docs/delivery-provenance/v10.1/validation/ansible/README.md",
     "docs/delivery-provenance/v10.1/validation/ansible/ansible-runtime-manifest.json",
     "docs/delivery-provenance/v10.1/validation/ansible/environment-manifest.json",
@@ -228,6 +228,19 @@ H0_ANSIBLE_GENERATED_PATHS = {
     "tests/test_h0_ansible_live_paths.py",
 }
 GENERATED_PATHS.update(H0_ANSIBLE_GENERATED_PATHS)
+H0_APPROVAL_GENERATED_PATHS = {
+    "automation/approval_manager.py",
+    "automation/smoke_test.py",
+    "automation/approvals/README.md",
+    "automation/approvals/reviews/AZPR-H0-TRANSPORT-20260807-001.md",
+    "automation/approvals/stage-manifests/AZPR-H0-TRANSPORT-20260807-001.json",
+    "automation/approvals/templates/authenticated-decision.template.json",
+    "automation/approvals/tickets/AZPR-H0-TRANSPORT-20260807-001.json",
+    "docs/adr/0011-digest-bound-approval-checkpoints.md",
+    "docs/logs/project-structure-log-v1.14.md",
+    "tests/test_approval_manager.py",
+}
+GENERATED_PATHS.update(H0_APPROVAL_GENERATED_PATHS)
 MERGED_GENERATED_PATHS = {
     ".gitignore",
     "AGENTS.md",
@@ -259,6 +272,16 @@ H0_CURRENT_RETIREMENTS = {
     "docs/current/project-structure-v1.12.md": {
         "sha256": "53a52142c52643ee512e2f4190e1f2eb3156d327f28590fc5a5e19d66c115ed5",
         "destination": "docs/legacy/project-structure/project-structure-v1.12.md",
+        "replacement": "project-structure v1.13",
+        "dependencies": "ADR-0003; ADR-0010; project-structure v1.13",
+        "decision_id": "MAP-H0-ANSIBLE-DOCUMENTATION",
+    },
+    "docs/current/project-structure-v1.13.md": {
+        "sha256": "161ba57589c03f978c4e6d0d2d169c2040699e7385c03f6e9df2b2bafefa5622",
+        "destination": "docs/legacy/project-structure/project-structure-v1.13.md",
+        "replacement": "project-structure v1.14",
+        "dependencies": "ADR-0003; ADR-0011; project-structure v1.14",
+        "decision_id": "MAP-H0-APPROVAL-DOCUMENTATION",
     }
 }
 
@@ -569,12 +592,12 @@ def h0_current_retirement_row(path: str, value: dict[str, str]) -> dict[str, str
         "proposed_destination": value["destination"],
         "action": "MOVE",
         "conflict_status": "NONE",
-        "reason": "Archive the superseded project-structure snapshot with document_status updated before publishing v1.13 for the H0 Ansible boundary.",
-        "dependencies": "ADR-0003; ADR-0010; project-structure v1.13",
+        "reason": f"Archive the superseded project-structure snapshot with document_status updated before publishing {value['replacement']}.",
+        "dependencies": value["dependencies"],
         "validation": "documentation current-family uniqueness; local links; archived status",
-        "rollback": "Restore project-structure v1.12 as the sole current snapshot and remove v1.13 plus its log.",
+        "rollback": f"Restore {Path(path).stem} as the sole current snapshot and remove {value['replacement']} plus its log.",
         "approval_needed": "NO",
-        "decision_id": "MAP-H0-ANSIBLE-DOCUMENTATION",
+        "decision_id": value["decision_id"],
         "resolution_status": "READY_FOR_APPROVAL",
         "transition_phase": "H0_PREPARATION",
     }

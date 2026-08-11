@@ -32,7 +32,7 @@ Keeping assertions and Results as peer authorities was rejected because it permi
 
 ## Related documents
 
-- [Project structure v1.13](../current/project-structure-v1.13.md)
+- [Project structure v1.14](../current/project-structure-v1.14.md)
 - [Backend structure v1.12](../current/backend-structure-v1.12.md)
 - [Business logic v1.12](../current/business-logic-v1.12.md)
 - [Business data v1.7](../current/business-data-v1.7.json)

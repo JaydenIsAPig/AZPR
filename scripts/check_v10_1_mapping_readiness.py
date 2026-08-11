@@ -177,7 +177,7 @@ REQUIRED_H0_ANSIBLE_GENERATED_PATHS = {
     "docs/current/business-data-v1.7.json",
     "docs/current/business-logic-v1.12.md",
     "docs/current/frontend-design-v1.1.md",
-    "docs/current/project-structure-v1.13.md",
+    "docs/current/project-structure-v1.14.md",
     "docs/delivery-provenance/v10.1/validation/ansible/README.md",
     "docs/delivery-provenance/v10.1/validation/ansible/ansible-runtime-manifest.json",
     "docs/delivery-provenance/v10.1/validation/ansible/environment-manifest.json",
@@ -212,6 +212,19 @@ REQUIRED_H0_ANSIBLE_GENERATED_PATHS = {
     "tests/test_h0_ansible_live_paths.py",
 }
 REQUIRED_GENERATED_PATHS.update(REQUIRED_H0_ANSIBLE_GENERATED_PATHS)
+REQUIRED_H0_APPROVAL_GENERATED_PATHS = {
+    "automation/approval_manager.py",
+    "automation/smoke_test.py",
+    "automation/approvals/README.md",
+    "automation/approvals/reviews/AZPR-H0-TRANSPORT-20260807-001.md",
+    "automation/approvals/stage-manifests/AZPR-H0-TRANSPORT-20260807-001.json",
+    "automation/approvals/templates/authenticated-decision.template.json",
+    "automation/approvals/tickets/AZPR-H0-TRANSPORT-20260807-001.json",
+    "docs/adr/0011-digest-bound-approval-checkpoints.md",
+    "docs/logs/project-structure-log-v1.14.md",
+    "tests/test_approval_manager.py",
+}
+REQUIRED_GENERATED_PATHS.update(REQUIRED_H0_APPROVAL_GENERATED_PATHS)
 REQUIRED_PHASE_GATES = {
     ("H0_PREPARATION", "exit_gates"): {
         "ANSIBLE_QUALIFICATION_INFRASTRUCTURE_COMPLETE",
@@ -1213,7 +1226,10 @@ def assess(
     h0_document_retirements = [
         row
         for row in mapping
-        if row["decision_id"] == "MAP-H0-ANSIBLE-DOCUMENTATION"
+        if row["decision_id"] in {
+            "MAP-H0-ANSIBLE-DOCUMENTATION",
+            "MAP-H0-APPROVAL-DOCUMENTATION",
+        }
         and row["transition_phase"] == "H0_PREPARATION"
     ]
     bound_paths.update(row["source_path"] for row in h0_document_retirements)

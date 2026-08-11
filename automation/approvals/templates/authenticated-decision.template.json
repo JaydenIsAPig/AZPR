@@ -1,0 +1,13 @@
+{
+  "format_version": "1.0",
+  "record_kind": "AZPR_APPROVAL_DECISION_TEMPLATE_NOT_AUTHORITY",
+  "approval_id": "AZPR-<LIFECYCLE>-<SCOPE>-<YYYYMMDD>-<NNN>",
+  "ticket_id": "AZPR-<LIFECYCLE>-<SCOPE>-<YYYYMMDD>-<NNN>[-RNN]",
+  "ticket_sha256": null,
+  "decision": "PENDING_AUTHENTICATED_REVIEW",
+  "decided_at": null,
+  "expires_at": null,
+  "authenticated_actor": null,
+  "authentication_binding": null,
+  "notes": "A trusted controller authentication adapter must create the real canonical decision. Editing this template never grants authority."
+}

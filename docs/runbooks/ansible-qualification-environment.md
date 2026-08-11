@@ -140,6 +140,33 @@ CPU, RAM, disk, filesystem, Python version, dependency hashes, reviewer
 identity, and network policy. Do not populate the human approval file on
 behalf of its approver.
 
+## H0 transport approval checkpoint
+
+Before H0-T02 changes or probes the host transport path, verify the canonical
+ticket and immutable review view for
+`AZPR-H0-TRANSPORT-20260807-001`:
+
+```bash
+python3 automation/approval_manager.py check \
+  --manifest automation/approvals/stage-manifests/AZPR-H0-TRANSPORT-20260807-001.json \
+  --ticket automation/approvals/tickets/AZPR-H0-TRANSPORT-20260807-001.json \
+  --review automation/approvals/reviews/AZPR-H0-TRANSPORT-20260807-001.md
+```
+
+The check must report ticket SHA-256
+`f74a416c8770f7268e8fa2353c880ed46c65adf9ddad67f38db29859373aef67`.
+Then the trusted controller authentication adapter must bind an authenticated
+`APPROVED` decision to that exact digest. The repository intentionally has no
+fallback authenticator. Stop if the decision is absent, expired, unverifiable,
+or if any observed action target differs from the ticket.
+
+After execution, allocate one shared run sequence and create separate records,
+for example `AZPR-RUN-H0-20260807-0042`,
+`AZPR-OUT-H0-20260807-0042`, and `AZPR-EVD-H0-20260807-0042`, each referring
+to the immutable approval ID. Never write execution success onto the approval
+record. Create a delta ticket only when remediation adds or changes an
+authorized action; an in-scope retry receives new run/outcome/evidence IDs.
+
 ## Method
 
 Run every command from the root of the H0 control checkout inside the guest

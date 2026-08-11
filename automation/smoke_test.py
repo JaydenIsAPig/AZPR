@@ -20,6 +20,10 @@ def main() -> int:
     )
     required = [
         "AGENTS.md",
+        "automation/approval_manager.py",
+        "automation/approvals/stage-manifests/AZPR-H0-TRANSPORT-20260807-001.json",
+        "automation/approvals/tickets/AZPR-H0-TRANSPORT-20260807-001.json",
+        "automation/approvals/reviews/AZPR-H0-TRANSPORT-20260807-001.md",
         "automation/controller.py",
         "automation/controller.config.json",
         "automation/result.schema.json",
@@ -72,6 +76,30 @@ def main() -> int:
     )
     if compile_result.returncode != 0:
         return compile_result.returncode
+
+    approval_compile_result = subprocess.run(
+        [sys.executable, "-m", "py_compile", "automation/approval_manager.py"],
+        cwd=root,
+    )
+    if approval_compile_result.returncode != 0:
+        return approval_compile_result.returncode
+
+    approval_check_result = subprocess.run(
+        [
+            sys.executable,
+            "automation/approval_manager.py",
+            "check",
+            "--manifest",
+            "automation/approvals/stage-manifests/AZPR-H0-TRANSPORT-20260807-001.json",
+            "--ticket",
+            "automation/approvals/tickets/AZPR-H0-TRANSPORT-20260807-001.json",
+            "--review",
+            "automation/approvals/reviews/AZPR-H0-TRANSPORT-20260807-001.md",
+        ],
+        cwd=root,
+    )
+    if approval_check_result.returncode != 0:
+        return approval_check_result.returncode
 
     validate_result = subprocess.run(
         [sys.executable, "automation/controller.py", "validate-roadmap", "automation/roadmap.example.json"],
