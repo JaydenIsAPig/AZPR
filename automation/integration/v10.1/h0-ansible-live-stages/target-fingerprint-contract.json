@@ -1,0 +1,139 @@
+{
+  "format_version": "1.0",
+  "contract_id": "AZPR_H0_TARGET_FINGERPRINT_V1",
+  "status": "PROPOSED_PENDING_HUMAN_APPROVAL",
+  "environment_scope": "DISPOSABLE_TEST",
+  "purpose": "Identify one exact H0 live-validation guest from independently observed non-secret Linux identity fields.",
+  "authority_effect": {
+    "identifies_target": true,
+    "authorizes_target": false,
+    "approves_environment": false,
+    "qualifies_environment": false,
+    "activates_operator_approval_adapter": false,
+    "activates_controller": false,
+    "executes_h0_t02": false,
+    "executes_azpr_verifier": false,
+    "authorizes_git": false
+  },
+  "observation_policy": {
+    "inside_target_local_session": true,
+    "independent_of_operator_input": true,
+    "shell_required": false,
+    "missing_or_unreadable_field": "BLOCK_WITHOUT_DIGEST",
+    "unsupported_or_invalid_field": "BLOCK_WITHOUT_DIGEST",
+    "observation_must_be_repeated_before_each_stage": true
+  },
+  "identity_fields": [
+    {
+      "name": "target_id",
+      "source": "/proc/sys/kernel/hostname",
+      "selector": "complete file value",
+      "normalization": "Strip leading and trailing ASCII whitespace, require ASCII, convert A-Z to lowercase, and require 1-200 hostname characters matching lowercase letters, digits, dot, or hyphen with an alphanumeric first and last character.",
+      "required_value": null
+    },
+    {
+      "name": "machine_id",
+      "source": "/etc/machine-id",
+      "selector": "complete file value",
+      "normalization": "Strip leading and trailing ASCII whitespace, require ASCII, convert A-F to lowercase, require exactly 32 hexadecimal characters, and reject the all-zero identifier.",
+      "required_value": null
+    },
+    {
+      "name": "operating_system_id",
+      "source": "/etc/os-release",
+      "selector": "ID",
+      "normalization": "Parse the os-release assignment without executing it, strip leading and trailing ASCII whitespace, require ASCII, and convert A-Z to lowercase.",
+      "required_value": "ubuntu"
+    },
+    {
+      "name": "operating_system_version_id",
+      "source": "/etc/os-release",
+      "selector": "VERSION_ID",
+      "normalization": "Parse the os-release assignment without executing it, strip leading and trailing ASCII whitespace, and require ASCII.",
+      "required_value": "24.04"
+    },
+    {
+      "name": "architecture",
+      "source": "uname(2)",
+      "selector": "machine",
+      "normalization": "Strip leading and trailing ASCII whitespace, require ASCII, and convert A-Z to lowercase; do not alias architecture names.",
+      "required_value": "aarch64"
+    },
+    {
+      "name": "reviewer_name",
+      "source": "getpwnam(3)",
+      "selector": "pw_name for ubuntu",
+      "normalization": "Strip leading and trailing ASCII whitespace, require ASCII, and convert A-Z to lowercase.",
+      "required_value": "ubuntu"
+    },
+    {
+      "name": "reviewer_uid",
+      "source": "getpwnam(3)",
+      "selector": "pw_uid for ubuntu",
+      "normalization": "Require a non-boolean integer and serialize it as the shortest unsigned base-10 JSON integer.",
+      "required_value": 1000
+    },
+    {
+      "name": "reviewer_gid",
+      "source": "getpwnam(3)",
+      "selector": "pw_gid for ubuntu",
+      "normalization": "Require a non-boolean integer and serialize it as the shortest unsigned base-10 JSON integer.",
+      "required_value": 1000
+    },
+    {
+      "name": "reviewer_home",
+      "source": "getpwnam(3)",
+      "selector": "pw_dir for ubuntu",
+      "normalization": "Strip leading and trailing ASCII whitespace, require ASCII, and require the exact absolute POSIX path without path rewriting.",
+      "required_value": "/home/ubuntu"
+    }
+  ],
+  "field_order": [
+    "target_id",
+    "machine_id",
+    "operating_system_id",
+    "operating_system_version_id",
+    "architecture",
+    "reviewer_name",
+    "reviewer_uid",
+    "reviewer_gid",
+    "reviewer_home"
+  ],
+  "canonical_serialization": {
+    "serialization_id": "AZPR_H0_TARGET_FINGERPRINT_CANONICAL_JSON_V1",
+    "encoding": "UTF-8",
+    "top_level_type": "object",
+    "member_order": [
+      "contract_id",
+      "target_id",
+      "machine_id",
+      "operating_system_id",
+      "operating_system_version_id",
+      "architecture",
+      "reviewer_name",
+      "reviewer_uid",
+      "reviewer_gid",
+      "reviewer_home"
+    ],
+    "contract_id_value": "AZPR_H0_TARGET_FINGERPRINT_V1",
+    "object_key_ordering": "the exact member_order above, not lexical sorting",
+    "separators": {"item": ",", "key_value": ":"},
+    "string_escaping": "RFC 8259 JSON with ensure_ascii=true",
+    "trailing_newline": false,
+    "byte_order_mark": false
+  },
+  "digest": {
+    "algorithm": "sha256",
+    "input": "the exact canonical UTF-8 bytes",
+    "output": "64 lowercase hexadecimal characters"
+  },
+  "comparison_policy": {
+    "expected_digest_required_for_authorization_validation": true,
+    "comparison": "constant-time exact comparison of the 32 digest bytes",
+    "mismatch": "BLOCK_TARGET_FINGERPRINT_MISMATCH",
+    "field_drift": "recompute and require new separately governed authorization; never substitute, omit, or reuse a prior field"
+  },
+  "implementation": "scripts/h0_target_fingerprint.py",
+  "test_vectors": "automation/integration/v10.1/h0-ansible-live-stages/target-fingerprint-test-vectors.json",
+  "governing_adr": "docs/adr/0013-h0-live-target-fingerprint.md"
+}

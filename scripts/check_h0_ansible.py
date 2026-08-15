@@ -27,6 +27,22 @@ RUNTIME_EVIDENCE = Path(
 IDEMPOTENCE_EVIDENCE = Path(
     "docs/delivery-provenance/v10.1/validation/ansible/idempotence-result.json"
 )
+LIVE_PROMPT_MANIFEST = Path(
+    "automation/integration/v10.1/h0-ansible-live-stages/stage-manifest.json"
+)
+LIVE_PROMPT_HASH_MANIFEST = Path(
+    "automation/integration/v10.1/h0-ansible-live-stages/SHA256SUMS.json"
+)
+LIVE_PROMPT_VALIDATOR = Path("scripts/check_h0_ansible_live_prompt_pack.py")
+TARGET_FINGERPRINT_CONTRACT = LIVE_PROMPT_MANIFEST.parent / "target-fingerprint-contract.json"
+TARGET_FINGERPRINT_VECTORS = LIVE_PROMPT_MANIFEST.parent / "target-fingerprint-test-vectors.json"
+TARGET_FINGERPRINT_IMPLEMENTATION = Path("scripts/h0_target_fingerprint.py")
+EXPECTED_TARGET_FINGERPRINT_CONTRACT_SHA256 = (
+    "d35da355850ee1440ea454c4e2663dae7fb15778bb2c935283ec16d7771f1d8a"
+)
+EXPECTED_LIVE_PROMPT_HASH_MANIFEST_SHA256 = (
+    "39e73e52ce60e66903b693aa1afc4b944fe31d963d4fd596eec8c4e6fca8a45b"
+)
 PREFLIGHT_EVIDENCE = Path(
     "docs/delivery-provenance/v10.1/validation/ansible/qualification-preflight.json"
 )
@@ -99,6 +115,54 @@ def validate(
     if runtime != {"python": "3.12", "ansible_core": "2.21.2", "third_party_collections": []}:
         errors.append("pinned Ansible runtime contract drifted")
 
+    expected_live_prompt_pack = {
+        "pack_id": "AZPR_H0_ANSIBLE_LIVE_VALIDATION",
+        "status": "DRAFT_NOT_ACTIVE",
+        "manifest": relative(LIVE_PROMPT_MANIFEST),
+        "hash_manifest": relative(LIVE_PROMPT_HASH_MANIFEST),
+        "hash_manifest_sha256": EXPECTED_LIVE_PROMPT_HASH_MANIFEST_SHA256,
+        "validator": relative(LIVE_PROMPT_VALIDATOR),
+        "stage_count": 4,
+        "operator_assistance_guide_count": 3,
+        "operator_assistance_result_schema": (
+            "automation/integration/v10.1/h0-ansible-live-stages/"
+            "operator-assistance-result.schema.json"
+        ),
+        "operator_assistance_can_create_authority": False,
+        "operator_assistance_can_start_stage": False,
+        "one_stage_per_invocation": True,
+        "automatic_stage_advancement": False,
+        "authority_effect": False,
+    }
+    if contract.get("live_validation_prompt_pack") != expected_live_prompt_pack:
+        errors.append("H0 live-validation prompt pack contract widened or drifted")
+    live_hash_manifest = root / LIVE_PROMPT_HASH_MANIFEST
+    if (
+        not live_hash_manifest.is_file()
+        or sha256(live_hash_manifest) != EXPECTED_LIVE_PROMPT_HASH_MANIFEST_SHA256
+    ):
+        errors.append("H0 live-validation prompt hash manifest drifted")
+
+    expected_target_fingerprint = {
+        "contract_id": "AZPR_H0_TARGET_FINGERPRINT_V1",
+        "status": "PROPOSED_PENDING_HUMAN_APPROVAL",
+        "contract": relative(TARGET_FINGERPRINT_CONTRACT),
+        "contract_sha256": EXPECTED_TARGET_FINGERPRINT_CONTRACT_SHA256,
+        "implementation": relative(TARGET_FINGERPRINT_IMPLEMENTATION),
+        "test_vectors": relative(TARGET_FINGERPRINT_VECTORS),
+        "human_approval_required": True,
+        "identifies_target": True,
+        "authorizes_target": False,
+    }
+    if contract.get("target_fingerprint") != expected_target_fingerprint:
+        errors.append("H0 target-fingerprint contract widened or drifted")
+    target_contract_path = root / TARGET_FINGERPRINT_CONTRACT
+    if (
+        not target_contract_path.is_file()
+        or sha256(target_contract_path) != EXPECTED_TARGET_FINGERPRINT_CONTRACT_SHA256
+    ):
+        errors.append("H0 target-fingerprint procedure bytes drifted")
+
     required_files = {
         ANSIBLE_ROOT / "README.md",
         ANSIBLE_ROOT / "ansible.cfg",
@@ -111,6 +175,12 @@ def validate(
         ANSIBLE_ROOT / "inventories/qualification/group_vars/all.yml",
         ANSIBLE_ROOT / "tests/README.md",
         ANSIBLE_ROOT / "tests/run_idempotence.py",
+        LIVE_PROMPT_MANIFEST,
+        LIVE_PROMPT_HASH_MANIFEST,
+        LIVE_PROMPT_VALIDATOR,
+        TARGET_FINGERPRINT_CONTRACT,
+        TARGET_FINGERPRINT_VECTORS,
+        TARGET_FINGERPRINT_IMPLEMENTATION,
         APPROVAL_TEMPLATE,
     }
     required_files.update(ANSIBLE_ROOT / "playbooks" / name for name in contract.get("playbooks", []))

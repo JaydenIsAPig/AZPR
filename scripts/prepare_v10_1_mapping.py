@@ -181,6 +181,23 @@ GENERATED_PATHS = {
 }
 H0_ANSIBLE_GENERATED_PATHS = {
     "README.md",
+    "automation/integration/v10.1/h0-ansible-live-stages/00-authority-and-target-preflight.md",
+    "automation/integration/v10.1/h0-ansible-live-stages/01-check-mode-and-diff-review.md",
+    "automation/integration/v10.1/h0-ansible-live-stages/02-two-apply-idempotence.md",
+    "automation/integration/v10.1/h0-ansible-live-stages/03-evidence-reconciliation.md",
+    "automation/integration/v10.1/h0-ansible-live-stages/README.md",
+    "automation/integration/v10.1/h0-ansible-live-stages/SHA256SUMS.json",
+    "automation/integration/v10.1/h0-ansible-live-stages/operator-input.schema.json",
+    "automation/integration/v10.1/h0-ansible-live-stages/operator-input.template.json",
+    "automation/integration/v10.1/h0-ansible-live-stages/operator-assistance-result.schema.json",
+    "automation/integration/v10.1/h0-ansible-live-stages/operator-assistance/00-repository-and-procedure-readiness.md",
+    "automation/integration/v10.1/h0-ansible-live-stages/operator-assistance/01-guest-local-observation-and-target-decision.md",
+    "automation/integration/v10.1/h0-ansible-live-stages/operator-assistance/02-operator-input-validation-and-stage-handoff.md",
+    "automation/integration/v10.1/h0-ansible-live-stages/stage-manifest.json",
+    "automation/integration/v10.1/h0-ansible-live-stages/stage-result.example.json",
+    "automation/integration/v10.1/h0-ansible-live-stages/stage-result.schema.json",
+    "automation/integration/v10.1/h0-ansible-live-stages/target-fingerprint-contract.json",
+    "automation/integration/v10.1/h0-ansible-live-stages/target-fingerprint-test-vectors.json",
     "docs/adr/0001-modular-monolith.md",
     "docs/adr/0003-documentation-versioning.md",
     "docs/adr/0004-python-domain-kernel.md",
@@ -193,7 +210,7 @@ H0_ANSIBLE_GENERATED_PATHS = {
     "docs/current/business-data-v1.7.json",
     "docs/current/business-logic-v1.12.md",
     "docs/current/frontend-design-v1.1.md",
-    "docs/current/project-structure-v1.14.md",
+    "docs/current/project-structure-v1.17.md",
     "docs/delivery-provenance/v10.1/validation/ansible/README.md",
     "docs/delivery-provenance/v10.1/validation/ansible/ansible-runtime-manifest.json",
     "docs/delivery-provenance/v10.1/validation/ansible/environment-manifest.json",
@@ -202,6 +219,7 @@ H0_ANSIBLE_GENERATED_PATHS = {
     "docs/delivery-provenance/v10.1/validation/ansible/qualification-preflight.json",
     "docs/delivery-provenance/v10.1/validation/linux-validation-environment-approval.template.json",
     "docs/logs/project-structure-log-v1.13.md",
+    "docs/logs/project-structure-log-v1.17.md",
     "docs/runbooks/README.md",
     "docs/runbooks/ansible-qualification-environment.md",
     "infrastructure/ansible/README.md",
@@ -224,8 +242,10 @@ H0_ANSIBLE_GENERATED_PATHS = {
     "infrastructure/ansible/tests/README.md",
     "infrastructure/ansible/tests/run_idempotence.py",
     "scripts/check_h0_ansible.py",
+    "scripts/check_h0_ansible_live_prompt_pack.py",
     "tests/test_h0_ansible_contract.py",
     "tests/test_h0_ansible_live_paths.py",
+    "tests/test_h0_ansible_live_prompt_pack.py",
 }
 GENERATED_PATHS.update(H0_ANSIBLE_GENERATED_PATHS)
 H0_APPROVAL_GENERATED_PATHS = {
@@ -241,6 +261,66 @@ H0_APPROVAL_GENERATED_PATHS = {
     "tests/test_approval_manager.py",
 }
 GENERATED_PATHS.update(H0_APPROVAL_GENERATED_PATHS)
+OPERATOR_APPROVAL_SOURCE_PATHS = {
+    "README.md",
+    "automation/approval_manager.py",
+    "automation/approvals/README.md",
+    "automation/approvals/schemas/execution-records-v1.schema.json",
+    "automation/approvals/schemas/operator-decision-assertion-v1.schema.json",
+    "automation/approvals/schemas/operator-decision-request-v1.schema.json",
+    "automation/approvals/schemas/operator-trust-record-v1.schema.json",
+    "automation/approvals/templates/operator-trust-record.template.json",
+    "automation/integration/v10.1/operator-approval-source-contract.json",
+    "automation/operator_approval.py",
+    "docs/adr/0001-modular-monolith.md",
+    "docs/adr/0003-documentation-versioning.md",
+    "docs/adr/0004-python-domain-kernel.md",
+    "docs/adr/0005-authoritative-classification-result.md",
+    "docs/adr/0006-versioned-opportunity-projections.md",
+    "docs/adr/0007-in-memory-processing-unit-of-work.md",
+    "docs/adr/0008-customer-scoped-access-context.md",
+    "docs/adr/0010-ansible-qualification-infrastructure.md",
+    "docs/adr/0012-macos-secure-enclave-operator-approval.md",
+    "docs/adr/README.md",
+    "docs/automation/current-status.md",
+    "docs/current/backend-structure-v1.12.md",
+    "docs/current/business-data-v1.7.json",
+    "docs/current/business-logic-v1.12.md",
+    "docs/current/frontend-design-v1.1.md",
+    "docs/legacy/project-structure/project-structure-v1.14.md",
+    "docs/logs/project-structure-log-v1.15.md",
+    "docs/runbooks/operator-authentication.md",
+    "native/operator-approval-helper/Package.swift",
+    "native/operator-approval-helper/Sources/AZPROperatorApprovalCore/ApprovalProtocol.swift",
+    "native/operator-approval-helper/Sources/AZPROperatorApprovalCore/CanonicalJSON.swift",
+    "native/operator-approval-helper/Sources/AZPROperatorApprovalCore/ReviewModel.swift",
+    "native/operator-approval-helper/Sources/AZPROperatorApprovalCore/SecureEnclaveSigner.swift",
+    "native/operator-approval-helper/Sources/AZPROperatorApprovalHelper/main.swift",
+    "native/operator-approval-helper/Tests/AZPROperatorApprovalCoreTests/Fixtures/canonical-v1.json",
+    "native/operator-approval-helper/Tests/AZPROperatorApprovalCoreTests/HardwareIntegrationTests.swift",
+    "native/operator-approval-helper/Tests/AZPROperatorApprovalCoreTests/OperatorApprovalCoreTests.swift",
+    "tests/fixtures/operator_approval/canonical-v1.json",
+    "tests/test_operator_approval.py",
+}
+GENERATED_PATHS.update(OPERATOR_APPROVAL_SOURCE_PATHS)
+H0_TARGET_FINGERPRINT_GENERATED_PATHS = {
+    "automation/approvals/procedure-decisions/README.md",
+    "automation/approvals/procedure-requests/AZPR-H0-FINGERPRINT-PROCEDURE-20260814-001.json",
+    "automation/approvals/procedure-reviews/AZPR-H0-FINGERPRINT-PROCEDURE-20260814-001.md",
+    "automation/approvals/schemas/procedure-approval-decision-v1.schema.json",
+    "automation/approvals/templates/h0-fingerprint-procedure-decision.template.json",
+    "automation/integration/v10.1/h0-ansible-live-stages/target-fingerprint-contract.json",
+    "automation/integration/v10.1/h0-ansible-live-stages/target-fingerprint-test-vectors.json",
+    "automation/procedure_approval.py",
+    "docs/adr/0013-h0-live-target-fingerprint.md",
+    "docs/adr/0014-repository-governed-procedure-approval.md",
+    "docs/logs/project-structure-log-v1.16.md",
+    "scripts/check_h0_fingerprint_procedure_approval.py",
+    "scripts/h0_target_fingerprint.py",
+    "tests/test_h0_target_fingerprint.py",
+    "tests/test_procedure_approval.py",
+}
+GENERATED_PATHS.update(H0_TARGET_FINGERPRINT_GENERATED_PATHS)
 MERGED_GENERATED_PATHS = {
     ".gitignore",
     "AGENTS.md",
@@ -282,7 +362,28 @@ H0_CURRENT_RETIREMENTS = {
         "replacement": "project-structure v1.14",
         "dependencies": "ADR-0003; ADR-0011; project-structure v1.14",
         "decision_id": "MAP-H0-APPROVAL-DOCUMENTATION",
-    }
+    },
+    "docs/current/project-structure-v1.14.md": {
+        "sha256": "dd6b3c71484a5ae2ee7f94570f6279d9c6420328c3b70a0b0f78b93168d59057",
+        "destination": "docs/legacy/project-structure/project-structure-v1.14.md",
+        "replacement": "project-structure v1.15",
+        "dependencies": "ADR-0003; ADR-0012; project-structure v1.15",
+        "decision_id": "MAP-H0-OPERATOR-APPROVAL-DOCUMENTATION",
+    },
+    "docs/current/project-structure-v1.15.md": {
+        "sha256": "a5e27b1a1404ac534ab98812d53d7a6b236f999ae1cb5aa6a8310d99785b52b0",
+        "destination": "docs/legacy/project-structure/project-structure-v1.15.md",
+        "replacement": "project-structure v1.16",
+        "dependencies": "ADR-0003; proposed ADR-0013; project-structure v1.16",
+        "decision_id": "MAP-H0-TARGET-FINGERPRINT-DOCUMENTATION",
+    },
+    "docs/current/project-structure-v1.16.md": {
+        "sha256": "7ca1a27863dc4797b59c1da400ad4408d9fe11a4c9793f4e42cff08101efde27",
+        "destination": "docs/legacy/project-structure/project-structure-v1.16.md",
+        "replacement": "project-structure v1.17",
+        "dependencies": "ADR-0003; H0 operator-assistance prompts; project-structure v1.17",
+        "decision_id": "MAP-H0-OPERATOR-ASSISTANCE-DOCUMENTATION",
+    },
 }
 
 
@@ -548,6 +649,7 @@ def current_row(path: str, *, action: str, destination: str, decision_id: str) -
 def generated_row(path: str) -> dict[str, str]:
     absolute = ROOT / path
     merged = path in MERGED_GENERATED_PATHS
+    operator_approval_source = path in OPERATOR_APPROVAL_SOURCE_PATHS
     if path.startswith("docs/") or path == "AUTONOMOUS_LOOP_INSTALL.md":
         classification = "REPOSITORY_DOCUMENTATION"
     elif path.startswith("tests/"):
@@ -567,8 +669,16 @@ def generated_row(path: str) -> dict[str, str]:
         "proposed_destination": path,
         "action": "MERGE" if merged else "ADD",
         "conflict_status": "NONE",
-        "reason": "Preparation-only safeguard, provenance, dependency, or validation artifact requested for mapping approval readiness.",
-        "dependencies": "ADR-0009; transition contract; no approval or activation side effect",
+        "reason": (
+            "Approved inert operator-approval source extension; source presence grants no installation, enrollment, activation, execution, or Git authority."
+            if operator_approval_source
+            else "Preparation-only safeguard, provenance, dependency, or validation artifact requested for mapping approval readiness."
+        ),
+        "dependencies": (
+            "ADR-0009; ADR-0012; inert source-extension contract; no approval or activation side effect"
+            if operator_approval_source
+            else "ADR-0009; transition contract; no approval or activation side effect"
+        ),
         "validation": "SHA-256; repository tests; mapping-readiness assessment",
         "rollback": (
             "Restore the exact pre-preparation bytes from the approved base commit."
@@ -576,7 +686,11 @@ def generated_row(path: str) -> dict[str, str]:
             else "Remove this exact preparation artifact before approval if the staged-hybrid decision is withdrawn."
         ),
         "approval_needed": "NO",
-        "decision_id": "MAP-INTEGRATION-GENERATED",
+        "decision_id": (
+            "MAP-H0-OPERATOR-APPROVAL-INERT-SOURCE"
+            if operator_approval_source
+            else "MAP-INTEGRATION-GENERATED"
+        ),
         "resolution_status": "READY_FOR_APPROVAL",
         "transition_phase": "H0_PREPARATION",
     }

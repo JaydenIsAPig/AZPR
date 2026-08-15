@@ -136,7 +136,8 @@ historical reports, immutable staging CSV, or preserved 527-row mapping.
 ## Related documents
 
 - [ADR-0009](0009-staged-hybrid-controller-transition.md)
-- [Project structure v1.14](../current/project-structure-v1.14.md)
+- [Project structure v1.17](../current/project-structure-v1.17.md)
 - [Qualification runbook](../runbooks/ansible-qualification-environment.md)
 - [Ansible implementation](../../infrastructure/ansible/README.md)
 - [Validation evidence](../delivery-provenance/v10.1/validation/ansible/README.md)
+- [Proposed ADR-0013 target fingerprint](0013-h0-live-target-fingerprint.md)

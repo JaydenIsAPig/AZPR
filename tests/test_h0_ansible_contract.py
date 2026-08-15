@@ -49,6 +49,34 @@ class H0AnsibleContractTests(unittest.TestCase):
         self.assertFalse(result["valid"])
         self.assertTrue(any("approval" in error for error in result["errors"]))
 
+    def test_live_prompt_pack_cannot_be_activated_or_advanced_automatically(self) -> None:
+        contract = json.loads(self.read(self.contract_path))
+        contract["live_validation_prompt_pack"]["status"] = "ACTIVE"
+        contract["live_validation_prompt_pack"]["automatic_stage_advancement"] = True
+        contract["live_validation_prompt_pack"]["authority_effect"] = True
+        result = self.validate(self.contract_path, json.dumps(contract))
+        self.assertFalse(result["valid"])
+        self.assertTrue(any("prompt pack contract" in error for error in result["errors"]))
+
+    def test_operator_assistance_cannot_create_authority_or_start_a_stage(self) -> None:
+        contract = json.loads(self.read(self.contract_path))
+        contract["live_validation_prompt_pack"][
+            "operator_assistance_can_create_authority"
+        ] = True
+        contract["live_validation_prompt_pack"]["operator_assistance_can_start_stage"] = True
+        result = self.validate(self.contract_path, json.dumps(contract))
+        self.assertFalse(result["valid"])
+        self.assertTrue(any("prompt pack contract" in error for error in result["errors"]))
+
+    def test_target_fingerprint_cannot_authorize_a_target_or_bypass_human_approval(self) -> None:
+        contract = json.loads(self.read(self.contract_path))
+        contract["target_fingerprint"]["status"] = "APPROVED"
+        contract["target_fingerprint"]["human_approval_required"] = False
+        contract["target_fingerprint"]["authorizes_target"] = True
+        result = self.validate(self.contract_path, json.dumps(contract))
+        self.assertFalse(result["valid"])
+        self.assertTrue(any("target-fingerprint contract" in error for error in result["errors"]))
+
     def test_production_inventory_cannot_be_hidden_in_example(self) -> None:
         hosts = json.loads(self.read(self.hosts_path))
         hosts["all"]["children"]["production"] = {"hosts": {}}
@@ -89,4 +117,3 @@ class H0AnsibleContractTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

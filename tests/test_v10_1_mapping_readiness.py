@@ -66,6 +66,7 @@ class V101MappingReadinessTests(unittest.TestCase):
         self.assertFalse(result["mapping_ready_for_human_approval"])
         self.assertFalse(result["final_mapping_approval_eligible"])
         self.assertTrue(result["checks"]["deterministic_mapping_matches"])
+        self.assertTrue(result["checks"]["operator_approval_source_extension_valid"])
         self.assertTrue(result["checks"]["verifier_evidence_valid"])
         self.assertTrue(result["checks"]["both_delivery_verifiers_pass"])
         self.assertFalse(result["checks"]["formal_int_01_verification_present"])
@@ -85,7 +86,15 @@ class V101MappingReadinessTests(unittest.TestCase):
         self.assertFalse(result["safe_for_unattended_execution_now"])
         self.assertEqual(
             result["next_required_action"],
-            "COMPLETE_H0_ANSIBLE_LIVE_CHECK_AND_IDEMPOTENCE_VALIDATION",
+            "RUN_H0_ALV_GUIDE_00_FOR_ATTRIBUTABLE_APPROVAL_AND_TARGET_HANDOFF",
+        )
+        self.assertFalse(result["checks"]["h0_target_fingerprint_procedure_approved"])
+        self.assertEqual(
+            result["checks"]["h0_target_fingerprint_procedure_status"],
+            "AWAITING_HUMAN_DECISION",
+        )
+        self.assertIsNone(
+            result["checks"]["h0_target_fingerprint_procedure_reference"]
         )
 
     def test_prequalification_pass_cannot_impersonate_formal_int_01(self) -> None:
@@ -325,6 +334,133 @@ class V101MappingReadinessTests(unittest.TestCase):
             result = self.assess(mapping=altered)
         self.assertFalse(result["mapping_structurally_ready_for_review"])
         self.assertTrue(any("generated preparation bytes drifted" in error for error in result["errors"]))
+
+    def test_operator_approval_source_rows_remain_inert_h0_preparation(self) -> None:
+        with self.mapping.open(newline="", encoding="utf-8") as source:
+            rows = list(csv.DictReader(source))
+        operator_rows = {
+            row["source_path"]: row
+            for row in rows
+            if row["source_archive"] == "INTEGRATION_GENERATED"
+            and row["source_path"]
+            in mapping_readiness.REQUIRED_OPERATOR_APPROVAL_SOURCE_PATHS
+        }
+        self.assertEqual(
+            set(operator_rows),
+            mapping_readiness.REQUIRED_OPERATOR_APPROVAL_SOURCE_PATHS,
+        )
+        for row in operator_rows.values():
+            self.assertEqual(row["decision_id"], "MAP-H0-OPERATOR-APPROVAL-INERT-SOURCE")
+            self.assertEqual(row["transition_phase"], "H0_PREPARATION")
+            self.assertEqual(row["approval_needed"], "NO")
+
+    def test_target_fingerprint_rows_remain_inert_h0_preparation(self) -> None:
+        with self.mapping.open(newline="", encoding="utf-8") as source:
+            rows = list(csv.DictReader(source))
+        fingerprint_rows = {
+            row["source_path"]: row
+            for row in rows
+            if row["source_archive"] == "INTEGRATION_GENERATED"
+            and row["source_path"]
+            in mapping_readiness.REQUIRED_H0_TARGET_FINGERPRINT_GENERATED_PATHS
+        }
+        self.assertEqual(
+            set(fingerprint_rows),
+            mapping_readiness.REQUIRED_H0_TARGET_FINGERPRINT_GENERATED_PATHS,
+        )
+        for row in fingerprint_rows.values():
+            self.assertEqual(row["transition_phase"], "H0_PREPARATION")
+            self.assertEqual(row["approval_needed"], "NO")
+        contract = json.loads(
+            (
+                ROOT
+                / "automation"
+                / "integration"
+                / "v10.1"
+                / "h0-ansible-live-stages"
+                / "target-fingerprint-contract.json"
+            ).read_text(encoding="utf-8")
+        )
+        self.assertEqual(contract["status"], "PROPOSED_PENDING_HUMAN_APPROVAL")
+        self.assertTrue(contract["authority_effect"]["identifies_target"])
+        self.assertTrue(
+            all(
+                value is False
+                for key, value in contract["authority_effect"].items()
+                if key != "identifies_target"
+            )
+        )
+
+    def test_operator_assistance_rows_remain_inert_h0_preparation(self) -> None:
+        with self.mapping.open(newline="", encoding="utf-8") as source:
+            rows = list(csv.DictReader(source))
+        assistance_rows = {
+            row["source_path"]: row
+            for row in rows
+            if row["source_archive"] == "INTEGRATION_GENERATED"
+            and row["source_path"]
+            in mapping_readiness.REQUIRED_H0_OPERATOR_ASSISTANCE_GENERATED_PATHS
+        }
+        self.assertEqual(
+            set(assistance_rows),
+            mapping_readiness.REQUIRED_H0_OPERATOR_ASSISTANCE_GENERATED_PATHS,
+        )
+        for row in assistance_rows.values():
+            self.assertEqual(row["transition_phase"], "H0_PREPARATION")
+            self.assertEqual(row["approval_needed"], "NO")
+            self.assertEqual(row["resolution_status"], "READY_FOR_APPROVAL")
+        manifest = json.loads(
+            (
+                ROOT
+                / "automation"
+                / "integration"
+                / "v10.1"
+                / "h0-ansible-live-stages"
+                / "stage-manifest.json"
+            ).read_text(encoding="utf-8")
+        )
+        assistance = manifest["operator_assistance"]
+        self.assertFalse(assistance["automatic_execution"])
+        self.assertFalse(assistance["automatic_stage_advancement"])
+        self.assertFalse(assistance["operator_input_may_be_created_by_agent"])
+        self.assertFalse(
+            assistance["human_authorization_may_be_created_or_inferred_by_agent"]
+        )
+        retirement = [
+            row
+            for row in rows
+            if row["source_archive"] == "CURRENT_REPOSITORY"
+            and row["source_path"] == "docs/current/project-structure-v1.16.md"
+        ]
+        self.assertEqual(len(retirement), 1)
+        self.assertEqual(retirement[0]["action"], "MOVE")
+        self.assertEqual(
+            retirement[0]["proposed_destination"],
+            "docs/legacy/project-structure/project-structure-v1.16.md",
+        )
+        self.assertEqual(
+            retirement[0]["decision_id"],
+            "MAP-H0-OPERATOR-ASSISTANCE-DOCUMENTATION",
+        )
+
+    def test_frozen_transition_contract_is_not_rewritten_for_source_extension(self) -> None:
+        self.assertEqual(
+            mapping_readiness.sha256(self.contract),
+            mapping_readiness.EXPECTED_TRANSITION_CONTRACT_SHA256,
+        )
+        source_contract = json.loads(
+            (
+                ROOT
+                / "automation"
+                / "integration"
+                / "v10.1"
+                / "operator-approval-source-contract.json"
+            ).read_text(encoding="utf-8")
+        )
+        self.assertEqual(source_contract["status"], "IMPLEMENTATION_SOURCE_ONLY_NOT_ACTIVE")
+        self.assertTrue(
+            all(value is False for value in source_contract["authority_effect"].values())
+        )
 
     def test_unmapped_current_file_drift_is_not_preserved(self) -> None:
         with mock.patch.object(

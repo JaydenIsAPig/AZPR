@@ -105,6 +105,123 @@ After either safeguard changes, rerun all checks in **Repository gates** and
 regenerate the mapping and readiness assessment before approval. Any regression
 is a stop condition.
 
+## Inert live-validation prompt sequence
+
+The source-only prompt pack under
+`automation/integration/v10.1/h0-ansible-live-stages/` separates the remaining
+live work into four invocations:
+
+1. `H0-ALV-00` performs read-only authority and exact-target preflight.
+2. `H0-ALV-01` runs check mode with diff and requires a separately supplied
+   human review bound to the exact target and output hashes.
+3. `H0-ALV-02` permits at most one invocation of the existing idempotence
+   runner on the exact `DISPOSABLE_TEST` target after fresh reverification.
+4. `H0-ALV-03` reconciles hashes and recaps read-only and stops before evidence
+   import, sealing, or lifecycle updates.
+
+Validate the pack before any stage:
+
+```bash
+python3 scripts/check_h0_ansible_live_prompt_pack.py
+```
+
+### Proposed exact-target fingerprint prerequisite
+
+The live pack cannot be used until an authorized human approves the exact
+`AZPR_H0_TARGET_FINGERPRINT_V1` contract. Its canonical procedure is
+`automation/integration/v10.1/h0-ansible-live-stages/target-fingerprint-contract.json`;
+ADR-0013 remains proposed. A matching fingerprint identifies one target but
+does not authorize it.
+
+Inside the already-open local session, the read-only implementation observes
+the kernel hostname, machine ID, os-release ID/version, uname architecture,
+and the `ubuntu` passwd name/UID/GID/home. It normalizes and serializes the nine
+fields in the contract's exact order, then hashes the exact UTF-8 bytes with
+SHA-256. It does not invoke a shell, Ansible, the operator adapter, a
+controller, or a network operation:
+
+```bash
+.integration-temp/offline-validation/venv/bin/python \
+  scripts/h0_target_fingerprint.py observe
+```
+
+Missing, unreadable, invalid, unsupported, or mismatched fields block without
+fallback. Repeat the observation before every H0-ALV stage. Do not reuse the
+host-side Multipass configuration fingerprint from earlier transport evidence;
+it covers a different non-authoritative scope.
+
+ADR-0014 governs the only accepted procedure-approval reference. The canonical
+request and immutable review bind the exact fingerprint contract digest. The
+checked-in template is not authority, and the governed decision path is
+intentionally absent. Check the channel without creating or modifying a record:
+
+```bash
+.integration-temp/offline-validation/venv/bin/python \
+  scripts/check_h0_fingerprint_procedure_approval.py check
+```
+
+`AWAITING_HUMAN_DECISION` is expected until the project owner creates a
+canonical decision in a separate human-authored commit. A valid approval
+produces the only accepted reference form,
+`git:<commit>:automation/approvals/procedure-decisions/AZPR_H0_TARGET_FINGERPRINT_V1.json`.
+The checker validates exact bytes, request/procedure digests, role and boundary
+acknowledgements, commit ancestry, an unchanged worktree record, and Git-author
+attribution. It does not authenticate execution, authorize a target, create
+operator input, activate an adapter/controller, invoke a stage, or advance H0.
+
+An authorized human must create the operator input from the null-valued
+template and insert the normalized target values, target digest, separately
+governed authorization reference, exact fingerprint-contract digest,
+procedure-approval assertion, authorizer, issuance/expiry, and allowed stages.
+The AI or implementation agent must not create or populate it. Validate it
+without displaying its contents:
+
+```bash
+.integration-temp/offline-validation/venv/bin/python \
+  scripts/h0_target_fingerprint.py validate-operator-input \
+  --input /private/tmp/azpr-h0-alv-operator-input.json
+```
+
+This validation uses Draft 2020-12 plus an enabled `date-time`
+`FormatChecker`, recalculates both digest bindings, and fails on a missing or
+expired approval. Keep the operator-approval adapter inactive.
+
+### Guided human-checkpoint preparation
+
+Use the three source-only prompts under
+`automation/integration/v10.1/h0-ansible-live-stages/operator-assistance/` when
+the operator wants the agent to perform all repetitive technical preparation:
+
+1. Invoke `00-repository-and-procedure-readiness.md` on the repository host.
+   It runs repository gates, records hashes, checks protected artifacts and
+   inactive authority components, and stops only for an attributable
+   procedure-approval reference or deliberate entry into the local guest.
+2. After the human deliberately enters the already-approved local session in
+   the intended disposable guest, invoke
+   `01-guest-local-observation-and-target-decision.md`. It performs the exact
+   fingerprint, platform, reviewer, runtime, inventory, approved-input, and
+   credential-name observations. It then stops for the human to understand the
+   observed target, decide whether to authorize it, and personally create
+   `/private/tmp/azpr-h0-alv-operator-input.json`.
+3. Back on the repository host, invoke
+   `02-operator-input-validation-and-stage-handoff.md`. It validates the file
+   without displaying it, repeats drift and attribution checks, and stops for
+   the human to deliberately invoke H0-ALV-00 as a new controlled stage.
+
+The guides conform to `operator-assistance-result.schema.json`. That schema
+has no `PASS` outcome: all technically successful paths still require one
+explicit human action. Guide results are not approval, authentication,
+operator input, stage results, evidence, or resume state. No guide may launch
+another guide or an H0-ALV stage automatically.
+
+The pack is `DRAFT_NOT_ACTIVE` and is not execution authority. Each live stage
+requires separately governed, unexpired authority bound to its exact target
+and stage. It does not use or activate the operator-approval adapter, modify
+the H0 transport ticket, authorize `HUMAN_APPROVED_QUALIFICATION`, seal the
+network, qualify the environment, run the AZPR verifier, or perform Git
+operations. Run exactly one stage per invocation and never advance
+automatically.
+
 ## Preconditions and immutable inputs
 
 The integration manager must verify all of the following before execution:
@@ -199,6 +316,7 @@ hash mismatch.
 python3 scripts/check_h0_ansible.py \
   --ansible-bin-dir .integration-temp/ansible/venv/bin
 
+python3 scripts/check_h0_ansible_live_prompt_pack.py
 python3 scripts/check_v10_1_prompt_stage_pack.py
 python3 scripts/check_v10_1_mapping_readiness.py
 python3 scripts/check_docs.py

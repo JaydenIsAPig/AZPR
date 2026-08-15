@@ -65,4 +65,4 @@ The repository check validates required metadata, filename/version agreement, un
 
 - [Documentation update checklist](../governance/documentation-update-checklist.md)
 - [Definition of done](../governance/definition-of-done.md)
-- [Project structure](../current/project-structure-v1.14.md)
+- [Project structure](../current/project-structure-v1.17.md)

@@ -25,6 +25,33 @@
     "ansible_core": "2.21.2",
     "third_party_collections": []
   },
+  "live_validation_prompt_pack": {
+    "pack_id": "AZPR_H0_ANSIBLE_LIVE_VALIDATION",
+    "status": "DRAFT_NOT_ACTIVE",
+    "manifest": "automation/integration/v10.1/h0-ansible-live-stages/stage-manifest.json",
+    "hash_manifest": "automation/integration/v10.1/h0-ansible-live-stages/SHA256SUMS.json",
+    "hash_manifest_sha256": "39e73e52ce60e66903b693aa1afc4b944fe31d963d4fd596eec8c4e6fca8a45b",
+    "validator": "scripts/check_h0_ansible_live_prompt_pack.py",
+    "stage_count": 4,
+    "operator_assistance_guide_count": 3,
+    "operator_assistance_result_schema": "automation/integration/v10.1/h0-ansible-live-stages/operator-assistance-result.schema.json",
+    "operator_assistance_can_create_authority": false,
+    "operator_assistance_can_start_stage": false,
+    "one_stage_per_invocation": true,
+    "automatic_stage_advancement": false,
+    "authority_effect": false
+  },
+  "target_fingerprint": {
+    "contract_id": "AZPR_H0_TARGET_FINGERPRINT_V1",
+    "status": "PROPOSED_PENDING_HUMAN_APPROVAL",
+    "contract": "automation/integration/v10.1/h0-ansible-live-stages/target-fingerprint-contract.json",
+    "contract_sha256": "d35da355850ee1440ea454c4e2663dae7fb15778bb2c935283ec16d7771f1d8a",
+    "implementation": "scripts/h0_target_fingerprint.py",
+    "test_vectors": "automation/integration/v10.1/h0-ansible-live-stages/target-fingerprint-test-vectors.json",
+    "human_approval_required": true,
+    "identifies_target": true,
+    "authorizes_target": false
+  },
   "inventory_roots": [
     "infrastructure/ansible/inventories/qualification"
   ],

@@ -1,0 +1,210 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://az-permit-radar.local/schemas/h0-ansible-operator-assistance-result.schema.json",
+  "title": "AZPR H0 Ansible operator-assistance result",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "guide_id": {
+      "enum": ["H0-ALV-GUIDE-00", "H0-ALV-GUIDE-01", "H0-ALV-GUIDE-02"]
+    },
+    "phase": {"const": "H0_PREPARATION"},
+    "outcome": {
+      "enum": ["HUMAN_ACTION_REQUIRED", "BLOCKED", "FAILED"]
+    },
+    "summary": {"type": "string", "minLength": 1, "maxLength": 2000},
+    "authority_effect": {"const": false},
+    "automated_checks": {
+      "type": "array",
+      "maxItems": 30,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "argv": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 30,
+            "items": {"type": "string", "maxLength": 500}
+          },
+          "exit_code": {"type": ["integer", "null"]},
+          "state_changing": {"const": false},
+          "stdout_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+          "stderr_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"}
+        },
+        "required": ["argv", "exit_code", "state_changing", "stdout_sha256", "stderr_sha256"]
+      }
+    },
+    "target_observation": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "environment_scope": {"const": "DISPOSABLE_TEST"},
+            "target_id": {"type": "string", "minLength": 1, "maxLength": 200},
+            "machine_id": {"type": "string", "pattern": "^(?!0{32}$)[0-9a-f]{32}$"},
+            "operating_system_id": {"const": "ubuntu"},
+            "operating_system_version_id": {"const": "24.04"},
+            "architecture": {"const": "aarch64"},
+            "reviewer_name": {"const": "ubuntu"},
+            "reviewer_uid": {"const": 1000},
+            "reviewer_gid": {"const": 1000},
+            "reviewer_home": {"const": "/home/ubuntu"},
+            "target_fingerprint_contract_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+            "target_fingerprint_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+          },
+          "required": [
+            "environment_scope",
+            "target_id",
+            "machine_id",
+            "operating_system_id",
+            "operating_system_version_id",
+            "architecture",
+            "reviewer_name",
+            "reviewer_uid",
+            "reviewer_gid",
+            "reviewer_home",
+            "target_fingerprint_contract_sha256",
+            "target_fingerprint_sha256"
+          ]
+        }
+      ]
+    },
+    "human_checkpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "required": {"type": "boolean"},
+        "checkpoint_id": {
+          "enum": [
+            "NONE",
+            "PROCEDURE_APPROVAL_REFERENCE_REQUIRED",
+            "LOCAL_GUEST_SESSION_REQUIRED",
+            "EXACT_TARGET_AUTHORIZATION_REQUIRED",
+            "OPERATOR_INPUT_CREATION_REQUIRED",
+            "AUTHORIZATION_ATTRIBUTION_CONFIRMATION_REQUIRED",
+            "H0_ALV_00_INVOCATION_REQUIRED"
+          ]
+        },
+        "human_action": {"type": "string", "minLength": 1, "maxLength": 3000},
+        "why_human_required": {"type": "string", "minLength": 1, "maxLength": 2000},
+        "required_inputs": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {"type": "string", "minLength": 1, "maxLength": 500}
+        },
+        "resume_with": {"type": ["string", "null"], "maxLength": 500}
+      },
+      "required": [
+        "required",
+        "checkpoint_id",
+        "human_action",
+        "why_human_required",
+        "required_inputs",
+        "resume_with"
+      ]
+    },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "live_target_observed": {"type": "boolean"},
+        "ansible_playbook_executed": {"const": false},
+        "operator_input_created_or_modified_by_agent": {"const": false},
+        "human_authorization_created_or_inferred_by_agent": {"const": false},
+        "operator_approval_adapter_activated": {"const": false},
+        "controller_activated": {"const": false},
+        "h0_t02_executed": {"const": false},
+        "host_transport_modified": {"const": false},
+        "network_controls_modified": {"const": false},
+        "protected_artifacts_modified": {"const": false},
+        "git_commit_merge_or_push": {"const": false},
+        "automatic_next_prompt_started": {"const": false}
+      },
+      "required": [
+        "live_target_observed",
+        "ansible_playbook_executed",
+        "operator_input_created_or_modified_by_agent",
+        "human_authorization_created_or_inferred_by_agent",
+        "operator_approval_adapter_activated",
+        "controller_activated",
+        "h0_t02_executed",
+        "host_transport_modified",
+        "network_controls_modified",
+        "protected_artifacts_modified",
+        "git_commit_merge_or_push",
+        "automatic_next_prompt_started"
+      ]
+    },
+    "next_guide": {
+      "type": ["string", "null"],
+      "enum": [null, "H0-ALV-GUIDE-01", "H0-ALV-GUIDE-02"]
+    },
+    "next_stage": {
+      "type": ["string", "null"],
+      "enum": [null, "H0-ALV-00"]
+    }
+  },
+  "required": [
+    "guide_id",
+    "phase",
+    "outcome",
+    "summary",
+    "authority_effect",
+    "automated_checks",
+    "target_observation",
+    "human_checkpoint",
+    "safety",
+    "next_guide",
+    "next_stage"
+  ],
+  "allOf": [
+    {
+      "if": {"properties": {"guide_id": {"const": "H0-ALV-GUIDE-00"}}, "required": ["guide_id"]},
+      "then": {
+        "properties": {
+          "target_observation": {"type": "null"},
+          "next_guide": {"enum": [null, "H0-ALV-GUIDE-01"]},
+          "next_stage": {"const": null},
+          "safety": {"properties": {"live_target_observed": {"const": false}}}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"guide_id": {"const": "H0-ALV-GUIDE-01"}}, "required": ["guide_id"]},
+      "then": {
+        "properties": {
+          "next_guide": {"enum": [null, "H0-ALV-GUIDE-02"]},
+          "next_stage": {"const": null}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"guide_id": {"const": "H0-ALV-GUIDE-02"}}, "required": ["guide_id"]},
+      "then": {
+        "properties": {
+          "target_observation": {"type": "null"},
+          "next_guide": {"const": null},
+          "safety": {"properties": {"live_target_observed": {"const": false}}}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"next_stage": {"const": "H0-ALV-00"}}, "required": ["next_stage"]},
+      "then": {
+        "properties": {
+          "guide_id": {"const": "H0-ALV-GUIDE-02"},
+          "outcome": {"const": "HUMAN_ACTION_REQUIRED"},
+          "human_checkpoint": {
+            "properties": {
+              "required": {"const": true},
+              "checkpoint_id": {"const": "H0_ALV_00_INVOCATION_REQUIRED"}
+            }
+          }
+        }
+      }
+    }
+  ]
+}

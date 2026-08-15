@@ -16,6 +16,7 @@ import json
 import os
 import re
 import subprocess
+import sys
 import tempfile
 from datetime import datetime
 from pathlib import Path, PurePosixPath
@@ -57,6 +58,7 @@ DEFAULT_ASSESSMENT_OUTPUT = (
     / "mapping-readiness-assessment.json"
 )
 EXPECTED_STAGING_MAPPING_SHA256 = "007786c1c1748f8264cee452df815b47e41e15deb8b532b31f426cd18b4f2525"
+EXPECTED_TRANSITION_CONTRACT_SHA256 = "34266ca5b121f1cfa76d708a7180d5ff3cad4d22c47ed7b787400e980534c310"
 
 BASE_FIELDS = [
     "source_archive",
@@ -165,6 +167,23 @@ REQUIRED_GENERATED_PATHS = {
 }
 REQUIRED_H0_ANSIBLE_GENERATED_PATHS = {
     "README.md",
+    "automation/integration/v10.1/h0-ansible-live-stages/00-authority-and-target-preflight.md",
+    "automation/integration/v10.1/h0-ansible-live-stages/01-check-mode-and-diff-review.md",
+    "automation/integration/v10.1/h0-ansible-live-stages/02-two-apply-idempotence.md",
+    "automation/integration/v10.1/h0-ansible-live-stages/03-evidence-reconciliation.md",
+    "automation/integration/v10.1/h0-ansible-live-stages/README.md",
+    "automation/integration/v10.1/h0-ansible-live-stages/SHA256SUMS.json",
+    "automation/integration/v10.1/h0-ansible-live-stages/operator-input.schema.json",
+    "automation/integration/v10.1/h0-ansible-live-stages/operator-input.template.json",
+    "automation/integration/v10.1/h0-ansible-live-stages/operator-assistance-result.schema.json",
+    "automation/integration/v10.1/h0-ansible-live-stages/operator-assistance/00-repository-and-procedure-readiness.md",
+    "automation/integration/v10.1/h0-ansible-live-stages/operator-assistance/01-guest-local-observation-and-target-decision.md",
+    "automation/integration/v10.1/h0-ansible-live-stages/operator-assistance/02-operator-input-validation-and-stage-handoff.md",
+    "automation/integration/v10.1/h0-ansible-live-stages/stage-manifest.json",
+    "automation/integration/v10.1/h0-ansible-live-stages/stage-result.example.json",
+    "automation/integration/v10.1/h0-ansible-live-stages/stage-result.schema.json",
+    "automation/integration/v10.1/h0-ansible-live-stages/target-fingerprint-contract.json",
+    "automation/integration/v10.1/h0-ansible-live-stages/target-fingerprint-test-vectors.json",
     "docs/adr/0001-modular-monolith.md",
     "docs/adr/0003-documentation-versioning.md",
     "docs/adr/0004-python-domain-kernel.md",
@@ -177,7 +196,7 @@ REQUIRED_H0_ANSIBLE_GENERATED_PATHS = {
     "docs/current/business-data-v1.7.json",
     "docs/current/business-logic-v1.12.md",
     "docs/current/frontend-design-v1.1.md",
-    "docs/current/project-structure-v1.14.md",
+    "docs/current/project-structure-v1.17.md",
     "docs/delivery-provenance/v10.1/validation/ansible/README.md",
     "docs/delivery-provenance/v10.1/validation/ansible/ansible-runtime-manifest.json",
     "docs/delivery-provenance/v10.1/validation/ansible/environment-manifest.json",
@@ -186,6 +205,7 @@ REQUIRED_H0_ANSIBLE_GENERATED_PATHS = {
     "docs/delivery-provenance/v10.1/validation/ansible/qualification-preflight.json",
     "docs/delivery-provenance/v10.1/validation/linux-validation-environment-approval.template.json",
     "docs/logs/project-structure-log-v1.13.md",
+    "docs/logs/project-structure-log-v1.17.md",
     "docs/runbooks/README.md",
     "docs/runbooks/ansible-qualification-environment.md",
     "infrastructure/ansible/README.md",
@@ -208,8 +228,10 @@ REQUIRED_H0_ANSIBLE_GENERATED_PATHS = {
     "infrastructure/ansible/tests/README.md",
     "infrastructure/ansible/tests/run_idempotence.py",
     "scripts/check_h0_ansible.py",
+    "scripts/check_h0_ansible_live_prompt_pack.py",
     "tests/test_h0_ansible_contract.py",
     "tests/test_h0_ansible_live_paths.py",
+    "tests/test_h0_ansible_live_prompt_pack.py",
 }
 REQUIRED_GENERATED_PATHS.update(REQUIRED_H0_ANSIBLE_GENERATED_PATHS)
 REQUIRED_H0_APPROVAL_GENERATED_PATHS = {
@@ -225,6 +247,111 @@ REQUIRED_H0_APPROVAL_GENERATED_PATHS = {
     "tests/test_approval_manager.py",
 }
 REQUIRED_GENERATED_PATHS.update(REQUIRED_H0_APPROVAL_GENERATED_PATHS)
+REQUIRED_OPERATOR_APPROVAL_SOURCE_PATHS = {
+    "README.md",
+    "automation/approval_manager.py",
+    "automation/approvals/README.md",
+    "automation/approvals/schemas/execution-records-v1.schema.json",
+    "automation/approvals/schemas/operator-decision-assertion-v1.schema.json",
+    "automation/approvals/schemas/operator-decision-request-v1.schema.json",
+    "automation/approvals/schemas/operator-trust-record-v1.schema.json",
+    "automation/approvals/templates/operator-trust-record.template.json",
+    "automation/integration/v10.1/operator-approval-source-contract.json",
+    "automation/operator_approval.py",
+    "docs/adr/0001-modular-monolith.md",
+    "docs/adr/0003-documentation-versioning.md",
+    "docs/adr/0004-python-domain-kernel.md",
+    "docs/adr/0005-authoritative-classification-result.md",
+    "docs/adr/0006-versioned-opportunity-projections.md",
+    "docs/adr/0007-in-memory-processing-unit-of-work.md",
+    "docs/adr/0008-customer-scoped-access-context.md",
+    "docs/adr/0010-ansible-qualification-infrastructure.md",
+    "docs/adr/0012-macos-secure-enclave-operator-approval.md",
+    "docs/adr/README.md",
+    "docs/automation/current-status.md",
+    "docs/current/backend-structure-v1.12.md",
+    "docs/current/business-data-v1.7.json",
+    "docs/current/business-logic-v1.12.md",
+    "docs/current/frontend-design-v1.1.md",
+    "docs/legacy/project-structure/project-structure-v1.14.md",
+    "docs/logs/project-structure-log-v1.15.md",
+    "docs/runbooks/operator-authentication.md",
+    "native/operator-approval-helper/Package.swift",
+    "native/operator-approval-helper/Sources/AZPROperatorApprovalCore/ApprovalProtocol.swift",
+    "native/operator-approval-helper/Sources/AZPROperatorApprovalCore/CanonicalJSON.swift",
+    "native/operator-approval-helper/Sources/AZPROperatorApprovalCore/ReviewModel.swift",
+    "native/operator-approval-helper/Sources/AZPROperatorApprovalCore/SecureEnclaveSigner.swift",
+    "native/operator-approval-helper/Sources/AZPROperatorApprovalHelper/main.swift",
+    "native/operator-approval-helper/Tests/AZPROperatorApprovalCoreTests/Fixtures/canonical-v1.json",
+    "native/operator-approval-helper/Tests/AZPROperatorApprovalCoreTests/HardwareIntegrationTests.swift",
+    "native/operator-approval-helper/Tests/AZPROperatorApprovalCoreTests/OperatorApprovalCoreTests.swift",
+    "tests/fixtures/operator_approval/canonical-v1.json",
+    "tests/test_operator_approval.py",
+}
+REQUIRED_GENERATED_PATHS.update(REQUIRED_OPERATOR_APPROVAL_SOURCE_PATHS)
+REQUIRED_H0_TARGET_FINGERPRINT_GENERATED_PATHS = {
+    "automation/approvals/procedure-decisions/README.md",
+    "automation/approvals/procedure-requests/AZPR-H0-FINGERPRINT-PROCEDURE-20260814-001.json",
+    "automation/approvals/procedure-reviews/AZPR-H0-FINGERPRINT-PROCEDURE-20260814-001.md",
+    "automation/approvals/schemas/procedure-approval-decision-v1.schema.json",
+    "automation/approvals/templates/h0-fingerprint-procedure-decision.template.json",
+    "automation/integration/v10.1/h0-ansible-live-stages/target-fingerprint-contract.json",
+    "automation/integration/v10.1/h0-ansible-live-stages/target-fingerprint-test-vectors.json",
+    "automation/procedure_approval.py",
+    "docs/adr/0014-repository-governed-procedure-approval.md",
+    "docs/adr/0013-h0-live-target-fingerprint.md",
+    "docs/logs/project-structure-log-v1.16.md",
+    "scripts/check_h0_fingerprint_procedure_approval.py",
+    "scripts/h0_target_fingerprint.py",
+    "tests/test_procedure_approval.py",
+    "tests/test_h0_target_fingerprint.py",
+}
+REQUIRED_GENERATED_PATHS.update(REQUIRED_H0_TARGET_FINGERPRINT_GENERATED_PATHS)
+REQUIRED_H0_OPERATOR_ASSISTANCE_GENERATED_PATHS = {
+    "automation/integration/v10.1/h0-ansible-live-stages/operator-assistance-result.schema.json",
+    "automation/integration/v10.1/h0-ansible-live-stages/operator-assistance/00-repository-and-procedure-readiness.md",
+    "automation/integration/v10.1/h0-ansible-live-stages/operator-assistance/01-guest-local-observation-and-target-decision.md",
+    "automation/integration/v10.1/h0-ansible-live-stages/operator-assistance/02-operator-input-validation-and-stage-handoff.md",
+    "docs/current/project-structure-v1.17.md",
+    "docs/logs/project-structure-log-v1.17.md",
+}
+REQUIRED_OPERATOR_SOURCE_CONTRACT_ALLOWED_PATHS = {
+    ".gitignore",
+    "README.md",
+    "automation/operator_approval.py",
+    "automation/approval_manager.py",
+    "automation/approvals/schemas/**",
+    "automation/approvals/templates/operator-trust-record.template.json",
+    "automation/approvals/README.md",
+    "automation/integration/v10.1/operator-approval-source-contract.json",
+    "docs/delivery-provenance/v10.1/integration/AZPR-v10.1-integration-path-mapping.csv",
+    "scripts/prepare_v10_1_mapping.py",
+    "scripts/check_v10_1_mapping_readiness.py",
+    "tests/test_v10_1_mapping_readiness.py",
+    "tests/test_operator_approval.py",
+    "tests/fixtures/operator_approval/**",
+    "native/operator-approval-helper/**",
+    "docs/adr/0012-macos-secure-enclave-operator-approval.md",
+    "docs/adr/README.md",
+    "docs/runbooks/operator-authentication.md",
+    "docs/automation/current-status.md",
+    "docs/current/project-structure-v1.14.md",
+    "docs/current/project-structure-v1.15.md",
+    "docs/legacy/project-structure/project-structure-v1.14.md",
+    "docs/logs/project-structure-log-v1.15.md",
+    "docs/current/backend-structure-v1.12.md",
+    "docs/current/business-data-v1.7.json",
+    "docs/current/business-logic-v1.12.md",
+    "docs/current/frontend-design-v1.1.md",
+    "docs/adr/0001-modular-monolith.md",
+    "docs/adr/0003-documentation-versioning.md",
+    "docs/adr/0004-python-domain-kernel.md",
+    "docs/adr/0005-authoritative-classification-result.md",
+    "docs/adr/0006-versioned-opportunity-projections.md",
+    "docs/adr/0007-in-memory-processing-unit-of-work.md",
+    "docs/adr/0008-customer-scoped-access-context.md",
+    "docs/adr/0010-ansible-qualification-infrastructure.md",
+}
 REQUIRED_PHASE_GATES = {
     ("H0_PREPARATION", "exit_gates"): {
         "ANSIBLE_QUALIFICATION_INFRASTRUCTURE_COMPLETE",
@@ -364,6 +491,26 @@ def h0_ansible_status(root: Path) -> tuple[bool, bool, list[str]]:
         return False, False, ["H0 Ansible validator returned invalid result"]
     issues = result.get("errors", [])
     return bool(result.get("valid")), bool(result.get("preparation_complete")), list(issues)
+
+
+def h0_procedure_approval_status(
+    root: Path,
+) -> tuple[bool, str, str | None, list[str]]:
+    module_path = root / "automation" / "procedure_approval.py"
+    name = "azpr_h0_procedure_approval"
+    spec = importlib.util.spec_from_file_location(name, module_path)
+    if spec is None or spec.loader is None:
+        return False, "BLOCKED", None, ["cannot load H0 procedure-approval validator"]
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    try:
+        spec.loader.exec_module(module)
+        result = module.assess_repository_channel(root)
+    except Exception as exc:
+        return False, "BLOCKED", None, [f"H0 procedure-approval validator failed: {exc}"]
+    finally:
+        sys.modules.pop(name, None)
+    return bool(result.approved), str(result.status), result.approval_reference, []
 
 
 def approval_binding_status(
@@ -671,6 +818,14 @@ def assess(
     attempts = load_json(verifier_attempts_path, []) if verifier_attempts_path.is_file() else {}
     identity_path = root / "docs" / "delivery-provenance" / "v10.1" / "delivery-identity.json"
     identity = load_json(identity_path, errors)
+    operator_source_contract_path = (
+        root
+        / "automation"
+        / "integration"
+        / "v10.1"
+        / "operator-approval-source-contract.json"
+    )
+    operator_source_contract = load_json(operator_source_contract_path, errors)
     immutable_mapping_path = (
         root
         / "docs"
@@ -682,6 +837,100 @@ def assess(
 
     if contract.get("decision_id") != "AZPR-V10.1-STAGED-HYBRID-CONTROLLER":
         errors.append("transition contract decision identity mismatch")
+    if not contract_path.is_file() or sha256(contract_path) != EXPECTED_TRANSITION_CONTRACT_SHA256:
+        errors.append("frozen transition contract bytes changed")
+
+    operator_source_contract_valid = True
+    expected_operator_source_contract_fields = {
+        "format_version",
+        "contract_kind",
+        "status",
+        "approved_on",
+        "governing_adr",
+        "extends_without_mutating",
+        "reason_for_separate_bytes",
+        "allowed_paths",
+        "excluded_generated_paths",
+        "approved_python_cryptography_version",
+        "allowed_operator_roles",
+        "authority_effect",
+        "deferred_inputs",
+    }
+    if set(operator_source_contract) != expected_operator_source_contract_fields:
+        errors.append("operator-approval source contract fields drifted")
+        operator_source_contract_valid = False
+    if operator_source_contract.get("format_version") != "1.0":
+        errors.append("operator-approval source contract format version drifted")
+        operator_source_contract_valid = False
+    if (
+        operator_source_contract.get("contract_kind")
+        != "AZPR_OPERATOR_APPROVAL_INERT_SOURCE_EXTENSION"
+        or operator_source_contract.get("status") != "IMPLEMENTATION_SOURCE_ONLY_NOT_ACTIVE"
+    ):
+        errors.append("operator-approval source contract is absent, active, or misidentified")
+        operator_source_contract_valid = False
+    if (
+        operator_source_contract.get("extends_without_mutating")
+        != "automation/integration/v10.1/controller-transition-contract.json"
+    ):
+        errors.append("operator-approval source contract no longer preserves the frozen transition contract")
+        operator_source_contract_valid = False
+    allowed_source_paths = operator_source_contract.get("allowed_paths")
+    if (
+        not isinstance(allowed_source_paths, list)
+        or any(not isinstance(path, str) for path in allowed_source_paths)
+        or len(allowed_source_paths) != len(set(allowed_source_paths))
+        or set(allowed_source_paths) != REQUIRED_OPERATOR_SOURCE_CONTRACT_ALLOWED_PATHS
+    ):
+        errors.append("operator-approval source contract allowlist drifted")
+        operator_source_contract_valid = False
+    if operator_source_contract.get("excluded_generated_paths") != [
+        "native/operator-approval-helper/.build/**"
+    ]:
+        errors.append("operator-approval source contract generated-path exclusions drifted")
+        operator_source_contract_valid = False
+    if operator_source_contract.get("approved_python_cryptography_version") != "46.0.4":
+        errors.append("operator-approval source contract cryptography version drifted")
+        operator_source_contract_valid = False
+    if operator_source_contract.get("allowed_operator_roles") != ["Head of AZPR Operations"]:
+        errors.append("operator-approval source contract role drifted")
+        operator_source_contract_valid = False
+    authority_effects = operator_source_contract.get("authority_effect")
+    expected_authority_effects = {
+        "install_helper",
+        "create_secure_enclave_key",
+        "enroll_operator",
+        "write_real_trust_record",
+        "activate_adapter",
+        "execute_controller",
+        "execute_h0_t02",
+        "commit",
+        "merge",
+        "push",
+    }
+    if (
+        not isinstance(authority_effects, dict)
+        or set(authority_effects) != expected_authority_effects
+        or any(value is not False for value in authority_effects.values())
+    ):
+        errors.append("operator-approval source contract grants runtime or Git authority")
+        operator_source_contract_valid = False
+    deferred_inputs = operator_source_contract.get("deferred_inputs")
+    if (
+        not isinstance(deferred_inputs, list)
+        or any(not isinstance(value, str) for value in deferred_inputs)
+        or len(deferred_inputs) != len(set(deferred_inputs))
+        or set(deferred_inputs)
+        != {
+            "authenticated operator subject",
+            "helper installation path and ownership",
+            "host-owned trust and replay-state paths",
+            "code-signing identity or explicit H0 hash-pin limitation",
+            "installation and enrollment approval ticket",
+        }
+    ):
+        errors.append("operator-approval source contract deferred inputs drifted")
+        operator_source_contract_valid = False
     if contract.get("decision_status") not in {
         "H0_ANSIBLE_IMPLEMENTED_PENDING_LIVE_VALIDATION",
         "H0_ANSIBLE_PREPARATION_COMPLETE_WAITING_FOR_HUMAN_GATES",
@@ -782,6 +1031,26 @@ def assess(
     errors.extend(f"prompt-stage pack: {issue}" for issue in pack_errors)
     h0_ansible_contract_valid, h0_ansible_evidence_complete, ansible_errors = h0_ansible_status(root)
     errors.extend(f"H0 Ansible: {issue}" for issue in ansible_errors)
+    target_fingerprint_contract = load_json(
+        root
+        / "automation"
+        / "integration"
+        / "v10.1"
+        / "h0-ansible-live-stages"
+        / "target-fingerprint-contract.json",
+        errors,
+    )
+    (
+        target_fingerprint_procedure_approved,
+        target_fingerprint_procedure_status,
+        target_fingerprint_procedure_reference,
+        procedure_approval_errors,
+    ) = h0_procedure_approval_status(root)
+    errors.extend(procedure_approval_errors)
+    if not target_fingerprint_procedure_approved:
+        warnings.append(
+            "the H0 target-fingerprint procedure remains pending separate human approval"
+        )
 
     expected_audit_authority = {
         "interim_source": "docs/audits/README.md",
@@ -1036,6 +1305,43 @@ def assess(
         if row["proposed_destination"] != path:
             errors.append(f"generated preparation destination drifted: {path}")
 
+    operator_source_rows = {
+        path: generated_rows[path]
+        for path in REQUIRED_OPERATOR_APPROVAL_SOURCE_PATHS
+        if path in generated_rows
+    }
+    if set(operator_source_rows) != REQUIRED_OPERATOR_APPROVAL_SOURCE_PATHS:
+        errors.append("operator-approval source mapping is incomplete")
+        operator_source_contract_valid = False
+    elif any(
+        row["decision_id"] != "MAP-H0-OPERATOR-APPROVAL-INERT-SOURCE"
+        or row["transition_phase"] != "H0_PREPARATION"
+        or row["approval_needed"] != "NO"
+        or row["resolution_status"] != "READY_FOR_APPROVAL"
+        for row in operator_source_rows.values()
+    ):
+        errors.append(
+            "operator-approval source mapping grants authority or uses the wrong lifecycle"
+        )
+        operator_source_contract_valid = False
+
+    project_structure_retirement = [
+        row
+        for row in mapping
+        if row["source_archive"] == "CURRENT_REPOSITORY"
+        and row["source_path"] == "docs/current/project-structure-v1.14.md"
+    ]
+    if (
+        len(project_structure_retirement) != 1
+        or project_structure_retirement[0]["action"] != "MOVE"
+        or project_structure_retirement[0]["proposed_destination"]
+        != "docs/legacy/project-structure/project-structure-v1.14.md"
+        or project_structure_retirement[0]["transition_phase"] != "H0_PREPARATION"
+        or project_structure_retirement[0]["approval_needed"] != "NO"
+    ):
+        errors.append("operator-approval project-structure retirement mapping is incomplete")
+        operator_source_contract_valid = False
+
     for destination, donors in destinations.items():
         if len(donors) > 1:
             errors.append(f"multiple materializing donors for {destination}: {donors!r}")
@@ -1229,6 +1535,9 @@ def assess(
         if row["decision_id"] in {
             "MAP-H0-ANSIBLE-DOCUMENTATION",
             "MAP-H0-APPROVAL-DOCUMENTATION",
+            "MAP-H0-OPERATOR-APPROVAL-DOCUMENTATION",
+            "MAP-H0-TARGET-FINGERPRINT-DOCUMENTATION",
+            "MAP-H0-OPERATOR-ASSISTANCE-DOCUMENTATION",
         }
         and row["transition_phase"] == "H0_PREPARATION"
     ]
@@ -1315,6 +1624,7 @@ def assess(
             "deterministic_mapping_matches": deterministic_mapping_matches,
             "prompt_stage_pack_valid": prompt_stage_pack_valid,
             "interim_audit_authority_valid": interim_audit_authority_valid,
+            "operator_approval_source_extension_valid": operator_source_contract_valid,
             "selected_prompt_actions": prompt_actions,
             "current_prompt_retirement_actions": current_prompt_actions,
             "frozen_delivery_report_rows": len(reports_rows),
@@ -1335,6 +1645,9 @@ def assess(
             "h0_ansible_preparation_complete": h0_ansible_preparation_complete,
             "h0_ansible_contract_valid": h0_ansible_contract_valid,
             "h0_ansible_status": ansible_preparation_status,
+            "h0_target_fingerprint_procedure_approved": target_fingerprint_procedure_approved,
+            "h0_target_fingerprint_procedure_status": target_fingerprint_procedure_status,
+            "h0_target_fingerprint_procedure_reference": target_fingerprint_procedure_reference,
             "linux_environment_human_approved": linux_environment_approved,
             "formal_linux_run_a_accepted": formal_linux_run_a_accepted,
             "formal_linux_run_b_accepted": formal_linux_run_b_accepted,
@@ -1357,6 +1670,8 @@ def assess(
         "next_required_action": (
             "CORRECT_MAPPING_OR_TRANSITION_CONTRACT"
             if not mapping_structurally_ready
+            else "RUN_H0_ALV_GUIDE_00_FOR_ATTRIBUTABLE_APPROVAL_AND_TARGET_HANDOFF"
+            if not target_fingerprint_procedure_approved
             else "COMPLETE_H0_ANSIBLE_LIVE_CHECK_AND_IDEMPOTENCE_VALIDATION"
             if ansible_preparation_status == "IMPLEMENTED_PENDING_LIVE_VALIDATION"
             else "CORRECT_H0_ANSIBLE_EVIDENCE_BINDING"

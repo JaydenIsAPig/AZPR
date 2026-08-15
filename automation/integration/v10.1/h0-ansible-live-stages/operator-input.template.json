@@ -1,0 +1,45 @@
+{
+  "format_version": "1.0",
+  "record_kind": "AZPR_H0_ANSIBLE_LIVE_OPERATOR_INPUT_TEMPLATE",
+  "status": "TEMPLATE_NOT_APPROVAL",
+  "target": {
+    "environment_scope": "DISPOSABLE_TEST",
+    "target_id": null,
+    "target_fingerprint_sha256": null,
+    "disposable_target_confirmed": false,
+    "local_guest_session_confirmed": false,
+    "machine_id": null,
+    "operating_system_id": null,
+    "operating_system_version_id": null,
+    "architecture": null,
+    "reviewer_name": null,
+    "reviewer_uid": null,
+    "reviewer_gid": null,
+    "reviewer_home": null
+  },
+  "authorization_reference": {
+    "separately_governed": true,
+    "authorized": false,
+    "reference": null,
+    "authorized_by": null,
+    "authorized_at": null,
+    "expires_at": null,
+    "fingerprint_procedure_approved": false,
+    "target_fingerprint_contract_sha256": null,
+    "allowed_stage_ids": [],
+    "target_fingerprint_sha256": null
+  },
+  "check_mode_review": {
+    "accepted": false,
+    "review_reference": null,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "target_fingerprint_sha256": null,
+    "stdout_sha256": null,
+    "stderr_sha256": null
+  },
+  "operator_approval_adapter": {
+    "must_remain_inactive": true,
+    "activation_authorized": false
+  }
+}

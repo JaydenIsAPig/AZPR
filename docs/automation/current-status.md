@@ -9,6 +9,19 @@ State: staged-hybrid transition selected for integration review.
   `DRAFT_NOT_ACTIVE`; it permits one stage per invocation and no automatic
   advancement.
 - The external trusted-controller candidate is deferred, unqualified, and forbidden from writes or external capability.
+- ADR-0012 authorizes a separately governed, inert source-only macOS
+  operator-approval adapter. Swift source defines the immutable native review
+  window and Touch-ID-protected Secure Enclave P-256 signing path; Python source
+  defines exact helper identity checks, canonical assertion verification with
+  `cryptography==46.0.4`, host-owned trust/replay contracts, and one-action
+  nonce consumption. The accepted role is `Head of AZPR Operations`. No real
+  operator subject, helper install path, owner/mode, signing identity, key,
+  public trust record, replay ledger, or enrollment exists, and neither
+  controller selects the adapter. Hardware Touch ID/Secure Enclave tests are
+  not run by this source stage. Installation, activation, H0-T02, commit,
+  merge, push, and stage progression remain unauthorized. The separate source
+  extension leaves the SHA-bound v10.1 transition contract and current H0
+  transport ticket unchanged.
 - Commit `ce80d335aef52c8900bd363bbcfacc1e497c0404` is the human-approved
   pre-Ansible H0 transition base. Its direct parent
   `d60e5d9b5fe3b39fa07a1b2e6bfa2719425eb6e5` remains recorded as source-tree
@@ -34,6 +47,39 @@ State: staged-hybrid transition selected for integration review.
   and configuration remained unchanged and that guest is stopped. This
   non-authoritative engineering evidence only unblocks live check/diff and
   two-apply idempotence work; neither has been run or inferred from the repair.
+  A separate four-stage H0 live-validation prompt pack now represents that
+  remaining work as inert source: read-only exact-target preflight, check/diff
+  plus hash-bound human review, one bounded `DISPOSABLE_TEST` two-apply
+  attempt, and read-only evidence reconciliation. The pack is
+  `DRAFT_NOT_ACTIVE`, permits one stage per invocation, does not advance
+  automatically, and grants no execution authority. It does not activate the
+  operator-approval adapter or alter the current H0 transport ticket.
+  The pack now also contains a deterministic, executable
+  `AZPR_H0_TARGET_FINGERPRINT_V1` proposal with exact independently observed
+  non-secret Linux fields, normalization, member order, canonical UTF-8 JSON,
+  SHA-256 behavior, mismatch rules, and a golden vector. ADR-0013 and the exact
+  fingerprint contract remain pending separate human approval. No operator
+  input exists, and a matching fingerprint identifies but never authorizes a
+  target. The operator-approval adapter remains inactive.
+  Three additional source-only operator-assistance prompts now automate the
+  repetitive host repository gates, guest-local deterministic observations,
+  safe operator-input validation, and H0-ALV-00 handoff analysis. They are not
+  stages, have no unattended-success result, store no resume state, and stop
+  only for attributable procedure approval, deliberate guest-local entry,
+  exact-target understanding/authorization, human operator-input authorship,
+  protected-channel attribution confirmation, or deliberate H0-ALV-00
+  invocation. They cannot enter the guest, create or infer approval, create or
+  modify operator input, run Ansible, or start another prompt automatically.
+  The project owner has stated that the procedure was read and its expected
+  digest calculated, but no separately governed attributable approval
+  reference has been supplied to repository authority; the procedure therefore
+  remains `PROPOSED_PENDING_HUMAN_APPROVAL` here.
+  ADR-0014 now resolves the mechanism gap with a canonical procedure-only
+  request, immutable review, strict decision schema, non-authoritative
+  template, empty governed decision path, and read-only repository-attribution
+  validator. The channel currently reports `AWAITING_HUMAN_DECISION`. It
+  creates no approval and has no target, execution, adapter/controller, H0,
+  verifier, or Git authority.
   Before H0-T02, approval ID `AZPR-H0-TRANSPORT-20260807-001` is now represented
   by a version-controlled stage manifest, canonical ticket, and immutable
   review view. The ticket SHA-256 is
@@ -53,4 +99,4 @@ State: staged-hybrid transition selected for integration review.
   and index atomically. No unresolved human identity or approval may be
   invented or silently bypassed.
 
-Use `.codex-loop/state.json` for local machine state after setup. This committed file is a human-readable handoff only. The controlling transition gates are documented in [ADR-0009](../adr/0009-staged-hybrid-controller-transition.md), the machine contract is `automation/integration/v10.1/controller-transition-contract.json`, and review evidence is under [delivery provenance](../delivery-provenance/v10.1/README.md).
+Use `.codex-loop/state.json` for local machine state after setup. This committed file is a human-readable handoff only. The controlling transition gates are documented in [ADR-0009](../adr/0009-staged-hybrid-controller-transition.md); the narrow source-only exception is [ADR-0012](../adr/0012-macos-secure-enclave-operator-approval.md). The machine contract remains `automation/integration/v10.1/controller-transition-contract.json`, and review evidence is under [delivery provenance](../delivery-provenance/v10.1/README.md).

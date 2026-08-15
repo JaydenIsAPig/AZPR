@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://az-permit-radar.local/schemas/operator-decision-assertion-v1.schema.json",
+  "title": "AZPR_OPERATOR_DECISION_ASSERTION_V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["signed_payload", "signature_algorithm", "signature_base64", "public_key_sha256", "helper_build_id"],
+  "properties": {
+    "signed_payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["format_version", "record_kind", "purpose", "approval_id", "ticket_id", "ticket_sha256", "decision", "nonce", "requested_at", "decided_at", "expires_at", "authenticator_id", "authentication_event_id", "key_id"],
+      "properties": {
+        "format_version": {"const": "1.0"},
+        "record_kind": {"const": "AZPR_OPERATOR_DECISION_ASSERTION"},
+        "purpose": {"const": "AZPR_OPERATOR_APPROVAL_DECISION_V1"},
+        "approval_id": {"type": "string", "minLength": 1, "maxLength": 256},
+        "ticket_id": {"type": "string", "minLength": 1, "maxLength": 256},
+        "ticket_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "decision": {"enum": ["APPROVED", "REJECTED"]},
+        "nonce": {"type": "string", "pattern": "^[A-Za-z0-9_-]{43}$"},
+        "requested_at": {"type": "string", "format": "date-time", "maxLength": 64},
+        "decided_at": {"type": "string", "format": "date-time", "maxLength": 64},
+        "expires_at": {"type": "string", "format": "date-time", "maxLength": 64},
+        "authenticator_id": {"type": "string", "minLength": 1, "maxLength": 256},
+        "authentication_event_id": {"type": "string", "minLength": 1, "maxLength": 256},
+        "key_id": {"type": "string", "minLength": 1, "maxLength": 256}
+      }
+    },
+    "signature_algorithm": {"const": "ECDSA_MESSAGE_X962_SHA256"},
+    "signature_base64": {"type": "string", "minLength": 1, "maxLength": 256},
+    "public_key_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "helper_build_id": {"const": "AZPR_OPERATOR_APPROVAL_HELPER_V1"}
+  }
+}

@@ -22,6 +22,7 @@ out/
 coverage/
 .next/
 .nuxt/
+/native/operator-approval-helper/.build/
 
 # Language and tool caches
 __pycache__/

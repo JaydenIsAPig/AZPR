@@ -76,11 +76,36 @@ individually tagged, explicitly becomes root, and has a bounded rollback.
 
 ## Review and execution sequence
 
+The source-only prompt pack at
+`automation/integration/v10.1/h0-ansible-live-stages/` provides four inert,
+single-invocation prompts for exact-target preflight, check/diff review, one
+two-apply attempt, and read-only evidence reconciliation. Validate it with
+`scripts/check_h0_ansible_live_prompt_pack.py`. Its existence grants no target
+authority and it cannot activate the operator-approval adapter, qualify the
+environment, seal networking, run the AZPR verifier, or advance H0.
+
+The proposed `AZPR_H0_TARGET_FINGERPRINT_V1` procedure is part of that inert
+pack. `scripts/h0_target_fingerprint.py` observes its fixed non-secret Linux
+identity fields locally, serializes exact canonical bytes, and calculates
+SHA-256. Its contract and golden vector remain pending human approval. A
+fingerprint identifies a target but does not authorize it; exact-stage target
+authority remains a separate human-owned input.
+
+Three optional, inert prompts under
+`automation/integration/v10.1/h0-ansible-live-stages/operator-assistance/`
+automate repository readiness, guest-local observation, and operator-input
+validation/handoff. They are not Ansible playbooks or H0-ALV stages. Each runs
+in one explicitly named context and ends at a human checkpoint; none can enter
+a guest, create approval or operator input, invoke H0-ALV-00, or advance to the
+next prompt automatically.
+
 Before any state-changing playbook:
 
 ```bash
 python3 scripts/check_h0_ansible.py \
   --ansible-bin-dir .integration-temp/ansible/venv/bin
+
+python3 scripts/check_h0_ansible_live_prompt_pack.py
 
 ANSIBLE_CONFIG=infrastructure/ansible/ansible.cfg \
   .integration-temp/ansible/venv/bin/ansible-playbook \
@@ -120,4 +145,3 @@ The environment approval, formal Linux Run A, formal Linux Run B, independence
 proof, audit-governance owner, and final exact mapping approval remain separate
 human/evidence gates. `INT-00` remains blocked until the transition contract
 records all of them.
-

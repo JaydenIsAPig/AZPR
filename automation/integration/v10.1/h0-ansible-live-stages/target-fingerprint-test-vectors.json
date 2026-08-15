@@ -1,0 +1,34 @@
+{
+  "format_version": "1.0",
+  "contract_id": "AZPR_H0_TARGET_FINGERPRINT_V1",
+  "vectors": [
+    {
+      "vector_id": "ubuntu-24.04-aarch64-disposable-01",
+      "input": {
+        "target_id": " AZPR-H0-Disposable-01\n",
+        "machine_id": "0123456789ABCDEF0123456789ABCDEF\n",
+        "operating_system_id": " Ubuntu ",
+        "operating_system_version_id": "24.04\n",
+        "architecture": "AARCH64",
+        "reviewer_name": "UBUNTU",
+        "reviewer_uid": 1000,
+        "reviewer_gid": 1000,
+        "reviewer_home": "/home/ubuntu\n"
+      },
+      "normalized_identity": {
+        "target_id": "azpr-h0-disposable-01",
+        "machine_id": "0123456789abcdef0123456789abcdef",
+        "operating_system_id": "ubuntu",
+        "operating_system_version_id": "24.04",
+        "architecture": "aarch64",
+        "reviewer_name": "ubuntu",
+        "reviewer_uid": 1000,
+        "reviewer_gid": 1000,
+        "reviewer_home": "/home/ubuntu"
+      },
+      "canonical_json": "{\"contract_id\":\"AZPR_H0_TARGET_FINGERPRINT_V1\",\"target_id\":\"azpr-h0-disposable-01\",\"machine_id\":\"0123456789abcdef0123456789abcdef\",\"operating_system_id\":\"ubuntu\",\"operating_system_version_id\":\"24.04\",\"architecture\":\"aarch64\",\"reviewer_name\":\"ubuntu\",\"reviewer_uid\":1000,\"reviewer_gid\":1000,\"reviewer_home\":\"/home/ubuntu\"}",
+      "canonical_utf8_hex": "7b22636f6e74726163745f6964223a22415a50525f48305f5441524745545f46494e4745525052494e545f5631222c227461726765745f6964223a22617a70722d68302d646973706f7361626c652d3031222c226d616368696e655f6964223a223031323334353637383961626364656630313233343536373839616263646566222c226f7065726174696e675f73797374656d5f6964223a227562756e7475222c226f7065726174696e675f73797374656d5f76657273696f6e5f6964223a2232342e3034222c22617263686974656374757265223a2261617263683634222c2272657669657765725f6e616d65223a227562756e7475222c2272657669657765725f756964223a313030302c2272657669657765725f676964223a313030302c2272657669657765725f686f6d65223a222f686f6d652f7562756e7475227d",
+      "sha256": "c93f0767a372fb0ca1ba46172e2bbd30baae441d1366118554869e4cfd0ba141"
+    }
+  ]
+}

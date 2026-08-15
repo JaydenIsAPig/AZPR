@@ -1,7 +1,7 @@
 ---
 document_id: project-structure
 version: 1.14
-document_status: current
+document_status: superseded
 implementation_status: partially implemented
 approved_on: 2026-08-07
 ---
@@ -101,12 +101,12 @@ physical inventory separation, security review, and a new/updated ADR.
 
 ## Related current documents
 
-- [Backend structure v1.12](backend-structure-v1.12.md)
-- [Business logic v1.12](business-logic-v1.12.md)
-- [Business data v1.7](business-data-v1.7.json)
-- [Frontend design v1.1](frontend-design-v1.1.md)
-- [ADR-0008](../adr/0008-customer-scoped-access-context.md)
-- [ADR-0010](../adr/0010-ansible-qualification-infrastructure.md)
-- [ADR-0011](../adr/0011-digest-bound-approval-checkpoints.md)
-- [H0 qualification runbook](../runbooks/ansible-qualification-environment.md)
-- [Project structure log](../logs/project-structure-log-v1.14.md)
+- [Backend structure v1.12](../../current/backend-structure-v1.12.md)
+- [Business logic v1.12](../../current/business-logic-v1.12.md)
+- [Business data v1.7](../../current/business-data-v1.7.json)
+- [Frontend design v1.1](../../current/frontend-design-v1.1.md)
+- [ADR-0008](../../adr/0008-customer-scoped-access-context.md)
+- [ADR-0010](../../adr/0010-ansible-qualification-infrastructure.md)
+- [ADR-0011](../../adr/0011-digest-bound-approval-checkpoints.md)
+- [H0 qualification runbook](../../runbooks/ansible-qualification-environment.md)
+- [Project structure log](../../logs/project-structure-log-v1.14.md)

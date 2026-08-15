@@ -1,0 +1,47 @@
+{
+  "stage_id": "H0-ALV-00",
+  "phase": "H0_PREPARATION",
+  "outcome": "APPROVAL_REQUIRED",
+  "summary": "Repository preflight passed, but exact disposable-target authorization is absent.",
+  "authority": {
+    "head_commit": null,
+    "mapping_sha256": null,
+    "h0_contract_sha256": null,
+    "live_authorization_reference": null,
+    "authorization_expires_at": null,
+    "operator_approval_adapter_active": false,
+    "h0_transport_ticket_modified": false
+  },
+  "target": {
+    "environment_scope": "DISPOSABLE_TEST",
+    "target_id": null,
+    "target_fingerprint_contract_sha256": null,
+    "target_fingerprint_sha256": null,
+    "local_guest_session": false,
+    "inventory_sha256": null,
+    "ansible_playbook_sha256": null
+  },
+  "preconditions": {
+    "passed": ["Repository authority chain inspected"],
+    "failed": ["Separately governed authorization for the exact disposable target is absent"]
+  },
+  "commands": [],
+  "evidence": {
+    "classification": "NON_AUTHORITATIVE_PROVISIONING_EVIDENCE",
+    "qualification_effect": false,
+    "raw_output_retained_in_result": false,
+    "credential_values_retained": false,
+    "artifacts": []
+  },
+  "safety": {
+    "operator_approval_adapter_activated": false,
+    "controller_activated": false,
+    "h0_t02_executed": false,
+    "host_transport_modified": false,
+    "network_controls_modified": false,
+    "approved_inputs_modified": false,
+    "git_commit_merge_or_push": false
+  },
+  "next_stage": null,
+  "next_action": "Supply separately governed authorization bound to the exact disposable target and H0-ALV-00."
+}

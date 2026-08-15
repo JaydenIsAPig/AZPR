@@ -1,0 +1,215 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://az-permit-radar.local/schemas/h0-ansible-live-operator-input.schema.json",
+  "title": "AZPR H0 Ansible live-validation operator input reference",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "format_version": {"const": "1.0"},
+    "record_kind": {"const": "AZPR_H0_ANSIBLE_LIVE_OPERATOR_INPUT_TEMPLATE"},
+    "status": {"enum": ["TEMPLATE_NOT_APPROVAL", "SUPPLIED_REFERENCE_NOT_APPROVAL"]},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "environment_scope": {"const": "DISPOSABLE_TEST"},
+        "target_id": {"type": ["string", "null"], "minLength": 1, "maxLength": 200},
+        "target_fingerprint_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "disposable_target_confirmed": {"type": "boolean"},
+        "local_guest_session_confirmed": {"type": "boolean"},
+        "machine_id": {"type": ["string", "null"], "pattern": "^[0-9a-f]{32}$"},
+        "operating_system_id": {"type": ["string", "null"], "maxLength": 100},
+        "operating_system_version_id": {"type": ["string", "null"], "maxLength": 100},
+        "architecture": {"type": ["string", "null"], "maxLength": 100},
+        "reviewer_name": {"type": ["string", "null"], "maxLength": 100},
+        "reviewer_uid": {"type": ["integer", "null"], "minimum": 0},
+        "reviewer_gid": {"type": ["integer", "null"], "minimum": 0},
+        "reviewer_home": {"type": ["string", "null"], "maxLength": 200}
+      },
+      "required": [
+        "environment_scope",
+        "target_id",
+        "target_fingerprint_sha256",
+        "disposable_target_confirmed",
+        "local_guest_session_confirmed",
+        "machine_id",
+        "operating_system_id",
+        "operating_system_version_id",
+        "architecture",
+        "reviewer_name",
+        "reviewer_uid",
+        "reviewer_gid",
+        "reviewer_home"
+      ]
+    },
+    "authorization_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "separately_governed": {"const": true},
+        "authorized": {"type": "boolean"},
+        "reference": {"type": ["string", "null"], "maxLength": 500},
+        "authorized_by": {"type": ["string", "null"], "maxLength": 200},
+        "authorized_at": {"type": ["string", "null"], "format": "date-time"},
+        "expires_at": {"type": ["string", "null"], "format": "date-time"},
+        "fingerprint_procedure_approved": {"type": "boolean"},
+        "target_fingerprint_contract_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "allowed_stage_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 3,
+          "items": {"enum": ["H0-ALV-00", "H0-ALV-01", "H0-ALV-02"]}
+        },
+        "target_fingerprint_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"}
+      },
+      "required": [
+        "separately_governed",
+        "authorized",
+        "reference",
+        "authorized_by",
+        "authorized_at",
+        "expires_at",
+        "fingerprint_procedure_approved",
+        "target_fingerprint_contract_sha256",
+        "allowed_stage_ids",
+        "target_fingerprint_sha256"
+      ]
+    },
+    "check_mode_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "accepted": {"type": "boolean"},
+        "review_reference": {"type": ["string", "null"], "maxLength": 500},
+        "reviewed_by": {"type": ["string", "null"], "maxLength": 200},
+        "reviewed_at": {"type": ["string", "null"], "format": "date-time"},
+        "target_fingerprint_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "stdout_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "stderr_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"}
+      },
+      "required": [
+        "accepted",
+        "review_reference",
+        "reviewed_by",
+        "reviewed_at",
+        "target_fingerprint_sha256",
+        "stdout_sha256",
+        "stderr_sha256"
+      ]
+    },
+    "operator_approval_adapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "must_remain_inactive": {"const": true},
+        "activation_authorized": {"const": false}
+      },
+      "required": ["must_remain_inactive", "activation_authorized"]
+    }
+  },
+  "required": [
+    "format_version",
+    "record_kind",
+    "status",
+    "target",
+    "authorization_reference",
+    "check_mode_review",
+    "operator_approval_adapter"
+  ],
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "TEMPLATE_NOT_APPROVAL"}}},
+      "then": {
+        "properties": {
+          "target": {
+            "properties": {
+              "disposable_target_confirmed": {"const": false},
+              "local_guest_session_confirmed": {"const": false}
+            }
+          },
+          "authorization_reference": {
+            "properties": {
+              "authorized": {"const": false},
+              "fingerprint_procedure_approved": {"const": false},
+              "allowed_stage_ids": {"maxItems": 0}
+            }
+          },
+          "check_mode_review": {"properties": {"accepted": {"const": false}}}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"status": {"const": "SUPPLIED_REFERENCE_NOT_APPROVAL"}}},
+      "then": {
+        "properties": {
+          "target": {
+            "properties": {
+              "target_id": {"type": "string", "minLength": 1, "maxLength": 200, "pattern": "^[a-z0-9](?:[a-z0-9.-]{0,198}[a-z0-9])?$"},
+              "machine_id": {"type": "string", "pattern": "^(?!0{32}$)[0-9a-f]{32}$"},
+              "operating_system_id": {"const": "ubuntu"},
+              "operating_system_version_id": {"const": "24.04"},
+              "architecture": {"const": "aarch64"},
+              "reviewer_name": {"const": "ubuntu"},
+              "reviewer_uid": {"const": 1000},
+              "reviewer_gid": {"const": 1000},
+              "reviewer_home": {"const": "/home/ubuntu"},
+              "target_fingerprint_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+              "disposable_target_confirmed": {"const": true},
+              "local_guest_session_confirmed": {"const": true}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "authorization_reference": {
+            "properties": {"authorized": {"const": true}},
+            "required": ["authorized"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "authorization_reference": {
+            "properties": {
+              "reference": {"type": "string", "minLength": 1},
+              "authorized_by": {"type": "string", "minLength": 1},
+              "authorized_at": {"type": "string", "format": "date-time"},
+              "expires_at": {"type": "string", "format": "date-time"},
+              "fingerprint_procedure_approved": {"const": true},
+              "target_fingerprint_contract_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+              "allowed_stage_ids": {"minItems": 1},
+              "target_fingerprint_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "check_mode_review": {
+            "properties": {"accepted": {"const": true}},
+            "required": ["accepted"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "check_mode_review": {
+            "properties": {
+              "review_reference": {"type": "string", "minLength": 1},
+              "reviewed_by": {"type": "string", "minLength": 1},
+              "reviewed_at": {"type": "string", "format": "date-time"},
+              "target_fingerprint_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+              "stdout_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+              "stderr_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+            }
+          }
+        }
+      }
+    }
+  ]
+}

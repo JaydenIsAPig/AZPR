@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://az-permit-radar.local/schemas/operator-decision-request-v1.schema.json",
+  "title": "AZPR operator decision helper request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["format_version", "record_kind", "ticket_base64", "nonce", "requested_at", "expires_at", "authenticator_id", "key_id", "preflight_result"],
+  "properties": {
+    "format_version": {"const": "1.0"},
+    "record_kind": {"const": "AZPR_OPERATOR_DECISION_REQUEST"},
+    "ticket_base64": {"type": "string", "minLength": 1, "maxLength": 349528},
+    "nonce": {"type": "string", "pattern": "^[A-Za-z0-9_-]{43}$"},
+    "requested_at": {"type": "string", "format": "date-time", "maxLength": 64},
+    "expires_at": {"type": "string", "format": "date-time", "maxLength": 64},
+    "authenticator_id": {"type": "string", "minLength": 1, "maxLength": 256},
+    "key_id": {"type": "string", "minLength": 1, "maxLength": 256},
+    "preflight_result": {"enum": ["PASS", "FAIL", "NOT_RUN"]}
+  }
+}

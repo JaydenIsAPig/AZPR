@@ -18,5 +18,8 @@ ADRs capture consequential, durable decisions. Accepted ADRs are normative withi
 | [0009](0009-staged-hybrid-controller-transition.md) | Accepted | Staged repository-to-external controller transition with single-writer cutover |
 | [0010](0010-ansible-qualification-infrastructure.md) | Accepted | H0 Ansible host provisioning remains separate from independent Linux qualification |
 | [0011](0011-digest-bound-approval-checkpoints.md) | Accepted | Manifest-driven, digest-bound approval tickets with separate decisions and outcomes |
+| [0012](0012-macos-secure-enclave-operator-approval.md) | Accepted | Inert macOS Secure Enclave and Touch ID operator-approval source boundary |
+| [0013](0013-h0-live-target-fingerprint.md) | Proposed | Deterministic H0 live-target identity fingerprint with no authority effect |
+| [0014](0014-repository-governed-procedure-approval.md) | Accepted | Repository-attributed approval channel for the exact inert H0 fingerprint procedure only |
 
 Use the next available four-digit number. ADRs are immutable after acceptance except for typo/link corrections; changed decisions receive a new ADR that supersedes the old one.

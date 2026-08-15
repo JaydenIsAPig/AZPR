@@ -1,0 +1,72 @@
+{
+  "format_version": "1.0",
+  "contract_kind": "AZPR_OPERATOR_APPROVAL_INERT_SOURCE_EXTENSION",
+  "status": "IMPLEMENTATION_SOURCE_ONLY_NOT_ACTIVE",
+  "approved_on": "2026-08-11",
+  "governing_adr": "docs/adr/0012-macos-secure-enclave-operator-approval.md",
+  "extends_without_mutating": "automation/integration/v10.1/controller-transition-contract.json",
+  "reason_for_separate_bytes": "The existing H0 transport ticket SHA-256-binds the original transition contract; changing it would invalidate that immutable checkpoint.",
+  "allowed_paths": [
+    ".gitignore",
+    "README.md",
+    "automation/operator_approval.py",
+    "automation/approval_manager.py",
+    "automation/approvals/schemas/**",
+    "automation/approvals/templates/operator-trust-record.template.json",
+    "automation/approvals/README.md",
+    "automation/integration/v10.1/operator-approval-source-contract.json",
+    "docs/delivery-provenance/v10.1/integration/AZPR-v10.1-integration-path-mapping.csv",
+    "scripts/prepare_v10_1_mapping.py",
+    "scripts/check_v10_1_mapping_readiness.py",
+    "tests/test_v10_1_mapping_readiness.py",
+    "tests/test_operator_approval.py",
+    "tests/fixtures/operator_approval/**",
+    "native/operator-approval-helper/**",
+    "docs/adr/0012-macos-secure-enclave-operator-approval.md",
+    "docs/adr/README.md",
+    "docs/runbooks/operator-authentication.md",
+    "docs/automation/current-status.md",
+    "docs/current/project-structure-v1.14.md",
+    "docs/current/project-structure-v1.15.md",
+    "docs/legacy/project-structure/project-structure-v1.14.md",
+    "docs/logs/project-structure-log-v1.15.md",
+    "docs/current/backend-structure-v1.12.md",
+    "docs/current/business-data-v1.7.json",
+    "docs/current/business-logic-v1.12.md",
+    "docs/current/frontend-design-v1.1.md",
+    "docs/adr/0001-modular-monolith.md",
+    "docs/adr/0003-documentation-versioning.md",
+    "docs/adr/0004-python-domain-kernel.md",
+    "docs/adr/0005-authoritative-classification-result.md",
+    "docs/adr/0006-versioned-opportunity-projections.md",
+    "docs/adr/0007-in-memory-processing-unit-of-work.md",
+    "docs/adr/0008-customer-scoped-access-context.md",
+    "docs/adr/0010-ansible-qualification-infrastructure.md"
+  ],
+  "excluded_generated_paths": [
+    "native/operator-approval-helper/.build/**"
+  ],
+  "approved_python_cryptography_version": "46.0.4",
+  "allowed_operator_roles": [
+    "Head of AZPR Operations"
+  ],
+  "authority_effect": {
+    "install_helper": false,
+    "create_secure_enclave_key": false,
+    "enroll_operator": false,
+    "write_real_trust_record": false,
+    "activate_adapter": false,
+    "execute_controller": false,
+    "execute_h0_t02": false,
+    "commit": false,
+    "merge": false,
+    "push": false
+  },
+  "deferred_inputs": [
+    "authenticated operator subject",
+    "helper installation path and ownership",
+    "host-owned trust and replay-state paths",
+    "code-signing identity or explicit H0 hash-pin limitation",
+    "installation and enrollment approval ticket"
+  ]
+}

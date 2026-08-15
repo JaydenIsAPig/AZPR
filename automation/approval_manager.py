@@ -67,6 +67,7 @@ DECISION_FIELDS = {
     "authenticated_actor",
     "authentication_binding",
 }
+OPERATOR_DECISION_FIELDS = DECISION_FIELDS | {"operator_assertion"}
 MATERIAL_AUTHORITY_FIELDS = (
     "stage_id",
     "lifecycle",
@@ -473,7 +474,15 @@ def authorize_execution(
     ticket_sha256 = validate_ticket_artifacts(root, manifest_path, ticket_path, review_path)
     ticket = load_canonical_object(ticket_path)
     decision = load_canonical_object(decision_path)
-    _strict_fields(decision, DECISION_FIELDS, "decision")
+    decision_fields = set(decision)
+    if decision_fields == DECISION_FIELDS:
+        _strict_fields(decision, DECISION_FIELDS, "decision")
+    elif decision_fields == OPERATOR_DECISION_FIELDS:
+        _strict_fields(decision, OPERATOR_DECISION_FIELDS, "decision")
+        if not isinstance(decision["operator_assertion"], dict):
+            raise ApprovalError("decision.operator_assertion must retain the signed assertion envelope")
+    else:
+        _strict_fields(decision, DECISION_FIELDS, "decision")
     if decision.get("record_kind") != "AZPR_APPROVAL_DECISION" or decision.get("decision") != "APPROVED":
         raise ApprovalError("execution requires a canonical APPROVED decision record")
     if decision.get("approval_id") != ticket["approval_id"] or decision.get("ticket_id") != ticket["ticket_id"]:
@@ -541,6 +550,132 @@ def _related_execution_ids(run_id: str, outcome_id: str, evidence_id: str, lifec
         raise ApprovalError("related execution IDs do not match the approval lifecycle")
     if len({value.group("date") for value in values}) != 1 or len({value.group("sequence") for value in values}) != 1:
         raise ApprovalError("run, outcome, and evidence records must share date and sequence")
+
+
+def create_execution_run_record(
+    authorization: Mapping[str, Any],
+    *,
+    lifecycle: str,
+    run_id: str,
+    outcome_id: str,
+    evidence_id: str,
+    started_at: str,
+    base_commit: str,
+    branch: str,
+) -> dict[str, Any]:
+    """Create the run record without implying an execution result."""
+
+    if authorization.get("record_kind") != "AZPR_EXECUTION_AUTHORIZATION":
+        raise ApprovalError("an execution authorization is required before creating a run")
+    _related_execution_ids(run_id, outcome_id, evidence_id, lifecycle)
+    parse_utc(started_at, "started_at")
+    _nonempty_string(base_commit, "base_commit")
+    _nonempty_string(branch, "branch")
+    action_ids = authorization.get("action_ids")
+    if not isinstance(action_ids, list) or not action_ids or not all(
+        isinstance(value, str) and value for value in action_ids
+    ):
+        raise ApprovalError("execution authorization action IDs are invalid")
+    return {
+        "format_version": "1.0",
+        "record_kind": "AZPR_EXECUTION_RUN",
+        "approval_id": authorization["approval_id"],
+        "ticket_id": authorization["ticket_id"],
+        "ticket_sha256": authorization["ticket_sha256"],
+        "run_id": run_id,
+        "outcome_id": outcome_id,
+        "evidence_id": evidence_id,
+        "started_at": started_at,
+        "base_commit": base_commit,
+        "branch": branch,
+        "action_ids": list(action_ids),
+        "approval_is_execution_result": False,
+    }
+
+
+def create_evidence_bundle_record(
+    authorization: Mapping[str, Any],
+    *,
+    lifecycle: str,
+    run_id: str,
+    outcome_id: str,
+    evidence_id: str,
+    created_at: str,
+    evidence_bindings: list[dict[str, str]],
+) -> dict[str, Any]:
+    """Create a hash-only evidence index distinct from the run and outcome."""
+
+    if authorization.get("record_kind") != "AZPR_EXECUTION_AUTHORIZATION":
+        raise ApprovalError("an execution authorization is required before recording evidence")
+    _related_execution_ids(run_id, outcome_id, evidence_id, lifecycle)
+    parse_utc(created_at, "created_at")
+    if not evidence_bindings:
+        raise ApprovalError("evidence bundle must not be empty")
+    normalized: list[dict[str, str]] = []
+    for index, item in enumerate(evidence_bindings):
+        if set(item) != {"name", "sha256"}:
+            raise ApprovalError(f"evidence_bindings[{index}] must contain exactly name and sha256")
+        name = _nonempty_string(item["name"], f"evidence_bindings[{index}].name")
+        digest = _nonempty_string(item["sha256"], f"evidence_bindings[{index}].sha256")
+        if re.fullmatch(r"[0-9a-f]{64}", digest) is None:
+            raise ApprovalError(f"evidence_bindings[{index}].sha256 is invalid")
+        normalized.append({"name": name, "sha256": digest})
+    return {
+        "format_version": "1.0",
+        "record_kind": "AZPR_EXECUTION_EVIDENCE_BUNDLE",
+        "approval_id": authorization["approval_id"],
+        "ticket_id": authorization["ticket_id"],
+        "ticket_sha256": authorization["ticket_sha256"],
+        "run_id": run_id,
+        "outcome_id": outcome_id,
+        "evidence_id": evidence_id,
+        "created_at": created_at,
+        "evidence_bindings": normalized,
+        "contains_raw_authentication_data": False,
+    }
+
+
+def validate_commit_eligibility(
+    *,
+    run_record: Mapping[str, Any],
+    evidence_record: Mapping[str, Any],
+    outcome_record: Mapping[str, Any],
+    active_contract_permits_commit: bool,
+    stage_outcome_permits_commit: bool,
+    current_commit: str,
+    current_branch: str,
+    changed_paths: list[str],
+    allowed_paths: list[str],
+    action_tests_passed: bool,
+    independent_validation_passed: bool,
+    diff_check_passed: bool,
+) -> None:
+    """Fail closed before a controller-owned commit; this function never commits."""
+
+    if not active_contract_permits_commit or not stage_outcome_permits_commit:
+        raise ApprovalError("the active controller contract or stage outcome does not permit a commit")
+    if run_record.get("record_kind") != "AZPR_EXECUTION_RUN":
+        raise ApprovalError("a separate execution run record is required before commit")
+    if evidence_record.get("record_kind") != "AZPR_EXECUTION_EVIDENCE_BUNDLE":
+        raise ApprovalError("a separate evidence bundle is required before commit")
+    if outcome_record.get("record_kind") != "AZPR_EXECUTION_OUTCOME":
+        raise ApprovalError("a separate execution outcome is required before commit")
+    shared = ("approval_id", "ticket_id", "ticket_sha256", "run_id", "outcome_id", "evidence_id")
+    if any(len({run_record.get(field), evidence_record.get(field), outcome_record.get(field)}) != 1 for field in shared):
+        raise ApprovalError("run, evidence, and outcome record bindings differ")
+    if outcome_record.get("outcome") != "SUCCEEDED":
+        raise ApprovalError("only a truthful SUCCEEDED outcome may be commit-eligible")
+    if run_record.get("base_commit") != current_commit:
+        raise ApprovalError("execution did not begin from the recorded base commit")
+    if not isinstance(current_branch, str) or not current_branch or current_branch in {"main", "master"}:
+        raise ApprovalError("an isolated controller branch is required before commit")
+    if not changed_paths or any(path not in allowed_paths for path in changed_paths):
+        raise ApprovalError("changed paths are empty or outside the exact commit allowlist")
+    if not action_tests_passed or not independent_validation_passed or not diff_check_passed:
+        raise ApprovalError("tests, independent validation, or git diff --check did not pass")
+    forbidden_fragments = ("private_key", "trust-record", "replay-ledger", ".pem", ".p12")
+    if any(any(fragment in path.lower() for fragment in forbidden_fragments) for path in changed_paths):
+        raise ApprovalError("commit paths include forbidden trust, key, or authentication state")
 
 
 def create_outcome_record(

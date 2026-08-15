@@ -1,0 +1,110 @@
+{
+  "format_version": "1.0",
+  "pack_id": "AZPR_H0_ANSIBLE_LIVE_VALIDATION",
+  "status": "DRAFT_NOT_ACTIVE",
+  "governing_contract": "infrastructure/ansible/h0-qualification-contract.json",
+  "parent_transition_contract": "automation/integration/v10.1/controller-transition-contract.json",
+  "operator_input_template": "automation/integration/v10.1/h0-ansible-live-stages/operator-input.template.json",
+  "operator_input_schema": "automation/integration/v10.1/h0-ansible-live-stages/operator-input.schema.json",
+  "result_schema": "automation/integration/v10.1/h0-ansible-live-stages/stage-result.schema.json",
+  "result_example": "automation/integration/v10.1/h0-ansible-live-stages/stage-result.example.json",
+  "hash_manifest": "automation/integration/v10.1/h0-ansible-live-stages/SHA256SUMS.json",
+  "target_fingerprint": {
+    "status": "PROPOSED_PENDING_HUMAN_APPROVAL",
+    "contract": "automation/integration/v10.1/h0-ansible-live-stages/target-fingerprint-contract.json",
+    "implementation": "scripts/h0_target_fingerprint.py",
+    "test_vectors": "automation/integration/v10.1/h0-ansible-live-stages/target-fingerprint-test-vectors.json",
+    "human_approval_required": true,
+    "identifies_target": true,
+    "authorizes_target": false
+  },
+  "operator_assistance": {
+    "status": "DRAFT_NOT_ACTIVE",
+    "result_schema": "automation/integration/v10.1/h0-ansible-live-stages/operator-assistance-result.schema.json",
+    "automatic_execution": false,
+    "automatic_stage_advancement": false,
+    "operator_input_may_be_created_by_agent": false,
+    "human_authorization_may_be_created_or_inferred_by_agent": false,
+    "guides": [
+      {
+        "sequence": 0,
+        "guide_id": "H0-ALV-GUIDE-00",
+        "file": "automation/integration/v10.1/h0-ansible-live-stages/operator-assistance/00-repository-and-procedure-readiness.md",
+        "execution_context": "REPOSITORY_HOST",
+        "state_changing": false,
+        "human_checkpoint": "PROCEDURE_APPROVAL_OR_LOCAL_GUEST_ENTRY"
+      },
+      {
+        "sequence": 1,
+        "guide_id": "H0-ALV-GUIDE-01",
+        "file": "automation/integration/v10.1/h0-ansible-live-stages/operator-assistance/01-guest-local-observation-and-target-decision.md",
+        "execution_context": "DISPOSABLE_GUEST_LOCAL_SESSION",
+        "state_changing": false,
+        "human_checkpoint": "EXACT_TARGET_AUTHORIZATION_AND_OPERATOR_INPUT"
+      },
+      {
+        "sequence": 2,
+        "guide_id": "H0-ALV-GUIDE-02",
+        "file": "automation/integration/v10.1/h0-ansible-live-stages/operator-assistance/02-operator-input-validation-and-stage-handoff.md",
+        "execution_context": "REPOSITORY_HOST",
+        "state_changing": false,
+        "human_checkpoint": "DELIBERATE_H0_ALV_00_INVOCATION"
+      }
+    ]
+  },
+  "execution_policy": {
+    "one_stage_per_invocation": true,
+    "automatic_stage_advancement": false,
+    "human_approval_may_be_created_by_agent": false,
+    "exact_target_binding_required": true,
+    "environment_scope": "DISPOSABLE_TEST"
+  },
+  "authority_effect": {
+    "authorizes_live_execution": false,
+    "approves_environment": false,
+    "qualifies_environment": false,
+    "activates_operator_approval_adapter": false,
+    "activates_controller": false,
+    "executes_h0_t02": false,
+    "executes_azpr_verifier": false,
+    "authorizes_git": false
+  },
+  "stages": [
+    {
+      "sequence": 0,
+      "stage_id": "H0-ALV-00",
+      "file": "automation/integration/v10.1/h0-ansible-live-stages/00-authority-and-target-preflight.md",
+      "predecessor": null,
+      "execution_mode": "READ_ONLY_PREFLIGHT",
+      "state_changing": false,
+      "requires_human_authorization": true
+    },
+    {
+      "sequence": 1,
+      "stage_id": "H0-ALV-01",
+      "file": "automation/integration/v10.1/h0-ansible-live-stages/01-check-mode-and-diff-review.md",
+      "predecessor": "H0-ALV-00",
+      "execution_mode": "ANSIBLE_CHECK_MODE",
+      "state_changing": false,
+      "requires_human_authorization": true
+    },
+    {
+      "sequence": 2,
+      "stage_id": "H0-ALV-02",
+      "file": "automation/integration/v10.1/h0-ansible-live-stages/02-two-apply-idempotence.md",
+      "predecessor": "H0-ALV-01",
+      "execution_mode": "BOUNDED_ANSIBLE_APPLY",
+      "state_changing": true,
+      "requires_human_authorization": true
+    },
+    {
+      "sequence": 3,
+      "stage_id": "H0-ALV-03",
+      "file": "automation/integration/v10.1/h0-ansible-live-stages/03-evidence-reconciliation.md",
+      "predecessor": "H0-ALV-02",
+      "execution_mode": "READ_ONLY_EVIDENCE_RECONCILIATION",
+      "state_changing": false,
+      "requires_human_authorization": false
+    }
+  ]
+}

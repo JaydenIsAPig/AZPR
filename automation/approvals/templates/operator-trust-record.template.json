@@ -1,0 +1,23 @@
+{
+  "format_version": "1.0",
+  "record_kind": "AZPR_OPERATOR_AUTHENTICATOR_TRUST",
+  "authenticator_id": null,
+  "helper_path": null,
+  "approved_helper_sha256": null,
+  "code_signing_designated_requirement": null,
+  "helper_build_id": null,
+  "helper_owner_uid": null,
+  "helper_owner_gid": null,
+  "helper_mode": null,
+  "key_id": null,
+  "public_key_encoding": "ANSI_X9_63_UNCOMPRESSED_P256",
+  "public_key_base64": null,
+  "public_key_sha256": null,
+  "authenticated_operator_subject": null,
+  "allowed_roles": [
+    "Head of AZPR Operations"
+  ],
+  "status": null,
+  "enrolled_at": null,
+  "revoked_at": null
+}

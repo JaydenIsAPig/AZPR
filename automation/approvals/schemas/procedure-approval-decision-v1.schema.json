@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://azpermitradar.local/schemas/procedure-approval-decision-v1.schema.json",
+  "title": "AZPR procedure approval decision v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "format_version": {"const": "1.0"},
+    "record_kind": {"const": "AZPR_PROCEDURE_APPROVAL_DECISION"},
+    "approval_id": {"type": "string", "pattern": "^AZPR-H0-FINGERPRINTPROC-[0-9]{8}-[0-9]{3}$"},
+    "request_id": {"const": "AZPR-H0-FINGERPRINT-PROCEDURE-20260814-001"},
+    "request_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "procedure_id": {"const": "AZPR_H0_TARGET_FINGERPRINT_V1"},
+    "procedure_path": {"const": "automation/integration/v10.1/h0-ansible-live-stages/target-fingerprint-contract.json"},
+    "procedure_sha256": {"const": "d35da355850ee1440ea454c4e2663dae7fb15778bb2c935283ec16d7771f1d8a"},
+    "decision": {"enum": ["APPROVED", "REJECTED"]},
+    "decided_at": {"type": "string", "format": "date-time"},
+    "decided_by": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "role": {"const": "Project owner"}
+      },
+      "required": ["name", "role"]
+    },
+    "acknowledgements": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reviewed_exact_procedure_bytes": {"const": true},
+        "procedure_identifies_but_does_not_authorize_target": {"const": true},
+        "no_target_approved": {"const": true},
+        "no_execution_authorized": {"const": true},
+        "no_adapter_or_controller_activation_authorized": {"const": true},
+        "no_h0_stage_advanced": {"const": true}
+      },
+      "required": [
+        "reviewed_exact_procedure_bytes",
+        "procedure_identifies_but_does_not_authorize_target",
+        "no_target_approved",
+        "no_execution_authorized",
+        "no_adapter_or_controller_activation_authorized",
+        "no_h0_stage_advanced"
+      ]
+    }
+  },
+  "required": [
+    "format_version",
+    "record_kind",
+    "approval_id",
+    "request_id",
+    "request_sha256",
+    "procedure_id",
+    "procedure_path",
+    "procedure_sha256",
+    "decision",
+    "decided_at",
+    "decided_by",
+    "acknowledgements"
+  ]
+}

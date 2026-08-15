@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://az-permit-radar.local/schemas/operator-trust-record-v1.schema.json",
+  "title": "AZPR host-owned operator authenticator trust record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["format_version", "record_kind", "authenticator_id", "helper_path", "approved_helper_sha256", "code_signing_designated_requirement", "helper_build_id", "helper_owner_uid", "helper_owner_gid", "helper_mode", "key_id", "public_key_encoding", "public_key_base64", "public_key_sha256", "authenticated_operator_subject", "allowed_roles", "status", "enrolled_at", "revoked_at"],
+  "properties": {
+    "format_version": {"const": "1.0"},
+    "record_kind": {"const": "AZPR_OPERATOR_AUTHENTICATOR_TRUST"},
+    "authenticator_id": {"type": ["string", "null"], "maxLength": 256},
+    "helper_path": {"type": ["string", "null"], "maxLength": 4096},
+    "approved_helper_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "code_signing_designated_requirement": {"type": ["string", "null"], "maxLength": 4096},
+    "helper_build_id": {"enum": ["AZPR_OPERATOR_APPROVAL_HELPER_V1", null]},
+    "helper_owner_uid": {"type": ["integer", "null"], "minimum": 0},
+    "helper_owner_gid": {"type": ["integer", "null"], "minimum": 0},
+    "helper_mode": {"type": ["integer", "null"], "minimum": 0, "maximum": 511},
+    "key_id": {"type": ["string", "null"], "maxLength": 256},
+    "public_key_encoding": {"enum": ["ANSI_X9_63_UNCOMPRESSED_P256", null]},
+    "public_key_base64": {"type": ["string", "null"], "maxLength": 256},
+    "public_key_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "authenticated_operator_subject": {"type": ["string", "null"], "maxLength": 1024},
+    "allowed_roles": {"type": "array", "maxItems": 16, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 256}},
+    "status": {"enum": ["ACTIVE", "REVOKED", "ROTATING", null]},
+    "enrolled_at": {"type": ["string", "null"], "format": "date-time", "maxLength": 64},
+    "revoked_at": {"type": ["string", "null"], "format": "date-time", "maxLength": 64}
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://az-permit-radar.local/schemas/h0-ansible-live-stage-result.schema.json",
+  "title": "AZPR H0 Ansible live-validation stage result",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "stage_id": {
+      "enum": ["H0-ALV-00", "H0-ALV-01", "H0-ALV-02", "H0-ALV-03"]
+    },
+    "phase": {"const": "H0_PREPARATION"},
+    "outcome": {
+      "enum": ["PASS", "BLOCKED", "APPROVAL_REQUIRED", "FAILED"]
+    },
+    "summary": {"type": "string", "minLength": 1, "maxLength": 2000},
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "head_commit": {"type": ["string", "null"], "pattern": "^[0-9a-f]{40}$"},
+        "mapping_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "h0_contract_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "live_authorization_reference": {"type": ["string", "null"], "maxLength": 500},
+        "authorization_expires_at": {"type": ["string", "null"], "format": "date-time"},
+        "operator_approval_adapter_active": {"const": false},
+        "h0_transport_ticket_modified": {"const": false}
+      },
+      "required": [
+        "head_commit",
+        "mapping_sha256",
+        "h0_contract_sha256",
+        "live_authorization_reference",
+        "authorization_expires_at",
+        "operator_approval_adapter_active",
+        "h0_transport_ticket_modified"
+      ]
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "environment_scope": {"const": "DISPOSABLE_TEST"},
+        "target_id": {"type": ["string", "null"], "maxLength": 200},
+        "target_fingerprint_contract_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "target_fingerprint_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "local_guest_session": {"type": "boolean"},
+        "inventory_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "ansible_playbook_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"}
+      },
+      "required": [
+        "environment_scope",
+        "target_id",
+        "target_fingerprint_contract_sha256",
+        "target_fingerprint_sha256",
+        "local_guest_session",
+        "inventory_sha256",
+        "ansible_playbook_sha256"
+      ]
+    },
+    "preconditions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "passed": {"type": "array", "maxItems": 100, "items": {"type": "string", "maxLength": 500}},
+        "failed": {"type": "array", "maxItems": 100, "items": {"type": "string", "maxLength": 500}}
+      },
+      "required": ["passed", "failed"]
+    },
+    "commands": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "argv": {"type": "array", "minItems": 1, "maxItems": 30, "items": {"type": "string", "maxLength": 500}},
+          "exit_code": {"type": ["integer", "null"]},
+          "state_changing": {"type": "boolean"},
+          "stdout_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+          "stderr_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+          "recap": {
+            "type": ["object", "null"],
+            "additionalProperties": false,
+            "properties": {
+              "ok": {"type": "integer", "minimum": 0},
+              "changed": {"type": "integer", "minimum": 0},
+              "unreachable": {"type": "integer", "minimum": 0},
+              "failed": {"type": "integer", "minimum": 0}
+            },
+            "required": ["ok", "changed", "unreachable", "failed"]
+          }
+        },
+        "required": ["argv", "exit_code", "state_changing", "stdout_sha256", "stderr_sha256", "recap"]
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "classification": {"const": "NON_AUTHORITATIVE_PROVISIONING_EVIDENCE"},
+        "qualification_effect": {"const": false},
+        "raw_output_retained_in_result": {"const": false},
+        "credential_values_retained": {"const": false},
+        "artifacts": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "path": {"type": "string", "minLength": 1, "maxLength": 500},
+              "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+            },
+            "required": ["path", "sha256"]
+          }
+        }
+      },
+      "required": [
+        "classification",
+        "qualification_effect",
+        "raw_output_retained_in_result",
+        "credential_values_retained",
+        "artifacts"
+      ]
+    },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operator_approval_adapter_activated": {"const": false},
+        "controller_activated": {"const": false},
+        "h0_t02_executed": {"const": false},
+        "host_transport_modified": {"const": false},
+        "network_controls_modified": {"const": false},
+        "approved_inputs_modified": {"const": false},
+        "git_commit_merge_or_push": {"const": false}
+      },
+      "required": [
+        "operator_approval_adapter_activated",
+        "controller_activated",
+        "h0_t02_executed",
+        "host_transport_modified",
+        "network_controls_modified",
+        "approved_inputs_modified",
+        "git_commit_merge_or_push"
+      ]
+    },
+    "next_stage": {
+      "type": ["string", "null"],
+      "enum": [null, "H0-ALV-01", "H0-ALV-02", "H0-ALV-03"]
+    },
+    "next_action": {"type": "string", "minLength": 1, "maxLength": 1000}
+  },
+  "required": [
+    "stage_id",
+    "phase",
+    "outcome",
+    "summary",
+    "authority",
+    "target",
+    "preconditions",
+    "commands",
+    "evidence",
+    "safety",
+    "next_stage",
+    "next_action"
+  ]
+}
