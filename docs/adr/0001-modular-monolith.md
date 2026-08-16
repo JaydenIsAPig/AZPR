@@ -57,5 +57,5 @@ Future implementation must include module-boundary tests, no direct domain depen
 ## Related documents
 
 - [Backend structure](../current/backend-structure-v1.12.md)
-- [Project structure](../current/project-structure-v1.17.md)
+- [Project structure](../current/project-structure-v1.18.md)
 - [Domain glossary](../governance/domain-glossary.md)

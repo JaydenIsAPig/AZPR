@@ -55,12 +55,13 @@ State: staged-hybrid transition selected for integration review.
   automatically, and grants no execution authority. It does not activate the
   operator-approval adapter or alter the current H0 transport ticket.
   The pack now also contains a deterministic, executable
-  `AZPR_H0_TARGET_FINGERPRINT_V1` proposal with exact independently observed
+  `AZPR_H0_TARGET_FINGERPRINT_V1` contract with exact independently observed
   non-secret Linux fields, normalization, member order, canonical UTF-8 JSON,
-  SHA-256 behavior, mismatch rules, and a golden vector. ADR-0013 and the exact
-  fingerprint contract remain pending separate human approval. No operator
-  input exists, and a matching fingerprint identifies but never authorizes a
-  target. The operator-approval adapter remains inactive.
+  SHA-256 behavior, mismatch rules, and a golden vector. ADR-0013 is accepted
+  for the exact procedure digest
+  `d35da355850ee1440ea454c4e2663dae7fb15778bb2c935283ec16d7771f1d8a`.
+  No operator input exists, and a matching fingerprint identifies but never
+  authorizes a target. The operator-approval adapter remains inactive.
   Three additional source-only operator-assistance prompts now automate the
   repetitive host repository gates, guest-local deterministic observations,
   safe operator-input validation, and H0-ALV-00 handoff analysis. They are not
@@ -70,16 +71,14 @@ State: staged-hybrid transition selected for integration review.
   protected-channel attribution confirmation, or deliberate H0-ALV-00
   invocation. They cannot enter the guest, create or infer approval, create or
   modify operator input, run Ansible, or start another prompt automatically.
-  The project owner has stated that the procedure was read and its expected
-  digest calculated, but no separately governed attributable approval
-  reference has been supplied to repository authority; the procedure therefore
-  remains `PROPOSED_PENDING_HUMAN_APPROVAL` here.
-  ADR-0014 now resolves the mechanism gap with a canonical procedure-only
-  request, immutable review, strict decision schema, non-authoritative
-  template, empty governed decision path, and read-only repository-attribution
-  validator. The channel currently reports `AWAITING_HUMAN_DECISION`. It
-  creates no approval and has no target, execution, adapter/controller, H0,
-  verifier, or Git authority.
+  The ADR-0014 channel now contains the canonical human-authored decision. Its
+  read-only validator reports `APPROVED` and derives
+  `git:82ba27a1be4d1590e15f78a891568844639096dd:automation/approvals/procedure-decisions/AZPR_H0_TARGET_FINGERPRINT_V1.json`.
+  The decision approves only the exact procedure definition. The protected
+  live-pack contract retains its static `PROPOSED_PENDING_HUMAN_APPROVAL`
+  marker because readiness derives from the decision channel, not a rewrite of
+  protected procedure bytes. The approval has no target, execution,
+  adapter/controller, H0, verifier, or Git authority.
   Before H0-T02, approval ID `AZPR-H0-TRANSPORT-20260807-001` is now represented
   by a version-controlled stage manifest, canonical ticket, and immutable
   review view. The ticket SHA-256 is

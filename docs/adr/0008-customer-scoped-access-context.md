@@ -23,7 +23,7 @@ In-memory locks are not durable authorization or database isolation. Production 
 
 ## Related documents
 
-- [Project structure v1.17](../current/project-structure-v1.17.md)
+- [Project structure v1.18](../current/project-structure-v1.18.md)
 - [Backend structure v1.12](../current/backend-structure-v1.12.md)
 - [Business logic v1.12](../current/business-logic-v1.12.md)
 - [Frontend design v1.1](../current/frontend-design-v1.1.md)

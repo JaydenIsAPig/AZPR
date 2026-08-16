@@ -4,7 +4,7 @@ AZ Permit Radar is an Arizona-specific permit intelligence and opportunity-alert
 
 ## Authoritative documentation
 
-- [Project structure](docs/current/project-structure-v1.17.md)
+- [Project structure](docs/current/project-structure-v1.18.md)
 - [Backend structure](docs/current/backend-structure-v1.12.md)
 - [Business logic](docs/current/business-logic-v1.12.md)
 - [Business data](docs/current/business-data-v1.7.json)

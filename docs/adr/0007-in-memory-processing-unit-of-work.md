@@ -23,7 +23,7 @@ A production persistence ADR must select technology later. It must translate the
 
 ## Related documents
 
-- [Project structure v1.17](../current/project-structure-v1.17.md)
+- [Project structure v1.18](../current/project-structure-v1.18.md)
 - [Backend structure v1.12](../current/backend-structure-v1.12.md)
 - [Business logic v1.12](../current/business-logic-v1.12.md)
 - [Business data v1.7](../current/business-data-v1.7.json)

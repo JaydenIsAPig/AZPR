@@ -1,32 +1,36 @@
 ---
 document_id: project-structure
-version: 1.17
+version: 1.18
 document_status: current
 implementation_status: partially implemented
-approved_on: pending
+approved_on: 2026-08-15
 ---
-# Project Structure v1.17
+# Project Structure v1.18
 
 ## Status statement
 
-**Implemented as inert source:** v1.16 behavior plus three operator-assistance
-prompts and a fail-closed result schema around H0-ALV-00 preparation. The
-guides automate repository checks, guest-local deterministic observation, safe
-operator-input validation, and explicit handoff analysis. They remain
-read-only source and cannot cross a human checkpoint or invoke an H0-ALV stage.
+**Implemented as inert source:** v1.17 behavior is unchanged. Three
+operator-assistance prompts and a fail-closed result schema automate repository
+checks, guest-local deterministic observation, safe operator-input validation,
+and explicit H0-ALV-00 handoff analysis. They remain read-only source and
+cannot cross a human checkpoint or invoke an H0-ALV stage.
 
-**Pending human action:** the exact fingerprint contract remains unchanged at
-the separately reviewed bytes, while repository authority still records
-ADR-0013 and the contract as proposed pending an attributable governed
-approval reference. No human-created operator input exists. The assistance
-guides cannot create or infer either record.
+**Approved procedure definition:** ADR-0013 is accepted for the exact
+`AZPR_H0_TARGET_FINGERPRINT_V1` procedure digest
+`d35da355850ee1440ea454c4e2663dae7fb15778bb2c935283ec16d7771f1d8a`.
+The ADR-0014 validator derives the canonical approval reference
+`git:82ba27a1be4d1590e15f78a891568844639096dd:automation/approvals/procedure-decisions/AZPR_H0_TARGET_FINGERPRINT_V1.json`.
+The protected fingerprint contract remains byte-unchanged with its static
+`PROPOSED_PENDING_HUMAN_APPROVAL` marker; readiness derives from the decision
+channel. No human-created operator input exists, and procedure approval alone
+does not authorize a target or execution.
 
-**Implemented as an inert approval channel:** ADR-0014 supplies a canonical
+**Implemented approved procedure channel:** ADR-0014 supplies a canonical
 procedure-review request, deterministic immutable review, strict decision
-schema, non-authoritative template, governed future-decision path, and
-read-only validator. The decision path remains empty. A future valid record is
-bound to exact procedure bytes and a separate human-authored Git commit, and
-can approve only the procedure definition.
+schema, non-authoritative template, governed decision path, and read-only
+validator. The human-authored decision is committed and validates as
+`APPROVED`; it is bound to the exact procedure bytes and can approve only the
+procedure definition.
 
 **Not active or installed:** no guide, live-validation stage, operator-approval
 adapter, helper, trust record, replay ledger, controller, H0-T02 action, or
@@ -47,7 +51,7 @@ remain unresolved gates.
 | `src/az_permit_radar/` | Domain-driven modular monolith and application/infrastructure adapters | Product behavior only; deterministic-first and customer-isolated |
 | `automation/approval_manager.py` and `automation/approvals/` | Manifest validation, canonical tickets, immutable reviews, execution guards, record separation, and schemas/templates | No human identity proof, helper installation, action execution, or Git mutation |
 | `automation/operator_approval.py` | Pinned helper verification, canonical assertion verification, host-state replay protection, and exact pre-action authorization boundary | Inert until host-owned paths, trust, key, subject, and enrollment receive separate authority |
-| `automation/procedure_approval.py` and procedure request/review records | Exact-byte, repository-attributed approval channel for the H0 fingerprint procedure definition | No decision is present; cannot authorize targets/actions, authenticate execution, activate anything, or advance H0 |
+| `automation/procedure_approval.py` and procedure request/review/decision records | Exact-byte, repository-attributed approval channel for the H0 fingerprint procedure definition | The procedure is approved by the canonical Git-derived reference; the channel cannot authorize targets/actions, authenticate execution, activate anything, or advance H0 |
 | `native/operator-approval-helper/` | Noneditable native review UI and Secure Enclave signature source | Source only; no installed helper or key-enrollment entry point is active |
 | `scripts/h0_target_fingerprint.py` and the H0 live pack | Read-only exact Linux identity observation, normalization, canonical serialization, digest comparison, operator-reference validation, and human-checkpoint guidance | Identifies and validates only; cannot approve, authorize, qualify, access a guest from the host, author operator input, or invoke a live stage |
 | Other `automation/` content | Repository controller, prompts, schemas, and staged integration workflow | Controllers remain inert during H0/H1/H2; no Ansible host provisioning |
@@ -82,11 +86,11 @@ and cannot rely on prior conversation as authentication or authority. A guide
 result can name the next guide or H0-ALV-00, but only a human can deliberately
 start the separate invocation.
 
-`H0-ALV-GUIDE-00` accepts only the ADR-0014 validator result. Missing approval
-remains `AWAITING_HUMAN_DECISION`; a future accepted reference has the fixed
-`git:<commit>:<decision-path>` form. Chat text, the template, an uncommitted or
-modified record, a mismatched author, or changed request/procedure bytes cannot
-satisfy the checkpoint.
+`H0-ALV-GUIDE-00` accepts only the ADR-0014 validator result. The current
+result is `APPROVED` with the fixed `git:<commit>:<decision-path>` reference
+recorded above. Chat text, the template, an uncommitted or modified record, a
+mismatched author, or changed request/procedure bytes cannot satisfy the
+checkpoint. A missing record would still return `AWAITING_HUMAN_DECISION`.
 
 ## H0 target-fingerprint boundary
 
@@ -103,12 +107,13 @@ BOM or trailing newline; SHA-256 returns lowercase hexadecimal. Missing,
 invalid, unsupported, or mismatched fields block without a digest fallback.
 The complete observation repeats before each stage.
 
-The repository template remains null-valued and non-authorizing. A human must
-separately approve the exact procedure contract hash, observe and authorize
-the exact disposable target, and create the operator input. The validator
-checks the supplied reference with Draft 2020-12 and an active `date-time`
-format checker, recomputes both bindings, and retains no credential values. It
-does not authenticate the authorizer or activate the operator-approval adapter.
+The repository template remains null-valued and non-authorizing. The exact
+procedure contract hash is separately approved through the ADR-0014 reference
+recorded above. A human must still observe and authorize the exact disposable
+target and create the operator input. The validator checks the supplied
+reference with Draft 2020-12 and an active `date-time` format checker,
+recomputes both bindings, and retains no credential values. It does not
+authenticate the authorizer or activate the operator-approval adapter.
 
 ## Operator-approval trust boundary
 
@@ -189,7 +194,7 @@ and external controller cutover remain future governed decisions.
 - [ADR-0010](../adr/0010-ansible-qualification-infrastructure.md)
 - [ADR-0011](../adr/0011-digest-bound-approval-checkpoints.md)
 - [ADR-0012](../adr/0012-macos-secure-enclave-operator-approval.md)
-- [Proposed ADR-0013](../adr/0013-h0-live-target-fingerprint.md)
+- [ADR-0013](../adr/0013-h0-live-target-fingerprint.md)
 - [Operator-authentication runbook](../runbooks/operator-authentication.md)
 - [H0 qualification runbook](../runbooks/ansible-qualification-environment.md)
-- [Project structure log](../logs/project-structure-log-v1.17.md)
+- [Project structure log](../logs/project-structure-log-v1.18.md)

@@ -210,7 +210,7 @@ H0_ANSIBLE_GENERATED_PATHS = {
     "docs/current/business-data-v1.7.json",
     "docs/current/business-logic-v1.12.md",
     "docs/current/frontend-design-v1.1.md",
-    "docs/current/project-structure-v1.17.md",
+    "docs/current/project-structure-v1.18.md",
     "docs/delivery-provenance/v10.1/validation/ansible/README.md",
     "docs/delivery-provenance/v10.1/validation/ansible/ansible-runtime-manifest.json",
     "docs/delivery-provenance/v10.1/validation/ansible/environment-manifest.json",
@@ -321,6 +321,11 @@ H0_TARGET_FINGERPRINT_GENERATED_PATHS = {
     "tests/test_procedure_approval.py",
 }
 GENERATED_PATHS.update(H0_TARGET_FINGERPRINT_GENERATED_PATHS)
+H0_PROCEDURE_DECISION_RECONCILIATION_PATHS = {
+    "docs/legacy/project-structure/project-structure-v1.17.md",
+    "docs/logs/project-structure-log-v1.18.md",
+}
+GENERATED_PATHS.update(H0_PROCEDURE_DECISION_RECONCILIATION_PATHS)
 MERGED_GENERATED_PATHS = {
     ".gitignore",
     "AGENTS.md",
@@ -383,6 +388,13 @@ H0_CURRENT_RETIREMENTS = {
         "replacement": "project-structure v1.17",
         "dependencies": "ADR-0003; H0 operator-assistance prompts; project-structure v1.17",
         "decision_id": "MAP-H0-OPERATOR-ASSISTANCE-DOCUMENTATION",
+    },
+    "docs/current/project-structure-v1.17.md": {
+        "sha256": "5b30532b17e00f04914d01577242a7b835444996515c47100f95928973f67506",
+        "destination": "docs/legacy/project-structure/project-structure-v1.17.md",
+        "replacement": "project-structure v1.18",
+        "dependencies": "ADR-0003; accepted ADR-0013; ADR-0014 procedure decision; project-structure v1.18",
+        "decision_id": "MAP-H0-PROCEDURE-DECISION-RECONCILIATION",
     },
 }
 

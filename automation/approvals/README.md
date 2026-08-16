@@ -62,26 +62,28 @@ checkpoint above and cannot authorize a target or action.
 The canonical request is under `procedure-requests/`, with its deterministic
 immutable review under `procedure-reviews/`. The decision schema and
 non-authoritative template are under `schemas/` and `templates/`. The governed
-destination is
-`procedure-decisions/AZPR_H0_TARGET_FINGERPRINT_V1.json`; that file is
-intentionally absent.
+decision is
+`procedure-decisions/AZPR_H0_TARGET_FINGERPRINT_V1.json`.
 
-Only the project owner may create the decision in a separate human-authored
-commit. Agents must not populate, repair, stage, commit, or infer it. The
-read-only check is:
+Only the project owner may author the decision in a separate human-authored
+commit. Agents must not populate, repair, rewrite, replace, stage, recommit, or
+infer it. The read-only check is:
 
 ```sh
 python3 scripts/check_h0_fingerprint_procedure_approval.py check
 ```
 
-Before a decision exists, it returns `AWAITING_HUMAN_DECISION` and a nonzero
-exit code. A valid committed decision returns a stable
-`git:<commit>:<decision-path>` reference. The validator checks canonical bytes,
-exact request and procedure digests, role and acknowledgements, commit ancestry,
-unchanged committed bytes, and Git-author attribution. This is repository
-attribution, not execution-grade authentication; it is accepted only for the
-procedure definition. It never activates the adapter/controller or authorizes
-a target, environment, H0 action, verifier, stage progression, or Git write.
+The current decision returns `APPROVED`, procedure digest
+`d35da355850ee1440ea454c4e2663dae7fb15778bb2c935283ec16d7771f1d8a`, and
+stable reference
+`git:82ba27a1be4d1590e15f78a891568844639096dd:automation/approvals/procedure-decisions/AZPR_H0_TARGET_FINGERPRINT_V1.json`.
+The validator checks canonical bytes, exact request and procedure digests, role
+and acknowledgements, commit ancestry, unchanged committed bytes, and Git-author
+attribution. This is repository attribution, not execution-grade
+authentication; it is accepted only for the procedure definition. It never
+activates the adapter/controller or authorizes a target, environment, H0
+action, verifier, stage progression, or Git write. If the record were absent,
+the channel would return `AWAITING_HUMAN_DECISION` and a nonzero exit code.
 
 ## Inert macOS operator adapter
 

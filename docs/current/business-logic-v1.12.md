@@ -35,7 +35,7 @@ Prompt 11 must select authentication and map verified subject, Customer Account 
 
 ## Related current documents
 
-- [Project structure v1.17](project-structure-v1.17.md)
+- [Project structure v1.18](project-structure-v1.18.md)
 - [Backend structure v1.12](backend-structure-v1.12.md)
 - [Business data v1.7](business-data-v1.7.json)
 - [Frontend design v1.1](frontend-design-v1.1.md)

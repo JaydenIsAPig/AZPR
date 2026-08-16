@@ -196,7 +196,7 @@ REQUIRED_H0_ANSIBLE_GENERATED_PATHS = {
     "docs/current/business-data-v1.7.json",
     "docs/current/business-logic-v1.12.md",
     "docs/current/frontend-design-v1.1.md",
-    "docs/current/project-structure-v1.17.md",
+    "docs/current/project-structure-v1.18.md",
     "docs/delivery-provenance/v10.1/validation/ansible/README.md",
     "docs/delivery-provenance/v10.1/validation/ansible/ansible-runtime-manifest.json",
     "docs/delivery-provenance/v10.1/validation/ansible/environment-manifest.json",
@@ -312,9 +312,11 @@ REQUIRED_H0_OPERATOR_ASSISTANCE_GENERATED_PATHS = {
     "automation/integration/v10.1/h0-ansible-live-stages/operator-assistance/00-repository-and-procedure-readiness.md",
     "automation/integration/v10.1/h0-ansible-live-stages/operator-assistance/01-guest-local-observation-and-target-decision.md",
     "automation/integration/v10.1/h0-ansible-live-stages/operator-assistance/02-operator-input-validation-and-stage-handoff.md",
-    "docs/current/project-structure-v1.17.md",
+    "docs/legacy/project-structure/project-structure-v1.17.md",
     "docs/logs/project-structure-log-v1.17.md",
+    "docs/logs/project-structure-log-v1.18.md",
 }
+REQUIRED_GENERATED_PATHS.update(REQUIRED_H0_OPERATOR_ASSISTANCE_GENERATED_PATHS)
 REQUIRED_OPERATOR_SOURCE_CONTRACT_ALLOWED_PATHS = {
     ".gitignore",
     "README.md",
@@ -1538,6 +1540,7 @@ def assess(
             "MAP-H0-OPERATOR-APPROVAL-DOCUMENTATION",
             "MAP-H0-TARGET-FINGERPRINT-DOCUMENTATION",
             "MAP-H0-OPERATOR-ASSISTANCE-DOCUMENTATION",
+            "MAP-H0-PROCEDURE-DECISION-RECONCILIATION",
         }
         and row["transition_phase"] == "H0_PREPARATION"
     ]

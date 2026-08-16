@@ -125,13 +125,15 @@ Validate the pack before any stage:
 python3 scripts/check_h0_ansible_live_prompt_pack.py
 ```
 
-### Proposed exact-target fingerprint prerequisite
+### Approved exact-target fingerprint prerequisite
 
-The live pack cannot be used until an authorized human approves the exact
-`AZPR_H0_TARGET_FINGERPRINT_V1` contract. Its canonical procedure is
-`automation/integration/v10.1/h0-ansible-live-stages/target-fingerprint-contract.json`;
-ADR-0013 remains proposed. A matching fingerprint identifies one target but
-does not authorize it.
+The project owner has approved the exact `AZPR_H0_TARGET_FINGERPRINT_V1`
+procedure through ADR-0014. Its canonical procedure is
+`automation/integration/v10.1/h0-ansible-live-stages/target-fingerprint-contract.json`,
+its SHA-256 is
+`d35da355850ee1440ea454c4e2663dae7fb15778bb2c935283ec16d7771f1d8a`, and
+ADR-0013 is accepted. A matching fingerprint identifies one target but does
+not authorize it.
 
 Inside the already-open local session, the read-only implementation observes
 the kernel hostname, machine ID, os-release ID/version, uname architecture,
@@ -152,18 +154,17 @@ it covers a different non-authoritative scope.
 
 ADR-0014 governs the only accepted procedure-approval reference. The canonical
 request and immutable review bind the exact fingerprint contract digest. The
-checked-in template is not authority, and the governed decision path is
-intentionally absent. Check the channel without creating or modifying a record:
+checked-in template is not authority, and the canonical decision is committed
+at the governed decision path. Check the channel without creating or modifying
+the record:
 
 ```bash
 .integration-temp/offline-validation/venv/bin/python \
   scripts/check_h0_fingerprint_procedure_approval.py check
 ```
 
-`AWAITING_HUMAN_DECISION` is expected until the project owner creates a
-canonical decision in a separate human-authored commit. A valid approval
-produces the only accepted reference form,
-`git:<commit>:automation/approvals/procedure-decisions/AZPR_H0_TARGET_FINGERPRINT_V1.json`.
+The current result is `APPROVED` and produces the only accepted reference,
+`git:82ba27a1be4d1590e15f78a891568844639096dd:automation/approvals/procedure-decisions/AZPR_H0_TARGET_FINGERPRINT_V1.json`.
 The checker validates exact bytes, request/procedure digests, role and boundary
 acknowledgements, commit ancestry, an unchanged worktree record, and Git-author
 attribution. It does not authenticate execution, authorize a target, create

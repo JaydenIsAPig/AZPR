@@ -86,15 +86,18 @@ class V101MappingReadinessTests(unittest.TestCase):
         self.assertFalse(result["safe_for_unattended_execution_now"])
         self.assertEqual(
             result["next_required_action"],
-            "RUN_H0_ALV_GUIDE_00_FOR_ATTRIBUTABLE_APPROVAL_AND_TARGET_HANDOFF",
+            "COMPLETE_H0_ANSIBLE_LIVE_CHECK_AND_IDEMPOTENCE_VALIDATION",
         )
-        self.assertFalse(result["checks"]["h0_target_fingerprint_procedure_approved"])
+        self.assertTrue(result["checks"]["h0_target_fingerprint_procedure_approved"])
         self.assertEqual(
             result["checks"]["h0_target_fingerprint_procedure_status"],
-            "AWAITING_HUMAN_DECISION",
+            "APPROVED",
         )
-        self.assertIsNone(
-            result["checks"]["h0_target_fingerprint_procedure_reference"]
+        self.assertEqual(
+            result["checks"]["h0_target_fingerprint_procedure_reference"],
+            "git:82ba27a1be4d1590e15f78a891568844639096dd:"
+            "automation/approvals/procedure-decisions/"
+            "AZPR_H0_TARGET_FINGERPRINT_V1.json",
         )
 
     def test_prequalification_pass_cannot_impersonate_formal_int_01(self) -> None:

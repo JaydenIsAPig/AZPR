@@ -1,8 +1,8 @@
 # ADR-0013: Deterministic H0 Live-Target Fingerprint
 
-- **Status:** Proposed
-- **Date:** 2026-08-13
-- **Deciders:** Project owner (pending)
+- **Status:** Accepted
+- **Date:** 2026-08-15
+- **Deciders:** Project owner
 - **Supersedes:** None
 - **Superseded by:** None
 
@@ -21,7 +21,7 @@ against another. The procedure must still avoid turning machine identity into
 permission: a matching fingerprint can identify a target but cannot establish
 that a human authorized it.
 
-## Proposed decision
+## Decision
 
 Adopt `AZPR_H0_TARGET_FINGERPRINT_V1` as defined byte-for-byte by
 `automation/integration/v10.1/h0-ansible-live-stages/target-fingerprint-contract.json`.
@@ -47,19 +47,21 @@ blocks without a usable digest. The complete procedure is re-run before each
 live stage. No field may be substituted, omitted, or recovered from operator
 text. A changed fingerprint requires new, separately governed authorization.
 
-This decision remains proposed until a human approves the exact contract
-SHA-256. A supplied operator-input reference must bind that contract digest,
-affirm procedure approval, bind the independently observed target digest, name
-the allowed stage, and remain attributable and unexpired. Neither this ADR,
-the contract, a digest match, nor model output authorizes a target, approves or
-qualifies an environment, activates the operator adapter or a controller, or
-authorizes Ansible, H0-T02, the AZPR verifier, or Git.
+The project owner approved the exact contract SHA-256
+`d35da355850ee1440ea454c4e2663dae7fb15778bb2c935283ec16d7771f1d8a`
+through the narrow repository-governed ADR-0014 channel. The canonical checker
+derives the attributable reference
+`git:82ba27a1be4d1590e15f78a891568844639096dd:automation/approvals/procedure-decisions/AZPR_H0_TARGET_FINGERPRINT_V1.json`.
+The protected contract, canonical request, and immutable review remain
+unchanged; the contract's static `PROPOSED_PENDING_HUMAN_APPROVAL` marker is
+not the readiness authority.
 
-ADR-0014 now defines the narrow repository-governed channel through which the
-project owner may later approve or reject only these exact procedure bytes.
-The channel currently contains a request, immutable review, schema, and
-non-authoritative template but no decision. Its existence does not change this
-ADR's proposed status or grant any authority.
+A supplied operator-input reference must bind that contract digest, affirm
+procedure approval, bind the independently observed target digest, name the
+allowed stage, and remain attributable and unexpired. Neither this ADR, the
+procedure approval, the contract, a digest match, nor model output authorizes
+a target, approves or qualifies an environment, activates the operator adapter
+or a controller, or authorizes Ansible, H0-T02, the AZPR verifier, or Git.
 
 ## Consequences
 
@@ -77,7 +79,7 @@ ADR's proposed status or grant any authority.
   invalidates the binding and requires a fresh human authorization.
 - Cloned guests must have distinct machine IDs; the procedure intentionally
   blocks if that premise cannot be established.
-- The proposal adds another exact hash that must be reconciled in the H0 pack,
+- The decision adds another exact hash that must be reconciled in the H0 pack,
   contract, mapping, and operator reference.
 
 ### Risks and mitigations
@@ -118,7 +120,7 @@ stable authorization binding dependent on ordinary reboot or DHCP changes.
   Schema and an enabled `date-time` `FormatChecker` through
   `scripts/h0_target_fingerprint.py validate-operator-input`.
 - Never create the human operator input, access a guest, or run Ansible while
-  reviewing or approving this proposal.
+  validating this decision.
 
 ## Related documents
 
