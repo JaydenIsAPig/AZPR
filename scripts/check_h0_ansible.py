@@ -41,7 +41,7 @@ EXPECTED_TARGET_FINGERPRINT_CONTRACT_SHA256 = (
     "d35da355850ee1440ea454c4e2663dae7fb15778bb2c935283ec16d7771f1d8a"
 )
 EXPECTED_LIVE_PROMPT_HASH_MANIFEST_SHA256 = (
-    "39e73e52ce60e66903b693aa1afc4b944fe31d963d4fd596eec8c4e6fca8a45b"
+    "503f81714b1a10b1fde4d7f1205d1b0125e63df731d2c99019c24da80ecf276e"
 )
 PREFLIGHT_EVIDENCE = Path(
     "docs/delivery-provenance/v10.1/validation/ansible/qualification-preflight.json"

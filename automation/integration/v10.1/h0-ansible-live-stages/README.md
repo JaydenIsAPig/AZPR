@@ -35,12 +35,21 @@ remain byte-independent and inactive.
    as a workaround for absent live-validation authority.
 10. Return exactly one JSON object matching `stage-result.schema.json`.
 
-## Proposed deterministic target fingerprint
+## Deterministic target fingerprint
 
 `target-fingerprint-contract.json` defines
-`AZPR_H0_TARGET_FINGERPRINT_V1`. It is an inert proposal pending separate human
-approval and does not authorize a target. The exact ordered non-secret identity
-fields are:
+`AZPR_H0_TARGET_FINGERPRINT_V1`. ADR-0013 accepts the exact procedure, and the
+ADR-0014 procedure-only decision `AZPR-H0-FINGERPRINTPROC-20260816-001`
+approves its SHA-256
+`d35da355850ee1440ea454c4e2663dae7fb15778bb2c935283ec16d7771f1d8a`. The
+canonical approval reference is
+`git:82ba27a1be4d1590e15f78a891568844639096dd:automation/approvals/procedure-decisions/AZPR_H0_TARGET_FINGERPRINT_V1.json`,
+and its `authority_effect` is `false`. The protected contract and stage
+manifest intentionally retain their static `PROPOSED_PENDING_HUMAN_APPROVAL`
+markers; readiness derives from the committed ADR-0014 decision channel.
+Procedure approval does not identify or authorize a target, approve an
+environment, authorize execution, or activate a controller or adapter. The
+exact ordered non-secret identity fields are:
 
 1. `target_id` from `/proc/sys/kernel/hostname`;
 2. `machine_id` from `/etc/machine-id`;
@@ -63,8 +72,8 @@ shell, network access, write, adapter, controller, or Ansible invocation.
 The repository template remains schema-valid and non-authorizing. An authorized
 human, not an agent, must create
 `/private/tmp/azpr-h0-alv-operator-input.json` from that template. Before doing
-so, the human must separately approve the exact fingerprint contract SHA-256
-and the exact disposable target. From the local session inside that target,
+so, the human must use the exact approved procedure reference and separately
+authorize the exact disposable target. From the local session inside that target,
 the human or their approved read-only operator process may run:
 
 ```bash
@@ -120,13 +129,13 @@ H0-ALV-00, or automatically start another prompt. Their results conform to
 human checkpoint but cannot satisfy it.
 
 ADR-0014 provides the procedure-only approval channel used by
-`H0-ALV-GUIDE-00`. Its canonical request, immutable review, schema, and
-non-authoritative template are repository source; the governed decision file
-is absent until the project owner creates it in a separate human-authored
-commit. The read-only checker derives a stable Git reference from a valid
-committed record. This channel cannot approve a target or environment,
-authorize execution, activate an adapter/controller, invoke a stage, or
-advance H0.
+`H0-ALV-GUIDE-00`. Its canonical request, immutable review, schema,
+non-authoritative template, and governed human-authored decision are committed
+repository source. The read-only checker reports `APPROVED` and accepts only
+`git:82ba27a1be4d1590e15f78a891568844639096dd:automation/approvals/procedure-decisions/AZPR_H0_TARGET_FINGERPRINT_V1.json`.
+This repository-attributed decision approves only the exact procedure bytes.
+It cannot approve a target or environment, authorize execution, activate an
+adapter/controller, invoke a stage, or advance H0.
 
 The irreducible human actions are limited to approving through an attributable
 governed channel, deliberately entering the target-local session, deciding

@@ -30,7 +30,7 @@
     "status": "DRAFT_NOT_ACTIVE",
     "manifest": "automation/integration/v10.1/h0-ansible-live-stages/stage-manifest.json",
     "hash_manifest": "automation/integration/v10.1/h0-ansible-live-stages/SHA256SUMS.json",
-    "hash_manifest_sha256": "39e73e52ce60e66903b693aa1afc4b944fe31d963d4fd596eec8c4e6fca8a45b",
+    "hash_manifest_sha256": "503f81714b1a10b1fde4d7f1205d1b0125e63df731d2c99019c24da80ecf276e",
     "validator": "scripts/check_h0_ansible_live_prompt_pack.py",
     "stage_count": 4,
     "operator_assistance_guide_count": 3,
