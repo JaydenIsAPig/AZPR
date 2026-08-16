@@ -63,14 +63,43 @@ class ProcedureApprovalTests(unittest.TestCase):
             },
         }
 
-    def test_checked_in_request_is_exact_and_channel_remains_pending(self) -> None:
+    def test_checked_in_request_is_exact_and_channel_state_is_valid(self) -> None:
         request, digest = approvals.validate_request_artifacts(ROOT)
-        self.assertEqual(digest, "324a976c0918de06cf33a72b5f9edfef9c4eae94a5afed35e41031ec46e98d05")
+        self.assertEqual(
+            digest,
+            "324a976c0918de06cf33a72b5f9edfef9c4eae94a5afed35e41031ec46e98d05",
+        )
         self.assertEqual(request["status"], "AWAITING_HUMAN_DECISION")
-        result = approvals.assess_repository_channel(ROOT)
+        decision_path = ROOT / approvals.DECISION_PATH
+
+        if not decision_path.exists():
+            result = approvals.assess_repository_channel(ROOT)
+            self.assertFalse(result.approved)
+            self.assertEqual(result.status, "AWAITING_HUMAN_DECISION")
+            self.assertIsNone(result.approval_id)
+            self.assertIsNone(result.approval_reference)
+        else:
+            result = approvals.validate_committed_decision(ROOT)
+            self.assertIn(result.status, {"APPROVED", "REJECTED"})
+            self.assertEqual(result.approved, result.status == "APPROVED")
+            self.assertIsNotNone(result.approval_id)
+            self.assertIsNotNone(result.approval_reference)
+            self.assertTrue(result.approval_reference.startswith("git:"))
+            self.assertTrue(
+                result.approval_reference.endswith(
+                    f":{approvals.DECISION_PATH.as_posix()}"
+                )
+            )
+            self.assertEqual(result.procedure_sha256, request["procedure_sha256"])
+            self.assertEqual(result.decided_role, "Project owner")
+
+    def test_absent_decision_remains_pending(self) -> None:
+        result = approvals.assess_repository_channel(self.root)
+
         self.assertFalse(result.approved)
         self.assertEqual(result.status, "AWAITING_HUMAN_DECISION")
-        self.assertFalse((ROOT / approvals.DECISION_PATH).exists())
+        self.assertIsNone(result.approval_id)
+        self.assertIsNone(result.approval_reference)
 
     def test_schema_and_validator_reject_template_tamper_and_wider_authority(self) -> None:
         schema = json.loads(SCHEMA.read_text(encoding="utf-8"))
@@ -155,12 +184,40 @@ class ProcedureApprovalTests(unittest.TestCase):
     def test_rejection_is_attributable_but_never_approval(self) -> None:
         decision = self.decision()
         decision["decision"] = "REJECTED"
-        parsed, _request, _digest = approvals.validate_decision_value(
+
+        decision_path = self.root / approvals.DECISION_PATH
+        decision_path.parent.mkdir(parents=True, exist_ok=True)
+        decision_path.write_bytes(approvals.canonical_bytes(decision))
+
+        subprocess.run(["git", "init", "-q"], cwd=self.root, check=True)
+        subprocess.run(
+            ["git", "config", "user.name", "Repository Owner"], cwd=self.root, check=True
+        )
+        subprocess.run(
+            ["git", "config", "user.email", "owner@example.invalid"],
+            cwd=self.root,
+            check=True,
+        )
+        subprocess.run(["git", "add", "."], cwd=self.root, check=True)
+        environment = {
+            **os.environ,
+            "GIT_AUTHOR_DATE": "2026-08-14T12:01:00Z",
+            "GIT_COMMITTER_DATE": "2026-08-14T12:01:00Z",
+        }
+        subprocess.run(
+            ["git", "commit", "-q", "-m", "Human procedure rejection"],
+            cwd=self.root,
+            env=environment,
+            check=True,
+        )
+
+        result = approvals.validate_committed_decision(
             self.root,
-            decision,
             now=datetime(2026, 8, 14, 13, 0, tzinfo=timezone.utc),
         )
-        self.assertEqual(parsed["decision"], "REJECTED")
+        self.assertEqual(result.status, "REJECTED")
+        self.assertFalse(result.approved)
+        self.assertIsNotNone(result.approval_reference)
 
 
 if __name__ == "__main__":
